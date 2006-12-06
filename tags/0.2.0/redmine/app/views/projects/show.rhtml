@@ -1,0 +1,62 @@
+<h2><%=_('Overview')%></h2> 
+	
+<div class="splitcontentleft">
+	<%= @project.descr %>	
+	<ul>
+	<li><%=_('Homepage')%>: <%= link_to @project.homepage, @project.homepage %></li>
+	<li><%=_('Created on')%>: <%= format_date(@project.created_on) %></li>
+	</ul>	
+
+  <div class="box">
+    <h3><%= image_tag "tracker" %> <%=_('Trackers')%></h3>
+    <ul>
+    <% for tracker in Tracker.find_all %>    
+      <li><%= link_to tracker.name, :controller => 'projects', :action => 'list_issues', :id => @project, 
+                                                :set_filter => 1, 
+                                                "tracker_id" => tracker.id %>:
+      <%= Issue.count(:conditions => ["project_id=? and tracker_id=? and issue_statuses.is_closed=?", @project.id, tracker.id, false], :include => :status) %> <%=_('open')%>
+      </li>
+    <% end %>
+    </ul>
+    <%= link_to_if_authorized '&#187; ' + _('Report an issue'), :controller => 'projects', :action => 'add_issue', :id => @project %>
+    <br />
+    <center><small>[ <%= link_to _('View all issues'), :controller => 'projects', :action => 'list_issues', :id => @project, :set_filter => 1 %> ]</small></center>
+  </div>
+</div>
+
+<div class="splitcontentright">
+	<div class="box">
+		<h3><%= image_tag "users" %> <%=_('Members')%></h3>	
+		<% for member in @members %>
+		<%= link_to_user member.user %> (<%= member.role.name %>)<br />		
+		<% end %>		
+	</div>
+  
+  <% if @subprojects %>
+ 	<div class="box">
+		<h3><%= image_tag "projects" %> <%=_('Subprojects')%></h3>	
+		<% for subproject in @subprojects %>
+		<%= link_to subproject.name, :action => 'show', :id => subproject %><br />		
+		<% end %>		
+	</div>
+  <% end %>
+  
+  <div class="box">
+    <h3><%=_('Latest news')%></h3>  
+    <% for news in @news %>
+      <p>
+      <b><%= news.title %></b> <small>(<%= link_to_user news.author %> <%= format_time(news.created_on) %>)</small><br />
+      <%= news.shortdescr %>
+      <small>[<%= link_to _('Read...'), :controller => 'news', :action => 'show', :id => news %>]</small>
+      </p>
+      <hr />
+    <% end %>
+    <center><small>[ <%= link_to _('View all news'), :controller => 'projects', :action => 'list_news', :id => @project %> ]</small></center>
+  </div>  
+</div>
+
+	
+
+
+
+	
