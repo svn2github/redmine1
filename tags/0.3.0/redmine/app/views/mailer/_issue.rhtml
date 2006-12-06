@@ -1,0 +1,6 @@
+<%=l(:label_issue)%> #<%= issue.id %> - <%= issue.subject %>
+<%=l(:field_author)%>: <%= issue.author.display_name %>
+
+<%= issue.description %>
+
+http://<%= $RDM_HOST_NAME %>/issues/show/<%= issue.id %>

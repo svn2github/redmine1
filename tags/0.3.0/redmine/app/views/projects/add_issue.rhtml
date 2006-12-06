@@ -1,0 +1,26 @@
+<h2><%=l(:label_issue_new)%>: <%= @tracker.name %></h2>
+
+<% labelled_tabular_form_for :issue, @issue, :url => {:action => 'add_issue'}, :html => {:multipart => true} do |f| %>
+<%= error_messages_for 'issue' %>
+<div class="box">
+<!--[form:issue]-->
+<%= hidden_field_tag 'tracker_id', @tracker.id %>
+
+<p><%= f.select :priority_id, (@priorities.collect {|p| [p.name, p.id]}), :required => true %></p>
+<p><%= f.select :assigned_to_id, (@issue.project.members.collect {|m| [m.name, m.user_id]}), :include_blank => true %></p>
+<p><%= f.select :category_id, (@project.issue_categories.collect {|c| [c.name, c.id]}) %></p>
+<p><%= f.text_field :subject, :size => 80, :required => true %></p>
+<p><%= f.text_area :description, :cols => 60, :rows => 10, :required => true %></p>
+<p><%= f.date_select :due_date, :start_year => Date.today.year, :include_blank => true %></p>
+
+<% for @custom_value in @custom_values %>
+	<p><%= custom_field_tag_with_label @custom_value %></p>
+<% end %>
+
+<p><label for="attachment_file"><%=l(:label_attachment)%></label>
+<%= file_field 'attachment', 'file'  %></p>
+<!--[eoform:issue]-->
+</div>
+
+<%= submit_tag l(:button_create) %>
+<% end %>

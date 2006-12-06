@@ -1,0 +1,26 @@
+<%= error_messages_for 'user' %>
+
+<div class="box">
+<!--[form:user]-->
+<p><%= f.text_field :login, :required => true, :size => 25  %></p>
+
+<p><label for="password"><%=l(:field_password)%><span class="required"> *</span></label>
+<%= password_field_tag 'password', nil, :size => 25  %></p>
+
+<p><label for="password_confirmation"><%=l(:field_password_confirmation)%><span class="required"> *</span></label>
+<%= password_field_tag 'password_confirmation', nil, :size => 25  %></p>
+
+<p><%= f.text_field :firstname, :required => true %></p>
+<p><%= f.text_field :lastname, :required => true %></p>
+<p><%= f.text_field :mail, :required => true %></p>
+<p><%= f.select :language, lang_options_for_select %></p>
+
+<% for @custom_value in @custom_values %>
+	<p><%= custom_field_tag_with_label @custom_value %></p>
+<% end %>
+
+<p><%= f.check_box :admin %></p>
+<p><%= f.check_box :mail_notification %></p>
+
+<!--[eoform:user]-->
+</div>

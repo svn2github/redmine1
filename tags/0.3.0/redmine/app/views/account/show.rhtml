@@ -1,0 +1,19 @@
+<h2><%= @user.display_name %></h2>
+
+<p>
+<%= mail_to @user.mail %><br />
+<%=l(:label_registered_on)%>: <%= format_date(@user.created_on) %>
+</p>
+
+<h3><%=l(:label_project_plural)%></h3>
+<p>
+<% for membership in @user.memberships %>
+	<%= membership.project.name %> (<%= membership.role.name %>, <%= format_date(membership.created_on) %>)
+	<br />
+<% end %>
+</p>
+
+<h3><%=l(:label_activity)%></h3>
+<p>
+<%=l(:label_reported_issues)%>: <%= Issue.count(["author_id=?", @user.id]) %>
+</p>
