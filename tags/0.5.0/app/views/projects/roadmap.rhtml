@@ -1,0 +1,59 @@
+<h2><%=l(:label_roadmap)%></h2>
+
+<div>
+
+<div class="rightbox" style="width:140px;">
+<% form_tag do %>
+<p><strong><%=l(:label_tracker_plural)%></strong></p>
+<% @trackers.each do |tracker| %>
+  <%= check_box_tag "tracker_ids[]", tracker.id, (@selected_tracker_ids.include? tracker.id.to_s) %>
+  <%= tracker.name %><br />
+<% end %>
+<p><center><%= submit_tag l(:button_apply), :class => 'button-small' %></center></p>
+<% end %>
+</div>
+
+<% if @versions.empty? %><p><i><%= l(:label_no_data) %></i></p><% end %>
+
+<% @versions.each do |version| %>   
+    <h3 class="icon22 icon22-package"><%= version.name %></h3>
+    <p><%=h version.description %></p>
+    <p><strong><%=l(:label_roadmap_due_in)%> <%= distance_of_time_in_words Time.now, version.effective_date %> (<%= format_date(version.effective_date) %>)</strong></p>    
+    <% issues = version.fixed_issues.find(:all,
+                                 :include => :status,
+                                 :conditions => ["tracker_id in (#{@selected_tracker_ids.join(',')})"],
+                                 :order => "position")
+
+       total = issues.size
+       complete = issues.inject(0) {|c,i| i.status.is_closed? ? c + 1 : c } 
+       percentComplete = total == 0 ? 100 : (100 / total * complete).floor 
+       percentIncomplete = 100 - percentComplete
+    %>
+    <table class="progress">
+      <tr>
+	<% if percentComplete > 0 %>
+          <td class="closed" style="width: <%= percentComplete %>%"></td>
+        <% end; if percentIncomplete > 0 %>
+          <td class="open" style="width: <%= percentIncomplete %>%"></td>
+        <% end %>
+      </tr>
+    </table>
+    <em><%= link_to(complete, :controller => 'projects', :action => 'list_issues', :id => @project, :status_id => 'c', :fixed_version_id => version, :set_filter => 1) %> <%= lwr(:label_closed_issues, complete) %> (<%= percentComplete %>%) &#160;
+        <%= link_to((total - complete), :controller => 'projects', :action => 'list_issues', :id => @project, :status_id => 'o', :fixed_version_id => version, :set_filter => 1) %> <%= lwr(:label_open_issues, total - complete)%> (<%= percentIncomplete %>%)</em>
+    <br />
+    <br />
+    <ul>
+      <% if total == 0 %>
+        <li><%=l(:label_roadmap_no_issues)%></li>
+      <% else %>
+        <% issues.each do |issue| %>
+          <li>
+            <%= link = link_to_issue(issue)
+                issue.status.is_closed? ? content_tag("del", link) : link %>: <%=h issue.subject %>
+            <%= content_tag "em", "(#{l(:label_closed_issues)})" if issue.status.is_closed? %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+<% end %>
+</div>
