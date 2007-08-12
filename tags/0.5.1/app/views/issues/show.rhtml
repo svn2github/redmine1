@@ -1,0 +1,116 @@
+<div class="contextual">
+<%= l(:label_export_to) %><%= link_to 'PDF', {:action => 'export_pdf', :id => @issue}, :class => 'icon icon-pdf' %>
+</div>
+
+<h2><%= @issue.tracker.name %> #<%= @issue.id %> - <%=h @issue.subject %></h2>
+
+<div class="box">
+<table width="100%">
+<tr>
+    <td style="width:15%"><b><%=l(:field_status)%> :</b></td><td style="width:35%"><%= @issue.status.name %></td>
+    <td style="width:15%"><b><%=l(:field_priority)%> :</b></td><td style="width:35%"><%= @issue.priority.name %></td>
+</tr>
+<tr>
+    <td><b><%=l(:field_assigned_to)%> :</b></td><td><%= @issue.assigned_to ? link_to_user(@issue.assigned_to) : "-" %></td>
+    <td><b><%=l(:field_category)%> :</b></td><td><%=h @issue.category ? @issue.category.name : "-" %></td>
+</tr>
+<tr>
+    <td><b><%=l(:field_author)%> :</b></td><td><%= link_to_user @issue.author %></td>
+    <td><b><%=l(:field_start_date)%> :</b></td><td><%= format_date(@issue.start_date) %></td>
+</tr>
+<tr>
+    <td><b><%=l(:field_created_on)%> :</b></td><td><%= format_date(@issue.created_on) %></td>
+    <td><b><%=l(:field_due_date)%> :</b></td><td><%= format_date(@issue.due_date) %></td>
+</tr>
+<tr>
+    <td><b><%=l(:field_updated_on)%> :</b></td><td><%= format_date(@issue.updated_on) %></td>
+    <td><b><%=l(:field_done_ratio)%> :</b></td><td><%= @issue.done_ratio %> %</td>
+</tr>
+<tr>
+    <td><b><%=l(:field_fixed_version)%> :</b></td><td><%= @issue.fixed_version ? link_to_version(@issue.fixed_version) : "-" %></td>
+    <td><b><%=l(:label_spent_time)%> :</b></td>
+    <td><%= @issue.spent_hours > 0 ? (link_to lwr(:label_f_hour, @issue.spent_hours), {:controller => 'timelog', :action => 'details', :issue_id => @issue}, :class => 'icon icon-time') : "-" %></td>
+</tr>
+<tr>
+<% n = 0
+for custom_value in @custom_values %>
+    <td valign="top"><b><%= custom_value.custom_field.name %> :</b></td><td><%= simple_format(h(show_value(custom_value))) %></td>
+<% n = n + 1
+   if (n > 1) 
+        n = 0 %>
+        </tr><tr>
+ <%end
+end %>
+</tr>
+</table>
+<hr />
+
+<% if @issue.changesets.any? %>
+<div style="float:right;">
+  <em><%= l(:label_revision_plural) %>: <%= @issue.changesets.collect{|changeset| link_to(changeset.revision, :controller => 'repositories', :action => 'revision', :id => @project, :rev => changeset.revision)}.join(", ") %></em>
+</div>
+<% end %>
+
+<b><%=l(:field_description)%> :</b><br /><br />
+<%= textilizable @issue.description, :attachments => @issue.attachments %>
+<br />
+
+<div class="contextual">
+<%= link_to_if_authorized l(:button_edit), {:controller => 'issues', :action => 'edit', :id => @issue}, :class => 'icon icon-edit' %>
+<%= link_to_if_authorized l(:button_log_time), {:controller => 'timelog', :action => 'edit', :issue_id => @issue}, :class => 'icon icon-time' %>
+<%= watcher_tag(@issue, @logged_in_user) %>
+<%= link_to_if_authorized l(:button_move), {:controller => 'projects', :action => 'move_issues', :id => @project, "issue_ids[]" => @issue.id }, :class => 'icon icon-move' %>
+<%= link_to_if_authorized l(:button_delete), {:controller => 'issues', :action => 'destroy', :id => @issue}, :confirm => l(:text_are_you_sure), :method => :post, :class => 'icon icon-del' %>
+</div>
+
+<% if authorize_for('issues', 'change_status') and @status_options and !@status_options.empty? %>
+  <% form_tag({:controller => 'issues', :action => 'change_status', :id => @issue}) do %>
+  <%=l(:label_change_status)%> :
+  <select name="new_status_id">
+  <%= options_from_collection_for_select @status_options, "id", "name" %>
+  </select>
+  <%= submit_tag l(:button_change) %>
+  <% end %>
+<% end %>
+&nbsp;
+</div>
+
+<% if authorize_for('issue_relations', 'new') || @issue.relations.any? %>
+<div id="relations" class="box">
+<%= render :partial => 'relations' %>
+</div>
+<% end %>
+
+<div id="history" class="box">
+<h3><%=l(:label_history)%>
+<% if @journals_count > @journals.length %>(<%= l(:label_last_changes, @journals.length) %>)<% end %></h3>
+<%= render :partial => 'history', :locals => { :journals => @journals } %>
+<% if @journals_count > @journals.length %>
+    <p><center><small><%= link_to l(:label_change_view_all), :action => 'history', :id => @issue %></small></center></p>
+<% end %>
+</div>
+
+<div class="box">
+<h3><%=l(:label_attachment_plural)%></h3>
+<%= link_to_attachments @issue.attachments, :delete_url => (authorize_for('issues', 'destroy_attachment') ? {:controller => 'issues', :action => 'destroy_attachment', :id => @issue} : nil) %>
+
+<% if authorize_for('issues', 'add_attachment') %>
+<p><%= toggle_link l(:label_attachment_new), "add_attachment_form" %></p>
+<% form_tag({ :controller => 'issues', :action => 'add_attachment', :id => @issue }, :multipart => true, :class => "tabular", :id => "add_attachment_form", :style => "display:none;") do %>
+  <%= render :partial => 'attachments/form' %>
+<%= submit_tag l(:button_add) %>
+<% end %>
+<% end %>
+</div>
+
+<% if authorize_for('issues', 'add_note') %>
+  <div class="box">
+  <h3><%= l(:label_add_note) %></h3>
+  <% form_tag({:controller => 'issues', :action => 'add_note', :id => @issue}, :class => "tabular" ) do %>
+  <p><label for="notes"><%=l(:field_notes)%></label>
+    <%= text_area_tag 'notes', '', :cols => 60, :rows => 10, :class => 'wiki-edit'  %></p>
+    <%= wikitoolbar_for 'notes' %>
+  <%= submit_tag l(:button_add) %>
+  <% end %>  
+  </div>
+<% end %>
