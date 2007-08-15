@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /projects/gantt
+Disallow: /projects/calendar
