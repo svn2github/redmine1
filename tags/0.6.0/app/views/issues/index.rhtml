@@ -1,0 +1,35 @@
+<h2><%=l(:label_issue_plural)%></h2>
+    
+<% form_tag({}, :id => 'query_form') do %>
+<%= render :partial => 'queries/filters', :locals => {:query => @query} %>
+<% end %>
+<div class="contextual">
+<%= link_to_remote l(:button_apply), 
+                   { :url => { :set_filter => 1 },
+                     :update => "content",
+                     :with => "Form.serialize('query_form')"
+                   }, :class => 'icon icon-edit' %>
+                   
+<%= link_to_remote l(:button_clear),
+                   { :url => { :set_filter => 1 }, 
+                     :update => "content",
+                   }, :class => 'icon icon-reload'  %>
+</div>
+<br />&nbsp;
+
+<%= error_messages_for 'query' %>
+<% if @query.valid? %>
+<% if @issues.empty? %>
+<p><i><%= l(:label_no_data) %></i></p>
+<% else %>
+&nbsp;
+<%= render :partial => 'issues/list', :locals => {:issues => @issues, :query => @query} %>
+
+<p><%= pagination_links_full @issue_pages %>
+[ <%= @issue_pages.current.first_item %> - <%= @issue_pages.current.last_item %> / <%= @issue_count %> ]</p>
+<% end %>
+<% end %>
+
+<% content_for :header_tags do %>
+<%= auto_discovery_link_tag(:atom, params.merge({:format => 'atom', :page => nil, :key => User.current.rss_key})) %>
+<% end %>
