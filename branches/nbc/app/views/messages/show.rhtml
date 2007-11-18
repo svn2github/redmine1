@@ -1,0 +1,27 @@
+<h2><%= link_to h(@board.name), :controller => 'boards', :action => 'show', :project_id => @project, :id => @board %> &#187; <%=h @message.subject %></h2>
+
+<p><span class="author"><%= authoring @message.created_on, @message.author %></span></p>
+<div class="wiki">
+<%= textilizable(@message.content, :attachments => @message.attachments) %>
+</div>
+<%= link_to_attachments @message.attachments, :no_author => true %>
+<br />
+
+<h3 class="icon22 icon22-comment"><%= l(:label_reply_plural) %></h3>
+<% @message.children.each do |message| %>
+  <a name="<%= "message-#{message.id}" %>"></a>
+  <h4><%=h message.subject %> - <%= message.author.name %>, <%= format_time(message.created_on) %></h4>
+  <div class="wiki"><%= textilizable message.content %></div>
+<% end %>
+
+<% if authorize_for('messages', 'reply') %>
+<p><%= toggle_link l(:button_reply), "reply", :focus => "reply_content" %></p>
+<div id="reply" style="display:none;">
+<%= error_messages_for 'message' %>
+<% form_for :reply, @reply, :url => {:action => 'reply', :id => @message} do |f| %>
+  <p><%= f.text_field :subject, :required => true, :size => 60 %></p>
+  <p><%= f.text_area :content, :required => true, :cols => 80, :rows => 10 %></p>
+  <p><%= submit_tag l(:button_submit) %></p>
+<% end %>
+</div>
+<% end %>
