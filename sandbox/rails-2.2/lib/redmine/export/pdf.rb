@@ -22,6 +22,7 @@ require 'rfpdf/chinese'
 module Redmine
   module Export
     module PDF
+      include ActionView::Helpers::TextHelper
       include ActionView::Helpers::NumberHelper
       
       class IFPDF < FPDF
