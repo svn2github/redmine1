@@ -308,9 +308,9 @@ module ApplicationHelper
   end
   
   def other_formats_links(&block)
-    concat('<p class="other-formats">' + l(:label_export_to), block.binding)
+    concat('<p class="other-formats">' + l(:label_export_to))
     yield Redmine::Views::OtherFormatsBuilder.new(self)
-    concat('</p>', block.binding)
+    concat('</p>')
   end
 
   def html_title(*args)
