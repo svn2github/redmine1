@@ -148,7 +148,7 @@ class ProjectsControllerTest < Test::Unit::TestCase
     @request.session[:user_id] = 2 # manager
     post :edit, :id => 1, :project => {:name => 'Test changed name',
                                        :issue_custom_field_ids => ['']}
-    assert_redirected_to 'projects/settings/ecookbook'
+    assert_redirected_to 'projects/ecookbook/settings'
     project = Project.find(1)
     assert_equal 'Test changed name', project.name
   end
@@ -214,7 +214,7 @@ class ProjectsControllerTest < Test::Unit::TestCase
       post :add_file, :id => 1, :version_id => '',
            :attachments => {'1' => {'file' => test_uploaded_file('testfile.txt', 'text/plain')}}
     end
-    assert_redirected_to 'projects/list_files/ecookbook'
+    assert_redirected_to 'projects/ecookbook/files'
     a = Attachment.find(:first, :order => 'created_on DESC')
     assert_equal 'testfile.txt', a.filename
     assert_equal Project.find(1), a.container
@@ -245,7 +245,7 @@ class ProjectsControllerTest < Test::Unit::TestCase
       post :add_file, :id => 1, :version_id => '2',
            :attachments => {'1' => {'file' => test_uploaded_file('testfile.txt', 'text/plain')}}
     end
-    assert_redirected_to 'projects/list_files/ecookbook'
+    assert_redirected_to 'projects/ecookbook/files'
     a = Attachment.find(:first, :order => 'created_on DESC')
     assert_equal 'testfile.txt', a.filename
     assert_equal Version.find(2), a.container
