@@ -139,7 +139,7 @@ class AccountTest < ActionController::IntegrationTest
     assert_no_tag :input, :attributes => { :name => 'user[password]' }
     
     post 'account/register', :user => {:firstname => 'Foo', :lastname => 'Smith', :mail => 'foo@bar.com'}
-    assert_redirected_to '/'
+    assert_redirected_to '/my/account'
     
     user = User.find_by_login('foo')
     assert user.is_a?(User)
