@@ -152,7 +152,7 @@ class ApplicationController < ActionController::Base
   
   def render_error(msg)
     flash.now[:error] = msg
-    render :nothing => true, :layout => !request.xhr?, :status => 500
+    render :text => '', :layout => !request.xhr?, :status => 500
   end
   
   def render_feed(items, options={})    
