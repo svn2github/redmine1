@@ -4,4 +4,6 @@ GLoc.set_kcode
 GLoc.load_localized_strings
 GLoc.set_config(:raise_string_not_found_errors => false)
 
+I18n.default_locale = 'en'
+
 require 'redmine'

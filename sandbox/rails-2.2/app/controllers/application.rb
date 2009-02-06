@@ -78,6 +78,7 @@ class ApplicationController < ActionController::Base
       nil
     end || Setting.default_language
     set_language_if_valid(lang)    
+    I18n.locale = lang
   end
   
   def require_login
