@@ -1,0 +1,27 @@
+uk:
+  activerecord:
+    errors:
+      messages:
+        inclusion: "немає в списку"
+        exclusion: "зарезервовано"
+        invalid: "невірне"
+        confirmation: "не збігається з підтвердженням"
+        accepted: "необхідно прийняти"
+        empty: "не може бути порожнім"
+        blank: "не може бути незаповненим"
+        too_long: "дуже довге"
+        too_short: "дуже коротке"
+        wrong_length: "не відповідає довжині"
+        taken: "вже використовується"
+        not_a_number: "не є числом"
+        not_a_date: "є недійсною датою"
+        greater_than: "must be greater than {{count}}"
+        greater_than_or_equal_to: "must be greater than or equal to {{count}}"
+        equal_to: "must be equal to {{count}}"
+        less_than: "must be less than {{count}}"
+        less_than_or_equal_to: "must be less than or equal to {{count}}"
+        odd: "must be odd"
+        even: "must be even"
+        greater_than_start_date: "повинна бути пізніша за дату початку"
+        activerecord_error_not_same_project: "не відносяться до одного проекту"
+        activerecord_error_circular_dependency: "Такий зв'язок приведе до циклічної залежності"

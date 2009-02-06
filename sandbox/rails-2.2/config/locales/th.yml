@@ -1,0 +1,27 @@
+th:
+  activerecord:
+    errors:
+      messages:
+        inclusion: "ไม่อยู่ในรายการ"
+        exclusion: "ถูกสงวนไว้"
+        invalid: "ไม่ถูกต้อง"
+        confirmation: "พิมพ์ไม่เหมือนเดิม"
+        accepted: "ต้องยอมรับ"
+        empty: "ต้องเติม"
+        blank: "ต้องเติม"
+        too_long: "ยาวเกินไป"
+        too_short: "สั้นเกินไป"
+        wrong_length: "ความยาวไม่ถูกต้อง"
+        taken: "ถูกใช้ไปแล้ว"
+        not_a_number: "ไม่ใช่ตัวเลข"
+        not_a_date: "ไม่ใช่วันที่ ที่ถูกต้อง"
+        greater_than: "must be greater than {{count}}"
+        greater_than_or_equal_to: "must be greater than or equal to {{count}}"
+        equal_to: "must be equal to {{count}}"
+        less_than: "must be less than {{count}}"
+        less_than_or_equal_to: "must be less than or equal to {{count}}"
+        odd: "must be odd"
+        even: "must be even"
+        greater_than_start_date: "ต้องมากกว่าวันเริ่ม"
+        activerecord_error_not_same_project: "ไม่ได้อยู่ในโครงการเดียวกัน"
+        activerecord_error_circular_dependency: "ความสัมพันธ์อ้างอิงเป็นวงกลม"

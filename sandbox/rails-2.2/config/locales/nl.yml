@@ -1,0 +1,27 @@
+nl:
+  activerecord:
+    errors:
+      messages:
+        inclusion: "staat niet in de lijst"
+        exclusion: "is gereserveerd"
+        invalid: "is ongeldig"
+        confirmation: "komt niet overeen met bevestiging"
+        accepted: "moet geaccepteerd worden"
+        empty: "mag niet leeg zijn"
+        blank: "mag niet blanco zijn"
+        too_long: "is te lang"
+        too_short: "is te kort"
+        wrong_length: "heeft een onjuiste lengte"
+        taken: "is al in gebruik"
+        not_a_number: "is geen getal"
+        not_a_date: "is geen valide datum"
+        greater_than: "must be greater than {{count}}"
+        greater_than_or_equal_to: "must be greater than or equal to {{count}}"
+        equal_to: "must be equal to {{count}}"
+        less_than: "must be less than {{count}}"
+        less_than_or_equal_to: "must be less than or equal to {{count}}"
+        odd: "must be odd"
+        even: "must be even"
+        greater_than_start_date: "moet na de startdatum liggen"
+        activerecord_error_not_same_project: "hoort niet bij hetzelfde project"
+        activerecord_error_circular_dependency: "Deze relatie zou een circulaire afhankelijkheid tot gevolg hebben"

@@ -1,0 +1,27 @@
+cs:
+  activerecord:
+    errors:
+      messages:
+        inclusion: "není zahrnuto v seznamu"
+        exclusion: "je rezervováno"
+        invalid: "je neplatné"
+        confirmation: "se neshoduje s potvrzením"
+        accepted: "musí být akceptováno"
+        empty: "nemůže být prázdný"
+        blank: "nemůže být prázdný"
+        too_long: "je příliš dlouhý"
+        too_short: "je příliš krátký"
+        wrong_length: "má chybnou délku"
+        taken: "je již použito"
+        not_a_number: "není číslo"
+        not_a_date: "není platné datum"
+        greater_than: "must be greater than {{count}}"
+        greater_than_or_equal_to: "must be greater than or equal to {{count}}"
+        equal_to: "must be equal to {{count}}"
+        less_than: "must be less than {{count}}"
+        less_than_or_equal_to: "must be less than or equal to {{count}}"
+        odd: "must be odd"
+        even: "must be even"
+        greater_than_start_date: "musí být větší než počáteční datum"
+        activerecord_error_not_same_project: "nepatří stejnému projektu"
+        activerecord_error_circular_dependency: "Tento vztah by vytvořil cyklickou závislost"

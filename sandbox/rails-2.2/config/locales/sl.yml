@@ -1,0 +1,27 @@
+sl:
+  activerecord:
+    errors:
+      messages:
+        inclusion: "ni vključen na seznamu"
+        exclusion: "je rezerviran"
+        invalid: "je napačen"
+        confirmation: "ne ustreza potrdilu"
+        accepted: "mora biti sprejet"
+        empty: "ne sme biti prazen"
+        blank: "ne sme biti neizpolnjen"
+        too_long: "je predolg"
+        too_short: "je prekratek"
+        wrong_length: "je napačne dolžine"
+        taken: "je že zaseden"
+        not_a_number: "ni število"
+        not_a_date: "ni veljaven datum"
+        greater_than: "must be greater than {{count}}"
+        greater_than_or_equal_to: "must be greater than or equal to {{count}}"
+        equal_to: "must be equal to {{count}}"
+        less_than: "must be less than {{count}}"
+        less_than_or_equal_to: "must be less than or equal to {{count}}"
+        odd: "must be odd"
+        even: "must be even"
+        greater_than_start_date: "mora biti kasnejši kot začeten datum"
+        activerecord_error_not_same_project: "ne pripada istemu projektu"
+        activerecord_error_circular_dependency: "Ta odnos bi povzročil krožno odvisnost"

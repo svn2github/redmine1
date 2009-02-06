@@ -1,0 +1,27 @@
+bg:
+  activerecord:
+    errors:
+      messages:
+        inclusion: "не съществува в списъка"
+        exclusion: "е запазено"
+        invalid: "е невалидно"
+        confirmation: "липсва одобрение"
+        accepted: "трябва да се приеме"
+        empty: "не може да е празно"
+        blank: "не може да е празно"
+        too_long: "е прекалено дълго"
+        too_short: "е прекалено късо"
+        wrong_length: "е с грешна дължина"
+        taken: "вече съществува"
+        not_a_number: "не е число"
+        not_a_date: "е невалидна дата"
+        greater_than: "must be greater than {{count}}"
+        greater_than_or_equal_to: "must be greater than or equal to {{count}}"
+        equal_to: "must be equal to {{count}}"
+        less_than: "must be less than {{count}}"
+        less_than_or_equal_to: "must be less than or equal to {{count}}"
+        odd: "must be odd"
+        even: "must be even"
+        greater_than_start_date: "трябва да е след началната дата"
+        activerecord_error_not_same_project: "не е от същия проект"
+        activerecord_error_circular_dependency: "Тази релация ще доведе до безкрайна зависимост"
