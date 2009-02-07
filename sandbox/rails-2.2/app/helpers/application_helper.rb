@@ -236,7 +236,7 @@ module ApplicationHelper
                                        {:controller => 'projects', :action => 'activity', :id => @project, :from => created.to_date},
                                        :title => format_time(created))
     author_tag = (author.is_a?(User) && !author.anonymous?) ? link_to(h(author), :controller => 'account', :action => 'show', :id => author) : h(author || 'Anonymous')
-    l(options[:label] || :label_added_time_by, author_tag, time_tag)
+    l(options[:label] || :label_added_time_by, :author => author_tag, :age => time_tag)
   end
 
   def l_or_humanize(s, options={})

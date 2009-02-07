@@ -194,7 +194,7 @@ fr:
   notice_email_sent: "Un email a été envoyé à %s"
   notice_email_error: "Erreur lors de l'envoi de l'email (%s)"
   notice_feeds_access_key_reseted: "Votre clé d'accès aux flux RSS a été réinitialisée."
-  notice_failed_to_save_issues: "%d demande(s) sur les %d sélectionnées n'ont pas pu être mise(s) à jour: %s."
+  notice_failed_to_save_issues: "{{count}} demande(s) sur les {{total}} sélectionnées n'ont pas pu être mise(s) à jour: {{ids}}."
   notice_no_issue_selected: "Aucune demande sélectionnée ! Cochez les demandes que vous voulez mettre à jour."
   notice_account_pending: "Votre compte a été créé et attend l'approbation de l'administrateur."
   notice_default_data_loaded: Paramétrage par défaut chargé avec succès.
@@ -217,7 +217,7 @@ fr:
   mail_subject_account_activation_request: "Demande d'activation d'un compte %s"
   mail_body_account_activation_request: "Un nouvel utilisateur (%s) s'est inscrit. Son compte nécessite votre approbation:"
   mail_subject_reminder: "%d demande(s) arrivent à échéance"
-  mail_body_reminder: "%d demande(s) qui vous sont assignées arrivent à échéance dans les %d prochains jours:"
+  mail_body_reminder: "{{count}} demande(s) qui vous sont assignées arrivent à échéance dans les {{days}} prochains jours:"
   
   gui_validation_error: 1 erreur
   gui_validation_error_plural: %d erreurs
@@ -669,8 +669,8 @@ fr:
   label_send_test_email: Envoyer un email de test
   label_feeds_access_key_created_on: Clé d'accès RSS créée il y a %s
   label_module_plural: Modules
-  label_added_time_by: Ajouté par %s il y a %s
-  label_updated_time_by: Mis à jour par %s il y a %s
+  label_added_time_by: Ajouté par {{author}} il y a {{age}}
+  label_updated_time_by: Mis à jour par {{author}} il y a {{age}}
   label_updated_time: Mis à jour il y a %s
   label_jump_to_a_project: Aller à un projet...
   label_file_plural: Fichiers
@@ -760,7 +760,7 @@ fr:
   text_subprojects_destroy_warning: 'Ses sous-projets: %s seront également supprimés.'
   text_workflow_edit: Sélectionner un tracker et un rôle pour éditer le workflow
   text_are_you_sure: Etes-vous sûr ?
-  text_journal_changed: changé de %s à %s
+  text_journal_changed: changé de {{old}} à {{new}}
   text_journal_set_to: mis à %s
   text_journal_deleted: supprimé
   text_tip_task_begin_day: tâche commençant ce jour
@@ -769,13 +769,13 @@ fr:
   text_project_identifier_info: 'Seuls les lettres minuscules (a-z), chiffres et tirets sont autorisés.<br />Un fois sauvegardé, l''identifiant ne pourra plus être modifié.'
   text_caracters_maximum: %d caractères maximum.
   text_caracters_minimum: %d caractères minimum.
-  text_length_between: Longueur comprise entre %d et %d caractères.
+  text_length_between: Longueur comprise entre {{min}} et {{max}} caractères.
   text_tracker_no_workflow: Aucun worflow n'est défini pour ce tracker
   text_unallowed_characters: Caractères non autorisés
   text_comma_separated: Plusieurs valeurs possibles (séparées par des virgules).
   text_issues_ref_in_commit_messages: Référencement et résolution des demandes dans les commentaires de commits
-  text_issue_added: La demande %s a été soumise par %s.
-  text_issue_updated: La demande %s a été mise à jour par %s.
+  text_issue_added: La demande {{id}} a été soumise par {{author}}.
+  text_issue_updated: La demande {{id}} a été mise à jour par {{author}}.
   text_wiki_destroy_confirmation: Etes-vous sûr de vouloir supprimer ce wiki et tout son contenu ?
   text_issue_category_destroy_question: %d demandes sont affectées à cette catégories. Que voulez-vous faire ?
   text_issue_category_destroy_assignments: N'affecter les demandes à aucune autre catégorie
