@@ -27,9 +27,7 @@ module Redmine
 
     def format_date(date)
       return nil unless date
-      # "Setting.date_format.size < 2" is a temporary fix (content of date_format setting changed)
-      @date_format ||= (Setting.date_format.blank? || Setting.date_format.size < 2 ? l(:general_fmt_date) : Setting.date_format)
-      date.strftime(@date_format)
+      Setting.date_format.blank? ? ::I18n.l(date.to_date) : date.strftime(Setting.date_format)
     end
     
     def format_time(time, include_date = true)
@@ -37,9 +35,7 @@ module Redmine
       time = time.to_time if time.is_a?(String)
       zone = User.current.time_zone
       local = zone ? time.in_time_zone(zone) : (time.utc? ? time.localtime : time)
-      @date_format ||= (Setting.date_format.blank? || Setting.date_format.size < 2 ? l(:general_fmt_date) : Setting.date_format)
-      @time_format ||= (Setting.time_format.blank? ? l(:general_fmt_time) : Setting.time_format)
-      include_date ? local.strftime("#{@date_format} #{@time_format}") : local.strftime(@time_format)
+      Setting.time_format.blank? ? ::I18n.l(local) : "#{format_date(time)} #{local.strftime(Setting.time_format)}"
     end
     
     def available_locales
