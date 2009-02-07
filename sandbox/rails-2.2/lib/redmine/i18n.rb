@@ -23,11 +23,11 @@ module Redmine
     end
     
     def lwr(str, count)
-      count > 1 ? ::I18n.t("#{str}_plural", :count => count) : ::I18n.t(str, :count => count)
+      count == 1 ? ::I18n.t(str, :count => count) : ::I18n.t("#{str}_plural", :count => count)
     end
     
-    def ll(lang, str)
-      ::I18n.t(str.to_s, :locale => lang.to_s.gsub(%r{(.+)\-(.+)$}) { "#{$1}-#{$2.upcase}" })
+    def ll(lang, str, value=nil)
+      ::I18n.t(str.to_s, :value => value, :locale => lang.to_s.gsub(%r{(.+)\-(.+)$}) { "#{$1}-#{$2.upcase}" })
     end
 
     def format_date(date)
