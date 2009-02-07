@@ -22,6 +22,7 @@ require 'cgi'
 
 module ApplicationHelper
   include Redmine::WikiFormatting::Macros::Definitions
+  include Redmine::I18n
   include GravatarHelper::PublicMethods
 
   extend Forwardable
