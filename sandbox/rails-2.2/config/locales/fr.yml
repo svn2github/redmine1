@@ -121,23 +121,28 @@ fr:
         less_than_or_equal_to: "doit être inférieur ou égal à {{count}}"
         odd: "doit être impair"
         even: "doit être pair"
+        greater_than_start_date: "doit être postérieur à la date de début"
+        not_same_project: "n'appartient pas au même projet"
+        circular_dependency: "Cette relation créerait une dépendance circulaire"
 
+  
+  actionview_datehelper_select_day_prefix:
   actionview_datehelper_select_month_names: Janvier,Février,Mars,Avril,Mai,Juin,Juillet,Août,Septembre,Octobre,Novembre,Décembre
   actionview_datehelper_select_month_names_abbr: Jan,Fév,Mars,Avril,Mai,Juin,Juil,Août,Sept,Oct,Nov,Déc
   actionview_datehelper_select_month_prefix:
   actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 jour
-  actionview_datehelper_time_in_words_day_plural: %d jours
+  actionview_datehelper_time_in_words_day_plural: "{{count}} jours"
   actionview_datehelper_time_in_words_hour_about: environ une heure
-  actionview_datehelper_time_in_words_hour_about_plural: environ %d heures
+  actionview_datehelper_time_in_words_hour_about_plural: "environ {{count}} heures"
   actionview_datehelper_time_in_words_hour_about_single: environ une heure
   actionview_datehelper_time_in_words_minute: 1 minute
   actionview_datehelper_time_in_words_minute_half: 30 secondes
   actionview_datehelper_time_in_words_minute_less_than: moins d'une minute
-  actionview_datehelper_time_in_words_minute_plural: %d minutes
+  actionview_datehelper_time_in_words_minute_plural: "{{count}} minutes"
   actionview_datehelper_time_in_words_minute_single: 1 minute
   actionview_datehelper_time_in_words_second_less_than: moins d'une seconde
-  actionview_datehelper_time_in_words_second_less_than_plural: moins de %d secondes
+  actionview_datehelper_time_in_words_second_less_than_plural: "moins de {{count}} secondes"
   actionview_instancetag_blank_option: Choisir
   
   activerecord_error_inclusion: n'est pas inclus dans la liste
@@ -157,11 +162,11 @@ fr:
   activerecord_error_not_same_project: n'appartient pas au même projet
   activerecord_error_circular_dependency: Cette relation créerait une dépendance circulaire
   
-  general_fmt_age: %d an
-  general_fmt_age_plural: %d ans
-  general_fmt_date: %%d/%%m/%%Y
-  general_fmt_datetime: %%d/%%m/%%Y %%H:%%M
-  general_fmt_datetime_short: %%d/%%m %%H:%%M
+  general_fmt_age: "{{count}} an"
+  general_fmt_age_plural: "{{count}} ans"
+  general_fmt_date: "%{{count}}/%%m/%%Y"
+  general_fmt_datetime: "%{{count}}/%%m/%%Y %%H:%%M"
+  general_fmt_datetime_short: "%{{count}}/%%m %%H:%%M"
   general_fmt_time: %%H:%%M
   general_text_No: 'Non'
   general_text_Yes: 'Oui'
@@ -191,8 +196,8 @@ fr:
   notice_file_not_found: "La page à laquelle vous souhaitez accéder n'existe pas ou a été supprimée."
   notice_locking_conflict: Les données ont été mises à jour par un autre utilisateur. Mise à jour impossible.
   notice_not_authorized: "Vous n'êtes pas autorisés à accéder à cette page."
-  notice_email_sent: "Un email a été envoyé à %s"
-  notice_email_error: "Erreur lors de l'envoi de l'email (%s)"
+  notice_email_sent: "Un email a été envoyé à {{value}}"
+  notice_email_error: "Erreur lors de l'envoi de l'email ({{value}})"
   notice_feeds_access_key_reseted: "Votre clé d'accès aux flux RSS a été réinitialisée."
   notice_failed_to_save_issues: "{{count}} demande(s) sur les {{total}} sélectionnées n'ont pas pu être mise(s) à jour: {{ids}}."
   notice_no_issue_selected: "Aucune demande sélectionnée ! Cochez les demandes que vous voulez mettre à jour."
@@ -200,27 +205,27 @@ fr:
   notice_default_data_loaded: Paramétrage par défaut chargé avec succès.
   notice_unable_delete_version: Impossible de supprimer cette version.
   
-  error_can_t_load_default_data: "Une erreur s'est produite lors du chargement du paramétrage: %s"
+  error_can_t_load_default_data: "Une erreur s'est produite lors du chargement du paramétrage: {{value}}"
   error_scm_not_found: "L'entrée et/ou la révision demandée n'existe pas dans le dépôt."
-  error_scm_command_failed: "Une erreur s'est produite lors de l'accès au dépôt: %s"
+  error_scm_command_failed: "Une erreur s'est produite lors de l'accès au dépôt: {{value}}"
   error_scm_annotate: "L'entrée n'existe pas ou ne peut pas être annotée."
   error_issue_not_found_in_project: "La demande n'existe pas ou n'appartient pas à ce projet"
   
-  warning_attachments_not_saved: "%d fichier(s) n'ont pas pu être sauvegardés."
+  warning_attachments_not_saved: "{{count}} fichier(s) n'ont pas pu être sauvegardés."
   
-  mail_subject_lost_password: Votre mot de passe %s
+  mail_subject_lost_password: "Votre mot de passe {{value}}"
   mail_body_lost_password: 'Pour changer votre mot de passe, cliquez sur le lien suivant:'
-  mail_subject_register: Activation de votre compte %s
+  mail_subject_register: "Activation de votre compte {{value}}"
   mail_body_register: 'Pour activer votre compte, cliquez sur le lien suivant:'
-  mail_body_account_information_external: Vous pouvez utiliser votre compte "%s" pour vous connecter.
+  mail_body_account_information_external: "Vous pouvez utiliser votre compte {{value}} pour vous connecter."
   mail_body_account_information: Paramètres de connexion de votre compte
-  mail_subject_account_activation_request: "Demande d'activation d'un compte %s"
-  mail_body_account_activation_request: "Un nouvel utilisateur (%s) s'est inscrit. Son compte nécessite votre approbation:"
-  mail_subject_reminder: "%d demande(s) arrivent à échéance"
+  mail_subject_account_activation_request: "Demande d'activation d'un compte {{value}}"
+  mail_body_account_activation_request: "Un nouvel utilisateur ({{value}}) s'est inscrit. Son compte nécessite votre approbation:"
+  mail_subject_reminder: "{{count}} demande(s) arrivent à échéance"
   mail_body_reminder: "{{count}} demande(s) qui vous sont assignées arrivent à échéance dans les {{days}} prochains jours:"
   
   gui_validation_error: 1 erreur
-  gui_validation_error_plural: %d erreurs
+  gui_validation_error_plural: "{{count}} erreurs"
   
   field_name: Nom
   field_description: Description
@@ -422,7 +427,7 @@ fr:
   label_issue_view_all: Voir toutes les demandes
   label_issue_added: Demande ajoutée
   label_issue_updated: Demande mise à jour
-  label_issues_by: Demandes par %s
+  label_issues_by: "Demandes par {{value}}"
   label_document: Document
   label_document_new: Nouveau document
   label_document_plural: Documents
@@ -466,11 +471,11 @@ fr:
   label_assigned_to_me_issues: Demandes qui me sont assignées
   label_last_login: Dernière connexion
   label_last_updates: Dernière mise à jour
-  label_last_updates_plural: %d dernières mises à jour
+  label_last_updates_plural: "{{count}} dernières mises à jour"
   label_registered_on: Inscrit le
   label_activity: Activité
   label_overall_activity: Activité globale
-  label_user_activity: "Activité de %s"
+  label_user_activity: "Activité de {{value}}"
   label_new: Nouveau
   label_logged_as: Connecté en tant que
   label_environment: Environnement
@@ -479,7 +484,7 @@ fr:
   label_auth_source_new: Nouveau mode d'authentification
   label_auth_source_plural: Modes d'authentification
   label_subproject_plural: Sous-projets
-  label_and_its_subprojects: %s et ses sous-projets
+  label_and_its_subprojects: "{{value}} et ses sous-projets"
   label_min_max_length: Longueurs mini - maxi
   label_list: Liste
   label_date: Date
@@ -490,8 +495,8 @@ fr:
   label_text: Texte long
   label_attribute: Attribut
   label_attribute_plural: Attributs
-  label_download: %d Téléchargement
-  label_download_plural: %d Téléchargements
+  label_download: "{{count}} Téléchargement"
+  label_download_plural: "{{count}} Téléchargements"
   label_no_data: Aucune donnée à afficher
   label_change_status: Changer le statut
   label_history: Historique
@@ -539,7 +544,7 @@ fr:
   label_months_from: mois depuis
   label_gantt: Gantt
   label_internal: Interne
-  label_last_changes: %d derniers changements
+  label_last_changes: "{{count}} derniers changements"
   label_change_view_all: Voir tous les changements
   label_personalize_page: Personnaliser cette page
   label_comment: Commentaire
@@ -562,7 +567,7 @@ fr:
   label_yesterday: hier
   label_this_week: cette semaine
   label_last_week: la semaine dernière
-  label_last_n_days: les %d derniers jours
+  label_last_n_days: "les {{count}} derniers jours"
   label_this_month: ce mois-ci
   label_last_month: le mois dernier
   label_this_year: cette année
@@ -576,8 +581,8 @@ fr:
   label_repository: Dépôt
   label_repository_plural: Dépôts
   label_browse: Parcourir
-  label_modification: %d modification
-  label_modification_plural: %d modifications
+  label_modification: "{{count}} modification"
+  label_modification_plural: "{{count}} modifications"
   label_revision: Révision
   label_revision_plural: Révisions
   label_associated_revisions: Révisions associées
@@ -596,8 +601,8 @@ fr:
   label_sort_lower: Descendre
   label_sort_lowest: Descendre en dernier
   label_roadmap: Roadmap
-  label_roadmap_due_in: Echéance dans %s
-  label_roadmap_overdue: En retard de %s
+  label_roadmap_due_in: "Echéance dans {{value}}"
+  label_roadmap_overdue: "En retard de {{value}}"
   label_roadmap_no_issues: Aucune demande pour cette version
   label_search: Recherche
   label_result_plural: Résultats
@@ -665,13 +670,13 @@ fr:
   label_date_from: Du
   label_date_to: Au
   label_language_based: Basé sur la langue de l'utilisateur
-  label_sort_by: Trier par %s
+  label_sort_by: "Trier par {{value}}"
   label_send_test_email: Envoyer un email de test
-  label_feeds_access_key_created_on: Clé d'accès RSS créée il y a %s
+  label_feeds_access_key_created_on: "Clé d'accès RSS créée il y a {{value}}"
   label_module_plural: Modules
-  label_added_time_by: Ajouté par {{author}} il y a {{age}}
-  label_updated_time_by: Mis à jour par {{author}} il y a {{age}}
-  label_updated_time: Mis à jour il y a %s
+  label_added_time_by: "Ajouté par {{author}} il y a {{age}}"
+  label_updated_time_by: "Mis à jour par {{author}} il y a {{age}}"
+  label_updated_time: "Mis à jour il y a {{value}}"
   label_jump_to_a_project: Aller à un projet...
   label_file_plural: Fichiers
   label_changeset_plural: Révisions
@@ -688,7 +693,7 @@ fr:
   label_registration_activation_by_email: activation du compte par email
   label_registration_manual_activation: activation manuelle du compte
   label_registration_automatic_activation: activation automatique du compte
-  label_display_per_page: 'Par page: %s'
+  label_display_per_page: "Par page: {{value}}'"
   label_age: Age
   label_change_properties: Changer les propriétés
   label_general: Général
@@ -757,33 +762,33 @@ fr:
   text_regexp_info: ex. ^[A-Z0-9]+$
   text_min_max_length_info: 0 pour aucune restriction
   text_project_destroy_confirmation: Etes-vous sûr de vouloir supprimer ce projet et toutes ses données ?
-  text_subprojects_destroy_warning: 'Ses sous-projets: %s seront également supprimés.'
+  text_subprojects_destroy_warning: "Ses sous-projets: {{value}} seront également supprimés.'"
   text_workflow_edit: Sélectionner un tracker et un rôle pour éditer le workflow
   text_are_you_sure: Etes-vous sûr ?
-  text_journal_changed: changé de {{old}} à {{new}}
-  text_journal_set_to: mis à %s
+  text_journal_changed: "changé de {{old}} à {{new}}"
+  text_journal_set_to: "mis à {{value}}"
   text_journal_deleted: supprimé
   text_tip_task_begin_day: tâche commençant ce jour
   text_tip_task_end_day: tâche finissant ce jour
   text_tip_task_begin_end_day: tâche commençant et finissant ce jour
   text_project_identifier_info: 'Seuls les lettres minuscules (a-z), chiffres et tirets sont autorisés.<br />Un fois sauvegardé, l''identifiant ne pourra plus être modifié.'
-  text_caracters_maximum: %d caractères maximum.
-  text_caracters_minimum: %d caractères minimum.
-  text_length_between: Longueur comprise entre {{min}} et {{max}} caractères.
+  text_caracters_maximum: "{{count}} caractères maximum."
+  text_caracters_minimum: "{{count}} caractères minimum."
+  text_length_between: "Longueur comprise entre {{min}} et {{max}} caractères."
   text_tracker_no_workflow: Aucun worflow n'est défini pour ce tracker
   text_unallowed_characters: Caractères non autorisés
   text_comma_separated: Plusieurs valeurs possibles (séparées par des virgules).
   text_issues_ref_in_commit_messages: Référencement et résolution des demandes dans les commentaires de commits
-  text_issue_added: La demande {{id}} a été soumise par {{author}}.
-  text_issue_updated: La demande {{id}} a été mise à jour par {{author}}.
+  text_issue_added: "La demande {{id}} a été soumise par {{author}}."
+  text_issue_updated: "La demande {{id}} a été mise à jour par {{author}}."
   text_wiki_destroy_confirmation: Etes-vous sûr de vouloir supprimer ce wiki et tout son contenu ?
-  text_issue_category_destroy_question: %d demandes sont affectées à cette catégories. Que voulez-vous faire ?
+  text_issue_category_destroy_question: "{{count}} demandes sont affectées à cette catégories. Que voulez-vous faire ?"
   text_issue_category_destroy_assignments: N'affecter les demandes à aucune autre catégorie
   text_issue_category_reassign_to: Réaffecter les demandes à cette catégorie
   text_user_mail_option: "Pour les projets non sélectionnés, vous recevrez seulement des notifications pour ce que vous surveillez ou à quoi vous participez (exemple: demandes dont vous êtes l'auteur ou la personne assignée)."
   text_no_configuration_data: "Les rôles, trackers, statuts et le workflow ne sont pas encore paramétrés.\nIl est vivement recommandé de charger le paramétrage par defaut. Vous pourrez le modifier une fois chargé."
   text_load_default_configuration: Charger le paramétrage par défaut
-  text_status_changed_by_changeset: Appliqué par commit %s.
+  text_status_changed_by_changeset: "Appliqué par commit {{value}}."
   text_issues_destroy_confirmation: 'Etes-vous sûr de vouloir supprimer le(s) demandes(s) selectionnée(s) ?'
   text_select_project_modules: 'Selectionner les modules à activer pour ce project:'
   text_default_administrator_account_changed: Compte administrateur par défaut changé
@@ -794,8 +799,8 @@ fr:
   text_destroy_time_entries: Supprimer les heures
   text_assign_time_entries_to_project: Reporter les heures sur le projet
   text_reassign_time_entries: 'Reporter les heures sur cette demande:'
-  text_user_wrote: '%s a écrit:'
-  text_enumeration_destroy_question: 'Cette valeur est affectée à %d objets.'
+  text_user_wrote: "{{value}} a écrit:'"
+  text_enumeration_destroy_question: "Cette valeur est affectée à {{count}} objets.'"
   text_enumeration_category_reassign_to: 'Réaffecter les objets à cette valeur:'
   text_email_delivery_not_configured: "L'envoi de mail n'est pas configuré, les notifications sont désactivées.\nConfigurez votre serveur SMTP dans config/email.yml et redémarrez l'application pour les activer."
   text_repository_usernames_mapping: "Vous pouvez sélectionner ou modifier l'utilisateur Redmine associé à chaque nom d'utilisateur figurant dans l'historique du dépôt.\nLes utilisateurs avec le même identifiant ou la même adresse mail seront automatiquement associés."
