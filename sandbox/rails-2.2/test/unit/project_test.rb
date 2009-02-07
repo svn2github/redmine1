@@ -42,7 +42,7 @@ class ProjectTest < Test::Unit::TestCase
     @ecookbook.name = ""
     assert !@ecookbook.save
     assert_equal 1, @ecookbook.errors.count
-    assert_equal "activerecord_error_blank", @ecookbook.errors.on(:name)
+    assert_equal I18n.translate('activerecord.errors.messages.blank'), @ecookbook.errors.on(:name)
   end
   
   def test_archive
