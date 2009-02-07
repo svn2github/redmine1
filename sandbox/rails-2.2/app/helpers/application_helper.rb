@@ -222,11 +222,6 @@ module ApplicationHelper
     l(options[:label] || :label_added_time_by, :author => author_tag, :age => time_tag)
   end
 
-  def l_or_humanize(s, options={})
-    k = "#{options[:prefix]}#{s}".to_sym
-    l_has_string?(k) ? l(k) : s.to_s.humanize
-  end
-
   def day_name(day)
     l(:general_day_names).split(',')[day-1]
   end

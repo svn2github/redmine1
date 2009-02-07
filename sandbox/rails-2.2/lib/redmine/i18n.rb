@@ -16,6 +16,11 @@ module Redmine
         raise "Translation string with multiple values: #{args.first}"
       end
     end
+
+    def l_or_humanize(s, options={})
+      k = "#{options[:prefix]}#{s}".to_sym
+      ::I18n.t(k, :default => s.to_s.humanize)
+    end
     
     def lwr(*args)
       GLoc.lwr(*args)

@@ -41,7 +41,7 @@
 <thead>
 <tr>
 <% @criterias.each do |criteria| %>
-  <th><%= l(@available_criterias[criteria][:label]) %></th>
+  <th><%= l_or_humanize(@available_criterias[criteria][:label]) %></th>
 <% end %>
 <% columns_width = (40 / (@periods.length+1)).to_i %>
 <% @periods.each do |period| %>
