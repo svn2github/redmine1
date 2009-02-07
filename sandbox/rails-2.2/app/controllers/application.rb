@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
       nil
     end || Setting.default_language
     set_language_if_valid(lang)    
-    I18n.locale = lang
+    I18n.locale = lang.gsub(%r{(.+)\-(.+)$}) { "#{$1}-#{$2.upcase}" }
   end
   
   def require_login
