@@ -22,8 +22,8 @@ module Redmine
       ::I18n.t(k, :default => s.to_s.humanize)
     end
     
-    def lwr(*args)
-      GLoc.lwr(*args)
+    def lwr(str, count)
+      count > 1 ? ::I18n.t("#{str}_plural", :count => count) : ::I18n.t(str, :count => count)
     end
     
     def ll(lang, str)
