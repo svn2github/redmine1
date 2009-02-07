@@ -26,8 +26,8 @@ module Redmine
       GLoc.lwr(*args)
     end
     
-    def ll(*args)
-      GLoc.ll(*args)
+    def ll(lang, str)
+      ::I18n.t(str.to_s, :locale => lang.to_s.gsub(%r{(.+)\-(.+)$}) { "#{$1}-#{$2.upcase}" })
     end
 
     def format_date(date)
