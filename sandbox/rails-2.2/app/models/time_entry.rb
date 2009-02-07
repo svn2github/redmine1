@@ -32,7 +32,7 @@ class TimeEntry < ActiveRecord::Base
                 :description => :comments
   
   validates_presence_of :user_id, :activity_id, :project_id, :hours, :spent_on
-  validates_numericality_of :hours, :allow_nil => true, :message => :activerecord_error_invalid
+  validates_numericality_of :hours, :allow_nil => true, :message => :invalid
   validates_length_of :comments, :maximum => 255, :allow_nil => true
 
   def after_initialize

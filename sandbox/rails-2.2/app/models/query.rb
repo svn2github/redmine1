@@ -123,7 +123,7 @@ class Query < ActiveRecord::Base
   
   def validate
     filters.each_key do |field|
-      errors.add label_for(field), :activerecord_error_blank unless 
+      errors.add label_for(field), :blank unless 
           # filter requires one or more values
           (values_for(field) and !values_for(field).first.blank?) or 
           # filter doesn't require any value
