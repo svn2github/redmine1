@@ -52,6 +52,14 @@ module Redmine
       Setting.time_format.blank? ? ::I18n.l(local, :format => (include_date ? :default : :time)) : 
                                    ((include_date ? "#{format_date(time)} " : "") + "#{local.strftime(Setting.time_format)}")
     end
+
+    def day_name(day)
+      ::I18n.t('date.day_names')[day % 7]
+    end
+  
+    def month_name(month)
+      ::I18n.t('date.month_names')[month]
+    end
     
     def valid_languages
       @@valid_languages ||= Dir.glob(File.join(RAILS_ROOT, 'config', 'locales', '*.yml')).collect {|f| File.basename(f).split('.').first}.collect(&:to_sym)

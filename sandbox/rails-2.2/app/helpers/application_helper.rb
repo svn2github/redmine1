@@ -222,14 +222,6 @@ module ApplicationHelper
     l(options[:label] || :label_added_time_by, :author => author_tag, :age => time_tag)
   end
 
-  def day_name(day)
-    l('date.day_names')[day % 7]
-  end
-
-  def month_name(month)
-    l('date.month_names')[month]
-  end
-
   def syntax_highlight(name, content)
     type = CodeRay::FileType[name]
     type ? CodeRay.scan(content, type).html : h(content)
