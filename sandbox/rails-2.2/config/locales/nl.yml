@@ -92,11 +92,6 @@ nl:
         not_same_project: "hoort niet bij hetzelfde project"
         circular_dependency: "Deze relatie zou een circulaire afhankelijkheid tot gevolg hebben"
 
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Januari,Februari,Maart,April,Mei,Juni,Juli,Augustus,September,Oktober,November,December
-  actionview_datehelper_select_month_names_abbr: Jan,Feb,Maa,Apr,Mei,Jun,Jul,Aug,Sep,Okt,Nov,Dec
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 dag
   actionview_datehelper_time_in_words_day_plural: "{{count}} dagen"
   actionview_datehelper_time_in_words_hour_about: ongeveer een uur

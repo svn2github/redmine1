@@ -93,11 +93,6 @@ en:
         circular_dependency: "This relation would create a circular dependency"
 
   
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: January,February,March,April,May,June,July,August,September,October,November,December
-  actionview_datehelper_select_month_names_abbr: Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 day
   actionview_datehelper_time_in_words_day_plural: "{{count}} days"
   actionview_datehelper_time_in_words_hour_about: about an hour

@@ -129,12 +129,6 @@
         not_same_project: "nem azonos projekthez tartozik"
         circular_dependency: "Ez a kapcsolat egy körkörös függőséget eredményez"
 
-  
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Január,Február,Március,Április,Május,Június,Július,Augusztus,Szeptember,Október,November,December
-  actionview_datehelper_select_month_names_abbr: Jan,Feb,Már,Ápr,Máj,Jún,Júl,Aug,Szept,Okt,Nov,Dec
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 nap
   actionview_datehelper_time_in_words_day_plural: "{{count}} nap"
   actionview_datehelper_time_in_words_hour_about: kb. 1 óra

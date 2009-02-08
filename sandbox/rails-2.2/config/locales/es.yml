@@ -157,11 +157,6 @@ es:
     array:
       sentence_connector: "y"
 
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre
-  actionview_datehelper_select_month_names_abbr: Ene,Feb,Mar,Abr,Mayo,Jun,Jul,Ago,Sep,Oct,Nov,Dic
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 día
   actionview_datehelper_time_in_words_day_plural: "{{count}} días"
   actionview_datehelper_time_in_words_hour_about: una hora aproximadamente

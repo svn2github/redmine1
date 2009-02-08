@@ -124,12 +124,6 @@ ja:
         circular_dependency: "この関係では、循環依存になります"
 
   
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: 1月,2月,3月,4月,5月,6月,7月,8月,9月,10月,11月,12月
-  actionview_datehelper_select_month_names_abbr: 1月,2月,3月,4月,5月,6月,7月,8月,9月,10月,11月,12月
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
-  actionview_datehelper_select_year_suffix: 月
   actionview_datehelper_time_in_words_day: 1日
   actionview_datehelper_time_in_words_day_plural: "{{count}}日"
   actionview_datehelper_time_in_words_hour_about: 約1時間

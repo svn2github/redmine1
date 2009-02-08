@@ -93,11 +93,6 @@ th:
         circular_dependency: "ความสัมพันธ์อ้างอิงเป็นวงกลม"
 
   
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: มกราคม,กุมภาพันธ์,มีนาคม,เมษายน,พฤษภาคม,มิถุนายน,กรกฎาคม,สิงหาคม,กันยายน,ตุลาคม,พฤศจิกายน,ธันวาคม
-  actionview_datehelper_select_month_names_abbr: ม.ค.,ก.พ.,มี.ค.,เม.ย.,พ.ค.,มิ.ย.,ก.ค.,ส.ค.,ก.ย.,ต.ค.,พ.ย.,ธ.ค.
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 วัน
   actionview_datehelper_time_in_words_day_plural: "{{count}} วัน"
   actionview_datehelper_time_in_words_hour_about: ประมาณ 1 ชั่วโมง

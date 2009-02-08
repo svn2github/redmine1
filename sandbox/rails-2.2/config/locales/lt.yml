@@ -133,11 +133,6 @@ lt:
       last_word_connector: " ir "
 
   
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: sausis,vasaris,kovas,balandis,gegužė,birželis,liepa,rugpjūtis,rugsėjis,spalis,lapkritis,gruodis
-  actionview_datehelper_select_month_names_abbr: Sau,Vas,Kov,Bal,Geg,Brž,Lie,Rgp,Rgs,Spl,Lap,Grd
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 diena
   actionview_datehelper_time_in_words_day_plural: "{{count}} dienų"
   actionview_datehelper_time_in_words_hour_about: apytiksliai valanda

@@ -124,11 +124,6 @@ zh:
         circular_dependency: "此关联将导致循环依赖"
 
   
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: 一月,二月,三月,四月,五月,六月,七月,八月,九月,十月,十一月,十二月
-  actionview_datehelper_select_month_names_abbr: 一,二,三,四,五,六,七,八,九,十,十一,十二
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 天
   actionview_datehelper_time_in_words_day_plural: "{{count}} 天"
   actionview_datehelper_time_in_words_hour_about: 约 1 小时

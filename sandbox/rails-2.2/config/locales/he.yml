@@ -103,12 +103,6 @@ he:
         not_same_project: "לא שייך לאותו הפרויקט"
         circular_dependency: "הקשר הזה יצור תלות מעגלית"
 
-  
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: ינואר,פברואר,מרץ,אפריל,מאי,יוני,יולי,אוגוסט,ספטמבר,אוקטובר,נובמבר,דצבמבר
-  actionview_datehelper_select_month_names_abbr: ינו',פבו',מרץ,אפר',מאי,יונ',יול',אוג',ספט',אוקט',נוב',דצמ'
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: יום 1
   actionview_datehelper_time_in_words_day_plural: "{{count}} ימים"
   actionview_datehelper_time_in_words_hour_about: כשעה

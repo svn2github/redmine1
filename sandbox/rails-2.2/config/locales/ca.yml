@@ -92,12 +92,6 @@ ca:
         not_same_project: "no pertany al mateix projecte"
         circular_dependency: "Aquesta relació crearia una dependència circular"
 
-  
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Gener,Febrer,Març,Abril,Maig,Juny,Juliol,Agost,Setembre,Octubre,Novembre,Desembre
-  actionview_datehelper_select_month_names_abbr: Gen,Feb,Mar,Abr,Mai,Jun,Jul,Ago,Set,Oct,Nov,Dec
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 dia
   actionview_datehelper_time_in_words_day_plural: "{{count}} dies"
   actionview_datehelper_time_in_words_hour_about: aproximadament una hora

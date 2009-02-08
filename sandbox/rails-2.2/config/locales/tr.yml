@@ -131,11 +131,6 @@ tr:
         circular_dependency: "Bu ilişki döngüsel bağımlılık meydana getirecektir"
       models:
   
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Ocak,Şubat,Mart,Nisan,Mayıs,Haziran,Temmuz,Ağustos,Eylül,Ekim,Kasım,Aralık
-  actionview_datehelper_select_month_names_abbr: Oca,Şub,Mar,Nis,May,Haz,Tem,Ağu,Eyl,Eki,Kas,Ara
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 gün
   actionview_datehelper_time_in_words_day_plural: "{{count}} gün"
   actionview_datehelper_time_in_words_hour_about: yaklaşık 1 saat

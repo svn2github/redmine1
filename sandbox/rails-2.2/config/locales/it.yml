@@ -106,12 +106,6 @@ it:
         not_same_project: "non appartiene allo stesso progetto"
         circular_dependency: "Questa relazione creerebbe una dipendenza circolare"
 
-  
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Gennaio,Febbraio,Marzo,Aprile,Maggio,Giugno,Luglio,Agosto,Settembre,Ottobre,Novembre,Dicembre
-  actionview_datehelper_select_month_names_abbr: Gen,Feb,Mar,Apr,Mag,Giu,Lug,Ago,Set,Ott,Nov,Dic
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 giorno
   actionview_datehelper_time_in_words_day_plural: "{{count}} giorni"
   actionview_datehelper_time_in_words_hour_about: circa un'ora

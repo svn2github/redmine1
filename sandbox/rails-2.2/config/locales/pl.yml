@@ -123,11 +123,6 @@ pl:
   # Keep this line in order to avoid problems with Windows Notepad UTF-8 EF-BB-BFidea...
   # Best regards from Lublin@Poland :-)
   # PL translation by Mariusz@Olejnik.net,
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Styczeń,Luty,Marzec,Kwiecień,Maj,Czerwiec,Lipiec,Sierpień,Wrzesień,Październik,Listopad,Grudzień
-  actionview_datehelper_select_month_names_abbr: Sty,Lut,Mar,Kwi,Maj,Cze,Lip,Sie,Wrz,Paź,Lis,Gru
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 dzień
   actionview_datehelper_time_in_words_day_plural234: "{{count}} dni"
   actionview_datehelper_time_in_words_day_plural5: "{{count}} dni"

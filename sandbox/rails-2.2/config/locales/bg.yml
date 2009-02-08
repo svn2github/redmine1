@@ -92,12 +92,6 @@ bg:
         not_same_project: "не е от същия проект"
         circular_dependency: "Тази релация ще доведе до безкрайна зависимост"
 
-  
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Януари,Февруари,Март,Април,Май,Юни,Юли,Август,Септември,Октомври,Ноември,Декември
-  actionview_datehelper_select_month_names_abbr: Яну,Фев,Мар,Апр,Май,Юни,Юли,Авг,Сеп,Окт,Ное,Дек
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 ден
   actionview_datehelper_time_in_words_day_plural: "{{count}} дни"
   actionview_datehelper_time_in_words_hour_about: около час

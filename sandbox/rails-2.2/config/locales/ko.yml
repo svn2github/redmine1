@@ -154,12 +154,6 @@ ko:
         not_same_project: "는 같은 프로젝트에 속해 있지 않습니다."
         circular_dependency: "이 관계는 순환 의존관계를 만들 수있습니다."
 
-  
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: 1월,2월,3월,4월,5월,6월,7월,8월,9월,10월,11월,12월
-  actionview_datehelper_select_month_names_abbr: 1월,2월,3월,4월,5월,6월,7월,8월,9월,10월,11월,12월
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 하루
   actionview_datehelper_time_in_words_day_plural: "{{count}} 일"
   actionview_datehelper_time_in_words_hour_about: 약 한 시간

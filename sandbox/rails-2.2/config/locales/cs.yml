@@ -95,12 +95,6 @@ cs:
   # CZ translation by Maxim Krušina | Massimo Filippi, s.r.o. | maxim@mxm.cz
   # Based on original CZ translation by Jan Kadleček
   
-  
-  actionview_datehelper_select_day_prefix: 
-  actionview_datehelper_select_month_names: Leden,Únor,Březen,Duben,Květen,Červen,Červenec,Srpen,Září,Říjen,Listopad,Prosinec
-  actionview_datehelper_select_month_names_abbr: Led,Úno,Bře,Dub,Kvě,Čer,Čvc,Srp,Zář,Říj,Lis,Pro
-  actionview_datehelper_select_month_prefix: 
-  actionview_datehelper_select_year_prefix: 
   actionview_datehelper_time_in_words_day: 1 den
   actionview_datehelper_time_in_words_day_plural: "{{count}} dny"
   actionview_datehelper_time_in_words_hour_about: asi hodinou

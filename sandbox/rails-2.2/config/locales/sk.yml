@@ -94,13 +94,6 @@ sk:
 
   # SK translation by Stanislav Pach | stano.pach@seznam.cz
   
-  
-  
-  actionview_datehelper_select_day_prefix: 
-  actionview_datehelper_select_month_names: Január,Február,Marec,Apríl,Máj,Jún,Júl,August,September,Október,November,December
-  actionview_datehelper_select_month_names_abbr: Jan,Feb,Mar,Apr,Máj,Jún,Júl,Aug,Sep,Okt,Nov,Dec
-  actionview_datehelper_select_month_prefix: 
-  actionview_datehelper_select_year_prefix: 
   actionview_datehelper_time_in_words_day: 1 deň
   actionview_datehelper_time_in_words_day_plural: "{{count}} dní/dňami"
   actionview_datehelper_time_in_words_hour_about: asi hodinou

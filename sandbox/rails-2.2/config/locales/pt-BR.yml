@@ -131,11 +131,6 @@ pt-BR:
         circular_dependency: "Esta relação geraria uma dependência circular"
 
   
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Setembro,Outubro,Novembro,Dezembro
-  actionview_datehelper_select_month_names_abbr: Jan,Fev,Mar,Abr,Mai,Jun,Jul,Ago,Set,Out,Nov,Dez
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 dia
   actionview_datehelper_time_in_words_day_plural: "{{count}} dias"
   actionview_datehelper_time_in_words_hour_about: aproximadamente uma hora

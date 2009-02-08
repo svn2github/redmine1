@@ -137,11 +137,6 @@ gl:
         not_same_project: "non pertence ao mesmo proxecto"
         circular_dependency: "Esta relación podería crear unha dependencia circular"
 
-  actionview_datehelper_select_day_prefix: 
-  actionview_datehelper_select_month_names: Xaneiro,Febreiro,Marzo,Abril,Maio,Xuño,Xullo,Agosto,Setembro,Outubro,Novembro,Decembro
-  actionview_datehelper_select_month_names_abbr: Xan,Feb,Mar,Abr,Mai,Xun,Xul,Ago,Set,Out,Nov,Dec
-  actionview_datehelper_select_month_prefix: 
-  actionview_datehelper_select_year_prefix: 
   actionview_datehelper_time_in_words_day: 1 día
   actionview_datehelper_time_in_words_day_plural: "{{count}} días"
   actionview_datehelper_time_in_words_hour_about: unha hora aproximadamente

@@ -223,11 +223,11 @@ module ApplicationHelper
   end
 
   def day_name(day)
-    l(:general_day_names).split(',')[day-1]
+    l('date.day_names')[day % 7]
   end
 
   def month_name(month)
-    l(:actionview_datehelper_select_month_names).split(',')[month-1]
+    l('date.month_names')[month]
   end
 
   def syntax_highlight(name, content)

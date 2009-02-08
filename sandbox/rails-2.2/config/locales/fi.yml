@@ -135,11 +135,6 @@ fi:
         circular_dependency: "Tämä suhde loisi kehän."
 
   
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Tammikuu,Helmikuu,Maaliskuu,Huhtikuu,Toukokuu,Kesäkuu,Heinäkuu,Elokuu,Syyskuu,Lokakuu,Marraskuu,Joulukuu
-  actionview_datehelper_select_month_names_abbr: Tammi,Helmi,Maalis,Huhti,Touko,Kesä,Heinä,Elo,Syys,Loka,Marras,Joulu
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 päivä
   actionview_datehelper_time_in_words_day_plural: "{{count}} päivää"
   actionview_datehelper_time_in_words_hour_about: noin tunti

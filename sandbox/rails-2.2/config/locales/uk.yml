@@ -93,11 +93,6 @@ uk:
         circular_dependency: "Такий зв'язок приведе до циклічної залежності"
 
   
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Січень,Лютий,Березень,Квітень,Травень,Червень,Липень,Серпень,Вересень,Жовтень,Листопад,Грудень
-  actionview_datehelper_select_month_names_abbr: Січ,Лют,Бер,Квіт,Трав,Чер,Лип,Серп,Вер,Жов,Лис,Груд
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 день
   actionview_datehelper_time_in_words_day_plural: "{{count}} днів(я)"
   actionview_datehelper_time_in_words_hour_about: близько години

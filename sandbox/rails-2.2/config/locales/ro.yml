@@ -138,12 +138,6 @@ ro:
         two_words_connector: " şi "
         last_word_connector: " şi "
 
-  
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Ianuarie,Februarie,Martie,Aprilie,Mai,Iunie,Iulie,August,Septembrie,Octombrie,Noiembrie,Decembrie
-  actionview_datehelper_select_month_names_abbr: Ian,Feb,Mar,Apr,Mai,Jun,Jul,Aug,Sep,Oct,Nov,Dec
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 zi
   actionview_datehelper_time_in_words_day_plural: "{{count}} zile"
   actionview_datehelper_time_in_words_hour_about: aproximativ o ora

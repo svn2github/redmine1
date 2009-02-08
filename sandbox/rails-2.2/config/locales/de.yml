@@ -122,11 +122,6 @@ de:
         circular_dependency: "Diese Beziehung würde eine zyklische Abhängigkeit erzeugen"
       models:
   
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Januar,Februar,März,April,Mai,Juni,Juli,August,September,Oktober,November,Dezember
-  actionview_datehelper_select_month_names_abbr: Jan,Feb,Mär,Apr,Mai,Jun,Jul,Aug,Sep,Okt,Nov,Dez
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 Tag
   actionview_datehelper_time_in_words_day_plural: "{{count}} Tagen"
   actionview_datehelper_time_in_words_hour_about: ungefähr einer Stunde

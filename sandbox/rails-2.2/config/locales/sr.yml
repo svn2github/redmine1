@@ -119,11 +119,6 @@
         circular_dependency: "Ova relacija bi napravila kružnu zavisnost"
 
   
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Januar,Februar,Mart,April,Maj,Jun,Jul,Avgust,Septembar,Oktobar,Novembar,Decembar
-  actionview_datehelper_select_month_names_abbr: Jan,Feb,Mar,Apr,Maj,Jun,Jul,Avg,Sep,Okt,Nov,Dec
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 dan
   actionview_datehelper_time_in_words_day_plural: "{{count}} dana"
   actionview_datehelper_time_in_words_hour_about: oko sat vremena

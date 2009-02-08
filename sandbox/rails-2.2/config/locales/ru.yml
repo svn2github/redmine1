@@ -202,11 +202,6 @@ ru:
       two_words_connector: " и "
       last_word_connector: " и "
   
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names_abbr: Янв,Фев,Мар,Апр,Май,Июн,Июл,Авг,Сен,Окт,Нояб,Дек
-  actionview_datehelper_select_month_names: Январь,Февраль,Март,Апрель,Май,Июнь,Июль,Август,Сентябрь,Октябрь,Ноябрь,Декабрь
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: "{{count}} день"
   actionview_datehelper_time_in_words_day_plural2: "{{count}} дня"
   actionview_datehelper_time_in_words_day_plural5: "{{count}} дней"

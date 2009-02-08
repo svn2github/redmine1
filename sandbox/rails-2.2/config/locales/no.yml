@@ -97,11 +97,6 @@
         circular_dependency: "Denne relasjonen ville lagd en sirkulær avhengighet"
 
   
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Januar,Februar,Mars,April,Mai,Juni,Juli,August,September,Oktober,November,Desember
-  actionview_datehelper_select_month_names_abbr: Jan,Feb,Mar,Apr,Mai,Jun,Jul,Aug,Sep,Okt,Nov,Des
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 dag
   actionview_datehelper_time_in_words_day_plural: "{{count}} dager"
   actionview_datehelper_time_in_words_hour_about: ca. en time

@@ -161,11 +161,6 @@ vi:
       two_words_connector: " và "
       last_word_connector: ", và "
   
-  actionview_datehelper_select_day_prefix:
-  actionview_datehelper_select_month_names: Tháng Giêng,Tháng Hai,Tháng Ba,Tháng Tư,Tháng Năm,Tháng Sáu,Tháng Bảy,Tháng Tám,Tháng Chín,Tháng Mười,Tháng M.Một,Tháng Chạp
-  actionview_datehelper_select_month_names_abbr: Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
-  actionview_datehelper_select_month_prefix:
-  actionview_datehelper_select_year_prefix:
   actionview_datehelper_time_in_words_day: 1 ngày
   actionview_datehelper_time_in_words_day_plural: "{{count}} ngày"
   actionview_datehelper_time_in_words_hour_about: khoảng 1 giờ
