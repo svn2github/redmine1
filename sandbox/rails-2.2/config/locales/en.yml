@@ -474,6 +474,10 @@ en:
   label_personalize_page: Personalize this page
   label_comment: Comment
   label_comment_plural: Comments
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Add a comment
   label_comment_added: Comment added
   label_comment_delete: Delete comments

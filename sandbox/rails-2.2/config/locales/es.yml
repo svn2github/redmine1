@@ -372,6 +372,10 @@ es:
   label_comment_added: Comentario añadido
   label_comment_delete: Borrar comentarios
   label_comment_plural: Comentarios
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_commits_per_author: Commits por autor
   label_commits_per_month: Commits por mes
   label_confirmation: Confirmación

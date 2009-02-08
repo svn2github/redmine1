@@ -416,6 +416,10 @@
   label_personalize_page: Tilpass denne siden
   label_comment: Kommentar
   label_comment_plural: Kommentarer
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Legg til kommentar
   label_comment_added: Kommentar lagt til
   label_comment_delete: Slett kommentar

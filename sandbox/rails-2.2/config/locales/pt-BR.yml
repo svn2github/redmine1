@@ -454,6 +454,10 @@ pt-BR:
   label_personalize_page: Personalizar esta página
   label_comment: Comentário
   label_comment_plural: Comentários
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Adicionar comentário
   label_comment_added: Comentário adicionado
   label_comment_delete: Excluir comentário

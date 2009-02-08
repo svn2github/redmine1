@@ -445,6 +445,10 @@
   label_personalize_page: Az oldal testreszabása
   label_comment: Megjegyzés
   label_comment_plural: Megjegyzés
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Megjegyzés hozzáadása
   label_comment_added: Megjegyzés hozzáadva
   label_comment_delete: Megjegyzések törlése

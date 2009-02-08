@@ -511,6 +511,10 @@ lt:
   label_personalize_page: Suasmeninti šį puslapį
   label_comment: Komentaras
   label_comment_plural: Komentarai
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Pridėkite komentarą
   label_comment_added: Komentaras pridėtas
   label_comment_delete: Pašalinkite komentarus

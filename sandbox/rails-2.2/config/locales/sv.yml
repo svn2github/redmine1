@@ -530,6 +530,10 @@ sv:
   label_personalize_page: Anpassa denna sida
   label_comment: Kommentar
   label_comment_plural: Kommentarer
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Lägg till kommentar
   label_comment_added: Kommentar tillagd
   label_comment_delete: Ta bort kommentar

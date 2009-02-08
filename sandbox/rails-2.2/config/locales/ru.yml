@@ -431,6 +431,10 @@ ru:
   label_comment_plural2: комментария
   label_comment_plural5: комментариев
   label_comment_plural: Комментарии
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment: комментарий
   label_commits_per_author: Изменений на пользователя
   label_commits_per_month: Изменений в месяц

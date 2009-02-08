@@ -428,6 +428,10 @@ fi:
   label_personalize_page: Personoi tämä sivu
   label_comment: Kommentti
   label_comment_plural: Kommentit
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Lisää kommentti
   label_comment_added: Kommentti lisätty
   label_comment_delete: Poista kommentti

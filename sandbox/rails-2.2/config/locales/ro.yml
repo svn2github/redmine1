@@ -409,6 +409,10 @@ ro:
   label_personalize_page: Personalizeaza aceasta pagina
   label_comment: Comentariu
   label_comment_plural: Comentarii
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Adauga un comentariu
   label_comment_added: Comentariu adaugat
   label_comment_delete: Stergere comentarii

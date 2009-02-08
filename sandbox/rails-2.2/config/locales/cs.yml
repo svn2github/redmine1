@@ -410,6 +410,10 @@ cs:
   label_personalize_page: Přizpůsobit tuto stránku
   label_comment: Komentář
   label_comment_plural: Komentáře
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Přidat komentáře
   label_comment_added: Komentář přidán
   label_comment_delete: Odstranit komentář

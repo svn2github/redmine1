@@ -377,6 +377,10 @@ it:
   label_personalize_page: Personalizza la pagina
   label_comment: Commento
   label_comment_plural: Commenti
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Aggiungi un commento
   label_comment_added: Commento aggiunto
   label_comment_delete: Elimina commenti

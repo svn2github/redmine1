@@ -394,6 +394,10 @@ ja:
   label_personalize_page: このページをパーソナライズする
   label_comment: コメント
   label_comment_plural: コメント
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: コメント追加
   label_comment_added: 追加されたコメント
   label_comment_delete: コメント削除

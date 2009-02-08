@@ -346,6 +346,10 @@ pl:
   label_comment_plural234: Komentarze
   label_comment_plural5: Komentarze
   label_comment_plural: Komentarze
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_commits_per_author: Zatwierdzenia według autorów
   label_commits_per_month: Zatwierdzenia według miesięcy
   label_confirmation: Potwierdzenie

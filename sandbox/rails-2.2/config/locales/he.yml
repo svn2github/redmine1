@@ -379,6 +379,10 @@ he:
   label_personalize_page: הפוך דף זה לשלך
   label_comment: תגובה
   label_comment_plural: תגובות
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: הוסף תגובה
   label_comment_added: תגובה הוספה
   label_comment_delete: מחק תגובות

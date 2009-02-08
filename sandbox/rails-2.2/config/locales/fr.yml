@@ -507,6 +507,10 @@ fr:
   label_personalize_page: Personnaliser cette page
   label_comment: Commentaire
   label_comment_plural: Commentaires
+  label_x_comments:
+    zero: aucun commentaire
+    one: 1 commentaire
+    other: "{{count}} commentaires"
   label_comment_add: Ajouter un commentaire
   label_comment_added: Commentaire ajouté
   label_comment_delete: Supprimer les commentaires

@@ -400,6 +400,10 @@
   label_personalize_page: Personalizuj ovu stranicu
   label_comment: Komentar
   label_comment_plural: Komentari
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Dodaj komentar
   label_comment_added: Komentar dodat
   label_comment_delete: Brisanje komentara

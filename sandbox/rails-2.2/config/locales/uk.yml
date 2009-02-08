@@ -379,6 +379,10 @@ uk:
   label_personalize_page: Персоналізувати цю сторінку
   label_comment: Коментувати
   label_comment_plural: Коментарі
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Залишити коментар
   label_comment_added: Коментар додано
   label_comment_delete: Видалити коментарі

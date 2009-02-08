@@ -363,6 +363,10 @@ bg:
   label_personalize_page: Персонализиране
   label_comment: Коментар
   label_comment_plural: Коментари
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Добавяне на коментар
   label_comment_added: Добавен коментар
   label_comment_delete: Изтриване на коментари

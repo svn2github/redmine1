@@ -409,6 +409,10 @@ sk:
   label_personalize_page: Prispôsobiť túto stránku
   label_comment: Komentár
   label_comment_plural: Komentáre
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Pridať komentár
   label_comment_added: Komentár pridaný
   label_comment_delete: Odstrániť komentár

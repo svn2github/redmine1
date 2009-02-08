@@ -504,6 +504,10 @@
   label_personalize_page: 自訂版面
   label_comment: 註解
   label_comment_plural: 註解
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: 加入新註解
   label_comment_added: 新註解已加入
   label_comment_delete: 刪除註解

@@ -307,6 +307,10 @@ nl:
   label_comment_added: Commentaar toegevoegd
   label_comment_delete: Verwijder commentaar
   label_comment_plural: Commentaar
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_commits_per_author: Commits per auteur
   label_commits_per_month: Commits per maand
   label_confirmation: Bevestiging

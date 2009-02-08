@@ -486,6 +486,10 @@ vi:
   label_personalize_page: Điều chỉnh trang này
   label_comment: Bình luận
   label_comment_plural: Bình luận
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Thêm bình luận
   label_comment_added: Đã thêm bình luận
   label_comment_delete: Xóa bình luận

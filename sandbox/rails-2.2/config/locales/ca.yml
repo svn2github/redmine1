@@ -417,6 +417,10 @@ ca:
   label_personalize_page: Personalitza aquesta pàgina
   label_comment: Comentari
   label_comment_plural: Comentaris
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "{{count}} comments"
   label_comment_add: Afegeix un comentari
   label_comment_added: Comentari afegit
   label_comment_delete: Suprimeix comentaris
