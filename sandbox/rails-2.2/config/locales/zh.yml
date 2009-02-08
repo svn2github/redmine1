@@ -429,8 +429,6 @@ zh:
   label_reported_issues: 已报告的问题
   label_assigned_to_me_issues: 指派给我的问题
   label_last_login: 最后登录
-  label_last_updates: 最后更新
-  label_last_updates_plural: "{{count}} 最后更新"
   label_registered_on: 注册于
   label_activity: 活动
   label_overall_activity: 全部活动

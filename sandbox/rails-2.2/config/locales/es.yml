@@ -476,8 +476,6 @@ es:
   label_last_login: Última conexión
   label_last_month: último mes
   label_last_n_days: "últimos {{count}} días"
-  label_last_updates: Actualizado
-  label_last_updates_plural: "{{count}} Actualizados"
   label_last_week: última semana
   label_latest_revision: Última revisión
   label_latest_revision_plural: Últimas revisiones

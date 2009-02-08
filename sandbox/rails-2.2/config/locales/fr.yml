@@ -432,8 +432,6 @@ fr:
   label_reported_issues: Demandes soumises
   label_assigned_to_me_issues: Demandes qui me sont assignées
   label_last_login: Dernière connexion
-  label_last_updates: Dernière mise à jour
-  label_last_updates_plural: "{{count}} dernières mises à jour"
   label_registered_on: Inscrit le
   label_activity: Activité
   label_overall_activity: Activité globale

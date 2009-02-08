@@ -309,8 +309,6 @@ uk:
   label_reported_issues: Створені питання
   label_assigned_to_me_issues: Мої питання
   label_last_login: Останнє підключення
-  label_last_updates: Останнє оновлення
-  label_last_updates_plural: "{{count}} останні оновлення"
   label_registered_on: Зареєстрований(а)
   label_activity: Активність
   label_new: Новий

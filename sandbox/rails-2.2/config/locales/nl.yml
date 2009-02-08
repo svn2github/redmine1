@@ -411,8 +411,6 @@ nl:
   label_last_login: Laatste bezoek
   label_last_month: laatste maand
   label_last_n_days: "{{count}} dagen geleden"
-  label_last_updates: Laatste wijziging
-  label_last_updates_plural: "{{count}} laatste wijziging"
   label_last_week: vorige week
   label_latest_revision: Meest recente revisie
   label_latest_revision_plural: Meest recente revisies

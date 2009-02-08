@@ -330,8 +330,6 @@
   label_reported_issues: Prijavljene kartice
   label_assigned_to_me_issues: Moje kartice
   label_last_login: Poslednje prijavljivanje
-  label_last_updates: Poslednje promene
-  label_last_updates_plural: "{{count}} poslednje promenjene"
   label_registered_on: Registrovano
   label_activity: Aktivnost
   label_new: Novo

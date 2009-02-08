@@ -429,8 +429,6 @@
   label_reported_issues: 我通報的項目
   label_assigned_to_me_issues: 分派給我的項目
   label_last_login: 最近一次連線
-  label_last_updates: 最近更新
-  label_last_updates_plural: "{{count}} 個最近更新"
   label_registered_on: 註冊於
   label_activity: 活動
   label_overall_activity: 檢視所有活動

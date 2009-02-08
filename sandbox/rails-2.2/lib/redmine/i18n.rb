@@ -31,10 +31,6 @@ module Redmine
       l((hours < 2.0 ? :label_f_hour : :label_f_hour_plural), :value => ("%.2f" % hours.to_f))
     end
     
-    def lwr(str, count)
-      count == 1 ? ::I18n.t(str, :count => count) : ::I18n.t("#{str}_plural", :count => count)
-    end
-    
     def ll(lang, str, value=nil)
       ::I18n.t(str.to_s, :value => value, :locale => lang.to_s.gsub(%r{(.+)\-(.+)$}) { "#{$1}-#{$2.upcase}" })
     end

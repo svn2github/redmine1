@@ -311,8 +311,6 @@ he:
   label_reported_issues: נושאים שדווחו
   label_assigned_to_me_issues: נושאים שהוצבו לי
   label_last_login: חיבור אחרון
-  label_last_updates: עידכון אחרון
-  label_last_updates_plural: "{{count}} עידכונים אחרונים"
   label_registered_on: נרשם בתאריך
   label_activity: פעילות
   label_new: חדש

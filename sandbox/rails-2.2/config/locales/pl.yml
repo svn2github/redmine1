@@ -452,10 +452,6 @@ pl:
   label_last_login: Ostatnie połączenie
   label_last_month: ostatni miesiąc
   label_last_n_days: "ostatnie {{count}} dni"
-  label_last_updates: Ostatnia zmiana
-  label_last_updates_plural234: "{{count}} ostatnie zmiany"
-  label_last_updates_plural5: "{{count}} ostatnich zmian"
-  label_last_updates_plural: "{{count}} ostatnie zmiany"
   label_last_week: ostatni tydzień
   label_latest_revision: Najnowsza rewizja
   label_latest_revision_plural: Najnowsze rewizje

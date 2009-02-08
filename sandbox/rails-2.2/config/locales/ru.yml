@@ -538,10 +538,6 @@ ru:
   label_last_login: Последнее подключение
   label_last_month: последний месяц
   label_last_n_days: "последние {{count}} дней"
-  label_last_updates_plural2: "{{count}} последних обновления"
-  label_last_updates_plural5: "{{count}} последних обновлений"
-  label_last_updates_plural: "{{count}} последние обновления"
-  label_last_updates: Последнее обновление
   label_last_week: последняя неделю
   label_latest_revision_plural: Последние редакции
   label_latest_revision: Последняя редакция

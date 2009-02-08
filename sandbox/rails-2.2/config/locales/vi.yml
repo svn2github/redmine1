@@ -412,8 +412,6 @@ vi:
   label_reported_issues: Vấn đề đã báo cáo
   label_assigned_to_me_issues: Vấn đề gán cho bạn
   label_last_login: Kết nối cuối
-  label_last_updates: Cập nhật cuối
-  label_last_updates_plural: "{{count}} cập nhật cuối"
   label_registered_on: Ngày tham gia
   label_activity: Hoạt động
   label_overall_activity: Tất cả hoạt động

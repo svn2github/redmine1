@@ -455,8 +455,6 @@ sv:
   label_reported_issues: Rapporterade ärenden
   label_assigned_to_me_issues: Ärenden tilldelade till mig
   label_last_login: Senaste inloggning
-  label_last_updates: Senast uppdaterad
-  label_last_updates_plural: "{{count}} senaste uppdateringarna"
   label_registered_on: Registrerad
   label_activity: Aktivitet
   label_overall_activity: All aktivitet

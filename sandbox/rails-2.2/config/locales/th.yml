@@ -334,8 +334,6 @@ th:
   label_reported_issues: ปัญหาที่แจ้งไว้
   label_assigned_to_me_issues: ปัญหาที่มอบหมายให้ฉัน
   label_last_login: ติดต่อครั้งสุดท้าย
-  label_last_updates: ปรับปรุงครั้งสุดท้าย
-  label_last_updates_plural: "{{count}} ปรับปรุงครั้งสุดท้าย"
   label_registered_on: ลงทะเบียนเมื่อ
   label_activity: กิจกรรม
   label_activity_plural: กิจกรรม

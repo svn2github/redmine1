@@ -366,8 +366,6 @@ pt:
   label_reported_issues: Tarefas criadas
   label_assigned_to_me_issues: Tarefas atribuídas a mim
   label_last_login: Último acesso
-  label_last_updates: Última alteração
-  label_last_updates_plural: "{{count}} Últimas alterações"
   label_registered_on: Registado em
   label_activity: Actividade
   label_overall_activity: Actividade geral

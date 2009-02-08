@@ -363,8 +363,6 @@ ko:
   label_reported_issues: 보고한 일감
   label_assigned_to_me_issues: 나에게 할당된 일감
   label_last_login: 최종 접속
-  label_last_updates: 최종 변경 내역
-  label_last_updates_plural: "최종변경 {{count}} "
   label_registered_on: 등록시각
   label_activity: 작업내역
   label_new: 새로 만들기

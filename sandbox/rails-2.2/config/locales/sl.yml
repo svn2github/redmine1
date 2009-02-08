@@ -395,8 +395,6 @@ sl:
   label_reported_issues: Prijavljeni zahtevki
   label_assigned_to_me_issues: Zahtevki dodeljeni meni
   label_last_login: Zadnja povezava
-  label_last_updates: Zadnja posodobitev
-  label_last_updates_plural: "{{count}} zadnje posodobitve"
   label_registered_on: Registriran
   label_activity: Aktivnost
   label_overall_activity: Celotna aktivnost

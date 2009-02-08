@@ -342,8 +342,6 @@
   label_reported_issues: Rapporterte saker
   label_assigned_to_me_issues: Saker tildelt meg 
   label_last_login: Sist innlogget
-  label_last_updates: Sist oppdatert
-  label_last_updates_plural: "{{count}} siste oppdaterte"
   label_registered_on: Registrert
   label_activity: Aktivitet
   label_overall_activity: All aktivitet

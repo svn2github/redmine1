@@ -336,8 +336,6 @@ sk:
   label_reported_issues: Nahlásené úlohy
   label_assigned_to_me_issues: Moje úlohy
   label_last_login: Posledné prihlásenie
-  label_last_updates: Posledná zmena
-  label_last_updates_plural: "{{count}} posledné zmeny"
   label_registered_on: Registrovaný
   label_activity: Aktivita
   label_overall_activity: Celková aktivita

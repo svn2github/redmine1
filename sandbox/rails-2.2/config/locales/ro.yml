@@ -341,8 +341,6 @@ ro:
   label_reported_issues: Tichete raportate
   label_assigned_to_me_issues: Tichete atribuite pentru mine
   label_last_login: Ultima conectare
-  label_last_updates: Ultima modificare
-  label_last_updates_plural: "ultimele {{count}} modificari"
   label_registered_on: Inregistrat la
   label_activity: Activitate
   label_new: Nou

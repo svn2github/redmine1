@@ -372,8 +372,6 @@ tr:
   label_reported_issues: Rapor edilmiş iletiler
   label_assigned_to_me_issues: Bana atanmış iletiler
   label_last_login: Son bağlantı
-  label_last_updates: Son güncellemeler
-  label_last_updates_plural: "son güncellenen {{count}}"
   label_registered_on: Kayıtlı
   label_activity: Faaliyet
   label_overall_activity: Tüm aktiviteler

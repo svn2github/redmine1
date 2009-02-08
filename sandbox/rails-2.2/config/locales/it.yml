@@ -309,8 +309,6 @@ it:
   label_reported_issues: Segnalazioni
   label_assigned_to_me_issues: Le mie segnalazioni
   label_last_login: Ultimo collegamento
-  label_last_updates: Ultimo aggiornamento
-  label_last_updates_plural: "{{count}} ultimo aggiornamento"
   label_registered_on: Registrato il
   label_activity: Attività
   label_new: Nuovo

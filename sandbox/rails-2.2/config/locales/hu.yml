@@ -371,8 +371,6 @@
   label_reported_issues: Bejelentett feladatok
   label_assigned_to_me_issues: A nekem kiosztott feladatok
   label_last_login: Utolsó bejelentkezés
-  label_last_updates: Utoljára frissítve
-  label_last_updates_plural: "Utoljára módosítva {{count}}"
   label_registered_on: Regisztrált
   label_activity: Tevékenységek
   label_overall_activity: Teljes aktivitás

@@ -343,8 +343,6 @@ ca:
   label_reported_issues: Assumptes informats
   label_assigned_to_me_issues: Assumptes assignats a mi
   label_last_login: Última connexió
-  label_last_updates: Última actualització
-  label_last_updates_plural: "{{count}} última actualització"
   label_registered_on: Informat el
   label_activity: Activitat
   label_overall_activity: Activitat global

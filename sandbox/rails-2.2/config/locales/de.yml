@@ -427,8 +427,6 @@ de:
   label_reported_issues: Gemeldete Tickets
   label_assigned_to_me_issues: Mir zugewiesen
   label_last_login: Letzte Anmeldung
-  label_last_updates: zuletzt aktualisiert
-  label_last_updates_plural: "{{count}} zuletzt aktualisierten"
   label_registered_on: Angemeldet am
   label_activity: Aktivität
   label_overall_activity: Aktivität aller Projekte anzeigen

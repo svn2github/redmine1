@@ -295,8 +295,6 @@ bg:
   label_reported_issues: Публикувани задачи
   label_assigned_to_me_issues: Възложени на мен
   label_last_login: Последно свързване
-  label_last_updates: Последно обновена
-  label_last_updates_plural: "{{count}} последно обновени"
   label_registered_on: Регистрация
   label_activity: Дейност
   label_new: Нов

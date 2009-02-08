@@ -380,8 +380,6 @@ pt-BR:
   label_reported_issues: Tickets reportados
   label_assigned_to_me_issues: Meus tickets
   label_last_login: Última conexão
-  label_last_updates: Última alteração
-  label_last_updates_plural: "{{count}} Últimas alterações"
   label_registered_on: Registrado em
   label_activity: Atividade
   label_overall_activity: Atividades gerais
