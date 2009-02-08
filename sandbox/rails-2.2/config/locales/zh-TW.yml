@@ -134,7 +134,6 @@
   general_csv_decimal_separator: '.'
   general_csv_encoding: Big5
   general_pdf_encoding: Big5
-  general_day_names: 星期一,星期二,星期三,星期四,星期五,星期六,星期日
   general_first_day_of_week: '7'
   
   notice_account_updated: 帳戶更新資訊已儲存

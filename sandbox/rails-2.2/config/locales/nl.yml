@@ -249,7 +249,6 @@ nl:
   general_csv_decimal_separator: '.'
   general_csv_encoding: ISO-8859-1
   general_csv_separator: ','
-  general_day_names: Maandag, Dinsdag, Woensdag, Donderdag, Vrijdag, Zaterdag, Zondag
   general_first_day_of_week: '7'
   general_lang_name: 'Nederlands'
   general_pdf_encoding: ISO-8859-1

@@ -103,7 +103,6 @@ sl:
   general_csv_decimal_separator: '.'
   general_csv_encoding: ISO-8859-1
   general_pdf_encoding: ISO-8859-1
-  general_day_names: Ponedeljek,Torek,Sreda,Četrtek,Petek,Sobota,Nedelja
   general_first_day_of_week: '1'
   
   notice_account_updated: Račun je bil uspešno posodobljen.

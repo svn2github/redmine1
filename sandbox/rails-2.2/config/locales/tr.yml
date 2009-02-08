@@ -141,7 +141,6 @@ tr:
   general_csv_separator: ','
   general_csv_encoding: ISO-8859-1
   general_pdf_encoding: ISO-8859-1
-  general_day_names: Pazartesi,Salı,Çarşamba,Perşembe,Cuma,Cumartesi,Pazar
   general_first_day_of_week: '7'
   
   notice_account_updated: Hesap başarıyla güncelleştirildi.

@@ -105,7 +105,6 @@ sk:
   general_csv_decimal_separator: '.'
   general_csv_encoding: UTF-8
   general_pdf_encoding: UTF-8
-  general_day_names: Pondelok,Utorok,Streda,Štvrtok,Piatok,Sobota,Nedeľa
   general_first_day_of_week: '1'
   
   notice_account_updated: Účet bol úspešne zmenený.
