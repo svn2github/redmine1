@@ -623,8 +623,8 @@ lt:
   label_changes_details: Visų pakeitimų detalės
   label_issue_tracking: Darbų sekimas
   label_spent_time: Sugaištas laikas
-  label_f_hour: %.2f valanda
-  label_f_hour_plural: %.2f valandų
+  label_f_hour: "{{value}} valanda"
+  label_f_hour_plural: "{{value}} valandų"
   label_time_tracking: Laiko sekimas
   label_change_plural: Pakeitimai
   label_statistics: Statistika

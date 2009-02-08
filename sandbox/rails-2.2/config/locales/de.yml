@@ -614,8 +614,8 @@ de:
   label_changes_details: Details aller Änderungen
   label_issue_tracking: Tickets
   label_spent_time: Aufgewendete Zeit
-  label_f_hour: %.2f Stunde
-  label_f_hour_plural: %.2f Stunden
+  label_f_hour: "{{value}} Stunde"
+  label_f_hour_plural: "{{value}} Stunden"
   label_time_tracking: Zeiterfassung
   label_change_plural: Änderungen
   label_statistics: Statistiken

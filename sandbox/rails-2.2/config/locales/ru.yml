@@ -528,10 +528,8 @@ ru:
   label_export_to: Экспортировать в
   label_feed_plural: Вводы
   label_feeds_access_key_created_on: "Ключ доступа RSS создан {{value}} назад"
-  label_f_hour: %.2f час
-  label_f_hour_plural2: %.2f часа
-  label_f_hour_plural: %.2f часов
-  label_f_hour_plural5: %.2f часов
+  label_f_hour: "{{value}} час"
+  label_f_hour_plural: "{{value}} часов"
   label_file_added: Файл добавлен
   label_file_plural: Файлы
   label_filter_add: Добавить фильтр

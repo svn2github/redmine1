@@ -464,8 +464,8 @@ ca:
   label_changes_details: Detalls de tots els canvis
   label_issue_tracking: "Seguiment d'assumptes"
   label_spent_time: Temps invertit
-  label_f_hour: %.2f hora
-  label_f_hour_plural: %.2f hores
+  label_f_hour: "{{value}} hora"
+  label_f_hour_plural: "{{value}} hores"
   label_time_tracking: Temps de seguiment
   label_change_plural: Canvis
   label_statistics: Estadístiques

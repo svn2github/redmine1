@@ -555,8 +555,8 @@ tr:
   label_changes_details: Bütün değişikliklerin detayları
   label_issue_tracking: İleti Takibi
   label_spent_time: Harcanan zaman
-  label_f_hour: %.2f saat
-  label_f_hour_plural: %.2f saat
+  label_f_hour: "{{value}} saat"
+  label_f_hour_plural: "{{value}} saat"
   label_time_tracking: Zaman Takibi
   label_change_plural: Değişiklikler
   label_statistics: İstatistikler

@@ -398,8 +398,8 @@ bg:
   label_changes_details: Подробни промени
   label_issue_tracking: Тракинг
   label_spent_time: Отделено време
-  label_f_hour: %.2f час
-  label_f_hour_plural: %.2f часа
+  label_f_hour: "{{value}} час"
+  label_f_hour_plural: "{{value}} часа"
   label_time_tracking: Отделяне на време
   label_change_plural: Промени
   label_statistics: Статистики

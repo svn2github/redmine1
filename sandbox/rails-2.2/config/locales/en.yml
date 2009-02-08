@@ -521,8 +521,8 @@ en:
   label_changes_details: Details of all changes
   label_issue_tracking: Issue tracking
   label_spent_time: Spent time
-  label_f_hour: %.2f hour
-  label_f_hour_plural: %.2f hours
+  label_f_hour: "{{value}} hour"
+  label_f_hour_plural: "{{value}} hours"
   label_time_tracking: Time tracking
   label_change_plural: Changes
   label_statistics: Statistics

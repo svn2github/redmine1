@@ -501,8 +501,8 @@
   label_changes_details: Detalji svih promena
   label_issue_tracking: Praćenje kartica
   label_spent_time: Utrošeno vremena
-  label_f_hour: %.2f časa
-  label_f_hour_plural: %.2f časova
+  label_f_hour: "{{value}} časa"
+  label_f_hour_plural: "{{value}} časova"
   label_time_tracking: Praćenje vremena
   label_change_plural: Promene
   label_statistics: Statistika

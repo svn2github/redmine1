@@ -617,8 +617,8 @@ zh:
   label_changes_details: 所有变更的详情
   label_issue_tracking: 问题跟踪
   label_spent_time: 耗时
-  label_f_hour: %.2f 小时
-  label_f_hour_plural: %.2f 小时
+  label_f_hour: "{{value}} 小时"
+  label_f_hour_plural: "{{value}} 小时"
   label_time_tracking: 时间跟踪
   label_change_plural: 变更
   label_statistics: 统计

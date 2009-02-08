@@ -33,7 +33,7 @@
 
 <% unless @criterias.empty? %>
 <div class="total-hours">
-<p><%= l(:label_total) %>: <%= html_hours(lwr(:label_f_hour, @total_hours)) %></p>
+<p><%= l(:label_total) %>: <%= html_hours(l_hours(@total_hours)) %></p>
 </div>
 
 <% unless @hours.empty? %>

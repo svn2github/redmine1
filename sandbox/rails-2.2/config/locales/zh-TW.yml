@@ -617,8 +617,8 @@
   label_changes_details: 所有變更的明細
   label_issue_tracking: 項目追蹤
   label_spent_time: 耗用時間
-  label_f_hour: %.2f 小時
-  label_f_hour_plural: %.2f 小時
+  label_f_hour: "{{value}} 小時"
+  label_f_hour_plural: "{{value}} 小時"
   label_time_tracking: 工時追蹤
   label_change_plural: 變更
   label_statistics: 統計資訊

@@ -455,8 +455,8 @@ sk:
   label_changes_details: Detail všetkých zmien
   label_issue_tracking: Sledovanie úloh
   label_spent_time: Strávený čas
-  label_f_hour: %.2f hodina
-  label_f_hour_plural: %.2f hodín
+  label_f_hour: "{{value}} hodina"
+  label_f_hour_plural: "{{value}} hodín"
   label_time_tracking: Sledovánie času
   label_change_plural: Zmeny
   label_statistics: Štatistiky

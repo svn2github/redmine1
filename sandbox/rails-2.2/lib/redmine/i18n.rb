@@ -26,6 +26,11 @@ module Redmine
       ::I18n.t(k, :default => s.to_s.humanize)
     end
     
+    def l_hours(hours)
+      hours = hours.to_f
+      l((hours < 2.0 ? :label_f_hour : :label_f_hour_plural), :value => ("%.2f" % hours.to_f))
+    end
+    
     def lwr(str, count)
       count == 1 ? ::I18n.t(str, :count => count) : ::I18n.t("#{str}_plural", :count => count)
     end

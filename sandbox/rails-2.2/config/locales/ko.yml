@@ -533,8 +533,8 @@ ko:
   label_changes_details: 모든 상세 변경 내역
   label_issue_tracking: 일감 추적
   label_spent_time: 작업 시간
-  label_f_hour: %.2f 시간
-  label_f_hour_plural: %.2f 시간
+  label_f_hour: "{{value}} 시간"
+  label_f_hour_plural: "{{value}} 시간"
   label_time_tracking: 시간추적
   label_change_plural: 변경사항들
   label_statistics: 통계

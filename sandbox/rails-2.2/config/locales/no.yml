@@ -526,8 +526,8 @@
   label_changes_details: Detaljer om alle endringer
   label_issue_tracking: Sakssporing
   label_spent_time: Brukt tid
-  label_f_hour: %.2f time
-  label_f_hour_plural: %.2f timer
+  label_f_hour: "{{value}} time"
+  label_f_hour_plural: "{{value}} timer"
   label_time_tracking: Tidssporing
   label_change_plural: Endringer
   label_statistics: Statistikk

@@ -438,10 +438,8 @@ pl:
   label_equals: równa się
   label_example: Przykład
   label_export_to: Eksportuj do
-  label_f_hour: %.2f godzina
-  label_f_hour_plural234: %.2f godziny
-  label_f_hour_plural5: %.2f godzin
-  label_f_hour_plural: %.2f godzin
+  label_f_hour: "{{value}} godzina"
+  label_f_hour_plural: "{{value}} godzin"
   label_feed_plural: Ilość RSS
   label_feeds_access_key_created_on: "Klucz dostępu RSS stworzony {{value}} dni temu"
   label_file_added: Dodano plik

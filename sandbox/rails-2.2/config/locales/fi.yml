@@ -527,8 +527,8 @@ fi:
   label_changes_details: Kaikkien muutosten yksityiskohdat
   label_issue_tracking: Tapahtumien seuranta
   label_spent_time: Käytetty aika
-  label_f_hour: %.2f tunti
-  label_f_hour_plural: %.2f tuntia
+  label_f_hour: "{{value}} tunti"
+  label_f_hour_plural: "{{value}} tuntia"
   label_time_tracking: Ajan seuranta
   label_change_plural: Muutokset
   label_statistics: Tilastot

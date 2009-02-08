@@ -598,8 +598,8 @@ vi:
   label_changes_details: Chi tiết của mọi thay đổi
   label_issue_tracking: Vấn đề
   label_spent_time: Thời gian
-  label_f_hour: %.2f giờ
-  label_f_hour_plural: %.2f giờ
+  label_f_hour: "{{value}} giờ"
+  label_f_hour_plural: "{{value}} giờ"
   label_time_tracking: Theo dõi thời gian
   label_change_plural: Thay đổi
   label_statistics: Thống kê

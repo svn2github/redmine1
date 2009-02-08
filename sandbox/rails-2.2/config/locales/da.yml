@@ -539,8 +539,8 @@ da:
   label_changes_details: Detaljer for alle ænringer
   label_issue_tracking: Sags søgning
   label_spent_time: Brugt tid
-  label_f_hour: %.2f time
-  label_f_hour_plural: %.2f timer
+  label_f_hour: "{{value}} time"
+  label_f_hour_plural: "{{value}} timer"
   label_time_tracking: Tidsstyring
   label_change_plural: Ændringer
   label_statistics: Statistik

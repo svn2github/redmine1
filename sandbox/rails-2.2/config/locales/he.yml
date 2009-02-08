@@ -480,8 +480,8 @@ he:
   label_changes_details: פירוט כל השינויים
   label_issue_tracking: מעקב אחר נושאים
   label_spent_time: זמן שבוזבז
-  label_f_hour: %.2f שעה
-  label_f_hour_plural: %.2f שעות
+  label_f_hour: "{{value}} שעה"
+  label_f_hour_plural: "{{value}} שעות"
   label_time_tracking: מעקב זמנים
   label_change_plural: שינויים
   label_statistics: סטטיסטיקות

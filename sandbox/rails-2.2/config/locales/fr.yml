@@ -620,8 +620,8 @@ fr:
   label_changes_details: Détails de tous les changements
   label_issue_tracking: Suivi des demandes
   label_spent_time: Temps passé
-  label_f_hour: %.2f heure
-  label_f_hour_plural: %.2f heures
+  label_f_hour: "{{value}} heure"
+  label_f_hour_plural: "{{value}} heures"
   label_time_tracking: Suivi du temps
   label_change_plural: Changements
   label_statistics: Statistiques

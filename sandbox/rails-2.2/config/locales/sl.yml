@@ -517,8 +517,8 @@ sl:
   label_changes_details: Podrobnosti o vseh spremembah
   label_issue_tracking: Sledenje zahtevkom
   label_spent_time: Porabljen čas
-  label_f_hour: %.2f ura
-  label_f_hour_plural: %.2f ur
+  label_f_hour: "{{value}} ura"
+  label_f_hour_plural: "{{value}} ur"
   label_time_tracking: Sledenje času
   label_change_plural: Spremembe
   label_statistics: Statistika

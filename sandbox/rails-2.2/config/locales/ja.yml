@@ -496,8 +496,8 @@ ja:
   label_changes_details: 全変更の詳細
   label_issue_tracking: チケットトラッキング
   label_spent_time: 経過時間
-  label_f_hour: %.2f 時間
-  label_f_hour_plural: %.2f 時間
+  label_f_hour: "{{value}} 時間"
+  label_f_hour_plural: "{{value}} 時間"
   label_time_tracking: 時間トラッキング
   label_change_plural: 変更
   label_statistics: 統計

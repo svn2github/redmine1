@@ -643,8 +643,8 @@ sv:
   label_changes_details: Detaljer om alla ändringar
   label_issue_tracking: Ärendeuppföljning
   label_spent_time: Spenderad tid
-  label_f_hour: %.2f timme
-  label_f_hour_plural: %.2f timmar
+  label_f_hour: "{{value}} timme"
+  label_f_hour_plural: "{{value}} timmar"
   label_time_tracking: Tidsuppföljning
   label_change_plural: Ändringar
   label_statistics: Statistik
