@@ -157,18 +157,6 @@ es:
     array:
       sentence_connector: "y"
 
-  actionview_datehelper_time_in_words_day: 1 día
-  actionview_datehelper_time_in_words_day_plural: "{{count}} días"
-  actionview_datehelper_time_in_words_hour_about: una hora aproximadamente
-  actionview_datehelper_time_in_words_hour_about_plural: "aproximadamente {{count}} horas"
-  actionview_datehelper_time_in_words_hour_about_single: una hora aproximadamente
-  actionview_datehelper_time_in_words_minute: 1 minuto
-  actionview_datehelper_time_in_words_minute_half: medio minuto
-  actionview_datehelper_time_in_words_minute_less_than: menos de un minuto
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minutos"
-  actionview_datehelper_time_in_words_minute_single: 1 minuto
-  actionview_datehelper_time_in_words_second_less_than: menos de un segundo
-  actionview_datehelper_time_in_words_second_less_than_plural: "menos de {{count}} segundos"
   actionview_instancetag_blank_option: Por favor seleccione
   
   button_activate: Activar

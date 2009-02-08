@@ -103,13 +103,6 @@ module ApplicationHelper
     h(truncate(text.to_s, :length => 120).gsub(%r{[\r\n]*<(pre|code)>.*$}m, '...')).gsub(/[\r\n]+/, "<br />")
   end
 
-  def distance_of_date_in_words(from_date, to_date = 0)
-    from_date = from_date.to_date if from_date.respond_to?(:to_date)
-    to_date = to_date.to_date if to_date.respond_to?(:to_date)
-    distance_in_days = (to_date - from_date).abs
-    lwr(:actionview_datehelper_time_in_words_day, distance_in_days)
-  end
-
   def due_date_distance_in_words(date)
     if date
       l((date < Date.today ? :label_roadmap_overdue : :label_roadmap_due_in), distance_of_date_in_words(Date.today, date))

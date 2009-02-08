@@ -129,18 +129,6 @@
         not_same_project: "nem azonos projekthez tartozik"
         circular_dependency: "Ez a kapcsolat egy körkörös függőséget eredményez"
 
-  actionview_datehelper_time_in_words_day: 1 nap
-  actionview_datehelper_time_in_words_day_plural: "{{count}} nap"
-  actionview_datehelper_time_in_words_hour_about: kb. 1 óra
-  actionview_datehelper_time_in_words_hour_about_plural: "kb. {{count}} óra"
-  actionview_datehelper_time_in_words_hour_about_single: kb. 1 óra
-  actionview_datehelper_time_in_words_minute: 1 perc
-  actionview_datehelper_time_in_words_minute_half: fél perc
-  actionview_datehelper_time_in_words_minute_less_than: kevesebb, mint 1 perc
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} perc"
-  actionview_datehelper_time_in_words_minute_single: 1 perc
-  actionview_datehelper_time_in_words_second_less_than: kevesebb, mint 1 másodperc
-  actionview_datehelper_time_in_words_second_less_than_plural: "kevesebb, mint {{count}} másodperc"
   actionview_instancetag_blank_option: Kérem válasszon
   
   general_text_No: 'Nem'

@@ -122,18 +122,6 @@ de:
         circular_dependency: "Diese Beziehung würde eine zyklische Abhängigkeit erzeugen"
       models:
   
-  actionview_datehelper_time_in_words_day: 1 Tag
-  actionview_datehelper_time_in_words_day_plural: "{{count}} Tagen"
-  actionview_datehelper_time_in_words_hour_about: ungefähr einer Stunde
-  actionview_datehelper_time_in_words_hour_about_plural: "ungefähr {{count}} Stunden"
-  actionview_datehelper_time_in_words_hour_about_single: ungefähr einer Stunde
-  actionview_datehelper_time_in_words_minute: 1 Minute
-  actionview_datehelper_time_in_words_minute_half: einer halben Minute
-  actionview_datehelper_time_in_words_minute_less_than: weniger als einer Minute
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} Minuten"
-  actionview_datehelper_time_in_words_minute_single: 1 Minute
-  actionview_datehelper_time_in_words_second_less_than: weniger als einer Sekunde
-  actionview_datehelper_time_in_words_second_less_than_plural: "weniger als {{count}} Sekunden"
   actionview_instancetag_blank_option: Bitte auswählen
   
   general_text_No: 'Nein'

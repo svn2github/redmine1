@@ -103,18 +103,6 @@ he:
         not_same_project: "לא שייך לאותו הפרויקט"
         circular_dependency: "הקשר הזה יצור תלות מעגלית"
 
-  actionview_datehelper_time_in_words_day: יום 1
-  actionview_datehelper_time_in_words_day_plural: "{{count}} ימים"
-  actionview_datehelper_time_in_words_hour_about: כשעה
-  actionview_datehelper_time_in_words_hour_about_plural: "כ-{{count}} שעות"
-  actionview_datehelper_time_in_words_hour_about_single: כשעה
-  actionview_datehelper_time_in_words_minute: דקה 1 
-  actionview_datehelper_time_in_words_minute_half: חצי דקה
-  actionview_datehelper_time_in_words_minute_less_than: פחות מדקה
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} דקות"
-  actionview_datehelper_time_in_words_minute_single: דקה 1
-  actionview_datehelper_time_in_words_second_less_than: פחות משניה
-  actionview_datehelper_time_in_words_second_less_than_plural: "פחות מ-{{count}} שניות"
   actionview_instancetag_blank_option: בחר בבקשה
   
   general_text_No: 'לא'

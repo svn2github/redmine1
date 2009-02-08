@@ -92,18 +92,6 @@ ca:
         not_same_project: "no pertany al mateix projecte"
         circular_dependency: "Aquesta relació crearia una dependència circular"
 
-  actionview_datehelper_time_in_words_day: 1 dia
-  actionview_datehelper_time_in_words_day_plural: "{{count}} dies"
-  actionview_datehelper_time_in_words_hour_about: aproximadament una hora
-  actionview_datehelper_time_in_words_hour_about_plural: "aproximadament {{count}} hores"
-  actionview_datehelper_time_in_words_hour_about_single: aproximadament una hora
-  actionview_datehelper_time_in_words_minute: 1 minut
-  actionview_datehelper_time_in_words_minute_half: mig minut
-  actionview_datehelper_time_in_words_minute_less_than: "menys d'un minut"
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minuts"
-  actionview_datehelper_time_in_words_minute_single: 1 minut
-  actionview_datehelper_time_in_words_second_less_than: "menys d'un segon"
-  actionview_datehelper_time_in_words_second_less_than_plural: "menys de {{count}} segons"
   actionview_instancetag_blank_option: Seleccioneu
   
   general_text_No: 'No'

@@ -92,19 +92,6 @@ th:
         not_same_project: "ไม่ได้อยู่ในโครงการเดียวกัน"
         circular_dependency: "ความสัมพันธ์อ้างอิงเป็นวงกลม"
 
-  
-  actionview_datehelper_time_in_words_day: 1 วัน
-  actionview_datehelper_time_in_words_day_plural: "{{count}} วัน"
-  actionview_datehelper_time_in_words_hour_about: ประมาณ 1 ชั่วโมง
-  actionview_datehelper_time_in_words_hour_about_plural: "ประมาณ {{count}} ชั่วโมง"
-  actionview_datehelper_time_in_words_hour_about_single: ประมาณ 1 ชั่วโมง
-  actionview_datehelper_time_in_words_minute: 1 นาที
-  actionview_datehelper_time_in_words_minute_half: ครึ่งนาที
-  actionview_datehelper_time_in_words_minute_less_than: ไม่ถึงนาที
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} นาที"
-  actionview_datehelper_time_in_words_minute_single: 1 นาที
-  actionview_datehelper_time_in_words_second_less_than: ไม่ถึงวินาที
-  actionview_datehelper_time_in_words_second_less_than_plural: "ไม่ถึง {{count}} วินาที"
   actionview_instancetag_blank_option: กรุณาเลือก
   
   general_text_No: 'ไม่'

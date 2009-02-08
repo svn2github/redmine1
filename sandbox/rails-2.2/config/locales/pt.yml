@@ -115,18 +115,6 @@ pt:
         circular_dependency: "Esta relação iria criar uma dependência circular"
 
   ## Translated by: Pedro Araújo <phcrva19@hotmail.com>
-  actionview_datehelper_time_in_words_day: 1 dia
-  actionview_datehelper_time_in_words_day_plural: "{{count}} dias"
-  actionview_datehelper_time_in_words_hour_about: cerca de uma hora
-  actionview_datehelper_time_in_words_hour_about_plural: "cerca de {{count}} horas"
-  actionview_datehelper_time_in_words_hour_about_single: cerca de uma hora
-  actionview_datehelper_time_in_words_minute: 1 minuto
-  actionview_datehelper_time_in_words_minute_half: meio minuto
-  actionview_datehelper_time_in_words_minute_less_than: menos de um minuto
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minutos"
-  actionview_datehelper_time_in_words_minute_single: 1 minuto
-  actionview_datehelper_time_in_words_second_less_than: menos de um segundo
-  actionview_datehelper_time_in_words_second_less_than_plural: "menos de {{count}} segundos"
   actionview_instancetag_blank_option: Seleccione
   
   general_text_No: 'Não'

@@ -95,18 +95,6 @@ cs:
   # CZ translation by Maxim Krušina | Massimo Filippi, s.r.o. | maxim@mxm.cz
   # Based on original CZ translation by Jan Kadleček
   
-  actionview_datehelper_time_in_words_day: 1 den
-  actionview_datehelper_time_in_words_day_plural: "{{count}} dny"
-  actionview_datehelper_time_in_words_hour_about: asi hodinou
-  actionview_datehelper_time_in_words_hour_about_plural: "asi {{count}} hodinami"
-  actionview_datehelper_time_in_words_hour_about_single: asi hodinou
-  actionview_datehelper_time_in_words_minute: 1 minutou
-  actionview_datehelper_time_in_words_minute_half: půl minutou
-  actionview_datehelper_time_in_words_minute_less_than: méně než minutou
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minutami"
-  actionview_datehelper_time_in_words_minute_single: 1 minutou
-  actionview_datehelper_time_in_words_second_less_than: méně než sekundou
-  actionview_datehelper_time_in_words_second_less_than_plural: "méně než {{count}} sekundami"
   actionview_instancetag_blank_option: Prosím vyberte
   
   general_text_No: 'Ne'

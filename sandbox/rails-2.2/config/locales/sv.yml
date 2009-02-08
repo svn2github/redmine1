@@ -150,19 +150,6 @@ sv:
       sentence_connector: "och"
       skip_last_comma: true
 
-  
-  actionview_datehelper_time_in_words_day: 1 dag
-  actionview_datehelper_time_in_words_day_plural: "{{count}} dagar"
-  actionview_datehelper_time_in_words_hour_about: cirka en timme
-  actionview_datehelper_time_in_words_hour_about_plural: "cirka {{count}} timmar"
-  actionview_datehelper_time_in_words_hour_about_single: cirka en timme
-  actionview_datehelper_time_in_words_minute: 1 minut
-  actionview_datehelper_time_in_words_minute_half: en halv minut
-  actionview_datehelper_time_in_words_minute_less_than: mindre än en minut
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minuter"
-  actionview_datehelper_time_in_words_minute_single: 1 minut
-  actionview_datehelper_time_in_words_second_less_than: mindre än en sekund
-  actionview_datehelper_time_in_words_second_less_than_plural: "mindre än {{count}} sekunder"
   actionview_instancetag_blank_option: Var god välj
   
   general_text_No: 'Nej'

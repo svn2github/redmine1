@@ -94,18 +94,6 @@ sk:
 
   # SK translation by Stanislav Pach | stano.pach@seznam.cz
   
-  actionview_datehelper_time_in_words_day: 1 deň
-  actionview_datehelper_time_in_words_day_plural: "{{count}} dní/dňami"
-  actionview_datehelper_time_in_words_hour_about: asi hodinou
-  actionview_datehelper_time_in_words_hour_about_plural: "asi {{count}} hodinami"
-  actionview_datehelper_time_in_words_hour_about_single: asi hodinou
-  actionview_datehelper_time_in_words_minute: 1 minútou
-  actionview_datehelper_time_in_words_minute_half: pol minútou
-  actionview_datehelper_time_in_words_minute_less_than: menej ako minútou
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minútami"
-  actionview_datehelper_time_in_words_minute_single: 1 minútou
-  actionview_datehelper_time_in_words_second_less_than: menej ako sekundou
-  actionview_datehelper_time_in_words_second_less_than_plural: "menej ako {{count}} sekundami"
   actionview_instancetag_blank_option: Prosím vyberte
   
   general_text_No: 'Nie'

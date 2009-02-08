@@ -92,19 +92,6 @@ sl:
         not_same_project: "ne pripada istemu projektu"
         circular_dependency: "Ta odnos bi povzročil krožno odvisnost"
 
-  
-  actionview_datehelper_time_in_words_day: 1 dan
-  actionview_datehelper_time_in_words_day_plural: "{{count}} dni"
-  actionview_datehelper_time_in_words_hour_about: kakšno uro
-  actionview_datehelper_time_in_words_hour_about_plural: "kakšnih {{count}} ur"
-  actionview_datehelper_time_in_words_hour_about_single: kakšno uro
-  actionview_datehelper_time_in_words_minute: 1 minuta
-  actionview_datehelper_time_in_words_minute_half: pol minute
-  actionview_datehelper_time_in_words_minute_less_than: manj kot minuta
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minut"
-  actionview_datehelper_time_in_words_minute_single: 1 minuta
-  actionview_datehelper_time_in_words_second_less_than: manj kot sekunda
-  actionview_datehelper_time_in_words_second_less_than_plural: "manj kot {{count}} sekund"
   actionview_instancetag_blank_option: Prosimo izberite
   
   general_text_No: 'Ne'

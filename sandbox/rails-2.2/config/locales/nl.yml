@@ -92,18 +92,6 @@ nl:
         not_same_project: "hoort niet bij hetzelfde project"
         circular_dependency: "Deze relatie zou een circulaire afhankelijkheid tot gevolg hebben"
 
-  actionview_datehelper_time_in_words_day: 1 dag
-  actionview_datehelper_time_in_words_day_plural: "{{count}} dagen"
-  actionview_datehelper_time_in_words_hour_about: ongeveer een uur
-  actionview_datehelper_time_in_words_hour_about_plural: "ongeveer {{count}} uur"
-  actionview_datehelper_time_in_words_hour_about_single: ongeveer een uur
-  actionview_datehelper_time_in_words_minute: 1 minuut
-  actionview_datehelper_time_in_words_minute_half: een halve minuut
-  actionview_datehelper_time_in_words_minute_less_than: minder dan een minuut
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minuten"
-  actionview_datehelper_time_in_words_minute_single: 1 minuut
-  actionview_datehelper_time_in_words_second_less_than: minder dan een seconde
-  actionview_datehelper_time_in_words_second_less_than_plural: "minder dan {{count}} seconden"
   actionview_instancetag_blank_option: Selecteer
   
   button_activate: Activeer

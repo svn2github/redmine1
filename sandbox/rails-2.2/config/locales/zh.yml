@@ -123,19 +123,6 @@ zh:
         not_same_project: "不属于同一个项目"
         circular_dependency: "此关联将导致循环依赖"
 
-  
-  actionview_datehelper_time_in_words_day: 1 天
-  actionview_datehelper_time_in_words_day_plural: "{{count}} 天"
-  actionview_datehelper_time_in_words_hour_about: 约 1 小时
-  actionview_datehelper_time_in_words_hour_about_plural: "约 {{count}} 小时"
-  actionview_datehelper_time_in_words_hour_about_single: 约 1 小时
-  actionview_datehelper_time_in_words_minute: 1 分钟
-  actionview_datehelper_time_in_words_minute_half: 半分钟
-  actionview_datehelper_time_in_words_minute_less_than: 1 分钟以内
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} 分钟"
-  actionview_datehelper_time_in_words_minute_single: 1 分钟
-  actionview_datehelper_time_in_words_second_less_than: 1 秒以内
-  actionview_datehelper_time_in_words_second_less_than_plural: "{{count}} 秒以内"
   actionview_instancetag_blank_option: 请选择
   
   general_text_No: '否'

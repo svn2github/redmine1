@@ -118,19 +118,6 @@
         not_same_project: "ne pripada istom projektu"
         circular_dependency: "Ova relacija bi napravila kružnu zavisnost"
 
-  
-  actionview_datehelper_time_in_words_day: 1 dan
-  actionview_datehelper_time_in_words_day_plural: "{{count}} dana"
-  actionview_datehelper_time_in_words_hour_about: oko sat vremena
-  actionview_datehelper_time_in_words_hour_about_plural: "oko {{count}} sati"
-  actionview_datehelper_time_in_words_hour_about_single: oko sat vremena
-  actionview_datehelper_time_in_words_minute: 1 minut
-  actionview_datehelper_time_in_words_minute_half: pola minuta
-  actionview_datehelper_time_in_words_minute_less_than: manje od minut
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minuta"
-  actionview_datehelper_time_in_words_minute_single: 1 minut
-  actionview_datehelper_time_in_words_second_less_than: manje od sekunde
-  actionview_datehelper_time_in_words_second_less_than_plural: "manje od {{count}} sekundi"
   actionview_instancetag_blank_option: Molim izaberite
   
   general_text_No: 'Ne'

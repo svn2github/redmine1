@@ -133,18 +133,6 @@ lt:
       last_word_connector: " ir "
 
   
-  actionview_datehelper_time_in_words_day: 1 diena
-  actionview_datehelper_time_in_words_day_plural: "{{count}} dienų"
-  actionview_datehelper_time_in_words_hour_about: apytiksliai valanda
-  actionview_datehelper_time_in_words_hour_about_plural: "apie {{count}} valandas"
-  actionview_datehelper_time_in_words_hour_about_single: apytiksliai valanda
-  actionview_datehelper_time_in_words_minute: 1 minutė
-  actionview_datehelper_time_in_words_minute_half: pusė minutės
-  actionview_datehelper_time_in_words_minute_less_than: mažiau kaip minutė
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minutės"
-  actionview_datehelper_time_in_words_minute_single: 1 minutė
-  actionview_datehelper_time_in_words_second_less_than: mažiau kaip sekundė
-  actionview_datehelper_time_in_words_second_less_than_plural: "mažiau, negu {{count}} sekundės"
   actionview_instancetag_blank_option: prašom išrinkti
   
   general_text_No: 'Ne'

@@ -92,18 +92,6 @@ bg:
         not_same_project: "не е от същия проект"
         circular_dependency: "Тази релация ще доведе до безкрайна зависимост"
 
-  actionview_datehelper_time_in_words_day: 1 ден
-  actionview_datehelper_time_in_words_day_plural: "{{count}} дни"
-  actionview_datehelper_time_in_words_hour_about: около час
-  actionview_datehelper_time_in_words_hour_about_plural: "около {{count}} часа"
-  actionview_datehelper_time_in_words_hour_about_single: около час
-  actionview_datehelper_time_in_words_minute: 1 минута
-  actionview_datehelper_time_in_words_minute_half: половин минута
-  actionview_datehelper_time_in_words_minute_less_than: по-малко от минута
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} минути"
-  actionview_datehelper_time_in_words_minute_single: 1 минута
-  actionview_datehelper_time_in_words_second_less_than: по-малко от секунда
-  actionview_datehelper_time_in_words_second_less_than_plural: "по-малко от {{count}} секунди"
   actionview_instancetag_blank_option: Изберете
   
   general_text_No: 'Не'

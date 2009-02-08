@@ -92,19 +92,6 @@ en:
         not_same_project: "doesn't belong to the same project"
         circular_dependency: "This relation would create a circular dependency"
 
-  
-  actionview_datehelper_time_in_words_day: 1 day
-  actionview_datehelper_time_in_words_day_plural: "{{count}} days"
-  actionview_datehelper_time_in_words_hour_about: about an hour
-  actionview_datehelper_time_in_words_hour_about_plural: "about {{count}} hours"
-  actionview_datehelper_time_in_words_hour_about_single: about an hour
-  actionview_datehelper_time_in_words_minute: 1 minute
-  actionview_datehelper_time_in_words_minute_half: half a minute
-  actionview_datehelper_time_in_words_minute_less_than: less than a minute
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minutes"
-  actionview_datehelper_time_in_words_minute_single: 1 minute
-  actionview_datehelper_time_in_words_second_less_than: less than a second
-  actionview_datehelper_time_in_words_second_less_than_plural: "less than {{count}} seconds"
   actionview_instancetag_blank_option: Please select
   
   general_text_No: 'No'

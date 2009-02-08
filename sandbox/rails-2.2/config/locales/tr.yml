@@ -131,18 +131,6 @@ tr:
         circular_dependency: "Bu ilişki döngüsel bağımlılık meydana getirecektir"
       models:
   
-  actionview_datehelper_time_in_words_day: 1 gün
-  actionview_datehelper_time_in_words_day_plural: "{{count}} gün"
-  actionview_datehelper_time_in_words_hour_about: yaklaşık 1 saat
-  actionview_datehelper_time_in_words_hour_about_plural: "yaklaşık {{count}} saat"
-  actionview_datehelper_time_in_words_hour_about_single: yaklaşık bir saat
-  actionview_datehelper_time_in_words_minute: 1 dakika
-  actionview_datehelper_time_in_words_minute_half: bir buçuk dakika
-  actionview_datehelper_time_in_words_minute_less_than: bir dakikadan az
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} dakika"
-  actionview_datehelper_time_in_words_minute_single: 1 dakika
-  actionview_datehelper_time_in_words_second_less_than: 1 saniyeden az
-  actionview_datehelper_time_in_words_second_less_than_plural: "{{count}} saniyeden az"
   actionview_instancetag_blank_option: Lütfen Seçin
   
   general_text_No: 'Hayır'

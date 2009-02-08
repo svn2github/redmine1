@@ -202,26 +202,6 @@ ru:
       two_words_connector: " и "
       last_word_connector: " и "
   
-  actionview_datehelper_time_in_words_day: "{{count}} день"
-  actionview_datehelper_time_in_words_day_plural2: "{{count}} дня"
-  actionview_datehelper_time_in_words_day_plural5: "{{count}} дней"
-  actionview_datehelper_time_in_words_day_plural: "{{count}} дней"
-  actionview_datehelper_time_in_words_hour_about_plural2: "около {{count}} часов"
-  actionview_datehelper_time_in_words_hour_about_plural5: "около {{count}} часов"
-  actionview_datehelper_time_in_words_hour_about_plural: "около {{count}} часов"
-  actionview_datehelper_time_in_words_hour_about_single: около часа
-  actionview_datehelper_time_in_words_hour_about: "около {{count}} часа"
-  actionview_datehelper_time_in_words_minute: 1 минута
-  actionview_datehelper_time_in_words_minute_half: полминуты
-  actionview_datehelper_time_in_words_minute_less_than: менее минуты
-  actionview_datehelper_time_in_words_minute_plural2: "{{count}} минуты"
-  actionview_datehelper_time_in_words_minute_plural5: "{{count}} минут"
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} минут"
-  actionview_datehelper_time_in_words_minute_single: 1 минуту
-  actionview_datehelper_time_in_words_second_less_than_plural2: "менее {{count}} секунд"
-  actionview_datehelper_time_in_words_second_less_than_plural5: "менее {{count}} секунд"
-  actionview_datehelper_time_in_words_second_less_than_plural: "менее {{count}} секунд"
-  actionview_datehelper_time_in_words_second_less_than: менее секунды
   actionview_instancetag_blank_option: Выберите
   
   button_activate: Активировать

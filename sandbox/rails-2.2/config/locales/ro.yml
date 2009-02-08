@@ -138,18 +138,6 @@ ro:
         two_words_connector: " şi "
         last_word_connector: " şi "
 
-  actionview_datehelper_time_in_words_day: 1 zi
-  actionview_datehelper_time_in_words_day_plural: "{{count}} zile"
-  actionview_datehelper_time_in_words_hour_about: aproximativ o ora
-  actionview_datehelper_time_in_words_hour_about_plural: "aproximativ {{count}} ore"
-  actionview_datehelper_time_in_words_hour_about_single: aproximativ o ora
-  actionview_datehelper_time_in_words_minute: 1 minut
-  actionview_datehelper_time_in_words_minute_half: 30 de secunde
-  actionview_datehelper_time_in_words_minute_less_than: mai putin de un minut
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minute"
-  actionview_datehelper_time_in_words_minute_single: 1 minut
-  actionview_datehelper_time_in_words_second_less_than: mai putin de o secunda
-  actionview_datehelper_time_in_words_second_less_than_plural: "mai putin de {{count}} secunde"
   actionview_instancetag_blank_option: Va rog selectati
   
   general_text_No: 'Nu'

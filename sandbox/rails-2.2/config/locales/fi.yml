@@ -135,18 +135,6 @@ fi:
         circular_dependency: "Tämä suhde loisi kehän."
 
   
-  actionview_datehelper_time_in_words_day: 1 päivä
-  actionview_datehelper_time_in_words_day_plural: "{{count}} päivää"
-  actionview_datehelper_time_in_words_hour_about: noin tunti
-  actionview_datehelper_time_in_words_hour_about_plural: "noin {{count}} tuntia"
-  actionview_datehelper_time_in_words_hour_about_single: noin tunnin
-  actionview_datehelper_time_in_words_minute: 1 minuutti
-  actionview_datehelper_time_in_words_minute_half: puoli minuuttia
-  actionview_datehelper_time_in_words_minute_less_than: vähemmän kuin minuuttia
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minuuttia"
-  actionview_datehelper_time_in_words_minute_single: 1 minuutti
-  actionview_datehelper_time_in_words_second_less_than: vähemmän kuin sekuntin
-  actionview_datehelper_time_in_words_second_less_than_plural: "vähemmän kuin {{count}} sekuntia"
   actionview_instancetag_blank_option: Valitse, ole hyvä
   
   general_text_No: 'Ei'

@@ -97,18 +97,6 @@
         circular_dependency: "Denne relasjonen ville lagd en sirkulær avhengighet"
 
   
-  actionview_datehelper_time_in_words_day: 1 dag
-  actionview_datehelper_time_in_words_day_plural: "{{count}} dager"
-  actionview_datehelper_time_in_words_hour_about: ca. en time
-  actionview_datehelper_time_in_words_hour_about_plural: "ca. {{count}} timer"
-  actionview_datehelper_time_in_words_hour_about_single: ca. en time
-  actionview_datehelper_time_in_words_minute: 1 minutt
-  actionview_datehelper_time_in_words_minute_half: et halvt minutt
-  actionview_datehelper_time_in_words_minute_less_than: mindre enn et minutt
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minutter"
-  actionview_datehelper_time_in_words_minute_single: 1 minutt
-  actionview_datehelper_time_in_words_second_less_than: mindre enn et sekund
-  actionview_datehelper_time_in_words_second_less_than_plural: "mindre enn {{count}} sekunder"
   actionview_instancetag_blank_option: Vennligst velg
   
   general_text_No: 'Nei'

@@ -92,19 +92,6 @@ uk:
         not_same_project: "не відносяться до одного проекту"
         circular_dependency: "Такий зв'язок приведе до циклічної залежності"
 
-  
-  actionview_datehelper_time_in_words_day: 1 день
-  actionview_datehelper_time_in_words_day_plural: "{{count}} днів(я)"
-  actionview_datehelper_time_in_words_hour_about: близько години
-  actionview_datehelper_time_in_words_hour_about_plural: "близько {{count}} годин(и)"
-  actionview_datehelper_time_in_words_hour_about_single: близько години
-  actionview_datehelper_time_in_words_minute: 1 хвилина
-  actionview_datehelper_time_in_words_minute_half: півхвилини
-  actionview_datehelper_time_in_words_minute_less_than: менше хвилини
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} хвилин(и)"
-  actionview_datehelper_time_in_words_minute_single: 1 хвилина
-  actionview_datehelper_time_in_words_second_less_than: менше секунди
-  actionview_datehelper_time_in_words_second_less_than_plural: "менше {{count}} секунд(и)"
   actionview_instancetag_blank_option: Оберіть
   
   general_text_No: 'Ні'

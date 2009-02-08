@@ -122,18 +122,6 @@ da:
           other:  "{{count}} fejl forhindrede denne {{model}} i at blive gemt"
         body: "Der var problemer med følgende felter:"
   
-  actionview_datehelper_time_in_words_day: 1 dag
-  actionview_datehelper_time_in_words_day_plural: "{{count}} dage"
-  actionview_datehelper_time_in_words_hour_about: cirka en time
-  actionview_datehelper_time_in_words_hour_about_plural: "cirka {{count}} timer"
-  actionview_datehelper_time_in_words_hour_about_single: cirka en time
-  actionview_datehelper_time_in_words_minute: 1 minut
-  actionview_datehelper_time_in_words_minute_half: et halvt minut
-  actionview_datehelper_time_in_words_minute_less_than: mindre end et minut
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minutter"
-  actionview_datehelper_time_in_words_minute_single: 1 minut
-  actionview_datehelper_time_in_words_second_less_than: mindre end et sekund
-  actionview_datehelper_time_in_words_second_less_than_plural: "mindre end {{count}} sekunder"
   actionview_instancetag_blank_option: Vælg venligst
   
   general_text_No: 'Nej'

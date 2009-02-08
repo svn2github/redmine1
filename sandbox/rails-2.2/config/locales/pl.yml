@@ -123,26 +123,6 @@ pl:
   # Keep this line in order to avoid problems with Windows Notepad UTF-8 EF-BB-BFidea...
   # Best regards from Lublin@Poland :-)
   # PL translation by Mariusz@Olejnik.net,
-  actionview_datehelper_time_in_words_day: 1 dzień
-  actionview_datehelper_time_in_words_day_plural234: "{{count}} dni"
-  actionview_datehelper_time_in_words_day_plural5: "{{count}} dni"
-  actionview_datehelper_time_in_words_day_plural: "{{count}} dni"
-  actionview_datehelper_time_in_words_hour_about: około godziny
-  actionview_datehelper_time_in_words_hour_about_plural234: "około {{count}} godzin"
-  actionview_datehelper_time_in_words_hour_about_plural5: "około {{count}} godzin"
-  actionview_datehelper_time_in_words_hour_about_plural: "około {{count}} godzin"
-  actionview_datehelper_time_in_words_hour_about_single: około godziny
-  actionview_datehelper_time_in_words_minute: 1 minuta
-  actionview_datehelper_time_in_words_minute_half: pół minuty
-  actionview_datehelper_time_in_words_minute_less_than: mniej niż minuta
-  actionview_datehelper_time_in_words_minute_plural234: "{{count}} minuty"
-  actionview_datehelper_time_in_words_minute_plural5: "{{count}} minut"
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minut"
-  actionview_datehelper_time_in_words_minute_single: 1 minuta
-  actionview_datehelper_time_in_words_second_less_than: mniej niż sekunda
-  actionview_datehelper_time_in_words_second_less_than_plural234: "mniej niż {{count}} sekundy"
-  actionview_datehelper_time_in_words_second_less_than_plural5: "mniej niż {{count}} sekund"
-  actionview_datehelper_time_in_words_second_less_than_plural: "mniej niż {{count}} sekund"
   actionview_instancetag_blank_option: Proszę wybierz
   
   button_activate: Aktywuj

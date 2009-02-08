@@ -161,18 +161,6 @@ vi:
       two_words_connector: " và "
       last_word_connector: ", và "
   
-  actionview_datehelper_time_in_words_day: 1 ngày
-  actionview_datehelper_time_in_words_day_plural: "{{count}} ngày"
-  actionview_datehelper_time_in_words_hour_about: khoảng 1 giờ
-  actionview_datehelper_time_in_words_hour_about_plural: "khoảng {{count}} giờ"
-  actionview_datehelper_time_in_words_hour_about_single: khoảng 1 giờ
-  actionview_datehelper_time_in_words_minute: 1 phút
-  actionview_datehelper_time_in_words_minute_half: nửa phút
-  actionview_datehelper_time_in_words_minute_less_than: dưới một phút
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} phút"
-  actionview_datehelper_time_in_words_minute_single: 1 phút
-  actionview_datehelper_time_in_words_second_less_than: cách vài giây
-  actionview_datehelper_time_in_words_second_less_than_plural: "cách {{count}} giấy"
   actionview_instancetag_blank_option: Vui lòng chọn
   
   general_text_No: 'Không'

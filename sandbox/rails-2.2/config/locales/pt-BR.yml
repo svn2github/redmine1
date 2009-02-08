@@ -130,19 +130,6 @@ pt-BR:
         not_same_project: "não pertence ao mesmo projeto"
         circular_dependency: "Esta relação geraria uma dependência circular"
 
-  
-  actionview_datehelper_time_in_words_day: 1 dia
-  actionview_datehelper_time_in_words_day_plural: "{{count}} dias"
-  actionview_datehelper_time_in_words_hour_about: aproximadamente uma hora
-  actionview_datehelper_time_in_words_hour_about_plural: "aproximadamente {{count}} horas"
-  actionview_datehelper_time_in_words_hour_about_single: aproximadamente uma hora
-  actionview_datehelper_time_in_words_minute: 1 minuto
-  actionview_datehelper_time_in_words_minute_half: meio minuto
-  actionview_datehelper_time_in_words_minute_less_than: menos de um minuto
-  actionview_datehelper_time_in_words_minute_plural: "{{count}} minutos"
-  actionview_datehelper_time_in_words_minute_single: 1 minuto
-  actionview_datehelper_time_in_words_second_less_than: menos de um segundo
-  actionview_datehelper_time_in_words_second_less_than_plural: "menos de {{count}} segundos"
   actionview_instancetag_blank_option: Selecione
   
   general_text_No: 'Não'

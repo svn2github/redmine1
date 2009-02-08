@@ -123,19 +123,6 @@ ja:
         not_same_project: "同じプロジェクトに属していません"
         circular_dependency: "この関係では、循環依存になります"
 
-  
-  actionview_datehelper_time_in_words_day: 1日
-  actionview_datehelper_time_in_words_day_plural: "{{count}}日"
-  actionview_datehelper_time_in_words_hour_about: 約1時間
-  actionview_datehelper_time_in_words_hour_about_plural: "約{{count}}時間"
-  actionview_datehelper_time_in_words_hour_about_single: 約1時間
-  actionview_datehelper_time_in_words_minute: 1分
-  actionview_datehelper_time_in_words_minute_half: 約30秒
-  actionview_datehelper_time_in_words_minute_less_than: 1分以内
-  actionview_datehelper_time_in_words_minute_plural: "{{count}}分"
-  actionview_datehelper_time_in_words_minute_single: 1分
-  actionview_datehelper_time_in_words_second_less_than: 1秒以内
-  actionview_datehelper_time_in_words_second_less_than_plural: "{{count}}秒以内"
   actionview_instancetag_blank_option: 選んでください
   
   general_text_No: 'いいえ'
