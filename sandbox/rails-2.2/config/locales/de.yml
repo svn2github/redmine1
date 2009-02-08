@@ -158,12 +158,6 @@ de:
   activerecord_error_not_same_project: gehört nicht zum selben Projekt
   activerecord_error_circular_dependency: Diese Beziehung würde eine zyklische Abhängigkeit erzeugen
   
-  general_fmt_age: "{{count}} Jahr"
-  general_fmt_age_plural: "{{count}} Jahre"
-  general_fmt_date: "%{{count}}.%%m.%%y"
-  general_fmt_datetime: "%{{count}}.%%m.%%y, %%H:%%M"
-  general_fmt_datetime_short: "%{{count}}.%%m, %%H:%%M"
-  general_fmt_time: %%H:%%M
   general_text_No: 'Nein'
   general_text_Yes: 'Ja'
   general_text_no: 'nein'

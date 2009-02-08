@@ -197,12 +197,6 @@ vi:
   activerecord_error_not_same_project: không thuộc cùng dự án
   activerecord_error_circular_dependency: quan hệ có thể gây ra lặp vô tận
   
-  general_fmt_age: "{{count}} năm"
-  general_fmt_age_plural: "{{count}} năm"
-  general_fmt_date: "%%m/%{{count}}/%%Y"
-  general_fmt_datetime: "%%m/%{{count}}/%%Y %%I:%%M %%p"
-  general_fmt_datetime_short: "%%b %{{count}}, %%I:%%M %%p"
-  general_fmt_time: %%I:%%M %%p
   general_text_No: 'Không'
   general_text_Yes: 'Có'
   general_text_no: 'không'

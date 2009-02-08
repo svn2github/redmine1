@@ -140,12 +140,6 @@ he:
   activerecord_error_not_same_project: לא שייך לאותו הפרויקט
   activerecord_error_circular_dependency: הקשר הזה יצור תלות מעגלית
   
-  general_fmt_age: "שנה {{count}}"
-  general_fmt_age_plural: "{{count}} שנים"
-  general_fmt_date: "%{{count}}/%%m/%%Y"
-  general_fmt_datetime: "%{{count}}/%%m/%%Y %%I:%%M %%p"
-  general_fmt_datetime_short: "%%b %{{count}}, %%I:%%M %%p"
-  general_fmt_time: %%I:%%M %%p
   general_text_No: 'לא'
   general_text_Yes: 'כן'
   general_text_no: 'לא'

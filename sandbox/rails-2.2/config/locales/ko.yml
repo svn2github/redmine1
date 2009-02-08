@@ -191,12 +191,6 @@ ko:
   activerecord_error_not_same_project: 는 같은 프로젝트에 속해 있지 않습니다.
   activerecord_error_circular_dependency: 이 관계는 순환 의존관계를 만들 수있습니다.
   
-  general_fmt_age: "{{count}} 년"
-  general_fmt_age_plural: "{{count}} 년"
-  general_fmt_date: "%%Y-%%m-%{{count}}"
-  general_fmt_datetime: "%%Y-%%m-%{{count}} %%I:%%M %%p"
-  general_fmt_datetime_short: "%%b %{{count}}, %%I:%%M %%p"
-  general_fmt_time: %%I:%%M %%p
   general_text_No: '아니오'
   general_text_Yes: '예'
   general_text_no: '아니오'

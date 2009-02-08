@@ -155,12 +155,6 @@
   activerecord_error_not_same_project: ne pripada istom projektu
   activerecord_error_circular_dependency: Ova relacija bi napravila kružnu zavisnost
   
-  general_fmt_age: "{{count}} g"
-  general_fmt_age_plural: "{{count}} god."
-  general_fmt_date: "%%m/%{{count}}/%%G"
-  general_fmt_datetime: "%%m/%{{count}}/%%G %%H:%%M %%p"
-  general_fmt_datetime_short: "%%b %{{count}}, %%H:%%M %%p"
-  general_fmt_time: %%I:%%M %%p
   general_text_No: 'Ne'
   general_text_Yes: 'Da'
   general_text_no: 'ne'

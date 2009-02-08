@@ -63,12 +63,6 @@ sl:
   activerecord_error_not_same_project: ne pripada istemu projektu
   activerecord_error_circular_dependency: Ta odnos bi povzročil krožno odvisnost
   
-  general_fmt_age: "{{count}} l"
-  general_fmt_age_plural: "{{count}} let"
-  general_fmt_date: "%%m/%{{count}}/%%Y"
-  general_fmt_datetime: "%%m/%{{count}}/%%Y %%I:%%M %%p"
-  general_fmt_datetime_short: "%%b %{{count}}, %%I:%%M %%p"
-  general_fmt_time: %%I:%%M %%p
   general_text_No: 'Ne'
   general_text_Yes: 'Da'
   general_text_no: 'ne'

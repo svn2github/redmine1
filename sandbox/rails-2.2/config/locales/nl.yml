@@ -217,12 +217,6 @@ nl:
   general_csv_separator: ','
   general_day_names: Maandag, Dinsdag, Woensdag, Donderdag, Vrijdag, Zaterdag, Zondag
   general_first_day_of_week: '7'
-  general_fmt_age: "{{count}} jr"
-  general_fmt_age_plural: "{{count}} jr"
-  general_fmt_date: "%{{count}}/%%m/%%Y"
-  general_fmt_datetime: "%{{count}}/%%m/%%Y %%H:%%M"
-  general_fmt_datetime_short: "%{{count}} %%b, %%H:%%M"
-  general_fmt_time: %%H:%%M
   general_lang_name: 'Nederlands'
   general_pdf_encoding: ISO-8859-1
   general_text_No: 'Nee'

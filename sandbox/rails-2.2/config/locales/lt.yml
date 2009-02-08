@@ -169,12 +169,6 @@ lt:
   activerecord_error_not_same_project: nepriklauso tam pačiam projektui
   activerecord_error_circular_dependency: Šis ryšys sukurtų ciklinę priklausomybę
   
-  general_fmt_age: "{{count}} m."
-  general_fmt_age_plural: "{{count}} metų(ai)"
-  general_fmt_date: "%%Y-%%m-%{{count}}"
-  general_fmt_datetime: "%%Y-%%m-%{{count}} %%H:%%M"
-  general_fmt_datetime_short: "%%b %{{count}}, %%H:%%M"
-  general_fmt_time: %%H:%%M
   general_text_No: 'Ne'
   general_text_Yes: 'Taip'
   general_text_no: 'ne'

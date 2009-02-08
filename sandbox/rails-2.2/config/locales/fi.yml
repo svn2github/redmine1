@@ -171,12 +171,6 @@ fi:
   activerecord_error_not_same_project: ei kuulu samaan projektiin
   activerecord_error_circular_dependency: Tämä suhde loisi kehän.
   
-  general_fmt_age: "{{count}} v."
-  general_fmt_age_plural: "{{count}} vuotta"
-  general_fmt_date: "%{{count}}.%%m.%%Y"
-  general_fmt_datetime: "%{{count}}.%%m.%%Y %%I:%%M %%p"
-  general_fmt_datetime_short: "%%b %{{count}}, %%I:%%M %%p"
-  general_fmt_time: %%I:%%M %%p
   general_text_No: 'Ei'
   general_text_Yes: 'Kyllä'
   general_text_no: 'ei'

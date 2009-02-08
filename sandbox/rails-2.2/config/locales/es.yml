@@ -348,12 +348,6 @@ es:
   general_csv_separator: ';'
   general_day_names: Lunes,Martes,Miércoles,Jueves,Viernes,Sábado,Domingo
   general_first_day_of_week: '1'
-  general_fmt_age: "{{count}} año"
-  general_fmt_age_plural: "{{count}} años"
-  general_fmt_date: "%{{count}}/%%m/%%Y"
-  general_fmt_datetime: "%{{count}}/%%m/%%Y %%H:%%M"
-  general_fmt_datetime_short: "%{{count}}/%%m %%H:%%M"
-  general_fmt_time: %%H:%%M
   general_lang_name: 'Español'
   general_pdf_encoding: ISO-8859-15
   general_text_No: 'No'

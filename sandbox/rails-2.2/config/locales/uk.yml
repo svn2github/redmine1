@@ -63,12 +63,6 @@ uk:
   activerecord_error_not_same_project: не відносяться до одного проекту
   activerecord_error_circular_dependency: Такий зв'язок приведе до циклічної залежності
   
-  general_fmt_age: "{{count}} р."
-  general_fmt_age_plural: "{{count}} рр."
-  general_fmt_date: "%%m/%{{count}}/%%Y"
-  general_fmt_datetime: "%%m/%{{count}}/%%Y %%I:%%M %%p"
-  general_fmt_datetime_short: "%%b %{{count}}, %%I:%%M %%p"
-  general_fmt_time: %%I:%%M %%p
   general_text_No: 'Ні'
   general_text_Yes: 'Так'
   general_text_no: 'Ні'

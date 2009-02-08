@@ -324,14 +324,6 @@ pl:
   general_csv_separator: ','
   general_day_names: Poniedziałek,Wtorek,Środa,Czwartek,Piątek,Sobota,Niedziela
   general_first_day_of_week: '1'
-  general_fmt_age: "{{count}} rok"
-  general_fmt_age_plural234: "{{count}} lata"
-  general_fmt_age_plural5: "{{count}} lat"
-  general_fmt_age_plural: "{{count}} lat"
-  general_fmt_date: "%%m/%{{count}}/%%Y"
-  general_fmt_datetime: "%%m/%{{count}}/%%Y %%I:%%M %%p"
-  general_fmt_datetime_short: "%%b %{{count}}, %%I:%%M %%p"
-  general_fmt_time: %%I:%%M %%p
   general_lang_name: 'Polski'
   general_pdf_encoding: UTF-8
   general_text_No: 'Nie'

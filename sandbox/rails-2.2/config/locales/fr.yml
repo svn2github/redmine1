@@ -162,12 +162,6 @@ fr:
   activerecord_error_not_same_project: n'appartient pas au même projet
   activerecord_error_circular_dependency: Cette relation créerait une dépendance circulaire
   
-  general_fmt_age: "{{count}} an"
-  general_fmt_age_plural: "{{count}} ans"
-  general_fmt_date: "%{{count}}/%%m/%%Y"
-  general_fmt_datetime: "%{{count}}/%%m/%%Y %%H:%%M"
-  general_fmt_datetime_short: "%{{count}}/%%m %%H:%%M"
-  general_fmt_time: %%H:%%M
   general_text_No: 'Non'
   general_text_Yes: 'Oui'
   general_text_no: 'non'

@@ -133,12 +133,6 @@
   activerecord_error_not_same_project: hører ikke til samme prosjekt
   activerecord_error_circular_dependency: Denne relasjonen ville lagd en sirkulær avhengighet
   
-  general_fmt_age: "{{count}} år"
-  general_fmt_age_plural: "{{count}} år"
-  general_fmt_date: "%{{count}}. %%B %%Y"
-  general_fmt_datetime: "%{{count}}. %%B %%H:%%M"
-  general_fmt_datetime_short: "%{{count}}.%%m.%%Y, %%H:%%M"
-  general_fmt_time: %%H:%%M
   general_text_No: 'Nei'
   general_text_Yes: 'Ja'
   general_text_no: 'nei'

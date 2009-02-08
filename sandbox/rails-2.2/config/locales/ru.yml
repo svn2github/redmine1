@@ -408,14 +408,6 @@ ru:
   general_csv_separator: ','
   general_day_names: Понедельник,Вторник,Среда,Четверг,Пятница,Суббота,Воскресенье
   general_first_day_of_week: '1'
-  general_fmt_age: "{{count}} г."
-  general_fmt_age_plural2: "{{count}} гг."
-  general_fmt_age_plural5: "{{count}} гг."
-  general_fmt_age_plural: "{{count}} лет"
-  general_fmt_date: "%{{count}}.%%m.%%Y"
-  general_fmt_datetime: "%{{count}}.%%m.%%Y %%I:%%M %%p"
-  general_fmt_datetime_short: "%{{count}} %%b, %%H:%%M"
-  general_fmt_time: %%H:%%M
   general_lang_name: 'Russian (Русский)'
   general_pdf_encoding: UTF-8
   general_text_no: 'Нет'

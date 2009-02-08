@@ -63,12 +63,6 @@ bg:
   activerecord_error_not_same_project: не е от същия проект
   activerecord_error_circular_dependency: Тази релация ще доведе до безкрайна зависимост
   
-  general_fmt_age: "{{count}} yr"
-  general_fmt_age_plural: "{{count}} yrs"
-  general_fmt_date: "%{{count}}.%%m.%%Y"
-  general_fmt_datetime: "%{{count}}.%%m.%%Y %%H:%%M"
-  general_fmt_datetime_short: "%%b %{{count}}, %%H:%%M"
-  general_fmt_time: %%H:%%M
   general_text_No: 'Не'
   general_text_Yes: 'Да'
   general_text_no: 'не'

@@ -161,12 +161,6 @@ ja:
   activerecord_error_not_same_project: 同じプロジェクトに属していません
   activerecord_error_circular_dependency: この関係では、循環依存になります
   
-  general_fmt_age: "{{count}}歳"
-  general_fmt_age_plural: "{{count}}歳"
-  general_fmt_date: "%%Y年%%m月%{{count}}日"
-  general_fmt_datetime: "%%Y年%%m月%{{count}}日 %%H:%%M %%p"
-  general_fmt_datetime_short: "%%b %{{count}}, %%H:%%M %%p"
-  general_fmt_time: %%H:%%M %%p
   general_text_No: 'いいえ'
   general_text_Yes: 'はい'
   general_text_no: 'いいえ'

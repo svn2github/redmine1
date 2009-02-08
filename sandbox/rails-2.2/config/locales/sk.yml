@@ -66,12 +66,6 @@ sk:
   activerecord_error_not_same_project: nepatrí rovnakému projektu
   activerecord_error_circular_dependency: Tento vzťah by vytvoril cyklickú závislosť
   
-  general_fmt_age: "{{count}} rok"
-  general_fmt_age_plural: "{{count}} rokov"
-  general_fmt_date: "%%m/%{{count}}/%%Y"
-  general_fmt_datetime: "%%m/%{{count}}/%%Y %%I:%%M %%p"
-  general_fmt_datetime_short: "%%b %{{count}}, %%I:%%M %%p"
-  general_fmt_time: %%I:%%M %%p
   general_text_No: 'Nie'
   general_text_Yes: 'Áno'
   general_text_no: 'nie'

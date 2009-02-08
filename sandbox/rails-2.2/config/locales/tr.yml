@@ -167,12 +167,6 @@ tr:
   activerecord_error_not_same_project: aynı projeye ait değil
   activerecord_error_circular_dependency: Bu ilişki döngüsel bağımlılık meydana getirecektir
   
-  general_fmt_age: "{{count}} yaşında"
-  general_fmt_age_plural: "{{count}} yaşında"
-  general_fmt_date: "%{{count}}/%%m/%%Y"
-  general_fmt_datetime: "%{{count}}/%%m/%%Y %%I:%%M %%p"
-  general_fmt_datetime_short: "%%b %{{count}}, %%I:%%M %%p"
-  general_fmt_time: %%I:%%M %%p
   general_text_No: 'Hayır'
   general_text_Yes: 'Evet'
   general_text_no: 'hayır'

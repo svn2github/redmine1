@@ -160,12 +160,6 @@
   activerecord_error_not_same_project: 不屬於同一個專案
   activerecord_error_circular_dependency: 這個關聯會導致環狀相依
   
-  general_fmt_age: "{{count}} 年"
-  general_fmt_age_plural: "{{count}} 年"
-  general_fmt_date: "%%m/%{{count}}/%%Y"
-  general_fmt_datetime: "%%m/%{{count}}/%%Y %%I:%%M %%p"
-  general_fmt_datetime_short: "%%b %{{count}}, %%I:%%M %%p"
-  general_fmt_time: %%I:%%M %%p
   general_text_No: '否'
   general_text_Yes: '是'
   general_text_no: '否'

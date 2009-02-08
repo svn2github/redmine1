@@ -166,12 +166,6 @@
   activerecord_error_not_same_project: nem azonos projekthez tartozik
   activerecord_error_circular_dependency: Ez a kapcsolat egy körkörös függőséget eredményez
   
-  general_fmt_age: "{{count}} év"
-  general_fmt_age_plural: "{{count}} év"
-  general_fmt_date: "%%Y.%%m.%{{count}}"
-  general_fmt_datetime: "%%Y.%%m.%{{count}} %%H:%%M:%%S"
-  general_fmt_datetime_short: "%%b %{{count}}, %%H:%%M:%%S"
-  general_fmt_time: %%H:%%M:%%S
   general_text_No: 'Nem'
   general_text_Yes: 'Igen'
   general_text_no: 'nem'

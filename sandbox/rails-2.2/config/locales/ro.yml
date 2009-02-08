@@ -175,12 +175,6 @@ ro:
   activerecord_error_not_same_project: nu apartine projectului respectiv
   activerecord_error_circular_dependency: Aceasta relatie ar crea dependenta circulara
   
-  general_fmt_age: "{{count}} an"
-  general_fmt_age_plural: "{{count}} ani"
-  general_fmt_date: "%%m/%{{count}}/%%Y"
-  general_fmt_datetime: "%%m/%{{count}}/%%Y %%I:%%M %%p"
-  general_fmt_datetime_short: "%%b %{{count}}, %%I:%%M %%p"
-  general_fmt_time: %%I:%%M %%p
   general_text_No: 'Nu'
   general_text_Yes: 'Da'
   general_text_no: 'nu'
