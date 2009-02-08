@@ -25,18 +25,33 @@ class Redmine::I18nTest < Test::Unit::TestCase
   end
   
   def test_date_format_default
+    set_language_if_valid 'en'
     today = Date.today
     Setting.date_format = ''    
     assert_equal I18n.l(today), format_date(today)
   end
   
   def test_date_format
+    set_language_if_valid 'en'
     today = Date.today
     Setting.date_format = '%d %m %Y'
     assert_equal today.strftime('%d %m %Y'), format_date(today)
   end
   
+  def test_date_and_time_for_each_language
+    Setting.date_format = ''
+    valid_languages.each do |lang|
+      set_language_if_valid lang
+      assert_nothing_raised "#{lang} failure" do
+        format_date(Date.today)
+        format_time(Time.now)
+        format_time(Time.now, false)
+      end
+    end
+  end
+  
   def test_time_format_default
+    set_language_if_valid 'en'
     now = Time.now
     Setting.date_format = ''
     Setting.time_format = ''    
@@ -45,6 +60,7 @@ class Redmine::I18nTest < Test::Unit::TestCase
   end
   
   def test_time_format
+    set_language_if_valid 'en'
     now = Time.now
     Setting.date_format = '%d %m %Y'
     Setting.time_format = '%H %M'
@@ -53,6 +69,7 @@ class Redmine::I18nTest < Test::Unit::TestCase
   end
   
   def test_utc_time_format
+    set_language_if_valid 'en'
     now = Time.now.utc
     Setting.date_format = '%d %m %Y'
     Setting.time_format = '%H %M'
