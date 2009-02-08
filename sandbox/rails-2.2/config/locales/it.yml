@@ -258,6 +258,10 @@ it:
   label_project: Progetto
   label_project_new: Nuovo progetto
   label_project_plural: Progetti
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: Tutti i progetti
   label_project_latest: Ultimi progetti registrati
   label_issue: Segnalazione

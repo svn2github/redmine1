@@ -381,6 +381,10 @@ lt:
   label_project: Projektas
   label_project_new: Naujas projektas
   label_project_plural: Projektai
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: Visi Projektai
   label_project_latest: Paskutiniai projektai
   label_issue: Darbas

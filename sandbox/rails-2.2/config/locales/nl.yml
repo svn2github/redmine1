@@ -471,6 +471,10 @@ nl:
   label_project_latest: Nieuwste projecten
   label_project_new: Nieuw project
   label_project_plural: Projecten
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_public_projects: Publieke projecten
   label_query: Eigen zoekvraag
   label_query_new: Nieuwe zoekvraag

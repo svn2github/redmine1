@@ -374,6 +374,10 @@ zh:
   label_project: 项目
   label_project_new: 新建项目
   label_project_plural: 项目
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: 所有的项目
   label_project_latest: 最近更新的项目
   label_issue: 问题

@@ -311,6 +311,10 @@ pt:
   label_project: Projecto
   label_project_new: Novo projecto
   label_project_plural: Projectos
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: Todos os projectos
   label_project_latest: Últimos projectos
   label_issue: Tarefa

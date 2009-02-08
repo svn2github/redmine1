@@ -279,6 +279,10 @@
   label_project: Projekat
   label_project_new: Novi projekat
   label_project_plural: Projekti
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: Svi projekti
   label_project_latest: Poslednji projekat
   label_issue: Kartica

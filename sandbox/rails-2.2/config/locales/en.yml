@@ -344,6 +344,10 @@ en:
   label_project: Project
   label_project_new: New project
   label_project_plural: Projects
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: All Projects
   label_project_latest: Latest projects
   label_issue: Issue

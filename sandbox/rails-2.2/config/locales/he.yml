@@ -260,6 +260,10 @@ he:
   label_project: פרויקט
   label_project_new: פרויקט חדש
   label_project_plural: פרויקטים
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: כל הפרויקטים
   label_project_latest: הפרויקטים החדשים ביותר
   label_issue: נושא

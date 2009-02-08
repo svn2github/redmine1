@@ -400,6 +400,10 @@ sv:
   label_project: Projekt
   label_project_new: Nytt projekt
   label_project_plural: Projekt
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: Alla projekt
   label_project_latest: Senaste projekt
   label_issue: Ärende

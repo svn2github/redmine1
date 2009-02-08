@@ -605,6 +605,10 @@ ru:
   label_project_plural2: проекта
   label_project_plural5: проектов
   label_project_plural: Проекты
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project: проект
   label_public_projects: Общие проекты
   label_query_new: Новый запрос

@@ -288,6 +288,10 @@ ca:
   label_project: Projecte
   label_project_new: Projecte nou
   label_project_plural: Projectes
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: Tots els projectes
   label_project_latest: Els últims projectes
   label_issue: Assumpte

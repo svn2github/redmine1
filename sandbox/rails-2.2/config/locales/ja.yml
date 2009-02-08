@@ -275,6 +275,10 @@ ja:
   label_project: プロジェクト
   label_project_new: 新しいプロジェクト
   label_project_plural: プロジェクト
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: 全プロジェクト
   label_project_latest: 最近のプロジェクト
   label_issue: チケット

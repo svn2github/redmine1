@@ -312,6 +312,10 @@ ko:
   label_project: 프로젝트
   label_project_new: 새 프로젝트
   label_project_plural: 프로젝트
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: 모든 프로젝트
   label_project_latest: 최근 프로젝트
   label_issue: 일감

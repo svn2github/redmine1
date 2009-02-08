@@ -377,6 +377,10 @@ fr:
   label_project: Projet
   label_project_new: Nouveau projet
   label_project_plural: Projets
+  label_x_projects:
+    zero:  aucun projet
+    one:   1 projet
+    other: "{{count}} projets"
   label_project_all: Tous les projets
   label_project_latest: Derniers projets
   label_issue: Demande

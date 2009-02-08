@@ -516,6 +516,10 @@ gl:
   label_project_latest: Últimos proxectos
   label_project_new: Novo proxecto
   label_project_plural: Proxectos
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_public_projects: Proxectos públicos
   label_query: Consulta personalizada
   label_query_new: Nova consulta

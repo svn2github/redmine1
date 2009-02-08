@@ -316,6 +316,10 @@
   label_project: Projekt
   label_project_new: Új projekt
   label_project_plural: Projektek
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: Az összes projekt
   label_project_latest: Legutóbbi projektek
   label_issue: Feladat

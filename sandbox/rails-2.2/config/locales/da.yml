@@ -302,6 +302,10 @@ da:
   label_project: Projekt
   label_project_new: Nyt projekt
   label_project_plural: Projekter
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: Alle projekter
   label_project_latest: Seneste projekter
   label_issue: Sag

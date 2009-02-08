@@ -282,6 +282,10 @@ cs:
   label_project: Projekt
   label_project_new: Nový projekt
   label_project_plural: Projekty
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: Všechny projekty
   label_project_latest: Poslední projekty
   label_issue: Úkol

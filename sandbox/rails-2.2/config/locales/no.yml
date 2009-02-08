@@ -287,6 +287,10 @@
   label_project: Prosjekt
   label_project_new: Nytt prosjekt
   label_project_plural: Prosjekter
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: Alle prosjekter
   label_project_latest: Siste prosjekter
   label_issue: Sak

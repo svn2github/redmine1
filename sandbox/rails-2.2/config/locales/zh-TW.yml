@@ -374,6 +374,10 @@
   label_project: 專案
   label_project_new: 建立新的專案
   label_project_plural: 專案清單
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: 全部的專案
   label_project_latest: 最近的專案
   label_issue: 項目

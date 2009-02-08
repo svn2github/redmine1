@@ -290,6 +290,10 @@ ro:
   label_project: Proiect
   label_project_new: Proiect nou
   label_project_plural: Proiecte
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: Toate proiectele
   label_project_latest: Ultimele proiecte
   label_issue: Tichet

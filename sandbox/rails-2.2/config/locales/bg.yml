@@ -244,6 +244,10 @@ bg:
   label_project: Проект
   label_project_new: Нов проект
   label_project_plural: Проекти
+  label_x_projects:
+    zero:  no projects
+    one:   1 project
+    other: "{{count}} projects"
   label_project_all: Всички проекти
   label_project_latest: Последни проекти
   label_issue: Задача
