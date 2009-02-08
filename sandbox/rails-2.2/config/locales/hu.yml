@@ -706,8 +706,8 @@
   text_unallowed_characters: Tiltott karakterek
   text_comma_separated: Több érték megengedett (vesszővel elválasztva)
   text_issues_ref_in_commit_messages: Hivatkozás feladatokra, feladatok javítása a commit üzenetekben
-  text_issue_added: "{{value}} feladat bejelentve."
-  text_issue_updated: "{{value}} feladat frissítve."
+  text_issue_added: "Issue {{id}} has been reported by {{author}}."
+  text_issue_updated: "Issue {{id}} has been updated by {{author}}."
   text_wiki_destroy_confirmation: Biztosan törölni szeretné ezt a wiki-t minden tartalmával együtt ?
   text_issue_category_destroy_question: "Néhány feladat ({{count}}) hozzá van rendelve ehhez a kategóriához. Mit szeretne tenni ?"
   text_issue_category_destroy_assignments: Kategória hozzárendelés megszűntetése

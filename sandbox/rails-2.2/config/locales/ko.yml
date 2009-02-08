@@ -656,8 +656,8 @@ ko:
   text_unallowed_characters: 허용되지 않는 문자열
   text_comma_separated: 복수의 값들이 허용됩니다.(구분자 ,)
   text_issues_ref_in_commit_messages: 커밋메시지에서 일감을 참조하거나 해결하기
-  text_issue_added: "일감[{{value}}]가 보고되었습니다."
-  text_issue_updated: "일감[{{value}}]가 수정되었습니다."
+  text_issue_added: "Issue {{id}} has been reported by {{author}}."
+  text_issue_updated: "Issue {{id}} has been updated by {{author}}."
   text_wiki_destroy_confirmation: 이 위키와 모든 내용을 지우시겠습니까?
   text_issue_category_destroy_question: "일부 일감들({{count}}개)이 이 카테고리에 할당되어 있습니다. 어떻게 하시겠습니까?"
   text_issue_category_destroy_assignments: 카테고리 할당 지우기

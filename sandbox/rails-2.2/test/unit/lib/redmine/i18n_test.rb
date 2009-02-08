@@ -59,4 +59,20 @@ class Redmine::I18nTest < Test::Unit::TestCase
     assert_equal Time.now.strftime('%d %m %Y %H %M'), format_time(now)
     assert_equal Time.now.strftime('%H %M'), format_time(now, false)
   end
+  
+  def test_valid_languages
+    assert valid_languages.is_a?(Array)
+    assert valid_languages.first.is_a?(Symbol)
+  end
+  
+  def test_valid_language
+    to_test = {'fr' => :fr,
+               'Fr' => :fr,
+               'zh' => :zh,
+               'zh-tw' => :"zh-TW",
+               'zh-TW' => :"zh-TW",
+               'zh-ZZ' => nil }
+    
+    to_test.each {|lang, expected| assert_equal expected, find_language(lang)}
+  end
 end

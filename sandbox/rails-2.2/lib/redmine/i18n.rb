@@ -1,5 +1,9 @@
 module Redmine
   module I18n
+    def self.included(base)
+      base.extend Redmine::I18n
+    end
+      
     def l(*args)
       case args.size
       when 1
@@ -44,20 +48,23 @@ module Redmine
                                    ((include_date ? "#{format_date(time)} " : "") + "#{local.strftime(Setting.time_format)}")
     end
     
-    def available_locales
-      GLoc.valid_languages.collect(&:to_s).sort
+    def valid_languages
+      @@valid_languages ||= Dir.glob(File.join(RAILS_ROOT, 'config', 'locales', '*.yml')).collect {|f| File.basename(f).split('.').first}.collect(&:to_sym)
     end
     
-    def locale_exists?(locale)
-      GLoc.valid_language?(locale.to_s)
+    def find_language(lang)
+      @@languages_lookup = valid_languages.inject({}) {|k, v| k[v.to_s.downcase] = v; k }
+      @@languages_lookup[lang.to_s.downcase]
     end
     
-    def locale
-      GLoc.current_language.to_s
+    def set_language_if_valid(lang)
+      if l = find_language(lang)
+        ::I18n.locale = l
+      end
     end
     
-    def locale=(locale)
-      GLoc.set_language_if_valid(locale.to_s)
+    def current_language
+      ::I18n.locale
     end
   end
 end

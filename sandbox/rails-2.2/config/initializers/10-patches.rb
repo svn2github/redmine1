@@ -3,9 +3,11 @@ require 'activerecord'
 
 module ActiveRecord
   class Base
+    include Redmine::I18n
+    
     # Translate attribute names for validation errors display
     def self.human_attribute_name(attr)
-      GLoc.l("field_#{attr}")
+      l("field_#{attr.to_s.gsub(/_id$/, '')}")
     end
   end
 end

@@ -546,8 +546,8 @@ uk:
   text_unallowed_characters: Заборонені символи
   text_comma_separated: Допустимі декілька значень (розділені комою).
   text_issues_ref_in_commit_messages: Посилання та зміна питань у повідомленнях до подавань
-  text_issue_added: "Питання {{value}} створено."
-  text_issue_updated: "Питання {{value}} оновлено."
+  text_issue_added: "Issue {{id}} has been reported by {{author}}."
+  text_issue_updated: "Issue {{id}} has been updated by {{author}}."
   text_wiki_destroy_confirmation: Ви впевнені, що хочете видалити цю wiki і весь зміст?
   text_issue_category_destroy_question: "Декілька питань ({{count}}) призначено в цю категорію. Що ви хочете зробити?"
   text_issue_category_destroy_assignments: Видалити призначення категорії

@@ -677,8 +677,8 @@
   text_unallowed_characters: Ugyldige tegn
   text_comma_separated: Flere verdier tillat (kommaseparert).
   text_issues_ref_in_commit_messages: Referering og retting av saker i innsendingsmelding
-  text_issue_added: "Sak {{value}} er rapportert."
-  text_issue_updated: "Sak {{value}} er oppdatert."
+  text_issue_added: "Issue {{id}} has been reported by {{author}}."
+  text_issue_updated: "Issue {{id}} has been updated by {{author}}."
   text_wiki_destroy_confirmation: Er du sikker på at du vil slette denne wikien og alt innholdet ?
   text_issue_category_destroy_question: "Noen saker ({{count}}) er lagt til i denne kategorien. Hva vil du gjøre ?"
   text_issue_category_destroy_assignments: Fjern bruk av kategorier

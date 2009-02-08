@@ -19,6 +19,8 @@ require 'uri'
 require 'cgi'
 
 class ApplicationController < ActionController::Base
+  include Redmine::I18n
+  
   layout 'base'
   
   before_filter :user_setup, :check_if_login_required, :set_localization
@@ -64,21 +66,18 @@ class ApplicationController < ActionController::Base
   end 
   
   def set_localization
-    User.current.language = nil unless User.current.logged?
-    lang = begin
-      if !User.current.language.blank? && GLoc.valid_language?(User.current.language)
-        User.current.language
-      elsif request.env['HTTP_ACCEPT_LANGUAGE']
-        accept_lang = parse_qvalues(request.env['HTTP_ACCEPT_LANGUAGE']).first.downcase
-        if !accept_lang.blank? && (GLoc.valid_language?(accept_lang) || GLoc.valid_language?(accept_lang = accept_lang.split('-').first))
-          User.current.language = accept_lang
-        end
+    lang = nil
+    if User.current.logged?
+      lang = find_language(User.current.language)
+    end
+    if lang.nil? && request.env['HTTP_ACCEPT_LANGUAGE']
+      accept_lang = parse_qvalues(request.env['HTTP_ACCEPT_LANGUAGE']).first.downcase
+      if !accept_lang.blank?
+        lang = find_language(accept_lang) || find_language(accept_lang.split('-').first)
       end
-    rescue
-      nil
-    end || Setting.default_language
-    set_language_if_valid(lang)    
-    I18n.locale = lang.gsub(%r{(.+)\-(.+)$}) { "#{$1}-#{$2.upcase}" }
+    end
+    lang ||= Setting.default_language
+    set_language_if_valid(lang)
   end
   
   def require_login
@@ -226,6 +225,8 @@ class ApplicationController < ActionController::Base
       tmp.collect!{|val, q| val}
     end
     return tmp
+  rescue
+    nil
   end
   
   # Returns a string that can be used as filename value in Content-Disposition header
