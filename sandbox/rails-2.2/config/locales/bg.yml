@@ -417,7 +417,6 @@ bg:
   label_latest_revision_plural: Последни ревизии
   label_view_revisions: Виж ревизиите
   label_max_size: Максимална големина
-  label_on: 'от'
   label_sort_highest: Премести най-горе
   label_sort_higher: Премести по-горе
   label_sort_lower: Премести по-долу

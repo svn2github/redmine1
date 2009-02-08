@@ -540,7 +540,6 @@ en:
   label_latest_revision_plural: Latest revisions
   label_view_revisions: View revisions
   label_max_size: Maximum size
-  label_on: 'on'
   label_sort_highest: Move to top
   label_sort_higher: Move up
   label_sort_lower: Move down

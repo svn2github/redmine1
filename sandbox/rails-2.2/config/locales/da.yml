@@ -493,7 +493,6 @@ da:
   label_latest_revision_plural: Seneste revisioner
   label_view_revisions: Se revisioner
   label_max_size: Maximal størrelse
-  label_on: 'til'
   label_sort_highest: Flyt til toppen
   label_sort_higher: Flyt op
   label_sort_lower: Flyt ned

@@ -596,7 +596,6 @@ sv:
   label_latest_revision_plural: Senaste revisionerna
   label_view_revisions: Visa revisioner
   label_max_size: Maxstorlek
-  label_on: 'på'
   label_sort_highest: Flytta till toppen
   label_sort_higher: Flytta upp
   label_sort_lower: Flytta ner

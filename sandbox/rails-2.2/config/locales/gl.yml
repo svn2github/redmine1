@@ -504,7 +504,6 @@ gl:
   label_none: ningún
   label_not_contains: non conten
   label_not_equals: non igual
-  label_on: de
   label_open_issues: aberta
   label_open_issues_plural: abertas
   label_optional_description: Descrición opcional

@@ -504,7 +504,6 @@ pl:
   label_none: brak
   label_not_contains: nie zawiera
   label_not_equals: różni się
-  label_on: 'z'
   label_open_issues: otwarte
   label_open_issues_plural234: otwarte
   label_open_issues_plural5: otwarte

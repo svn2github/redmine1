@@ -524,7 +524,6 @@ es:
   label_none: ninguno
   label_not_contains: no contiene
   label_not_equals: no igual
-  label_on: de
   label_open_issues: abierta
   label_open_issues_plural: abiertas
   label_optional_description: Descripción opcional

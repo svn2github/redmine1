@@ -486,7 +486,6 @@ ko:
   label_latest_revision_plural: 최근 개정판
   label_view_revisions: 개정판 보기
   label_max_size: 최대 크기
-  label_on: '전체: '
   label_sort_highest: 최상단으로
   label_sort_higher: 위로
   label_sort_lower: 아래로

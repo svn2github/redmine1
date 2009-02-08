@@ -459,7 +459,6 @@ nl:
   label_none: geen
   label_not_contains: bevat niet
   label_not_equals: is niet gelijk
-  label_on: 'van'
   label_open_issues: open
   label_open_issues_plural: open
   label_optional_description: Optionele beschrijving
