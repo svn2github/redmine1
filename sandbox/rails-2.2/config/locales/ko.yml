@@ -415,6 +415,18 @@ ko:
   label_open_issues_plural: 진행중
   label_closed_issues: 완료됨
   label_closed_issues_plural: 완료됨
+  label_x_open_issues_abbr_on_total:
+    zero:  0 open / {{total}}
+    one:   1 open / {{total}}
+    other: "{{count}} open / {{total}}"
+  label_x_open_issues_abbr:
+    zero:  0 open
+    one:   1 open
+    other: "{{count}} open"
+  label_x_closed_issues_abbr:
+    zero:  0 closed
+    one:   1 closed
+    other: "{{count}} closed"
   label_total: 합계
   label_permissions: 허가권한
   label_current_status: 일감 상태

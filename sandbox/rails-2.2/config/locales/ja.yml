@@ -377,6 +377,18 @@ ja:
   label_open_issues_plural: 未完了
   label_closed_issues: 終了
   label_closed_issues_plural: 終了
+  label_x_open_issues_abbr_on_total:
+    zero:  0 open / {{total}}
+    one:   1 open / {{total}}
+    other: "{{count}} open / {{total}}"
+  label_x_open_issues_abbr:
+    zero:  0 open
+    one:   1 open
+    other: "{{count}} open"
+  label_x_closed_issues_abbr:
+    zero:  0 closed
+    one:   1 closed
+    other: "{{count}} closed"
   label_total: 合計
   label_permissions: 権限
   label_current_status: 現在のステータス

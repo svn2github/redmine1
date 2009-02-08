@@ -468,6 +468,18 @@ vi:
   label_open_issues_plural: mở
   label_closed_issues: đóng
   label_closed_issues_plural: đóng
+  label_x_open_issues_abbr_on_total:
+    zero:  0 open / {{total}}
+    one:   1 open / {{total}}
+    other: "{{count}} open / {{total}}"
+  label_x_open_issues_abbr:
+    zero:  0 open
+    one:   1 open
+    other: "{{count}} open"
+  label_x_closed_issues_abbr:
+    zero:  0 closed
+    one:   1 closed
+    other: "{{count}} closed"
   label_total: Tổng cộng
   label_permissions: Quyền
   label_current_status: Trạng thái hiện tại

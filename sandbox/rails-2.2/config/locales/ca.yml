@@ -399,6 +399,18 @@ ca:
   label_open_issues_plural: oberts
   label_closed_issues: tancat
   label_closed_issues_plural: tancats
+  label_x_open_issues_abbr_on_total:
+    zero:  0 open / {{total}}
+    one:   1 open / {{total}}
+    other: "{{count}} open / {{total}}"
+  label_x_open_issues_abbr:
+    zero:  0 open
+    one:   1 open
+    other: "{{count}} open"
+  label_x_closed_issues_abbr:
+    zero:  0 closed
+    one:   1 closed
+    other: "{{count}} closed"
   label_total: Total
   label_permissions: Permisos
   label_current_status: Estat actual

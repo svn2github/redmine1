@@ -427,6 +427,18 @@
   label_open_issues_plural: nyitott
   label_closed_issues: lezárt
   label_closed_issues_plural: lezárt
+  label_x_open_issues_abbr_on_total:
+    zero:  0 open / {{total}}
+    one:   1 open / {{total}}
+    other: "{{count}} open / {{total}}"
+  label_x_open_issues_abbr:
+    zero:  0 open
+    one:   1 open
+    other: "{{count}} open"
+  label_x_closed_issues_abbr:
+    zero:  0 closed
+    one:   1 closed
+    other: "{{count}} closed"
   label_total: Összesen
   label_permissions: Jogosultságok
   label_current_status: Jelenlegi státusz

@@ -489,6 +489,18 @@ fr:
   label_open_issues_plural: ouverts
   label_closed_issues: fermé
   label_closed_issues_plural: fermés
+  label_x_open_issues_abbr_on_total:
+    zero:  0 ouvert sur {{total}}
+    one:   1 ouvert sur {{total}}
+    other: "{{count}} ouverts sur {{total}}"
+  label_x_open_issues_abbr:
+    zero:  0 ouvert
+    one:   1 ouvert
+    other: "{{count}} ouverts"
+  label_x_closed_issues_abbr:
+    zero:  0 fermé
+    one:   1 fermé
+    other: "{{count}} fermés"
   label_total: Total
   label_permissions: Permissions
   label_current_status: Statut actuel

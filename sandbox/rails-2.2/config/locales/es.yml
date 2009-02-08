@@ -367,6 +367,18 @@ es:
   label_chronological_order: En orden cronológico
   label_closed_issues: cerrada
   label_closed_issues_plural: cerradas
+  label_x_open_issues_abbr_on_total:
+    zero:  0 open / {{total}}
+    one:   1 open / {{total}}
+    other: "{{count}} open / {{total}}"
+  label_x_open_issues_abbr:
+    zero:  0 open
+    one:   1 open
+    other: "{{count}} open"
+  label_x_closed_issues_abbr:
+    zero:  0 closed
+    one:   1 closed
+    other: "{{count}} closed"
   label_comment: Comentario
   label_comment_add: Añadir un comentario
   label_comment_added: Comentario añadido

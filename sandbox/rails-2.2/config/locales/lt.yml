@@ -493,6 +493,18 @@ lt:
   label_open_issues_plural: atidarytos
   label_closed_issues: uždaryta
   label_closed_issues_plural: uždarytos
+  label_x_open_issues_abbr_on_total:
+    zero:  0 open / {{total}}
+    one:   1 open / {{total}}
+    other: "{{count}} open / {{total}}"
+  label_x_open_issues_abbr:
+    zero:  0 open
+    one:   1 open
+    other: "{{count}} open"
+  label_x_closed_issues_abbr:
+    zero:  0 closed
+    one:   1 closed
+    other: "{{count}} closed"
   label_total: Bendra suma
   label_permissions: Leidimai
   label_current_status: Einamoji padėtis

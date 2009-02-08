@@ -27,8 +27,9 @@
       <li><%= link_to tracker.name, :controller => 'issues', :action => 'index', :project_id => @project, 
                                                 :set_filter => 1, 
                                                 "tracker_id" => tracker.id %>:
-      <%= @open_issues_by_tracker[tracker] || 0 %> <%= lwr(:label_open_issues, @open_issues_by_tracker[tracker] || 0) %>
-      <%= l(:label_on) %> <%= @total_issues_by_tracker[tracker] || 0 %></li>
+					<%= l(:label_x_open_issues_abbr_on_total, :count => @open_issues_by_tracker[tracker].to_i,
+																										:total => @total_issues_by_tracker[tracker].to_i) %>
+			</li>
     <% end %>
     </ul>
     <p><%= link_to l(:label_issue_view_all), :controller => 'issues', :action => 'index', :project_id => @project, :set_filter => 1 %></p>

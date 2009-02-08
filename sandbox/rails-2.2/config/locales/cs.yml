@@ -392,6 +392,18 @@ cs:
   label_open_issues_plural: otevřené
   label_closed_issues: uzavřený
   label_closed_issues_plural: uzavřené
+  label_x_open_issues_abbr_on_total:
+    zero:  0 open / {{total}}
+    one:   1 open / {{total}}
+    other: "{{count}} open / {{total}}"
+  label_x_open_issues_abbr:
+    zero:  0 open
+    one:   1 open
+    other: "{{count}} open"
+  label_x_closed_issues_abbr:
+    zero:  0 closed
+    one:   1 closed
+    other: "{{count}} closed"
   label_total: Celkem
   label_permissions: Práva
   label_current_status: Aktuální stav
