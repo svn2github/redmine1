@@ -99,7 +99,7 @@ module Redmine
               item.url
             end
             caption = item.caption(project)
-            caption = l(caption) if caption.is_a?(Symbol)
+            caption = l_or_humanize(caption) if caption.is_a?(Symbol)
             if block_given?
               yield item, caption, url, (current_menu_item == item.name)
             else
@@ -199,7 +199,7 @@ module Redmine
           c
         else
           # check if localized string exists on first render (after strings are loaded)
-          @caption_key ||= (@caption || (l_or_humanize(@name, :prefix => "label_")))
+          @caption_key ||= (@caption || "label_#{@name}".to_sym)
         end
       end
       
