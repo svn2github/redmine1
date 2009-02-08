@@ -112,23 +112,6 @@ ca:
   actionview_datehelper_time_in_words_second_less_than_plural: "menys de {{count}} segons"
   actionview_instancetag_blank_option: Seleccioneu
   
-  activerecord_error_inclusion: no està inclòs a la llista
-  activerecord_error_exclusion: està reservat
-  activerecord_error_invalid: no és vàlid
-  activerecord_error_confirmation: la confirmació no coincideix
-  activerecord_error_accepted: "s'ha d'acceptar"
-  activerecord_error_empty: no pot estar buit
-  activerecord_error_blank: no pot estar en blanc
-  activerecord_error_too_long: és massa llarg
-  activerecord_error_too_short: és massa curt
-  activerecord_error_wrong_length: la longitud és incorrecta
-  activerecord_error_taken: "ja s'està utilitzant"
-  activerecord_error_not_a_number: no és un número
-  activerecord_error_not_a_date: no és una data vàlida
-  activerecord_error_greater_than_start_date: ha de ser superior que la data inicial
-  activerecord_error_not_same_project: no pertany al mateix projecte
-  activerecord_error_circular_dependency: Aquesta relació crearia una dependència circular
-  
   general_text_No: 'No'
   general_text_Yes: 'Si'
   general_text_no: 'no'

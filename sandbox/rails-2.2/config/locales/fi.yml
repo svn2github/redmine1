@@ -154,23 +154,6 @@ fi:
   actionview_datehelper_time_in_words_second_less_than_plural: "vähemmän kuin {{count}} sekuntia"
   actionview_instancetag_blank_option: Valitse, ole hyvä
   
-  activerecord_error_inclusion: ei ole listalla
-  activerecord_error_exclusion: on varattu
-  activerecord_error_invalid: ei ole kelpaava
-  activerecord_error_confirmation: ei vastaa vahvistusta
-  activerecord_error_accepted: tulee hyväksyä
-  activerecord_error_empty: ei voi olla tyhjä
-  activerecord_error_blank: ei voi olla tyhjä
-  activerecord_error_too_long: on liian pitkä
-  activerecord_error_too_short: on liian lyhyt
-  activerecord_error_wrong_length: on väärän pituinen
-  activerecord_error_taken: on jo varattu
-  activerecord_error_not_a_number: ei ole numero
-  activerecord_error_not_a_date: ei ole oikea päivä
-  activerecord_error_greater_than_start_date: tulee olla aloituspäivän jälkeinen
-  activerecord_error_not_same_project: ei kuulu samaan projektiin
-  activerecord_error_circular_dependency: Tämä suhde loisi kehän.
-  
   general_text_No: 'Ei'
   general_text_Yes: 'Kyllä'
   general_text_no: 'ei'

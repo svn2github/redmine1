@@ -150,23 +150,6 @@ pt-BR:
   actionview_datehelper_time_in_words_second_less_than_plural: "menos de {{count}} segundos"
   actionview_instancetag_blank_option: Selecione
   
-  activerecord_error_inclusion: não está incluso na lista
-  activerecord_error_exclusion: está reservado
-  activerecord_error_invalid: é inválido
-  activerecord_error_confirmation: confirmação não confere
-  activerecord_error_accepted: deve ser aceito
-  activerecord_error_empty: não pode ficar vazio
-  activerecord_error_blank: não pode ficar em branco
-  activerecord_error_too_long: é muito longo
-  activerecord_error_too_short: é muito curto
-  activerecord_error_wrong_length: esta com o tamanho errado
-  activerecord_error_taken: já está em uso
-  activerecord_error_not_a_number: não é um número
-  activerecord_error_not_a_date: não é uma data válida
-  activerecord_error_greater_than_start_date: deve ser maior que a data inicial
-  activerecord_error_not_same_project: não pertence ao mesmo projeto
-  activerecord_error_circular_dependency: Esta relação geraria uma dependência circular
-  
   general_text_No: 'Não'
   general_text_Yes: 'Sim'
   general_text_no: 'não'

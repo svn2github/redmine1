@@ -229,23 +229,6 @@ ru:
   actionview_datehelper_time_in_words_second_less_than: менее секунды
   actionview_instancetag_blank_option: Выберите
   
-  activerecord_error_accepted: необходимо принять
-  activerecord_error_blank: необходимо заполнить
-  activerecord_error_circular_dependency: Такая связь приведет к циклической зависимости
-  activerecord_error_confirmation: ошибка в подтверждении
-  activerecord_error_empty: необходимо заполнить
-  activerecord_error_exclusion: зарезервировано
-  activerecord_error_greater_than_start_date: должна быть позднее даты начала
-  activerecord_error_inclusion: нет в списке
-  activerecord_error_invalid: неверное значение
-  activerecord_error_not_a_date: дата недействительна
-  activerecord_error_not_a_number: не является числом
-  activerecord_error_not_same_project: не относятся к одному проекту
-  activerecord_error_taken: уже используется
-  activerecord_error_too_long: слишком длинное значение
-  activerecord_error_too_short: слишком короткое значение
-  activerecord_error_wrong_length: не соответствует длине
-  
   button_activate: Активировать
   button_add: Добавить
   button_annotate: Авторство

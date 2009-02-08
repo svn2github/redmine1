@@ -150,23 +150,6 @@ tr:
   actionview_datehelper_time_in_words_second_less_than_plural: "{{count}} saniyeden az"
   actionview_instancetag_blank_option: Lütfen Seçin
   
-  activerecord_error_inclusion: Listede yok
-  activerecord_error_exclusion: ayrılmış
-  activerecord_error_invalid: doğru değil
-  activerecord_error_confirmation: doğrulayıcı ile uyuşmuyor
-  activerecord_error_accepted: kabul edilmeli
-  activerecord_error_empty: boş bırakılamaz
-  activerecord_error_blank: boş bırakılamaz
-  activerecord_error_too_long: çok uzun
-  activerecord_error_too_short: çok kısa
-  activerecord_error_wrong_length: yanlış uzunluk
-  activerecord_error_taken: zaten alınmış
-  activerecord_error_not_a_number: sayı değil
-  activerecord_error_not_a_date: geçerli bir tarih değil
-  activerecord_error_greater_than_start_date: başlangıç tarihinden büyük olmalı
-  activerecord_error_not_same_project: aynı projeye ait değil
-  activerecord_error_circular_dependency: Bu ilişki döngüsel bağımlılık meydana getirecektir
-  
   general_text_No: 'Hayır'
   general_text_Yes: 'Evet'
   general_text_no: 'hayır'

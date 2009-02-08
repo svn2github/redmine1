@@ -149,23 +149,6 @@
   actionview_datehelper_time_in_words_second_less_than_plural: "kevesebb, mint {{count}} másodperc"
   actionview_instancetag_blank_option: Kérem válasszon
   
-  activerecord_error_inclusion: nem található a listában
-  activerecord_error_exclusion: foglalt
-  activerecord_error_invalid: érvénytelen
-  activerecord_error_confirmation: jóváhagyás szükséges
-  activerecord_error_accepted: ell kell fogadni
-  activerecord_error_empty: nem lehet üres
-  activerecord_error_blank: nem lehet üres
-  activerecord_error_too_long: túl hosszú
-  activerecord_error_too_short: túl rövid
-  activerecord_error_wrong_length: hibás a hossza
-  activerecord_error_taken: már foglalt
-  activerecord_error_not_a_number: nem egy szám
-  activerecord_error_not_a_date: nem érvényes dátum
-  activerecord_error_greater_than_start_date: nagyobbnak kell lennie, mint az indítás dátuma
-  activerecord_error_not_same_project: nem azonos projekthez tartozik
-  activerecord_error_circular_dependency: Ez a kapcsolat egy körkörös függőséget eredményez
-  
   general_text_No: 'Nem'
   general_text_Yes: 'Igen'
   general_text_no: 'nem'

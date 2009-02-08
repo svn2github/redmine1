@@ -143,23 +143,6 @@
   actionview_datehelper_time_in_words_second_less_than_plural: "小於 {{count}} 秒"
   actionview_instancetag_blank_option: 請選擇
   
-  activerecord_error_inclusion: 必須被包含
-  activerecord_error_exclusion: 必須被排除
-  activerecord_error_invalid: 不正確
-  activerecord_error_confirmation: 與確認欄位不相符
-  activerecord_error_accepted: 必須被接受
-  activerecord_error_empty: 不可為空值
-  activerecord_error_blank: 不可為空白
-  activerecord_error_too_long: 長度過長
-  activerecord_error_too_short: 長度太短
-  activerecord_error_wrong_length: 長度不正確
-  activerecord_error_taken: 已經被使用
-  activerecord_error_not_a_number: 不是一個數字
-  activerecord_error_not_a_date: 日期格式不正確
-  activerecord_error_greater_than_start_date: 必須在起始日期之後
-  activerecord_error_not_same_project: 不屬於同一個專案
-  activerecord_error_circular_dependency: 這個關聯會導致環狀相依
-  
   general_text_No: '否'
   general_text_Yes: '是'
   general_text_no: '否'

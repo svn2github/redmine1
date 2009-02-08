@@ -115,23 +115,6 @@ sk:
   actionview_datehelper_time_in_words_second_less_than_plural: "menej ako {{count}} sekundami"
   actionview_instancetag_blank_option: Prosím vyberte
   
-  activerecord_error_inclusion: nieje zahrnuté v zozname
-  activerecord_error_exclusion: je rezervované
-  activerecord_error_invalid: je neplatné
-  activerecord_error_confirmation: sa nezhoduje s potvrdením
-  activerecord_error_accepted: musí byť akceptované
-  activerecord_error_empty: nemôže byť prázdne
-  activerecord_error_blank: nemôže byť prázdne
-  activerecord_error_too_long: je príliš dlhé
-  activerecord_error_too_short: je príliš krátke
-  activerecord_error_wrong_length: má chybnú dĺžku
-  activerecord_error_taken: je už použité
-  activerecord_error_not_a_number: nieje číslo
-  activerecord_error_not_a_date: nieje platný dátum
-  activerecord_error_greater_than_start_date: musí byť väčší ako počiatočný dátum
-  activerecord_error_not_same_project: nepatrí rovnakému projektu
-  activerecord_error_circular_dependency: Tento vzťah by vytvoril cyklickú závislosť
-  
   general_text_No: 'Nie'
   general_text_Yes: 'Áno'
   general_text_no: 'nie'

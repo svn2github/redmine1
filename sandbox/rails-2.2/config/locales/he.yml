@@ -123,23 +123,6 @@ he:
   actionview_datehelper_time_in_words_second_less_than_plural: "פחות מ-{{count}} שניות"
   actionview_instancetag_blank_option: בחר בבקשה
   
-  activerecord_error_inclusion: לא כלול ברשימה
-  activerecord_error_exclusion: שמור
-  activerecord_error_invalid: לא קביל
-  activerecord_error_confirmation: לא מתאים לאישור
-  activerecord_error_accepted: חייב להסכים
-  activerecord_error_empty: לא יכול להיות ריק
-  activerecord_error_blank: לא יכול להיות חסר
-  activerecord_error_too_long: ארוך מדי
-  activerecord_error_too_short: קצר מדי
-  activerecord_error_wrong_length: בארוך שגוי
-  activerecord_error_taken: כבר נלקח
-  activerecord_error_not_a_number: אינו מספר
-  activerecord_error_not_a_date: אינו תאריך קביל
-  activerecord_error_greater_than_start_date: חייב להיות מאוחר יותר מתאריך ההתחלה
-  activerecord_error_not_same_project: לא שייך לאותו הפרויקט
-  activerecord_error_circular_dependency: הקשר הזה יצור תלות מעגלית
-  
   general_text_No: 'לא'
   general_text_Yes: 'כן'
   general_text_no: 'לא'

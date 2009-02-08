@@ -180,23 +180,6 @@ vi:
   actionview_datehelper_time_in_words_second_less_than_plural: "cách {{count}} giấy"
   actionview_instancetag_blank_option: Vui lòng chọn
   
-  activerecord_error_inclusion: không chứa trong danh sách
-  activerecord_error_exclusion: đã được dùng
-  activerecord_error_invalid: không hợp lệ
-  activerecord_error_confirmation: không khớp
-  activerecord_error_accepted: phải được chấp nhận
-  activerecord_error_empty: không thể để trống
-  activerecord_error_blank: không thể để trống
-  activerecord_error_too_long: quá dài
-  activerecord_error_too_short: quá ngắn
-  activerecord_error_wrong_length: độ dài không đúng
-  activerecord_error_taken: đã được chọn
-  activerecord_error_not_a_number: không phải con số
-  activerecord_error_not_a_date: không phải ngày hợp lệ
-  activerecord_error_greater_than_start_date: phải đi sau ngày bắt đầu
-  activerecord_error_not_same_project: không thuộc cùng dự án
-  activerecord_error_circular_dependency: quan hệ có thể gây ra lặp vô tận
-  
   general_text_No: 'Không'
   general_text_Yes: 'Có'
   general_text_no: 'không'

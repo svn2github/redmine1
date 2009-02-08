@@ -112,23 +112,6 @@ en:
   actionview_datehelper_time_in_words_second_less_than_plural: "less than {{count}} seconds"
   actionview_instancetag_blank_option: Please select
   
-  activerecord_error_inclusion: is not included in the list
-  activerecord_error_exclusion: is reserved
-  activerecord_error_invalid: is invalid
-  activerecord_error_confirmation: doesn't match confirmation
-  activerecord_error_accepted: must be accepted
-  activerecord_error_empty: can't be empty
-  activerecord_error_blank: can't be blank
-  activerecord_error_too_long: is too long
-  activerecord_error_too_short: is too short
-  activerecord_error_wrong_length: is the wrong length
-  activerecord_error_taken: has already been taken
-  activerecord_error_not_a_number: is not a number
-  activerecord_error_not_a_date: is not a valid date
-  activerecord_error_greater_than_start_date: must be greater than start date
-  activerecord_error_not_same_project: doesn't belong to the same project
-  activerecord_error_circular_dependency: This relation would create a circular dependency
-  
   general_text_No: 'No'
   general_text_Yes: 'Yes'
   general_text_no: 'no'

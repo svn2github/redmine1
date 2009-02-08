@@ -138,23 +138,6 @@
   actionview_datehelper_time_in_words_second_less_than_plural: "manje od {{count}} sekundi"
   actionview_instancetag_blank_option: Molim izaberite
   
-  activerecord_error_inclusion: nije uključen u listu
-  activerecord_error_exclusion: je rezervisan
-  activerecord_error_invalid: je pogrešan
-  activerecord_error_confirmation: Ne slaže se sa potvrdom
-  activerecord_error_accepted: mora biti prihvaćen
-  activerecord_error_empty: ne sme biti prazan
-  activerecord_error_blank: ne sme biti prazno
-  activerecord_error_too_long: je suvise dugačko
-  activerecord_error_too_short: je suvise kratko
-  activerecord_error_wrong_length: je pogrešne dužine
-  activerecord_error_taken: je već zauzeto
-  activerecord_error_not_a_number: nije broj
-  activerecord_error_not_a_date: nije datum
-  activerecord_error_greater_than_start_date: mora biti veći od početnog datuma
-  activerecord_error_not_same_project: ne pripada istom projektu
-  activerecord_error_circular_dependency: Ova relacija bi napravila kružnu zavisnost
-  
   general_text_No: 'Ne'
   general_text_Yes: 'Da'
   general_text_no: 'ne'

@@ -112,23 +112,6 @@ uk:
   actionview_datehelper_time_in_words_second_less_than_plural: "менше {{count}} секунд(и)"
   actionview_instancetag_blank_option: Оберіть
   
-  activerecord_error_inclusion: немає в списку
-  activerecord_error_exclusion: зарезервовано 
-  activerecord_error_invalid: невірне
-  activerecord_error_confirmation: не збігається з підтвердженням
-  activerecord_error_accepted: необхідно прийняти
-  activerecord_error_empty: не може бути порожнім
-  activerecord_error_blank: не може бути незаповненим
-  activerecord_error_too_long: дуже довге
-  activerecord_error_too_short: дуже коротке
-  activerecord_error_wrong_length: не відповідає довжині
-  activerecord_error_taken: вже використовується
-  activerecord_error_not_a_number: не є числом
-  activerecord_error_not_a_date: є недійсною датою
-  activerecord_error_greater_than_start_date: повинна бути пізніша за дату початку
-  activerecord_error_not_same_project: не відносяться до одного проекту
-  activerecord_error_circular_dependency: Такий зв'язок приведе до циклічної залежності
-  
   general_text_No: 'Ні'
   general_text_Yes: 'Так'
   general_text_no: 'Ні'

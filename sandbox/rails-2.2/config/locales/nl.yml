@@ -110,22 +110,7 @@ nl:
   actionview_datehelper_time_in_words_second_less_than: minder dan een seconde
   actionview_datehelper_time_in_words_second_less_than_plural: "minder dan {{count}} seconden"
   actionview_instancetag_blank_option: Selecteer
-  activerecord_error_accepted: moet geaccepteerd worden
-  activerecord_error_blank: mag niet blanco zijn
-  activerecord_error_circular_dependency: Deze relatie zou een circulaire afhankelijkheid tot gevolg hebben
-  activerecord_error_confirmation: komt niet overeen met bevestiging
-  activerecord_error_empty: mag niet leeg zijn
-  activerecord_error_exclusion: is gereserveerd
-  activerecord_error_greater_than_start_date: moet na de startdatum liggen
-  activerecord_error_inclusion: staat niet in de lijst
-  activerecord_error_invalid: is ongeldig
-  activerecord_error_not_a_date: is geen valide datum
-  activerecord_error_not_a_number: is geen getal
-  activerecord_error_not_same_project: hoort niet bij hetzelfde project
-  activerecord_error_taken: is al in gebruik
-  activerecord_error_too_long: is te lang
-  activerecord_error_too_short: is te kort
-  activerecord_error_wrong_length: heeft een onjuiste lengte
+  
   button_activate: Activeer
   button_add: Voeg toe
   button_annotate: Annoteer

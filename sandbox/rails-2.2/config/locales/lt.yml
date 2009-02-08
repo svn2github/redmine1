@@ -152,23 +152,6 @@ lt:
   actionview_datehelper_time_in_words_second_less_than_plural: "mažiau, negu {{count}} sekundės"
   actionview_instancetag_blank_option: prašom išrinkti
   
-  activerecord_error_inclusion: nėra įtrauktas į sąrašą
-  activerecord_error_exclusion: yra rezervuota(as)
-  activerecord_error_invalid: yra negaliojanti(is)
-  activerecord_error_confirmation: neatitinka patvirtinimo
-  activerecord_error_accepted: turi būti priimtas
-  activerecord_error_empty: negali būti tuščiu
-  activerecord_error_blank: negali būti tuščiu
-  activerecord_error_too_long: yra per ilgas
-  activerecord_error_too_short: yra per trumpas
-  activerecord_error_wrong_length: neteisingas ilgis
-  activerecord_error_taken: buvo jau paimtas
-  activerecord_error_not_a_number: nėra skaičius
-  activerecord_error_not_a_date: data nėra galiojanti
-  activerecord_error_greater_than_start_date: turi būti didesnė negu pradžios data
-  activerecord_error_not_same_project: nepriklauso tam pačiam projektui
-  activerecord_error_circular_dependency: Šis ryšys sukurtų ciklinę priklausomybę
-  
   general_text_No: 'Ne'
   general_text_Yes: 'Taip'
   general_text_no: 'ne'

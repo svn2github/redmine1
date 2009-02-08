@@ -141,23 +141,6 @@ da:
   actionview_datehelper_time_in_words_second_less_than_plural: "mindre end {{count}} sekunder"
   actionview_instancetag_blank_option: Vælg venligst
   
-  activerecord_error_inclusion: er ikke i listen
-  activerecord_error_exclusion: er reserveret
-  activerecord_error_invalid: er ugyldig
-  activerecord_error_confirmation: passer ikke bekræftelsen
-  activerecord_error_accepted: skal accepteres
-  activerecord_error_empty: kan ikke være tom
-  activerecord_error_blank: kan ikke være blank
-  activerecord_error_too_long: er for lang
-  activerecord_error_too_short: er for kort
-  activerecord_error_wrong_length: har den forkerte længde
-  activerecord_error_taken: er allerede valgt
-  activerecord_error_not_a_number: er ikke et nummer
-  activerecord_error_not_a_date: er en ugyldig dato
-  activerecord_error_greater_than_start_date: skal være senere end startdatoen
-  activerecord_error_not_same_project: høre ikke til samme projekt
-  activerecord_error_circular_dependency: Denne relation vil skabe et afhængighedsforhold
-  
   general_text_No: 'Nej'
   general_text_Yes: 'Ja'
   general_text_no: 'nej'

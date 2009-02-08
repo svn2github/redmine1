@@ -149,22 +149,7 @@ pl:
   actionview_datehelper_time_in_words_second_less_than_plural5: "mniej niż {{count}} sekund"
   actionview_datehelper_time_in_words_second_less_than_plural: "mniej niż {{count}} sekund"
   actionview_instancetag_blank_option: Proszę wybierz
-  activerecord_error_accepted: musi być zaakceptowane
-  activerecord_error_blank: nie może być czyste
-  activerecord_error_circular_dependency: Ta relacja może wytworzyć kołową zależność
-  activerecord_error_confirmation: nie pasuje do potwierdzenia
-  activerecord_error_empty: nie może być puste
-  activerecord_error_exclusion: jest zarezerwowane
-  activerecord_error_greater_than_start_date: musi być większe niż początkowa data
-  activerecord_error_inclusion: nie jest zawarte na liście
-  activerecord_error_invalid: jest nieprawidłowe
-  activerecord_error_not_a_date: nie jest prawidłową datą
-  activerecord_error_not_a_number: nie jest numerem
-  activerecord_error_not_same_project: nie należy do tego samego projektu
-  activerecord_error_taken: jest już wybrane
-  activerecord_error_too_long: jest za długie
-  activerecord_error_too_short: jest za krótkie
-  activerecord_error_wrong_length: ma złą długość
+  
   button_activate: Aktywuj
   button_add: Dodaj
   button_annotate: Adnotuj

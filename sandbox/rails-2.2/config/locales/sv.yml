@@ -170,23 +170,6 @@ sv:
   actionview_datehelper_time_in_words_second_less_than_plural: "mindre än {{count}} sekunder"
   actionview_instancetag_blank_option: Var god välj
   
-  activerecord_error_inclusion: finns inte i listan
-  activerecord_error_exclusion: är reserverad
-  activerecord_error_invalid: är ogiltig
-  activerecord_error_confirmation: överensstämmer inte med bekräftelsen
-  activerecord_error_accepted: måste accepteras
-  activerecord_error_empty: får inte vara tom
-  activerecord_error_blank: får inte vara tom
-  activerecord_error_too_long: är för lång
-  activerecord_error_too_short: är för kort
-  activerecord_error_wrong_length: har fel längd
-  activerecord_error_taken: har redan tagits
-  activerecord_error_not_a_number: är inte ett nummer
-  activerecord_error_not_a_date: är inte ett korrekt datum
-  activerecord_error_greater_than_start_date: måste vara senare än startdatumet
-  activerecord_error_not_same_project: tillhör inte samma projekt
-  activerecord_error_circular_dependency: Denna relation skulle skapa ett cirkulärt beroende
-  
   general_text_No: 'Nej'
   general_text_Yes: 'Ja'
   general_text_no: 'nej'

@@ -112,23 +112,6 @@ th:
   actionview_datehelper_time_in_words_second_less_than_plural: "ไม่ถึง {{count}} วินาที"
   actionview_instancetag_blank_option: กรุณาเลือก
   
-  activerecord_error_inclusion: ไม่อยู่ในรายการ
-  activerecord_error_exclusion: ถูกสงวนไว้
-  activerecord_error_invalid: ไม่ถูกต้อง
-  activerecord_error_confirmation: พิมพ์ไม่เหมือนเดิม
-  activerecord_error_accepted: ต้องยอมรับ
-  activerecord_error_empty: ต้องเติม
-  activerecord_error_blank: ต้องเติม
-  activerecord_error_too_long: ยาวเกินไป
-  activerecord_error_too_short: สั้นเกินไป
-  activerecord_error_wrong_length: ความยาวไม่ถูกต้อง
-  activerecord_error_taken: ถูกใช้ไปแล้ว
-  activerecord_error_not_a_number: ไม่ใช่ตัวเลข
-  activerecord_error_not_a_date: ไม่ใช่วันที่ ที่ถูกต้อง
-  activerecord_error_greater_than_start_date: ต้องมากกว่าวันเริ่ม
-  activerecord_error_not_same_project: ไม่ได้อยู่ในโครงการเดียวกัน
-  activerecord_error_circular_dependency: ความสัมพันธ์อ้างอิงเป็นวงกลม
-  
   general_text_No: 'ไม่'
   general_text_Yes: 'ใช่'
   general_text_no: 'ไม่'
