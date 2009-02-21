@@ -467,7 +467,7 @@ class ProjectsControllerTest < Test::Unit::TestCase
   def test_project_menu
     assert_no_difference 'Redmine::MenuManager.items(:project_menu).size' do
       Redmine::MenuManager.map :project_menu do |menu|
-        menu.push :foo, { :controller => 'projects', :action => 'show' }, :cation => 'Foo'
+        menu.push :foo, { :controller => 'projects', :action => 'show' }, :caption => 'Foo'
         menu.push :bar, { :controller => 'projects', :action => 'show' }, :before => :activity
         menu.push :hello, { :controller => 'projects', :action => 'show' }, :caption => Proc.new {|p| p.name.upcase }, :after => :bar
       end

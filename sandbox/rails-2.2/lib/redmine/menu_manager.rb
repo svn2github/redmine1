@@ -99,7 +99,7 @@ module Redmine
               item.url
             end
             caption = item.caption(project)
-            caption = l_or_humanize(caption) if caption.is_a?(Symbol)
+            caption = l_or_humanize(caption, :prefix => 'label_') if caption.is_a?(Symbol)
             if block_given?
               yield item, caption, url, (current_menu_item == item.name)
             else
@@ -186,7 +186,7 @@ module Redmine
         @url = url
         @condition = options[:if]
         @param = options[:param] || :id
-        @caption = options[:caption]
+        @caption = options[:caption] || @name
         @html_options = options[:html] || {}
         # Adds a unique class to each menu item based on its name
         @html_options[:class] = [@html_options[:class], @name.to_s.dasherize].compact.join(' ')
@@ -198,8 +198,7 @@ module Redmine
           c = @name.to_s.humanize if c.blank?
           c
         else
-          # check if localized string exists on first render (after strings are loaded)
-          @caption_key ||= (@caption || "label_#{@name}".to_sym)
+          @caption
         end
       end
       
