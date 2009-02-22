@@ -99,8 +99,6 @@ class EmbeddedController < ApplicationController
     
     # Keep html body only
     @content.gsub!(%r{^.*<body[^>]*>(.*)</body>.*$}mi, '\\1')
-    # Strip leading spaces to reduce file size
-    @content.gsub!(%r{^\s+}, '')
     
     # Re-encode content if needed
     source_encoding = Setting.plugin_embedded['encoding'].to_s
