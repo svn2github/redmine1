@@ -137,7 +137,8 @@ class RepositoriesController < ApplicationController
   def revision
     @changeset = @repository.changesets.find_by_revision(@rev)
     raise ChangesetNotFound unless @changeset
-
+    @issues = @changeset.issues.visible
+    
     respond_to do |format|
       format.html
       format.js {render :layout => false}
