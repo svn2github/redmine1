@@ -38,6 +38,9 @@ class Journal < ActiveRecord::Base
                                               :conditions => "#{Journal.table_name}.journalized_type = 'Issue' AND" +
                                                              " (#{JournalDetail.table_name}.prop_key = 'status_id' OR #{Journal.table_name}.notes <> '')"}
   
+  named_scope :visible, lambda {|*args| { :include => {:issue => :project},
+                                          :conditions => Project.allowed_to_condition(args.first || User.current, :view_issues) } }
+
   def save
     # Do not save an empty journal
     (details.empty? && notes.blank?) ? false : super

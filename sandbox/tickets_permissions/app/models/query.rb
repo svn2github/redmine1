@@ -279,7 +279,6 @@ class Query < ActiveRecord::Base
     elsif project
       project_clauses << "#{Project.table_name}.id = %d" % project.id
     end
-    project_clauses <<  Project.allowed_to_condition(User.current, :view_issues)
     project_clauses.join(' AND ')
   end
 
