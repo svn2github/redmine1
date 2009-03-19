@@ -21,7 +21,7 @@ require 'versions_controller'
 # Re-raise errors caught by the controller.
 class VersionsController; def rescue_action(e) raise e end; end
 
-class VersionsControllerTest < Test::Unit::TestCase
+class VersionsControllerTest < ActionController::TestCase
   fixtures :projects, :versions, :issues, :users, :roles, :members, :enabled_modules
   
   def setup
