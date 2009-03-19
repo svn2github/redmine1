@@ -17,7 +17,7 @@
 
 require File.dirname(__FILE__) + '/../test_helper'
 
-class NewsTest < Test::Unit::TestCase
+class NewsTest < ActiveSupport::TestCase
   fixtures :projects, :users, :roles, :members, :enabled_modules, :news
 
   def setup

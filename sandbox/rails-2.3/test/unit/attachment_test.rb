@@ -17,7 +17,7 @@
 
 require File.dirname(__FILE__) + '/../test_helper'
 
-class AttachmentTest < Test::Unit::TestCase
+class AttachmentTest < ActiveSupport::TestCase
   fixtures :issues, :users
   
   def setup
@@ -32,6 +32,6 @@ class AttachmentTest < Test::Unit::TestCase
   end
   
   def test_digest
-    assert_equal '1478adae0d4eb06d35897518540e25d6', Attachment.digest(Test::Unit::TestCase.fixture_path + "/files/testfile.txt")
+    assert_equal '1478adae0d4eb06d35897518540e25d6', Attachment.digest(self.class.fixture_path + "/files/testfile.txt")
   end
 end
