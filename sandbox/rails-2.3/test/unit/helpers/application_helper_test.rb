@@ -21,6 +21,7 @@ class ApplicationHelperTest < HelperTestCase
   include ApplicationHelper
   include ActionView::Helpers::TextHelper
   include ActionView::Helpers::DateHelper
+  include ActionView::Helpers::NumberHelper
   
   fixtures :projects, :roles, :enabled_modules, :users,
                       :repositories, :changesets, 
@@ -417,5 +418,14 @@ EXPECTED
     # turn off avatars
     Setting.gravatar_enabled = '0'
     assert_nil avatar(User.find_by_mail('jsmith@somenet.foo'))
+  end
+  
+  def test_number_to_human_size
+    valid_languages.each do |lang|
+      ::I18n.locale = lang
+      [2, 2.kilobyte, 2.megabyte, 2.gigabyte, 2.terabyte].each do |size|
+        assert number_to_human_size(size).to_s.include?('2')
+      end
+    end
   end
 end

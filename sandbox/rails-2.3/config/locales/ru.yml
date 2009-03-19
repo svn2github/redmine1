@@ -65,10 +65,6 @@ ru:
       format:
         delimiter: ""
         precision: 1
-      # Rails 2.2
-      # storage_units: [байт, КБ, МБ, ГБ, ТБ]
-
-      # Rails 2.3
       storage_units:
         # Storage units output formatting.
         # %u is the storage unit, %n is the number (default: 2 MB)
