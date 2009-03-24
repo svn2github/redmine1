@@ -62,7 +62,7 @@ class MailHandler < ActionMailer::Base
     if headers.detect {|h| h.to_s =~ MESSAGE_ID_RE}
       klass, object_id = $1, $2.to_i
       method_name = "receive_#{klass}_reply"
-      if self.class.private_instance_methods.include?(method_name)
+      if self.class.private_instance_methods.collect(&:to_s).include?(method_name)
         send method_name, object_id
       else
         # ignoring it
