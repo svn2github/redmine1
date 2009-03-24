@@ -25,7 +25,7 @@ module Redmine
       lines = 0
       @truncated = false
       diff_table = DiffTable.new(diff_type)
-      diff.each do |line|
+      diff.each_line do |line|
         if line =~ /^(---|\+\+\+) (.*)$/
           self << diff_table if diff_table.length > 1
           diff_table = DiffTable.new(diff_type)
