@@ -73,6 +73,7 @@ queries_005:
   is_public: true
   name: Open issues by priority and tracker
   filters: |
+    --- 
     status_id: 
       :values: 
       - "1"
