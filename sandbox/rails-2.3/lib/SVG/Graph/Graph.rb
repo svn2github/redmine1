@@ -355,7 +355,7 @@ module SVG
       # by subclasses.
       def init_with config
         config.each { |key, value|
-          self.send( key.to_s+"=", value ) if methods.include? key.to_s
+          self.send( key.to_s+"=", value ) if respond_to?(key)
         }
       end
 
