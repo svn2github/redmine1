@@ -101,7 +101,7 @@ class MailHandler < ActionMailer::Base
     if status && issue.new_statuses_allowed_to(user).include?(status)
       issue.status = status
     end
-    issue.subject = email.subject.chomp.toutf8
+    issue.subject = email.subject.chomp
     issue.description = plain_text_body
     # custom fields
     issue.custom_field_values = issue.available_custom_fields.inject({}) do |h, c|
