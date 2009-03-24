@@ -37,6 +37,6 @@ class Redmine::UnifiedDiffTest < ActiveSupport::TestCase
   private
   
   def read_diff_fixture(filename)
-    File.new(File.join(File.dirname(__FILE__), '/../../../fixtures/diffs', filename)).read
+    File.new(File.join(File.dirname(__FILE__), '/../../../fixtures/diffs', filename)).read.split("\n")
   end
 end
