@@ -1,0 +1,13 @@
+Message-ID: <49C9087B.6090404@somenet.foo>
+Date: Tue, 24 Mar 2009 17:21:15 +0100
+From: jsmith <jsmith@somenet.foo>
+User-Agent: Thunderbird 2.0.0.19 (Windows/20081209)
+MIME-Version: 1.0
+To: redmine@somenet.foo
+Subject: =?ISO-8859-1?Q?Caract=E8res_accentu=E9s=3A_=E9=E8=EA=F9=E0=E2?=
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
+
+Corps de mail avec des caractères accentués: éèêùàâ
+
+

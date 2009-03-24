@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 # redMine - project management software
 # Copyright (C) 2006-2007  Jean-Philippe Lang
 #
@@ -179,6 +181,15 @@ class MailHandlerTest < ActiveSupport::TestCase
     issue.reload
     assert_equal 'HTML email', issue.subject
     assert_equal 'This is a html-only email.', issue.description
+  end
+  
+  def test_iso8859_1_encoding
+    issue = submit_email('ticket_iso8859_1_encoded.eml', :issue => {:project => 'ecookbook'})
+    assert issue.is_a?(Issue)
+    assert !issue.new_record?
+    issue.reload
+    assert_equal 'Caractères accentués: éèêùàâ', issue.subject
+    assert_equal 'Corps de mail avec des caractères accentués: éèêùàâ', issue.description
   end
 
   private
