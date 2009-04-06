@@ -430,7 +430,7 @@ class IssuesController < ApplicationController
   
 private
   def find_issue
-    @issue = Issue.find(params[:id], :include => [:project, :tracker, :status, :author, :priority, :category])
+    @issue = Issue.visible.find(params[:id], :include => [:project, :tracker, :status, :author, :priority, :category])
     @project = @issue.project
   rescue ActiveRecord::RecordNotFound
     render_404
@@ -438,7 +438,7 @@ private
   
   # Filter for bulk operations
   def find_issues
-    @issues = Issue.find_all_by_id(params[:id] || params[:ids])
+    @issues = Issue.visible.find_all_by_id(params[:id] || params[:ids])
     raise ActiveRecord::RecordNotFound if @issues.empty?
     projects = @issues.collect(&:project).compact.uniq
     if projects.size == 1
