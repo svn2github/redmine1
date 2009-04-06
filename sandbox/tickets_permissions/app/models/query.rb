@@ -319,7 +319,7 @@ class Query < ActiveRecord::Base
       
     end if filters and valid?
     
-    (filters_clauses << project_statement).join(' AND ')
+    (filters_clauses << project_statement).reject {|s| s.blank?}.join(' AND ')
   end
   
   private
