@@ -39,7 +39,7 @@ class Journal < ActiveRecord::Base
                                                              " (#{JournalDetail.table_name}.prop_key = 'status_id' OR #{Journal.table_name}.notes <> '')"}
   
   named_scope :visible, lambda {|*args| { :include => {:issue => :project},
-                                          :conditions => Project.allowed_to_condition(args.first || User.current, :view_issues) } }
+                                          :conditions => Issue.visible_condition(args.first) } }
 
   def save
     # Do not save an empty journal

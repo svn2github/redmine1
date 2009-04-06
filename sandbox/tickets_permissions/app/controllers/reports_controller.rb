@@ -134,13 +134,15 @@ private
         ActiveRecord::Base.connection.select_all("select    s.id as status_id, 
                                                   s.is_closed as closed, 
                                                   t.id as tracker_id,
-                                                  count(i.id) as total 
+                                                  count(#{Issue.table_name}.id) as total 
                                                 from 
-                                                  #{Issue.table_name} i, #{IssueStatus.table_name} s, #{Tracker.table_name} t
+                                                  #{Issue.table_name}, #{Project.table_name}, #{IssueStatus.table_name} s, #{Tracker.table_name} t
                                                 where 
-                                                  i.status_id=s.id 
-                                                  and i.tracker_id=t.id
-                                                  and i.project_id=#{@project.id}
+                                                  #{Issue.table_name}.status_id=s.id 
+                                                  and #{Issue.table_name}.tracker_id=t.id
+                                                  and #{Issue.table_name}.project_id=#{Project.table_name}.id
+                                                  and #{Project.table_name}.id=#{@project.id}
+                                                  and #{Issue.visible_condition}
                                                 group by s.id, s.is_closed, t.id")	
   end
 
@@ -149,13 +151,15 @@ private
         ActiveRecord::Base.connection.select_all("select    s.id as status_id, 
                                                   s.is_closed as closed, 
                                                   v.id as fixed_version_id,
-                                                  count(i.id) as total 
+                                                  count(#{Issue.table_name}.id) as total 
                                                 from 
-                                                  #{Issue.table_name} i, #{IssueStatus.table_name} s, #{Version.table_name} v
+                                                  #{Issue.table_name}, #{Project.table_name}, #{IssueStatus.table_name} s, #{Version.table_name} v
                                                 where 
-                                                  i.status_id=s.id 
-                                                  and i.fixed_version_id=v.id
-                                                  and i.project_id=#{@project.id}
+                                                  #{Issue.table_name}.status_id=s.id 
+                                                  and #{Issue.table_name}.fixed_version_id=v.id
+                                                  and #{Issue.table_name}.project_id=#{Project.table_name}.id
+                                                  and #{Project.table_name}.id=#{@project.id}
+                                                  and #{Issue.visible_condition}
                                                 group by s.id, s.is_closed, v.id")	
   end
   	
@@ -164,13 +168,15 @@ private
       ActiveRecord::Base.connection.select_all("select    s.id as status_id, 
                                                   s.is_closed as closed, 
                                                   p.id as priority_id,
-                                                  count(i.id) as total 
+                                                  count(#{Issue.table_name}.id) as total 
                                                 from 
-                                                  #{Issue.table_name} i, #{IssueStatus.table_name} s, #{Enumeration.table_name} p
+                                                  #{Issue.table_name}, #{Project.table_name}, #{IssueStatus.table_name} s, #{Enumeration.table_name} p
                                                 where 
-                                                  i.status_id=s.id 
-                                                  and i.priority_id=p.id
-                                                  and i.project_id=#{@project.id}
+                                                  #{Issue.table_name}.status_id=s.id 
+                                                  and #{Issue.table_name}.priority_id=p.id
+                                                  and #{Issue.table_name}.project_id=#{Project.table_name}.id
+                                                  and #{Project.table_name}.id=#{@project.id}
+                                                  and #{Issue.visible_condition}
                                                 group by s.id, s.is_closed, p.id")	
   end
 	
@@ -179,13 +185,15 @@ private
       ActiveRecord::Base.connection.select_all("select    s.id as status_id, 
                                                   s.is_closed as closed, 
                                                   c.id as category_id,
-                                                  count(i.id) as total 
+                                                  count(#{Issue.table_name}.id) as total 
                                                 from 
-                                                  #{Issue.table_name} i, #{IssueStatus.table_name} s, #{IssueCategory.table_name} c
+                                                  #{Issue.table_name}, #{Project.table_name}, #{IssueStatus.table_name} s, #{IssueCategory.table_name} c
                                                 where 
-                                                  i.status_id=s.id 
-                                                  and i.category_id=c.id
-                                                  and i.project_id=#{@project.id}
+                                                  #{Issue.table_name}.status_id=s.id 
+                                                  and #{Issue.table_name}.category_id=c.id
+                                                  and #{Issue.table_name}.project_id=#{Project.table_name}.id
+                                                  and #{Project.table_name}.id=#{@project.id}
+                                                  and #{Issue.visible_condition}
                                                 group by s.id, s.is_closed, c.id")	
   end
   
@@ -194,13 +202,15 @@ private
       ActiveRecord::Base.connection.select_all("select    s.id as status_id, 
                                                   s.is_closed as closed, 
                                                   a.id as assigned_to_id,
-                                                  count(i.id) as total 
+                                                  count(#{Issue.table_name}.id) as total 
                                                 from 
-                                                  #{Issue.table_name} i, #{IssueStatus.table_name} s, #{User.table_name} a
+                                                  #{Issue.table_name}, #{Project.table_name}, #{IssueStatus.table_name} s, #{User.table_name} a
                                                 where 
-                                                  i.status_id=s.id 
-                                                  and i.assigned_to_id=a.id
-                                                  and i.project_id=#{@project.id}
+                                                  #{Issue.table_name}.status_id=s.id 
+                                                  and #{Issue.table_name}.assigned_to_id=a.id
+                                                  and #{Issue.table_name}.project_id=#{Project.table_name}.id
+                                                  and #{Project.table_name}.id=#{@project.id}
+                                                  and #{Issue.visible_condition}
                                                 group by s.id, s.is_closed, a.id")
   end
   
@@ -209,13 +219,15 @@ private
       ActiveRecord::Base.connection.select_all("select    s.id as status_id, 
                                                   s.is_closed as closed, 
                                                   a.id as author_id,
-                                                  count(i.id) as total 
+                                                  count(#{Issue.table_name}.id) as total 
                                                 from 
-                                                  #{Issue.table_name} i, #{IssueStatus.table_name} s, #{User.table_name} a
+                                                  #{Issue.table_name}, #{Project.table_name}, #{IssueStatus.table_name} s, #{User.table_name} a
                                                 where 
-                                                  i.status_id=s.id 
-                                                  and i.author_id=a.id
-                                                  and i.project_id=#{@project.id}
+                                                  #{Issue.table_name}.status_id=s.id 
+                                                  and #{Issue.table_name}.author_id=a.id
+                                                  and #{Issue.table_name}.project_id=#{Project.table_name}.id
+                                                  and #{Project.table_name}.id=#{@project.id}
+                                                  and #{Issue.visible_condition}
                                                 group by s.id, s.is_closed, a.id")	
   end
   
@@ -223,14 +235,16 @@ private
     @issues_by_subproject ||= 
       ActiveRecord::Base.connection.select_all("select    s.id as status_id, 
                                                   s.is_closed as closed, 
-                                                  i.project_id as project_id,
-                                                  count(i.id) as total 
+                                                  #{Issue.table_name}.project_id as project_id,
+                                                  count(#{Issue.table_name}.id) as total 
                                                 from 
-                                                  #{Issue.table_name} i, #{IssueStatus.table_name} s
+                                                  #{Issue.table_name}, #{Project.table_name}, #{IssueStatus.table_name} s
                                                 where 
-                                                  i.status_id=s.id 
-                                                  and i.project_id IN (#{@project.descendants.active.collect{|p| p.id}.join(',')})
-                                                group by s.id, s.is_closed, i.project_id") if @project.descendants.active.any?
+                                                  #{Issue.table_name}.status_id=s.id 
+                                                  and #{Issue.table_name}.project_id=#{Project.table_name}.id
+                                                  and #{Project.table_name}.id IN (#{@project.descendants.active.collect{|p| p.id}.join(',')})
+                                                  and #{Issue.visible_condition}
+                                                group by s.id, s.is_closed, #{Issue.table_name}.project_id") if @project.descendants.active.any?
     @issues_by_subproject ||= []
   end
 end

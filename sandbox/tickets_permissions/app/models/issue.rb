@@ -51,12 +51,17 @@ class Issue < ActiveRecord::Base
   validates_inclusion_of :done_ratio, :in => 0..100
   validates_numericality_of :estimated_hours, :allow_nil => true
 
-  named_scope :visible, lambda {|*args| { :include => :project,
-                                          :conditions => Project.allowed_to_condition(args.first || User.current, :view_issues) } }
+  named_scope :visible, lambda { |*args| { :include => :project, :conditions => Issue.visible_condition(args.first) } }
   
-  # Returns true if usr or current user is allowed to view the issue
-  def visible?(usr=nil)
-    (usr || User.current).allowed_to?(:view_issues, self.project)
+  # Returns the SQL condition that restricts to visible issues for +user+
+  def self.visible_condition(user=nil)
+    user ||= User.current
+    Project.allowed_to_condition(user, :view_issues)
+  end
+  
+  # Returns true if +user+ or current user is allowed to view the issue
+  def visible?(user=nil)
+    !self.class.visible(user).find_by_id(id).nil?
   end
   
   def after_initialize
