@@ -39,7 +39,8 @@ class Member < ActiveRecord::Base
   end
   
   def <=>(member)
-    roles.first == member.roles.first ? (user <=> member.user) : (roles.first <=> member.roles.first)
+    a, b = roles.sort.first, member.roles.sort.first
+    a == b ? (user <=> member.user) : (a <=> b)
   end
   
   def before_destroy
