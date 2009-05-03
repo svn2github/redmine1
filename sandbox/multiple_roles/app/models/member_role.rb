@@ -15,35 +15,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-class Member < ActiveRecord::Base
-  belongs_to :user
-  has_many :member_roles
-  has_many :roles, :through => :member_roles
-  belongs_to :project
-
-  validates_presence_of :user, :project
-  validates_uniqueness_of :user_id, :scope => :project_id
+class MemberRole < ActiveRecord::Base
+  belongs_to :member
+  belongs_to :role
   
-  def name
-    self.user.name
-  end
+  validates_presence_of :role
   
-  # Sets user by login
-  def user_login=(login)
-    login = login.to_s
-    unless login.blank?
-      if (u = User.find_by_login(login))
-        self.user = u
-      end
-    end
-  end
-  
-  def <=>(member)
-    roles.first == member.roles.first ? (user <=> member.user) : (roles.first <=> member.roles.first)
-  end
-  
-  def before_destroy
-    # remove category based auto assignments for this member
-    IssueCategory.update_all "assigned_to_id = NULL", ["project_id = ? AND assigned_to_id = ?", project.id, user.id]
+  def validate
+    errors.add :role_id, :invalid if role && !role.member?
   end
 end
