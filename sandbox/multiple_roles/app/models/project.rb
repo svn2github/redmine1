@@ -252,7 +252,7 @@ class Project < ActiveRecord::Base
   
   # Users issues can be assigned to
   def assignable_users
-    members.select {|m| m.role.assignable?}.collect {|m| m.user}.sort
+    members.select {|m| m.roles.detect {|role| role.assignable?}}.collect {|m| m.user}.sort
   end
   
   # Returns the mail adresses of users that should be always notified on project events

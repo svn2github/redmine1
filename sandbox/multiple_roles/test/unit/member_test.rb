@@ -50,13 +50,22 @@ class MemberTest < Test::Unit::TestCase
   end
   
   def test_validate
-    member = Member.new(:project_id => 1, :user_id => 2, :role_id =>2)
-    # same use can't have more than one role for a project
+    member = Member.new(:project_id => 1, :user_id => 2, :role_ids => [2])
+    # same use can't have more than one membership for a project
+    assert !member.save
+    
+    member = Member.new(:project_id => 1, :user_id => 2, :role_ids => [])
+    # must have one role at least
     assert !member.save
   end
   
   def test_destroy
-    @jsmith.destroy
+    assert_difference 'Member.count', -1 do
+      assert_difference 'MemberRole.count', -1 do
+        @jsmith.destroy
+      end
+    end
+    
     assert_raise(ActiveRecord::RecordNotFound) { Member.find(@jsmith.id) }
   end
 end

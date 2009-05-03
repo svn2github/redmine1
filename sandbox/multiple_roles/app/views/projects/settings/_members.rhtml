@@ -1,13 +1,13 @@
 <%= error_messages_for 'member' %>
 <% roles = Role.find_all_givable
-   members = @project.members.find(:all, :include => [:role, :user]).sort %>
+   members = @project.members.find(:all, :include => [:roles, :user]).sort %>
 
 <div class="splitcontentleft">
 <% if members.any? %>
 <table class="list">
 	<thead>
 	  <th><%= l(:label_user) %></th>
-	  <th><%= l(:label_role) %></th>
+	  <th><%= l(:label_role_plural) %></th>
 	  <th style="width:15%"></th>
           <%= call_hook(:view_projects_settings_members_table_header, :project => @project) %>
 	</thead>
@@ -16,10 +16,10 @@
 	<% next if member.new_record? %>
 	<tr id="member-<%= member.id %>" class="<%= cycle 'odd', 'even' %>">
 	<td><%=h member.name %></td>
-    <td align="center">
+    <td>
     <% if authorize_for('members', 'edit') %>
       <% remote_form_for(:member, member, :url => {:controller => 'members', :action => 'edit', :id => member}, :method => :post) do |f| %>
-        <%= f.select :role_id, roles.collect{|role| [role.name, role.id]}, {}, :class => "small" %>
+        <%= select_tag 'member[role_ids][]', options_from_collection_for_select(roles, 'id', 'name', member.role_ids), :multiple => true %>
         <%= submit_tag l(:button_change), :class => "small" %>
       <% end %>
     <% end %>
@@ -58,7 +58,7 @@
 			<% end -%>
 			</div>
 		<% end %>
-    <p><%= l(:label_role) %>: <%= f.select :role_id, roles.collect{|role| [role.name, role.id]}, :selected => nil %>
+    <p><%= l(:label_role_plural) %>: <%= select_tag 'member[role_ids][]', options_from_collection_for_select(roles, 'id', 'name'), :multiple => true %>
     <%= submit_tag l(:button_add) %></p>
 		</fieldset>
   <% end %>

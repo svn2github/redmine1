@@ -17,7 +17,7 @@
 
 class Member < ActiveRecord::Base
   belongs_to :user
-  has_many :member_roles
+  has_many :member_roles, :dependent => :delete_all
   has_many :roles, :through => :member_roles
   belongs_to :project
 
@@ -45,5 +45,11 @@ class Member < ActiveRecord::Base
   def before_destroy
     # remove category based auto assignments for this member
     IssueCategory.update_all "assigned_to_id = NULL", ["project_id = ? AND assigned_to_id = ?", project.id, user.id]
+  end
+  
+  protected
+  
+  def validate
+    errors.add_to_base "Role can't be blank" if roles.empty?
   end
 end

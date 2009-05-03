@@ -130,7 +130,7 @@ class UserTest < Test::Unit::TestCase
     assert_equal key, @jsmith.rss_key
   end
   
-  def test_role_for_project
+  def test_roles_for_project
     # user with a role
     roles = @jsmith.roles_for_project(Project.find(1))
     assert_kind_of Role, roles.first

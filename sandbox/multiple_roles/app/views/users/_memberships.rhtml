@@ -12,7 +12,7 @@
 	<td><%=h membership.project %></td>
     <td align="center">
     <% form_tag({ :action => 'edit_membership', :id => @user, :membership_id => membership }) do %>
-        <%= select_tag 'membership[role_id]', options_from_collection_for_select(@roles, "id", "name", membership.role_id) %>
+        <%= select_tag 'membership[role_ids][]', options_from_collection_for_select(@roles, "id", "name", membership.role_ids), :multiple => true %>
         <%= submit_tag l(:button_change), :class => "small" %>
     <% end %>
     </td>
@@ -33,7 +33,7 @@
 <% form_tag({ :action => 'edit_membership', :id => @user }) do %>
 <%= select_tag 'membership[project_id]', options_for_membership_project_select(@user, @projects) %>
 <%= l(:label_role) %>:
-<%= select_tag 'membership[role_id]', options_from_collection_for_select(@roles, "id", "name") %>
+<%= select_tag 'membership[role_ids][]', options_from_collection_for_select(@roles, "id", "name"), :multiple => true %>
 <%= submit_tag l(:button_add) %>
 <% end %>
 </p>
