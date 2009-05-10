@@ -30,7 +30,7 @@ Redmine::Plugin.register :simple_ci do
   # that stores the CI feed url for each project
   settings :default => {'feed_url_custom_field' => 0,
                         'success_keyword' => 'success',
-                        'show_descriptions' => 2}, :partial => 'settings/settings'
+                        'show_descriptions' => 2}, :partial => 'settings/simple_ci_settings'
 
   # This plugin adds a project module
   # It can be enabled/disabled at project level (Project settings -> Modules)
@@ -41,5 +41,5 @@ Redmine::Plugin.register :simple_ci do
   end
 
   # A new item is added to the project menu
-  menu :project_menu, 'Integration', :controller => 'simple_ci', :action => 'show'
+  menu :project_menu, :simple_ci, { :controller => 'simple_ci', :action => 'show' }, :caption => 'Integration'
 end
