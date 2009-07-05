@@ -1,4 +1,4 @@
-<h2><%= l(:label_group) %>: <%= h(@group) %></h2>
+<h2><%= link_to l(:label_group_plural), groups_path %> &#187; <%= h(@group) %></h2>
 
 <% selected_tab = params[:tab] ? params[:tab].to_s : group_settings_tabs.first[:name] %>
 
