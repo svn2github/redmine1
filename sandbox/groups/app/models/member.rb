@@ -17,15 +17,21 @@
 
 class Member < ActiveRecord::Base
   belongs_to :user
-  has_many :member_roles, :dependent => :delete_all
+  belongs_to :principal, :foreign_key => 'user_id'
+  has_many :member_roles, :dependent => :destroy
   has_many :roles, :through => :member_roles
   belongs_to :project
 
-  validates_presence_of :user, :project
+  validates_presence_of :principal, :project
   validates_uniqueness_of :user_id, :scope => :project_id
   
   def name
     self.user.name
+  end
+  
+  alias :base_role_ids= :role_ids=
+  def role_ids=(arg)
+    self.base_role_ids = ((arg || []) + member_roles.select {|mr| !mr.inherited_from.nil?}.collect(&:role_id))
   end
   
   # Sets user by login
@@ -43,14 +49,20 @@ class Member < ActiveRecord::Base
     a == b ? (user <=> member.user) : (a <=> b)
   end
   
+  def deletable?
+    member_roles.detect {|mr| mr.inherited_from}.nil?
+  end
+  
   def before_destroy
-    # remove category based auto assignments for this member
-    IssueCategory.update_all "assigned_to_id = NULL", ["project_id = ? AND assigned_to_id = ?", project.id, user.id]
+    if user
+      # remove category based auto assignments for this member
+      IssueCategory.update_all "assigned_to_id = NULL", ["project_id = ? AND assigned_to_id = ?", project.id, user.id]
+    end
   end
   
   protected
   
   def validate
-    errors.add_to_base "Role can't be blank" if roles.empty?
+    errors.add_to_base "Role can't be blank" if member_roles.empty? && roles.empty?
   end
 end

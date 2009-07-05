@@ -1,5 +1,5 @@
-# redMine - project management software
-# Copyright (C) 2006-2007  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2009  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
 
 require "digest/sha1"
 
-class User < ActiveRecord::Base
+class User < Principal
 
   # Account statuses
   STATUS_ANONYMOUS  = 0
@@ -33,9 +33,8 @@ class User < ActiveRecord::Base
     :username => '#{login}'
   }
 
-  has_many :memberships, :class_name => 'Member', :include => [ :project, :roles ], :conditions => "#{Project.table_name}.status=#{Project::STATUS_ACTIVE}", :order => "#{Project.table_name}.name"
-  has_many :members, :dependent => :delete_all
-  has_many :projects, :through => :memberships
+  has_and_belongs_to_many :groups, :after_add => Proc.new {|user, group| group.user_added(user)},
+                                   :after_remove => Proc.new {|user, group| group.user_removed(user)}
   has_many :issue_categories, :foreign_key => 'assigned_to_id', :dependent => :nullify
   has_many :changesets, :dependent => :nullify
   has_one :preference, :dependent => :destroy, :class_name => 'UserPreference'
@@ -317,7 +316,7 @@ class User < ActiveRecord::Base
   end
   
   private
-  
+    
   # Return password digest
   def self.hash_password(clear_password)
     Digest::SHA1.hexdigest(clear_password || "")

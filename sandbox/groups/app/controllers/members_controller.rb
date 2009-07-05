@@ -59,8 +59,10 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    @member.destroy
-	respond_to do |format|
+    if request.post? && @member.deletable?
+      @member.destroy
+    end
+    respond_to do |format|
       format.html { redirect_to :controller => 'projects', :action => 'settings', :tab => 'members', :id => @project }
       format.js { render(:update) {|page| page.replace_html "tab-content-members", :partial => 'projects/settings/members'} }
     end
