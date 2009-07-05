@@ -63,7 +63,7 @@ class UsersController < ApplicationController
       if @user.save
         Mailer.deliver_account_information(@user, params[:password]) if params[:send_information]
         flash[:notice] = l(:notice_successful_create)
-        redirect_to :action => 'list'
+        redirect_to :controller => 'users', :action => 'edit', :id => @user
       end
     end
     @auth_sources = AuthSource.find(:all)
@@ -87,7 +87,7 @@ class UsersController < ApplicationController
     @auth_sources = AuthSource.find(:all)
     @membership ||= Member.new
   rescue ::ActionController::RedirectBackError
-    redirect_to :controller => 'users', :action => 'show', :id => @user
+    redirect_to :controller => 'users', :action => 'edit', :id => @user
   end
   
   def edit_membership
