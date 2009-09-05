@@ -44,6 +44,24 @@ class GroupTest < Test::Unit::TestCase
     m = Member.create!(:principal => group, :project => project, :role_ids => [1, 2])
     assert user.member_of?(project)
   end
+  
+  def test_roles_updated
+    group = Group.find(11)
+    user = User.find(9)
+    project = Project.first
+    group.users << user
+    m = Member.create!(:principal => group, :project => project, :role_ids => [1])
+    assert_equal [1], user.reload.roles_for_project(project).collect(&:id).sort
+    
+    m.role_ids = [1, 2]
+    assert_equal [1, 2], user.reload.roles_for_project(project).collect(&:id).sort
+    
+    m.role_ids = [2]
+    assert_equal [2], user.reload.roles_for_project(project).collect(&:id).sort
+    
+    m.role_ids = [1]
+    assert_equal [1], user.reload.roles_for_project(project).collect(&:id).sort
+  end
 
   def test_roles_removed_when_removing_group_membership
     assert User.find(8).member_of?(Project.find(5))
