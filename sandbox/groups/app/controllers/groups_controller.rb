@@ -105,6 +105,32 @@ class GroupsController < ApplicationController
     end
   end
   
+  def add_user
+    @group = Group.find(params[:id])
+    @group.users << User.find_all_by_id(params[:user_ids]) if request.post?
+    respond_to do |format|
+      format.html { redirect_to :controller => 'groups', :action => 'edit', :id => @group, :tab => 'users' }
+      format.js { render(:update) {|page| page.replace_html "tab-content-users", :partial => 'groups/users'} }
+    end
+  end
+  
+  def destroy_user
+    @group = Group.find(params[:id])
+    @group.users.delete(User.find(params[:user_id])) if request.post?
+    respond_to do |format|
+      format.html { redirect_to :controller => 'groups', :action => 'edit', :id => @group, :tab => 'users' }
+      format.js { render(:update) {|page| page.replace_html "tab-content-users", :partial => 'groups/users'} }
+    end
+  end
+  
+  def autocomplete_for_user
+    @group = Group.find(params[:id])
+    @users = User.active.find(:all, :conditions => ["LOWER(login) LIKE ? OR LOWER(firstname) LIKE ? OR LOWER(lastname) LIKE ?", "#{params[:q]}%", "#{params[:q]}%", "#{params[:q]}%"],
+                                    :limit => 100,
+                                    :order => 'lastname ASC') - @group.users
+    render :layout => false
+  end
+  
   def edit_membership
     @group = Group.find(params[:id])
     @membership = params[:membership_id] ? Member.find(params[:membership_id]) : Member.new(:principal => @group)
