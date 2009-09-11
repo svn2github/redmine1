@@ -25,6 +25,13 @@ class Principal < ActiveRecord::Base
   # Groups and active users
   named_scope :active, :conditions => "#{Principal.table_name}.type='Group' OR (#{Principal.table_name}.type='User' AND #{Principal.table_name}.status = 1)"
   
+  named_scope :like, lambda {|q| 
+    s = "%#{q.to_s.strip.downcase}%"
+    {:conditions => ["LOWER(login) LIKE ? OR LOWER(firstname) LIKE ? OR LOWER(lastname) LIKE ?", s, s, s],
+     :order => 'type, login, lastname, firstname'
+    }
+  }
+  
   def <=>(principal)
     self.to_s.downcase <=> principal.to_s.downcase
   end
