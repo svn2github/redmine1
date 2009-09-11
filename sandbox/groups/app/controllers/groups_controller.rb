@@ -105,7 +105,7 @@ class GroupsController < ApplicationController
     end
   end
   
-  def add_user
+  def add_users
     @group = Group.find(params[:id])
     @group.users << User.find_all_by_id(params[:user_ids]) if request.post?
     respond_to do |format|
@@ -114,7 +114,7 @@ class GroupsController < ApplicationController
     end
   end
   
-  def destroy_user
+  def remove_user
     @group = Group.find(params[:id])
     @group.users.delete(User.find(params[:user_id])) if request.post?
     respond_to do |format|

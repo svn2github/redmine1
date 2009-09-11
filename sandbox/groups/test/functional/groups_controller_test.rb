@@ -22,7 +22,7 @@ require 'groups_controller'
 class GroupsController; def rescue_action(e) raise e end; end
 
 class GroupsControllerTest < Test::Unit::TestCase
-  fixtures :projects, :users
+  fixtures :projects, :users, :members, :member_roles
   
   def setup
     @controller = GroupsController.new
@@ -73,5 +73,35 @@ class GroupsControllerTest < Test::Unit::TestCase
       post :destroy, :id => 10
     end
     assert_redirected_to 'groups'
+  end
+  
+  def test_add_users
+    assert_difference 'Group.find(10).users.count', 2 do
+      post :add_users, :id => 10, :user_ids => ['2', '3']
+    end
+  end
+  
+  def test_remove_user
+    assert_difference 'Group.find(10).users.count', -1 do
+      post :remove_user, :id => 10, :user_id => '8'
+    end
+  end
+  
+  def test_new_membership
+    assert_difference 'Group.find(10).members.count' do
+      post :edit_membership, :id => 10, :membership => { :project_id => 2, :role_ids => ['1', '2']}
+    end
+  end
+  
+  def test_edit_membership
+    assert_no_difference 'Group.find(10).members.count' do
+      post :edit_membership, :id => 10, :membership_id => 6, :membership => { :role_ids => ['1', '3']}
+    end
+  end
+  
+  def test_destroy_membership
+    assert_difference 'Group.find(10).members.count', -1 do
+      post :destroy_membership, :id => 10, :membership_id => 6
+    end
   end
 end
