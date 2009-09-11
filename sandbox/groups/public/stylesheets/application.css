@@ -344,6 +344,8 @@ div#tab-content-members fieldset legend, div#tab-content-memberships fieldset le
 div#tab-content-members fieldset label, div#tab-content-memberships fieldset label, div#tab-content-users fieldset label { display: block; }
 div#tab-content-members fieldset div, div#tab-content-users fieldset div { max-height: 400px; overflow:auto; }
 
+table.members td.group { font-weight: bold; }
+
 * html div#tab-content-members fieldset div { height: 450px; }
 
 /***** Flash & error messages ****/
