@@ -125,7 +125,7 @@ class GroupsController < ApplicationController
   
   def autocomplete_for_user
     @group = Group.find(params[:id])
-    @users = User.active.find(:all, :conditions => ["LOWER(login) LIKE ? OR LOWER(firstname) LIKE ? OR LOWER(lastname) LIKE ?", "#{params[:q]}%", "#{params[:q]}%", "#{params[:q]}%"],
+    @users = User.active.find(:all, :conditions => ["LOWER(login) LIKE ? OR LOWER(firstname) LIKE ? OR LOWER(lastname) LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%"],
                                     :limit => 100,
                                     :order => 'lastname ASC') - @group.users
     render :layout => false

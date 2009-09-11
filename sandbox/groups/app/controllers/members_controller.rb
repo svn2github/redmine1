@@ -68,8 +68,8 @@ class MembersController < ApplicationController
     end
   end
   
-  def autocomplete_for_member_login
-    @principals = Principal.active.find(:all, :conditions => ["LOWER(login) LIKE ? OR LOWER(firstname) LIKE ? OR LOWER(lastname) LIKE ?", "#{params[:q]}%", "#{params[:q]}%", "#{params[:q]}%"],
+  def autocomplete_for_member
+    @principals = Principal.active.find(:all, :conditions => ["LOWER(login) LIKE ? OR LOWER(firstname) LIKE ? OR LOWER(lastname) LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%"],
                                               :limit => 100,
                                               :order => 'type, login, lastname ASC') - @project.principals
     render :layout => false
