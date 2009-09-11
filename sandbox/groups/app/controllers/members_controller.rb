@@ -16,8 +16,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class MembersController < ApplicationController
-  before_filter :find_member, :except => [:new, :autocomplete_for_member_login]
-  before_filter :find_project, :only => [:new, :autocomplete_for_member_login]
+  before_filter :find_member, :except => [:new, :autocomplete_for_member]
+  before_filter :find_project, :only => [:new, :autocomplete_for_member]
   before_filter :authorize
 
   def new

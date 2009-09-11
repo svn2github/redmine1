@@ -71,10 +71,10 @@ class MembersControllerTest < Test::Unit::TestCase
     assert !User.find(3).member_of?(Project.find(1))
   end
   
-  def test_autocomplete_for_member_login
-    get :autocomplete_for_member_login, :id => 1, :q => 'mis'
+  def test_autocomplete_for_member
+    get :autocomplete_for_member, :id => 1, :q => 'mis'
     assert_response :success
-    assert_template 'autocomplete_for_member_login'
+    assert_template 'autocomplete_for_member'
     
     assert_tag :label, :content => /User Misc/,
                        :child => { :tag => 'input', :attributes => { :name => 'member[user_ids][]', :value => '8' } }

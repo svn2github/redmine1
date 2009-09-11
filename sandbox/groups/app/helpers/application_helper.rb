@@ -194,6 +194,14 @@ module ApplicationHelper
     end
     s
   end
+  
+  def principals_check_box_tags(name, principals)
+    s = ''
+    principals.each do |principal|
+      s << "<label>#{ check_box_tag name, principal.id, false } #{h principal}</label>\n"
+    end
+    s 
+  end
 
   # Truncates and returns the string as a single line
   def truncate_single_line(string, *args)
