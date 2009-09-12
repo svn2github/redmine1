@@ -107,10 +107,16 @@ class GroupsController < ApplicationController
   
   def add_users
     @group = Group.find(params[:id])
-    @group.users << User.find_all_by_id(params[:user_ids]) if request.post?
+    users = User.find_all_by_id(params[:user_ids])
+    @group.users << users if request.post?
     respond_to do |format|
       format.html { redirect_to :controller => 'groups', :action => 'edit', :id => @group, :tab => 'users' }
-      format.js { render(:update) {|page| page.replace_html "tab-content-users", :partial => 'groups/users'} }
+      format.js { 
+        render(:update) {|page| 
+          page.replace_html "tab-content-users", :partial => 'groups/users'
+          users.each {|user| page.visual_effect(:highlight, "user-#{user.id}") }
+        }
+      }
     end
   end
   
