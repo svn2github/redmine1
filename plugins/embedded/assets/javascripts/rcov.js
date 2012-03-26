@@ -7,7 +7,7 @@ function toggleCode( id ) {
     return false;
 
   elemStyle = elem.style;
-  
+
   if ( elemStyle.display != "block" ) {
     elemStyle.display = "block"
   } else {
