@@ -22,12 +22,3 @@ Redmine::Plugin.register :embedded do
                                  :caption => Proc.new { Setting.plugin_embedded['menu'] },
                                  :if => Proc.new { !Setting.plugin_embedded['menu'].blank? }
 end
-
-# Routes
-class << ActionController::Routing::Routes;self;end.class_eval do
-  define_method :clear!, lambda {}
-end
-
-ActionController::Routing::Routes.draw do |map|
-  map.connect 'embedded/:id/*path', :controller => 'embedded', :action => 'index'
-end
