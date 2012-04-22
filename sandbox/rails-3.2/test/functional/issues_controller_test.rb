@@ -1357,7 +1357,7 @@ class IssuesControllerTest < ActionController::TestCase
       :attributes => {:name => 'issue[tracker_id]'},
       :child => {:tag => 'option', :attributes => {:value => '3', :selected => 'selected'}}
     assert_tag 'textarea',
-      :attributes => {:name => 'issue[description]'}, :content => 'Prefilled'
+      :attributes => {:name => 'issue[description]'}, :content => "\nPrefilled"
     assert_tag 'input',
       :attributes => {:name => 'issue[custom_field_values][2]', :value => 'Custom field value'}
   end
@@ -1727,7 +1727,7 @@ class IssuesControllerTest < ActionController::TestCase
     assert_template 'new'
 
     assert_tag :textarea, :attributes => { :name => 'issue[description]' },
-                          :content => 'This is a description'
+                          :content => "\nThis is a description"
     assert_tag :select, :attributes => { :name => 'issue[priority_id]' },
                         :child => { :tag => 'option', :attributes => { :selected => 'selected',
                                                                        :value => '6' },
@@ -2621,7 +2621,7 @@ class IssuesControllerTest < ActionController::TestCase
     assert_template 'edit'
 
     assert_error_tag :descendant => {:content => /Activity can't be blank/}
-    assert_tag :textarea, :attributes => { :name => 'notes' }, :content => notes
+    assert_tag :textarea, :attributes => { :name => 'notes' }, :content => "\n"+notes
     assert_tag :input, :attributes => { :name => 'time_entry[hours]', :value => "2z" }
   end
 
@@ -2640,7 +2640,7 @@ class IssuesControllerTest < ActionController::TestCase
 
     assert_error_tag :descendant => {:content => /Activity can't be blank/}
     assert_error_tag :descendant => {:content => /Hours can't be blank/}
-    assert_tag :textarea, :attributes => { :name => 'notes' }, :content => notes
+    assert_tag :textarea, :attributes => { :name => 'notes' }, :content => "\n"+notes
     assert_tag :input, :attributes => { :name => 'time_entry[comments]', :value => "this is my comment" }
   end
 
