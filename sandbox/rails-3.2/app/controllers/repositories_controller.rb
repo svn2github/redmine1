@@ -384,10 +384,10 @@ class RepositoriesController < ApplicationController
   end
 
   def graph_commits_per_author(repository)
-    commits_by_author = repository.changesets.count(:all, :group => :committer)
+    commits_by_author = Changeset.count(:all, :group => :committer, :conditions => ["repository_id = ?", repository.id])
     commits_by_author.to_a.sort! {|x, y| x.last <=> y.last}
 
-    changes_by_author = repository.changes.count(:all, :group => :committer)
+    changes_by_author = Change.count(:all, :group => :committer, :include => :changeset, :conditions => ["#{Changeset.table_name}.repository_id = ?", repository.id])
     h = changes_by_author.inject({}) {|o, i| o[i.first] = i.last; o}
 
     fields = commits_by_author.collect {|r| r.first}
