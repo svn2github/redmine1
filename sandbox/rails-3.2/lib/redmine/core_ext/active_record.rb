@@ -27,7 +27,7 @@ module ActiveRecord
         join_dependency = construct_join_dependency_for_association_find
         relation = construct_relation_for_association_find_ids(join_dependency)
         rows = connection.select_all(relation, 'SQL', relation.bind_values)
-        rows.map {|row| row["id"]}
+        rows.map {|row| row["id"].to_i}
       rescue ThrowResult
         []
     end
