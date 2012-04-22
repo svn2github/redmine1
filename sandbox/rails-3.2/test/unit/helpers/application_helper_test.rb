@@ -79,7 +79,7 @@ class ApplicationHelperTest < ActionView::TestCase
       # two exclamation marks
       'http://example.net/path!602815048C7B5C20!302.html' => '<a class="external" href="http://example.net/path!602815048C7B5C20!302.html">http://example.net/path!602815048C7B5C20!302.html</a>',
       # escaping
-      'http://foo"bar' => '<a class="external" href="http://foo&quot;bar">http://foo"bar</a>',
+      'http://foo"bar' => '<a class="external" href="http://foo&quot;bar">http://foo&quot;bar</a>',
       # wrap in angle brackets
       '<http://foo.bar>' => '&lt;<a class="external" href="http://foo.bar">http://foo.bar</a>&gt;'
     }
@@ -942,7 +942,7 @@ RAW
   def test_default_formatter
     with_settings :text_formatting => 'unknown' do
       text = 'a *link*: http://www.example.net/'
-      assert_equal '<p>a *link*: <a class="external" href="http://www.example.net/">http://www.example.net/</a></p>', textilizable(text)
+      assert_equal '<p>a *link*: <a href="http://www.example.net/" class="external">http://www.example.net/</a></p>', textilizable(text)
     end
   end
 

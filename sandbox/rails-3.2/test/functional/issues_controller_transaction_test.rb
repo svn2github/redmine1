@@ -43,7 +43,7 @@ class IssuesControllerTransactionTest < ActionController::TestCase
            :journal_details,
            :queries
 
-  self.use_transactional_fixtures = false
+  #self.use_transactional_fixtures = false
 
   def setup
     @controller = IssuesController.new

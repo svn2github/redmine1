@@ -22,9 +22,12 @@ class Unauthorized < Exception; end
 
 class ApplicationController < ActionController::Base
   include Redmine::I18n
+  
+  class_attribute :accept_api_auth_actions
+  class_attribute :accept_rss_auth_actions
+  class_attribute :model_object
 
   layout 'base'
-  exempt_from_layout 'builder', 'rsb'
 
   protect_from_forgery
   def handle_unverified_request
@@ -68,7 +71,6 @@ class ApplicationController < ActionController::Base
   end
 
   before_filter :user_setup, :check_if_login_required, :set_localization
-  filter_parameter_logging :password
 
   rescue_from ActionController::InvalidAuthenticityToken, :with => :invalid_authenticity_token
   rescue_from ::Unauthorized, :with => :deny_access
@@ -242,7 +244,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_model_object
-    model = self.class.read_inheritable_attribute('model_object')
+    model = self.class.model_object
     if model
       @object = model.find(params[:id])
       self.instance_variable_set('@' + controller_name.singularize, @object) if @object
@@ -252,7 +254,7 @@ class ApplicationController < ActionController::Base
   end
 
   def self.model_object(model)
-    write_inheritable_attribute('model_object', model)
+    self.model_object = model
   end
 
   # Filter for bulk issue operations
@@ -388,9 +390,9 @@ class ApplicationController < ActionController::Base
 
   def self.accept_rss_auth(*actions)
     if actions.any?
-      write_inheritable_attribute('accept_rss_auth_actions', actions)
+      self.accept_rss_auth_actions = actions
     else
-      read_inheritable_attribute('accept_rss_auth_actions') || []
+      self.accept_rss_auth_actions || []
     end
   end
 
@@ -400,9 +402,9 @@ class ApplicationController < ActionController::Base
 
   def self.accept_api_auth(*actions)
     if actions.any?
-      write_inheritable_attribute('accept_api_auth_actions', actions)
+      self.accept_api_auth_actions = actions
     else
-      read_inheritable_attribute('accept_api_auth_actions') || []
+      self.accept_api_auth_actions || []
     end
   end
 
@@ -523,26 +525,12 @@ class ApplicationController < ActionController::Base
     else
       @error_messages = objects.errors.full_messages
     end
-    render :template => 'common/error_messages.api', :status => :unprocessable_entity, :layout => false
+    render :template => 'common/error_messages.api', :status => :unprocessable_entity, :layout => nil
   end
 
-  # Overrides #default_template so that the api template
-  # is used automatically if it exists
-  def default_template(action_name = self.action_name)
-    if api_request?
-      begin
-        return self.view_paths.find_template(default_template_name(action_name), 'api')
-      rescue ::ActionView::MissingTemplate
-        # the api template was not found
-        # fallback to the default behaviour
-      end
-    end
-    super
-  end
-
-  # Overrides #pick_layout so that #render with no arguments
+  # Overrides #_include_layout? so that #render with no arguments
   # doesn't use the layout for api requests
-  def pick_layout(*args)
-    api_request? ? nil : super
+  def _include_layout?(*args)
+    api_request? ? false : super
   end
 end

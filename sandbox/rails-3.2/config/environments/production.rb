@@ -1,5 +1,5 @@
 # Settings specified here will take precedence over those in config/environment.rb
-
+RedmineApp::Application.configure do
 # The production environment is meant for finished, "live" apps.
 # Code is not reloaded between requests
 config.cache_classes = true
@@ -17,7 +17,6 @@ config.cache_classes = true
 # config.logger.level = Logger::INFO
 
 # Full error reports are disabled and caching is turned on
-config.action_controller.consider_all_requests_local = false
 config.action_controller.perform_caching             = true
 
 # Enable serving of images, stylesheets, and javascripts from an asset server
@@ -28,3 +27,6 @@ config.action_mailer.raise_delivery_errors = false
 
 # No email in production log
 config.action_mailer.logger = nil
+
+config.active_support.deprecation = :log
+end
