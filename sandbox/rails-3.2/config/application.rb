@@ -25,7 +25,7 @@ module RedmineApp
     # Activate observers that should always be running.
     config.active_record.observers = :message_observer, :issue_observer, :journal_observer, :news_observer, :document_observer, :wiki_content_observer, :comment_observer
 
-    config.active_record.store_full_sti_class = false
+    config.active_record.store_full_sti_class = true
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
