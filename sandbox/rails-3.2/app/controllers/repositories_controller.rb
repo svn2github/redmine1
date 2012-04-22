@@ -18,6 +18,7 @@
 require 'SVG/Graph/Bar'
 require 'SVG/Graph/BarHorizontal'
 require 'digest/sha1'
+require 'redmine/scm/adapters/abstract_adapter'
 
 class ChangesetNotFound < Exception; end
 class InvalidRevisionParam < Exception; end
