@@ -235,8 +235,8 @@ RedmineApp::Application.routes.draw do
   get 'projects/:id/repository/revisions/:rev/:format(/*path(.:ext))', :to => 'repositories#entry', :format => /raw/
   get 'projects/:id/repository/revisions/:rev/:action(/*path(.:ext))', :controller => 'repositories', :action => /(browse|show|entry|changes|annotate|diff)/
   get 'projects/:id/repository/:repository_id/:format(/*path(.:ext))', :to => 'repositories#entry', :format => /raw/
-  get 'projects/:id/repository/:repository_id', :to => 'repositories#show', :path => nil
   get 'projects/:id/repository/:repository_id/:action(/*path(.:ext))', :controller => 'repositories', :action => /(browse|show|entry|changes|annotate|diff)/
+  get 'projects/:id/repository/:repository_id', :to => 'repositories#show', :path => nil
 
   get 'projects/:id/repository/:format(/*path(.:ext))', :to => 'repositories#entry', :format => /raw/
   get 'projects/:id/repository/:action(/*path(.:ext))', :controller => 'repositories', :action => /(browse|show|entry|changes|annotate|diff)/
