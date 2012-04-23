@@ -88,6 +88,15 @@ class WatchersControllerTest < ActionController::TestCase
     @request.session[:user_id] = 2
     xhr :get, :new, :project_id => 1
     assert_response :success
+    assert_equal Project.find(1), assigns(:project)
+    assert_select_rjs :replace_html, 'ajax-modal'
+  end
+
+  def test_new_for_new_record
+    @request.session[:user_id] = 2
+    xhr :get, :new, :project_id => 'ecookbook'
+    assert_response :success
+    assert_equal Project.find(1), assigns(:project)
     assert_select_rjs :replace_html, 'ajax-modal'
   end
 
