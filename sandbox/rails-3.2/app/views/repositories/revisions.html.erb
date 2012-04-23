@@ -1,5 +1,5 @@
 <div class="contextual">
-<% form_tag(
+<%= form_tag(
        {:controller => 'repositories', :action => 'revision', :id => @project,
         :repository_id => @repository.identifier_param}
      ) do %>
