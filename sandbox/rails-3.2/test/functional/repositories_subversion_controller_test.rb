@@ -62,6 +62,7 @@ class RepositoriesSubversionControllerTest < ActionController::TestCase
       entry = assigns(:entries).detect {|e| e.name == 'subversion_test'}
       assert_not_nil entry
       assert_equal 'dir', entry.kind
+      assert_select 'tr.dir a[href=/projects/subproject1/repository/show/subversion_test]'
 
       assert_tag 'input', :attributes => {:name => 'rev'}
       assert_tag 'a', :content => 'Statistics'

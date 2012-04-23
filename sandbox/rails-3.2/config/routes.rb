@@ -239,8 +239,8 @@ RedmineApp::Application.routes.draw do
   get 'projects/:id/repository/:repository_id/:action(/*path(.:ext))', :controller => 'repositories', :action => /(browse|show|entry|changes|annotate|diff)/
 
   get 'projects/:id/repository/:format(/*path(.:ext))', :to => 'repositories#entry', :format => /raw/
-  get 'projects/:id/repository', :to => 'repositories#show', :path => nil
   get 'projects/:id/repository/:action(/*path(.:ext))', :controller => 'repositories', :action => /(browse|show|entry|changes|annotate|diff)/
+  get 'projects/:id/repository', :to => 'repositories#show', :path => nil
 
   # additional routes for having the file name at the end of url
   match 'attachments/:id/:filename', :controller => 'attachments', :action => 'show', :id => /\d+/, :filename => /.*/, :via => :get
