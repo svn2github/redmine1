@@ -84,7 +84,7 @@ class WatchersControllerTest < ActionController::TestCase
     assert_select_rjs :replace_html, 'ajax-modal'
   end
 
-  def test_new_for_new_record
+  def test_new_for_new_record_with_id
     @request.session[:user_id] = 2
     xhr :get, :new, :project_id => 1
     assert_response :success
@@ -92,7 +92,7 @@ class WatchersControllerTest < ActionController::TestCase
     assert_select_rjs :replace_html, 'ajax-modal'
   end
 
-  def test_new_for_new_record
+  def test_new_for_new_record_with_identifier
     @request.session[:user_id] = 2
     xhr :get, :new, :project_id => 'ecookbook'
     assert_response :success
