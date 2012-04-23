@@ -127,6 +127,14 @@ module Redmine #:nodoc:
       File.join(self.class.directory, id.to_s)
     end
 
+    def public_directory
+      File.join(self.class.public_directory, id.to_s)
+    end
+
+    def assets_directory
+      File.join(directory, 'assets')
+    end
+
     def <=>(plugin)
       self.id.to_s <=> plugin.id.to_s
     end
@@ -300,7 +308,44 @@ module Redmine #:nodoc:
     def configurable?
       settings && settings.is_a?(Hash) && !settings[:partial].blank?
     end
-    
+
+    def mirror_assets
+      source = assets_directory
+      destination = public_directory
+      return unless File.directory?(source)
+
+      source_files = Dir[source + "/**/*"]
+      source_dirs = source_files.select { |d| File.directory?(d) }
+      source_files -= source_dirs
+
+      unless source_files.empty?
+        base_target_dir = File.join(destination, File.dirname(source_files.first).gsub(source, ''))
+        FileUtils.mkdir_p(base_target_dir)
+      end
+
+      source_dirs.each do |dir|
+        # strip down these paths so we have simple, relative paths we can
+        # add to the destination
+        target_dir = File.join(destination, dir.gsub(source, ''))
+        begin
+          FileUtils.mkdir_p(target_dir)
+        rescue Exception => e
+          raise "Could not create directory #{target_dir}: \n" + e
+        end
+      end
+
+      source_files.each do |file|
+        begin
+          target = File.join(destination, file.gsub(source, ''))
+          unless File.exist?(target) && FileUtils.identical?(file, target)
+            FileUtils.cp(file, target)
+          end
+        rescue Exception => e
+          raise "Could not copy #{file} to #{target}: \n" + e
+        end
+      end
+    end
+
     # The directory containing this plugin's migrations (<tt>plugin/db/migrate</tt>)
     def migration_directory
       File.join(Rails.root, 'plugins', id.to_s, 'db', 'migrate')
