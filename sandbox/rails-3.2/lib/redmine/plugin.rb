@@ -43,6 +43,9 @@ module Redmine #:nodoc:
   #
   # When rendered, the plugin settings value is available as the local variable +settings+
   class Plugin
+    cattr_accessor :directory
+    self.directory = File.join(Rails.root, 'plugins')
+
     cattr_accessor :public_directory
     self.public_directory = File.join(Rails.root, 'public', 'plugin_assets')
 
@@ -70,9 +73,19 @@ module Redmine #:nodoc:
       p.instance_eval(&block)
       # Set a default name if it was not provided during registration
       p.name(id.to_s.humanize) if p.name.nil?
+
       # Adds plugin locales if any
       # YAML translation files should be found under <plugin>/config/locales/
-      ::I18n.load_path += Dir.glob(File.join(Rails.root, 'vendor', 'plugins', id.to_s, 'config', 'locales', '*.yml'))
+      ::I18n.load_path += Dir.glob(File.join(p.directory, 'config', 'locales', '*.yml'))
+
+      # Prepends the app/views directory of the plugin to the view path
+      ActionController::Base.prepend_view_path(File.join(p.directory, 'app', 'views'))
+
+      # Adds the app/{controllers,helpers,models} directories of the plugin to the autoload path
+      Dir.glob File.expand_path(File.join(p.directory, 'app', '{controllers,helpers,models}')) do |dir|
+        ActiveSupport::Dependencies.autoload_paths += [dir]
+      end
+
       registered_plugins[id] = p
     end
 
@@ -100,8 +113,18 @@ module Redmine #:nodoc:
       registered_plugins[id.to_sym].present?
     end
 
+    def self.load
+      Dir.glob(File.join(self.directory, '*', 'init.rb')).sort.each do |initializer|
+        require initializer
+      end
+    end
+
     def initialize(id)
       @id = id.to_sym
+    end
+
+    def directory
+      File.join(self.class.directory, id.to_s)
     end
 
     def <=>(plugin)
