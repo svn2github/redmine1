@@ -114,8 +114,18 @@ module Redmine #:nodoc:
     end
 
     def self.load
-      Dir.glob(File.join(self.directory, '*', 'init.rb')).sort.each do |initializer|
-        require initializer
+      Dir.glob(File.join(self.directory, '*')).sort.each do |directory|
+        if File.directory?(directory)
+          lib = File.join(directory, "lib")
+          if File.directory?(lib)
+            $:.unshift lib
+            ActiveSupport::Dependencies.autoload_paths += [lib]
+          end
+          initializer = File.join(directory, "init.rb")
+          if File.file?(initializer)
+            require initializer
+          end
+        end
       end
     end
 
