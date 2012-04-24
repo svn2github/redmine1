@@ -3,7 +3,7 @@ RedmineApp::Application.configure do
   # The production environment is meant for finished, "live" apps.
   # Code is not reloaded between requests
   config.cache_classes = true
-  
+
   #####
   # Customize the default logger (http://ruby-doc.org/core/classes/Logger.html)
   #
@@ -15,18 +15,18 @@ RedmineApp::Application.configure do
   #
   # config.logger = Logger.new(config.log_path, 7, 1048576)
   # config.logger.level = Logger::INFO
-  
+
   # Full error reports are disabled and caching is turned on
   config.action_controller.perform_caching = true
-  
+
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host                  = "http://assets.example.com"
-  
+
   # Disable delivery errors if you bad email addresses should just be ignored
   config.action_mailer.raise_delivery_errors = false
-  
+
   # No email in production log
   config.action_mailer.logger = nil
-  
+
   config.active_support.deprecation = :log
 end
