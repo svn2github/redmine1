@@ -79,7 +79,10 @@ module Redmine #:nodoc:
       ::I18n.load_path += Dir.glob(File.join(p.directory, 'config', 'locales', '*.yml'))
 
       # Prepends the app/views directory of the plugin to the view path
-      ActionController::Base.prepend_view_path(File.join(p.directory, 'app', 'views'))
+      view_path = File.join(p.directory, 'app', 'views')
+      if File.directory?(view_path)
+        ActionController::Base.prepend_view_path(view_path)
+      end
 
       # Adds the app/{controllers,helpers,models} directories of the plugin to the autoload path
       Dir.glob File.expand_path(File.join(p.directory, 'app', '{controllers,helpers,models}')) do |dir|
