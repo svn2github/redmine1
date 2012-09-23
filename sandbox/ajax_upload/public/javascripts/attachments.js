@@ -106,38 +106,22 @@ function uploadBlob(blob, options) {
 }
 
 function addInputFiles(inputEl) {
-
   var clearedFileInput = $(inputEl).clone();
   clearedFileInput.val('');
 
   if (inputEl.files) {
-
-    // multiple files selection input or dropped files, we have to handle them separately to allow user to remove them
-    uploadAndAttachFiles(inputEl.files);
+    // upload files using ajax
+    $.each(inputEl.files, function() {addFile(this, true);});
     $(inputEl).remove();
   } else {
-
-    // classic upload on form submission upload
+    // browser not supporting the file API, upload on form submission
     var attachment_id;
-
-    if (inputEl.files) {
-      attachment_id = addFile(inputEl.files[0], false);
-    } else {
-      // "old browser" not supporting File API
-      var aFilename = inputEl.value.split(/\/|\\/);
-      attachment_id = addFile({ name: aFilename[ aFilename.length - 1 ] }, false);
-    }
-
+    var aFilename = inputEl.value.split(/\/|\\/);
+    attachment_id = addFile({ name: aFilename[ aFilename.length - 1 ] }, false);
     if (attachment_id) {
       $(inputEl).attr({ name: 'attachments[' + attachment_id + '][file]', style: 'display:none;' }).appendTo('#attachments\\[' + attachment_id + '\\]');
     }
   }
 
   clearedFileInput.insertAfter('#attachments_fields');
-}
-
-function uploadAndAttachFiles(files) {
-  $.each(files, function() {
-    addFile(this, true);
-  });
 }
