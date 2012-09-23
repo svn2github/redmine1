@@ -20,12 +20,12 @@ function addFile(inputEl, file, eagerUpload) {
 
     fileFieldCount++;
 
-    var attachment_id = addFile.nextAttachmentId++;
+    var attachmentId = addFile.nextAttachmentId++;
 
     var fileSpan = $(
-      '<span id="attachments_' + attachment_id + '"> \
-        <input type="text" class="filename readonly" name="attachments[' + attachment_id + '][filename]" readonly="readonly"></input> \
-        <input type="text" class="description" name="attachments[' + attachment_id + '][description]" maxlength="255"></input> \
+      '<span id="attachments_' + attachmentId + '"> \
+        <input type="text" class="filename readonly" name="attachments[' + attachmentId + '][filename]" readonly="readonly"></input> \
+        <input type="text" class="description" name="attachments[' + attachmentId + '][description]" maxlength="255"></input> \
         <a href="#" onclick="removeFile(this); return false;" class="remove-upload">&nbsp</a> \
       </span>'
     );
@@ -46,7 +46,7 @@ function addFile(inputEl, file, eagerUpload) {
         })
         .done(function(result) {
           progressSpan.progressbar( 'value', 100 ).remove();
-          $('<input type="hidden" name="attachments[' + attachment_id + '][token]"/>').val(result.token).appendTo(fileSpan);
+          $('<input type="hidden" name="attachments[' + attachmentId + '][token]"/>').val(result.token).appendTo(fileSpan);
           fileSpan.find('input.description, a').show();
         })
         .fail(function(result) {
@@ -58,7 +58,7 @@ function addFile(inputEl, file, eagerUpload) {
         });
     }
 
-    return attachment_id;
+    return attachmentId;
   }
   return null;
 }
@@ -119,11 +119,11 @@ function addInputFiles(inputEl) {
     $(inputEl).remove();
   } else {
     // browser not supporting the file API, upload on form submission
-    var attachment_id;
+    var attachmentId;
     var aFilename = inputEl.value.split(/\/|\\/);
-    attachment_id = addFile(inputEl, { name: aFilename[ aFilename.length - 1 ] }, false);
-    if (attachment_id) {
-      $(inputEl).attr({ name: 'attachments[' + attachment_id + '][file]', style: 'display:none;' }).appendTo('#attachments\\[' + attachment_id + '\\]');
+    attachmentId = addFile(inputEl, { name: aFilename[ aFilename.length - 1 ] }, false);
+    if (attachmentId) {
+      $(inputEl).attr({ name: 'attachments[' + attachmentId + '][file]', style: 'display:none;' }).appendTo('#attachments\\[' + attachment_id + '\\]');
     }
   }
 
