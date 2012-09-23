@@ -158,7 +158,11 @@ class Attachment < ActiveRecord::Base
   end
 
   def deletable?(user=User.current)
-    container && container.attachments_deletable?(user)
+    if container_id
+      container && container.attachments_deletable?(user)
+    else
+      author == user
+    end
   end
 
   def image?

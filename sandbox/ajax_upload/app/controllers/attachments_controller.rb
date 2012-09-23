@@ -103,9 +103,17 @@ class AttachmentsController < ApplicationController
     if @attachment.container.respond_to?(:init_journal)
       @attachment.container.init_journal(User.current)
     end
-    # Make sure association callbacks are called
-    @attachment.container.attachments.delete(@attachment)
-    redirect_to_referer_or project_path(@project)
+    if @attachment.container
+      # Make sure association callbacks are called
+      @attachment.container.attachments.delete(@attachment)
+    else
+      @attachment.destroy
+    end
+
+    respond_to do |format|
+      format.html { redirect_to_referer_or project_path(@project) }
+      format.js
+    end
   end
 
 private
