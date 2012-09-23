@@ -29,8 +29,11 @@ function addFile(inputEl, file, eagerUpload) {
         <a href="#" onclick="removeFile(this); return false;" class="remove-upload">&nbsp</a> \
       </span>'
     );
-    fileSpan.find('input.description').attr('placeholder', $(inputEl).data('description-placeholder'));
     fileSpan.find('input.filename').val(file.name);
+    fileSpan.find('input.description').attr('placeholder', $(inputEl).data('description-placeholder'))
+    if (eagerUpload) {
+      fileSpan.find('input.description, a').hide();
+    }
     fileSpan.appendTo('#attachments_fields');
 
     if(eagerUpload) {
@@ -44,6 +47,7 @@ function addFile(inputEl, file, eagerUpload) {
         .done(function(result) {
           progressSpan.progressbar( 'value', 100 ).remove();
           $('<input type="hidden" name="attachments[' + attachment_id + '][token]"/>').val(result.token).appendTo(fileSpan);
+          fileSpan.find('input.description, a').show();
         })
         .fail(function(result) {
           progressSpan.text(result.statusText);
