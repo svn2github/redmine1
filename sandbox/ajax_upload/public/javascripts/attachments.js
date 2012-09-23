@@ -98,8 +98,7 @@ function uploadBlob(blob, options) {
 }
 
 function addInputFiles(inputEl) {
-  var clearedFileInput = $(inputEl).clone();
-  clearedFileInput.val('');
+  var clearedFileInput = $(inputEl).clone().val('');
 
   if (inputEl.files) {
     // upload files using ajax
