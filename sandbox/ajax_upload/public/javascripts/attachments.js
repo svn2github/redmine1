@@ -109,7 +109,7 @@ function addInputFiles(inputEl) {
 
   var clearedFileInput = $(inputEl).clone();
 
-  if (inputEl.files && inputEl.files.length > 1) {
+  if (inputEl.files) {
 
     // multiple files selection input or dropped files, we have to handle them separately to allow user to remove them
     uploadAndAttachFiles(inputEl.files);
