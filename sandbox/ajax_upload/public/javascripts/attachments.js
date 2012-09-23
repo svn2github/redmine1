@@ -123,7 +123,7 @@ function addInputFiles(inputEl) {
     var aFilename = inputEl.value.split(/\/|\\/);
     attachmentId = addFile(inputEl, { name: aFilename[ aFilename.length - 1 ] }, false);
     if (attachmentId) {
-      $(inputEl).attr({ name: 'attachments[' + attachmentId + '][file]', style: 'display:none;' }).appendTo('#attachments\\[' + attachment_id + '\\]');
+      $(inputEl).attr({ name: 'attachments[' + attachmentId + '][file]', style: 'display:none;' }).appendTo('#attachments\\[' + attachmentId + '\\]');
     }
   }
 
