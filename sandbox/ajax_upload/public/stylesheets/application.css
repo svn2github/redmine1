@@ -521,6 +521,8 @@ span.required {color: #bb0000;}
 #attachments_fields input.readonly { background: #ddd; }
 #attachments_fields div { display: inline-block; }
 #attachments_fields img {vertical-align: middle;}
+a.remove-upload {background: url(../images/delete.png) no-repeat 1px 50%; width:18px; display:inline-block;}
+a.remove-upload:hover {text-decoration:none !important;}
 
 div.attachments { margin-top: 12px; }
 div.attachments p { margin:4px 0 2px 0; }
