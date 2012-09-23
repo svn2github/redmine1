@@ -3,7 +3,7 @@
 
 var fileFieldCount = 0;
 
-function addFile(file, eagerUpload) {
+function addFile(inputEl, file, eagerUpload) {
 
   function onLoadstart(e) {
     addFile.uploading++;
@@ -21,12 +21,15 @@ function addFile(file, eagerUpload) {
     fileFieldCount++;
 
     var attachment_id = addFile.nextAttachmentId++;
+    var descriptionPlaceholder = $(inputEl).data('description-placeholder');
+    var deleteImagePath = $(inputEl).data('delete-image-path');
+    var deleteTitle = $(inputEl).data('delete-title');
 
     var fileSpan = $(
       '<span id="attachments[' + attachment_id + ']"> \
         <input class="readonly" type="text" name="attachments[' + attachment_id + '][filename]" readonly="readonly"></input> \
-        <input type="text" class="description" name="attachments[' + attachment_id + '][description]" maxlength="255" placeholder="' + ATTACHMENT_CONFIG['HL_DESCRIPTION_PLACEHOLDER'] + '"></input> \
-        <a href="#" onclick="removeFile(this); return false;"><img src="' + ATTACHMENT_CONFIG['H_DELETE_IMAGE_PATH'] + '" alt="' + ATTACHMENT_CONFIG['HL_DELETE_TITLE'] + '"></img></a> \
+        <input type="text" class="description" name="attachments[' + attachment_id + '][description]" maxlength="255" placeholder="' + descriptionPlaceholder + '"></input> \
+        <a href="#" onclick="removeFile(this); return false;"><img src="' + deleteImagePath + '" alt="' + deleteTitle + '"></img></a> \
       </span>'
     );
 
@@ -37,7 +40,7 @@ function addFile(file, eagerUpload) {
       var progressSpan = $('<div/>').insertBefore($('input[name=attachments\\[' + attachment_id + '\\]\\[description\\]]', fileSpan));
       progressSpan.progressbar();
 
-      uploadBlob(file, {
+      uploadBlob(file, $(inputEl).data('upload-path'), {
           loadstartEventHandler: onLoadstart.bind(progressSpan),
           progressEventHandler: onProgress.bind(progressSpan)
         })
@@ -67,14 +70,13 @@ function removeFile(el) {
   fileFieldCount--;
 }
 
-function uploadBlob(blob, options) {
+function uploadBlob(blob, uploadUrl, options) {
 
   var actualOptions = $.extend({
     loadstartEventHandler: $.noop,
     progressEventHandler: $.noop
   }, options);
 
-  var uploadUrl = ATTACHMENT_CONFIG['UPLOAD_PATH'];
   if (blob instanceof window.File) {
     uploadUrl += '?filename=' + encodeURIComponent(blob.name);
   }
@@ -111,14 +113,14 @@ function addInputFiles(inputEl) {
     if (sizeExceeded) {
       window.alert(maxFileSizeExceeded);
     } else {
-      $.each(inputEl.files, function() {addFile(this, true);});
+      $.each(inputEl.files, function() {addFile(inputEl, this, true);});
     }
     $(inputEl).remove();
   } else {
     // browser not supporting the file API, upload on form submission
     var attachment_id;
     var aFilename = inputEl.value.split(/\/|\\/);
-    attachment_id = addFile({ name: aFilename[ aFilename.length - 1 ] }, false);
+    attachment_id = addFile(inputEl, { name: aFilename[ aFilename.length - 1 ] }, false);
     if (attachment_id) {
       $(inputEl).attr({ name: 'attachments[' + attachment_id + '][file]', style: 'display:none;' }).appendTo('#attachments\\[' + attachment_id + '\\]');
     }

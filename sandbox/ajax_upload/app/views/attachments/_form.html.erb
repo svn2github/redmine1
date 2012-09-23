@@ -14,18 +14,13 @@
       :onchange => 'addInputFiles(this);',
       :data => {
         :max_file_size => Setting.attachment_max_size.to_i.kilobytes,
-        :max_file_size_message => l(:error_attachment_too_big, :max_size => number_to_human_size(Setting.attachment_max_size.to_i.kilobytes))
+        :max_file_size_message => l(:error_attachment_too_big, :max_size => number_to_human_size(Setting.attachment_max_size.to_i.kilobytes)),
+        :upload_path => uploads_path,
+        :description_placeholder => l(:label_optional_description),
+        :delete_image_path => image_path('delete.png'),
+        :delete_title => l(:button_delete)
       } %>
 (<%= l(:label_max_size) %>: <%= number_to_human_size(Setting.attachment_max_size.to_i.kilobytes) %>)
 </span>
 
 <%= javascript_include_tag 'attachments' %>
-<%= javascript_tag do %>
-  var ATTACHMENT_CONFIG = <%=
-  {
-    :UPLOAD_PATH => uploads_path,
-    :HL_DESCRIPTION_PLACEHOLDER => h(l(:label_optional_description)),
-    :H_DELETE_IMAGE_PATH => h(image_path('delete.png')),
-    :HL_DELETE_TITLE => h(l(:button_delete))
-  }.to_json.html_safe %>;
-<% end %>
