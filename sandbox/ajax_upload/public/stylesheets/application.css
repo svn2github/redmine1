@@ -516,11 +516,10 @@ fieldset#notified_events .parent { padding-left: 20px; }
 span.required {color: #bb0000;}
 .summary {font-style: italic;}
 
-#attachments_fields input.description {margin-left: 8px; width:340px;}
+#attachments_fields input.description {margin-left:4px; width:340px;}
 #attachments_fields span {display:block; white-space:nowrap;}
 #attachments_fields input.readonly { background: #ddd; }
-#attachments_fields div { display: inline-block; }
-#attachments_fields img {vertical-align: middle;}
+#attachments_fields div.ui-progressbar { width: 100px; height:14px; margin: 2px 0 -5px 8px; display: inline-block; }
 a.remove-upload {background: url(../images/delete.png) no-repeat 1px 50%; width:18px; display:inline-block;}
 a.remove-upload:hover {text-decoration:none !important;}
 
@@ -528,9 +527,6 @@ div.attachments { margin-top: 12px; }
 div.attachments p { margin:4px 0 2px 0; }
 div.attachments img { vertical-align: middle; }
 div.attachments span.author { font-size: 0.9em; color: #888; }
-
-div.ui-progressbar { width: 100px; height: 1em; display: inline-block; }
-div.fileover { background-color: lightgrey; }
 
 div.thumbnails {margin-top:0.6em;}
 div.thumbnails div {background:#fff;border:2px solid #ddd;display:inline-block;margin-right:2px;}

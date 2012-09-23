@@ -39,7 +39,7 @@ function addFile(inputEl, file, eagerUpload) {
     if(eagerUpload) {
       var progressSpan = $('<div/>').insertAfter(fileSpan.find('input.filename'));
       progressSpan.progressbar();
-
+      fileSpan.addClass('ajax-loading');
       uploadBlob(file, $(inputEl).data('upload-path'), attachmentId, {
           loadstartEventHandler: onLoadstart.bind(progressSpan),
           progressEventHandler: onProgress.bind(progressSpan)
@@ -51,6 +51,7 @@ function addFile(inputEl, file, eagerUpload) {
         .fail(function(result) {
           progressSpan.text(result.statusText);
         }).always(function() {
+          fileSpan.removeClass('ajax-loading');
           if(--addFile.uploading == 0) {
             $('input:submit', fileSpan.parents('form')).removeAttr('disabled');
           }
