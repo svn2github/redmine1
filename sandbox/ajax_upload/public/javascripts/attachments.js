@@ -21,17 +21,17 @@ function addFile(inputEl, file, eagerUpload) {
     fileFieldCount++;
 
     var attachment_id = addFile.nextAttachmentId++;
-    var descriptionPlaceholder = $(inputEl).data('description-placeholder');
     var deleteImagePath = $(inputEl).data('delete-image-path');
     var deleteTitle = $(inputEl).data('delete-title');
 
     var fileSpan = $(
       '<span id="attachments[' + attachment_id + ']"> \
         <input class="readonly" type="text" name="attachments[' + attachment_id + '][filename]" readonly="readonly"></input> \
-        <input type="text" class="description" name="attachments[' + attachment_id + '][description]" maxlength="255" placeholder="' + descriptionPlaceholder + '"></input> \
+        <input type="text" class="description" name="attachments[' + attachment_id + '][description]" maxlength="255"></input> \
         <a href="#" onclick="removeFile(this); return false;"><img src="' + deleteImagePath + '" alt="' + deleteTitle + '"></img></a> \
       </span>'
     );
+    fileSpan.find('input.description').attr('placeholder', $(inputEl).data('description-placeholder'));
 
     $('input[name=attachments\\[' + attachment_id + '\\]\\[filename\\]]', fileSpan).val(file.name);
     fileSpan.appendTo('#attachments_fields');
