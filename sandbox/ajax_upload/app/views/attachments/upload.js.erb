@@ -1,0 +1,2 @@
+var fileSpan = $('#attachments_<%= params[:attachment_id] %>');
+$('<input type="hidden" name="attachments[<%= params[:attachment_id] %>][token]"/>').val('<%= @attachment.token %>').appendTo(fileSpan);

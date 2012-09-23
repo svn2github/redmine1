@@ -40,13 +40,12 @@ function addFile(inputEl, file, eagerUpload) {
       var progressSpan = $('<div/>').insertAfter(fileSpan.find('input.filename'));
       progressSpan.progressbar();
 
-      uploadBlob(file, $(inputEl).data('upload-path'), {
+      uploadBlob(file, $(inputEl).data('upload-path'), attachmentId, {
           loadstartEventHandler: onLoadstart.bind(progressSpan),
           progressEventHandler: onProgress.bind(progressSpan)
         })
         .done(function(result) {
           progressSpan.progressbar( 'value', 100 ).remove();
-          $('<input type="hidden" name="attachments[' + attachmentId + '][token]"/>').val(result.token).appendTo(fileSpan);
           fileSpan.find('input.description, a').show();
         })
         .fail(function(result) {
@@ -71,22 +70,23 @@ function removeFile(el) {
   fileFieldCount--;
 }
 
-function uploadBlob(blob, uploadUrl, options) {
+function uploadBlob(blob, uploadUrl, attachmentId, options) {
 
   var actualOptions = $.extend({
     loadstartEventHandler: $.noop,
     progressEventHandler: $.noop
   }, options);
 
+  uploadUrl = uploadUrl + '?attachment_id=' + attachmentId;
   if (blob instanceof window.File) {
-    uploadUrl += '?filename=' + encodeURIComponent(blob.name);
+    uploadUrl += '&filename=' + encodeURIComponent(blob.name);
   }
 
   return $.ajax(uploadUrl, {
     type: 'POST',
     contentType: 'application/octet-stream',
     beforeSend: function(jqXhr) {
-      jqXhr.setRequestHeader('Accept', 'application/json');
+      jqXhr.setRequestHeader('Accept', 'application/js');
     },
     xhr: function() {
       var xhr = $.ajaxSettings.xhr();
