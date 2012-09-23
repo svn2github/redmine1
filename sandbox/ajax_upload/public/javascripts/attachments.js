@@ -23,7 +23,7 @@ function addFile(inputEl, file, eagerUpload) {
     var attachment_id = addFile.nextAttachmentId++;
 
     var fileSpan = $(
-      '<span id="attachments[' + attachment_id + ']"> \
+      '<span id="attachments_' + attachment_id + '"> \
         <input type="text" class="filename readonly" name="attachments[' + attachment_id + '][filename]" readonly="readonly"></input> \
         <input type="text" class="description" name="attachments[' + attachment_id + '][description]" maxlength="255"></input> \
         <a href="#" onclick="removeFile(this); return false;" class="remove-upload">&nbsp</a> \
