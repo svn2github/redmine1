@@ -16,7 +16,7 @@ function addFile(file, eagerUpload) {
     }
   }
 
-  if (fileFieldCount < 10 && checkFileSize(file)) {
+  if (fileFieldCount < 10) {
 
     fileFieldCount++;
 
@@ -67,14 +67,6 @@ function removeFile(el) {
   fileFieldCount--;
 }
 
-function checkFileSize(file) {
-  if (file.size && file.size > ATTACHMENT_CONFIG['MAX_FILE_SIZE']) {
-    window.alert(ATTACHMENT_CONFIG['L_MAX_FILE_SIZE_EXCEEDED']);
-    return false;
-  }
-  return true;
-}
-
 function uploadBlob(blob, options) {
 
   var actualOptions = $.extend({
@@ -111,7 +103,15 @@ function addInputFiles(inputEl) {
 
   if (inputEl.files) {
     // upload files using ajax
-    $.each(inputEl.files, function() {addFile(this, true);});
+    var sizeExceeded = false;
+    $.each(inputEl.files, function() {
+      if (this.size && this.size > ATTACHMENT_CONFIG['MAX_FILE_SIZE']) {sizeExceeded=true;}
+    });
+    if (sizeExceeded) {
+      window.alert(ATTACHMENT_CONFIG['L_MAX_FILE_SIZE_EXCEEDED']);
+    } else {
+      $.each(inputEl.files, function() {addFile(this, true);});
+    }
     $(inputEl).remove();
   } else {
     // browser not supporting the file API, upload on form submission
