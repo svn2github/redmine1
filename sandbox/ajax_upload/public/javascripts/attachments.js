@@ -99,15 +99,17 @@ function uploadBlob(blob, options) {
 
 function addInputFiles(inputEl) {
   var clearedFileInput = $(inputEl).clone().val('');
+  var maxFileSize = $(inputEl).data('max-file-size');
+  var maxFileSizeExceeded = $(inputEl).data('max-file-size-message');
 
   if (inputEl.files) {
     // upload files using ajax
     var sizeExceeded = false;
     $.each(inputEl.files, function() {
-      if (this.size && this.size > ATTACHMENT_CONFIG['MAX_FILE_SIZE']) {sizeExceeded=true;}
+      if (this.size && maxFileSize && this.size > parseInt(maxFileSize)) {sizeExceeded=true;}
     });
     if (sizeExceeded) {
-      window.alert(ATTACHMENT_CONFIG['L_MAX_FILE_SIZE_EXCEEDED']);
+      window.alert(maxFileSizeExceeded);
     } else {
       $.each(inputEl.files, function() {addFile(this, true);});
     }
