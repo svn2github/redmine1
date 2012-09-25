@@ -22,22 +22,22 @@ function addFile(inputEl, file, eagerUpload) {
 
     var attachmentId = addFile.nextAttachmentId++;
 
-    var fileSpan = $(
-      '<span id="attachments_' + attachmentId + '"> \
-        <input type="text" class="filename readonly" name="attachments[' + attachmentId + '][filename]" readonly="readonly"></input> \
-        <input type="text" class="description" name="attachments[' + attachmentId + '][description]" maxlength="255"></input> \
-        <a href="#" onclick="removeFile(this); return false;" class="remove-upload">&nbsp</a> \
-      </span>'
+    var fileSpan = $('<span>', { id: 'attachments_' + attachmentId });
+    
+    fileSpan.append(
+        $('<input>', { type: 'text', class: 'filename readonly', name: 'attachments[' + attachmentId + '][filename]', readonly: 'readonly'} ).val(file.name),
+        $('<input>', { type: 'text', class: 'description', name: 'attachments[' + attachmentId + '][description]', maxlength: 255, placeholder: $(inputEl).data('description-placeholder') } ),
+        $('<a>&nbsp</a>').attr({ href: "#", class:'remove-upload' }).click( removeFile.bind(fileSpan) )
     );
-    fileSpan.find('input.filename').val(file.name);
-    fileSpan.find('input.description').attr('placeholder', $(inputEl).data('description-placeholder'))
+
     if (eagerUpload) {
       fileSpan.find('input.description, a').hide();
     }
+
     fileSpan.appendTo('#attachments_fields');
 
     if(eagerUpload) {
-      var progressSpan = $('<div/>').insertAfter(fileSpan.find('input.filename'));
+      var progressSpan = $('<div>').insertAfter(fileSpan.find('input.filename'));
       progressSpan.progressbar();
       fileSpan.addClass('ajax-loading');
       uploadBlob(file, $(inputEl).data('upload-path'), attachmentId, {
@@ -67,8 +67,9 @@ addFile.nextAttachmentId = 1;
 addFile.uploading = 0;
 
 function removeFile(el) {
-  $(el).parents('span').first().remove();
+  this.remove();
   fileFieldCount--;
+  return false;
 }
 
 function uploadBlob(blob, uploadUrl, attachmentId, options) {
