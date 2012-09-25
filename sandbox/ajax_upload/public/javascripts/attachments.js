@@ -1,8 +1,6 @@
 /* Redmine - project management software
    Copyright (C) 2006-2012  Jean-Philippe Lang */
 
-var fileFieldCount = 0;
-
 function addFile(inputEl, file, eagerUpload) {
 
   function onLoadstart(e) {
@@ -16,9 +14,7 @@ function addFile(inputEl, file, eagerUpload) {
     }
   }
 
-  if (fileFieldCount < 10) {
-
-    fileFieldCount++;
+  if ($('#attachments_fields').children().length < 10) {
 
     var attachmentId = addFile.nextAttachmentId++;
 
@@ -68,7 +64,6 @@ addFile.uploading = 0;
 
 function removeFile(el) {
   this.remove();
-  fileFieldCount--;
   return false;
 }
 
