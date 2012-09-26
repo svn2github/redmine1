@@ -524,6 +524,8 @@ span.required {color: #bb0000;}
 a.remove-upload {background: url(../images/delete.png) no-repeat 1px 50%; width:18px; display:inline-block;}
 a.remove-upload:hover {text-decoration:none !important;}
 
+div.fileover { background-color: lavender; }
+
 div.attachments { margin-top: 12px; }
 div.attachments p { margin:4px 0 2px 0; }
 div.attachments img { vertical-align: middle; }

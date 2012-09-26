@@ -99,20 +99,10 @@ function uploadBlob(blob, uploadUrl, attachmentId, options) {
 
 function addInputFiles(inputEl) {
   var clearedFileInput = $(inputEl).clone().val('');
-  var maxFileSize = $(inputEl).data('max-file-size');
-  var maxFileSizeExceeded = $(inputEl).data('max-file-size-message');
 
   if (inputEl.files) {
     // upload files using ajax
-    var sizeExceeded = false;
-    $.each(inputEl.files, function() {
-      if (this.size && maxFileSize && this.size > parseInt(maxFileSize)) {sizeExceeded=true;}
-    });
-    if (sizeExceeded) {
-      window.alert(maxFileSizeExceeded);
-    } else {
-      $.each(inputEl.files, function() {addFile(inputEl, this, true);});
-    }
+    uploadAndAttachFiles(inputEl.files, inputEl);
     $(inputEl).remove();
   } else {
     // browser not supporting the file API, upload on form submission
@@ -126,3 +116,57 @@ function addInputFiles(inputEl) {
 
   clearedFileInput.insertAfter('#attachments_fields');
 }
+
+function uploadAndAttachFiles(files, inputEl) {
+
+  var maxFileSize = $(inputEl).data('max-file-size');
+  var maxFileSizeExceeded = $(inputEl).data('max-file-size-message');
+
+  var sizeExceeded = false;
+  $.each(files, function() {
+    if (this.size && maxFileSize && this.size > parseInt(maxFileSize)) {sizeExceeded=true;}
+  });
+  if (sizeExceeded) {
+    window.alert(maxFileSizeExceeded);
+  } else {
+    $.each(files, function() {addFile(inputEl, this, true);});
+  }
+}
+
+function handleFileDropEvent(e) {
+
+  $(this).removeClass('fileover');
+  blockEventPropagation(e);
+
+  if ($.inArray('Files', e.dataTransfer.types) > -1) {
+
+    uploadAndAttachFiles(e.dataTransfer.files, $('input:file[name=attachments_files]'));
+  }
+}
+
+function dragOverHandler(e) {
+  $(this).addClass('fileover');
+  blockEventPropagation(e);
+}
+
+function dragOutHandler(e) {
+  $(this).removeClass('fileover');
+  blockEventPropagation(e);
+}
+
+function setupFileDrop() {
+  if (window.File && window.FileList && window.ProgressEvent && window.FormData) {
+
+    $.event.fixHooks.drop = { props: [ 'dataTransfer' ] };
+
+    $('form div.box').has('input:file').each(function() {
+      $(this).on({
+          dragover: dragOverHandler,
+          dragleave: dragOutHandler,
+          drop: handleFileDropEvent
+      });
+    });
+  }
+}
+
+$(document).ready(setupFileDrop);
