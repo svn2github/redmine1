@@ -3,17 +3,6 @@
 
 function addFile(inputEl, file, eagerUpload) {
 
-  function onLoadstart(e) {
-    addFile.uploading++;
-    $('input:submit:enabled', $(this).parents('form')).attr('disabled', 'disabled');    
-  }
-
-  function onProgress(e) {
-    if(e.lengthComputable) {
-      this.progressbar( 'value', e.loaded * 100 / e.total );
-    }
-  }
-
   if ($('#attachments_fields').children().length < 10) {
 
     var attachmentId = addFile.nextAttachmentId++;
@@ -22,36 +11,12 @@ function addFile(inputEl, file, eagerUpload) {
     
     fileSpan.append(
         $('<input>', { type: 'text', class: 'filename readonly', name: 'attachments[' + attachmentId + '][filename]', readonly: 'readonly'} ).val(file.name),
-        $('<input>', { type: 'text', class: 'description', name: 'attachments[' + attachmentId + '][description]', maxlength: 255, placeholder: $(inputEl).data('description-placeholder') } ),
-        $('<a>&nbsp</a>').attr({ href: "#", class:'remove-upload' }).click( removeFile.bind(fileSpan) )
-    );
-
-    if (eagerUpload) {
-      fileSpan.find('input.description, a').hide();
-    }
-
-    fileSpan.appendTo('#attachments_fields');
+        $('<input>', { type: 'text', class: 'description', name: 'attachments[' + attachmentId + '][description]', maxlength: 255, placeholder: $(inputEl).data('description-placeholder') } ).toggle(!eagerUpload),
+        $('<a>&nbsp</a>').attr({ href: "#", class: 'remove-upload' }).click( removeFile.bind(fileSpan) ).toggle(!eagerUpload)
+    ).appendTo('#attachments_fields');
 
     if(eagerUpload) {
-      var progressSpan = $('<div>').insertAfter(fileSpan.find('input.filename'));
-      progressSpan.progressbar();
-      fileSpan.addClass('ajax-loading');
-      uploadBlob(file, $(inputEl).data('upload-path'), attachmentId, {
-          loadstartEventHandler: onLoadstart.bind(progressSpan),
-          progressEventHandler: onProgress.bind(progressSpan)
-        })
-        .done(function(result) {
-          progressSpan.progressbar( 'value', 100 ).remove();
-          fileSpan.find('input.description, a').show();
-        })
-        .fail(function(result) {
-          progressSpan.text(result.statusText);
-        }).always(function() {
-          fileSpan.removeClass('ajax-loading');
-          if(--addFile.uploading == 0) {
-            $('input:submit', fileSpan.parents('form')).removeAttr('disabled');
-          }
-        });
+      ajaxUpload(file, attachmentId, fileSpan, inputEl);
     }
 
     return attachmentId;
@@ -60,7 +25,59 @@ function addFile(inputEl, file, eagerUpload) {
 }
 
 addFile.nextAttachmentId = 1;
-addFile.uploading = 0;
+
+function ajaxUpload(file, attachmentId, fileSpan, inputEl) {
+
+  function onLoadstart(e) {
+    fileSpan.removeClass('ajax-waiting');
+    fileSpan.addClass('ajax-loading');
+    $('input:submit', $(this).parents('form')).attr('disabled', 'disabled');    
+  }
+
+  function onProgress(e) {
+    if(e.lengthComputable) {
+      this.progressbar( 'value', e.loaded * 100 / e.total );
+    }
+  }
+
+  var progressSpan = $('<div>').insertAfter(fileSpan.find('input.filename'));
+  progressSpan.progressbar();
+  fileSpan.addClass('ajax-waiting');
+
+  var form = $(inputEl).parents('form');
+
+  form.queue('upload', function() {
+
+    uploadBlob(file, $(inputEl).data('upload-path'), attachmentId, {
+        loadstartEventHandler: onLoadstart.bind(progressSpan),
+        progressEventHandler: onProgress.bind(progressSpan)
+      })
+      .done(function(result) {
+        progressSpan.progressbar( 'value', 100 ).remove();
+        fileSpan.find('input.description, a').show();
+      })
+      .fail(function(result) {
+        progressSpan.text(result.statusText);
+      }).always(function() {
+        fileSpan.removeClass('ajax-loading');
+        var form = fileSpan.parents('form');
+        if (form.queue('upload').length == 0 && --ajaxUpload.uploading == 0) {
+          $('input:submit', form).removeAttr('disabled');
+        }
+        form.dequeue('upload');
+      });
+  });
+
+  var maxSyncUpload = $(inputEl).data('max-concurrent-uploads');
+
+  if (maxSyncUpload == null || ajaxUpload.uploading < maxSyncUpload) {
+    // dequeue now to let next upload get started
+    if(form.dequeue('upload'))
+      ajaxUpload.uploading++;
+  }
+}
+
+ajaxUpload.uploading = 0;
 
 function removeFile(el) {
   this.remove();
