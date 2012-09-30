@@ -40,13 +40,9 @@ function ajaxUpload(file, attachmentId, fileSpan, inputEl) {
     }
   }
 
-  var progressSpan = $('<div>').insertAfter(fileSpan.find('input.filename'));
-  progressSpan.progressbar();
-  fileSpan.addClass('ajax-waiting');
+  function actualUpload(file, attachmentId, fileSpan, inputEl) {
 
-  var form = $(inputEl).parents('form');
-
-  form.queue('upload', function() {
+    ajaxUpload.uploading++;
 
     uploadBlob(file, $(inputEl).data('upload-path'), attachmentId, {
         loadstartEventHandler: onLoadstart.bind(progressSpan),
@@ -59,22 +55,26 @@ function ajaxUpload(file, attachmentId, fileSpan, inputEl) {
       .fail(function(result) {
         progressSpan.text(result.statusText);
       }).always(function() {
+        ajaxUpload.uploading--;
         fileSpan.removeClass('ajax-loading');
         var form = fileSpan.parents('form');
-        if (form.queue('upload').length == 0 && --ajaxUpload.uploading == 0) {
+        if (form.queue('upload').length == 0 && ajaxUpload.uploading == 0) {
           $('input:submit', form).removeAttr('disabled');
         }
         form.dequeue('upload');
       });
-  });
+  }
+
+  var progressSpan = $('<div>').insertAfter(fileSpan.find('input.filename'));
+  progressSpan.progressbar();
+  fileSpan.addClass('ajax-waiting');
 
   var maxSyncUpload = $(inputEl).data('max-concurrent-uploads');
 
-  if (maxSyncUpload == null || ajaxUpload.uploading < maxSyncUpload) {
-    // dequeue now to let next upload get started
-    if(form.dequeue('upload'))
-      ajaxUpload.uploading++;
-  }
+  if(maxSyncUpload == null || maxSyncUpload <= 0 || ajaxUpload.uploading < maxSyncUpload)
+    actualUpload(file, attachmentId, fileSpan, inputEl);
+  else
+    $(inputEl).parents('form').queue('upload', actualUpload.bind(this, file, attachmentId, fileSpan, inputEl));
 }
 
 ajaxUpload.uploading = 0;
