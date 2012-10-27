@@ -44,7 +44,9 @@ class PreviewsController < ApplicationController
 
   def find_attachments
   	if (attachments = params[:attachments]).present?
-      @attachments = attachments.values.collect { |attachment| Attachment.find_by_token( attachment[:token] )  }
+      @attachments = attachments.values.collect do |attachment|
+        Attachment.find_by_token( attachment[:token] ) if attachment[:token].present?
+      end.compact!
   	end
   end
 
