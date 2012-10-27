@@ -256,7 +256,7 @@ class WikiController < ApplicationController
     # page is nil when previewing a new page
     return render_403 unless page.nil? || editable?(page)
     if page
-      @attachements = page.attachments
+      @attachments = page.attachments
       @previewed = page.content
     end
     @text = params[:content][:text]
