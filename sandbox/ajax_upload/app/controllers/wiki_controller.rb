@@ -36,6 +36,7 @@ class WikiController < ApplicationController
   before_filter :find_wiki, :authorize
   before_filter :find_existing_or_new_page, :only => [:show, :edit, :update]
   before_filter :find_existing_page, :only => [:rename, :protect, :history, :diff, :annotate, :add_attachment, :destroy]
+  before_filter :find_attachments, :only => [:preview]
 
   helper :attachments
   include AttachmentsHelper
@@ -256,7 +257,7 @@ class WikiController < ApplicationController
     # page is nil when previewing a new page
     return render_403 unless page.nil? || editable?(page)
     if page
-      @attachments = page.attachments
+      @attachments += page.attachments
       @previewed = page.content
     end
     @text = params[:content][:text]

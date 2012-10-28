@@ -42,14 +42,6 @@ class PreviewsController < ApplicationController
 
   private
 
-  def find_attachments
-  	if (attachments = params[:attachments]).present?
-      @attachments = attachments.values.collect do |attachment|
-        Attachment.find_by_token( attachment[:token] ) if attachment[:token].present?
-      end.compact!
-  	end
-  end
-
   def find_project
     project_id = (params[:issue] && params[:issue][:project_id]) || params[:project_id]
     @project = Project.find(project_id)
