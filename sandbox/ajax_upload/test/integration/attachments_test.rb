@@ -53,6 +53,32 @@ class AttachmentsTest < ActionController::IntegrationTest
     assert_equal 'File content'.length, attachment.filesize
   end
 
+  def test_upload_as_js_and_preview_as_inline_attachment
+    log_user('jsmith', 'jsmith')
+
+    assert_difference 'Attachment.count' do
+      post '/uploads.js?attachment_id=1&filename=myupload.jpg', 'JPEG content', {"CONTENT_TYPE" => 'application/octet-stream'}
+      assert_response :success
+      assert_equal 'text/javascript', response.content_type
+    end
+
+    token = response.body.match(/\.val\('(\d+\.[0-9a-f]+)'\)/)[1]
+    assert_not_nil token, "No upload token found in response:\n#{response.body}"
+
+    post '/issues/preview/new/ecookbook', {
+        :issue => {:tracker_id => 1, :description => 'Inline upload: !myupload.jpg!'},
+        :attachments => {'1' => {:filename => 'myupload.jpg', :description => 'My uploaded file', :token => token}}
+      }
+    assert_response :success
+
+    attachment_path = response.body.match(%r{<img src="(/attachments/download/\d+)"})[1]
+    assert_not_nil token, "No attachment path found in response:\n#{response.body}"
+
+    get attachment_path
+    assert_response :success
+    assert_equal 'JPEG content', response.body
+  end
+
   def test_upload_as_js_and_destroy
     log_user('jsmith', 'jsmith')
 
