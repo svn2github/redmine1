@@ -26,14 +26,7 @@ class AttachmentsTest < ActionController::IntegrationTest
   def test_upload_as_js_and_attach_to_an_issue
     log_user('jsmith', 'jsmith')
 
-    assert_difference 'Attachment.count' do
-      post '/uploads.js?attachment_id=1&filename=myupload.txt', 'File content', {"CONTENT_TYPE" => 'application/octet-stream'}
-      assert_response :success
-      assert_equal 'text/javascript', response.content_type
-    end
-
-    token = response.body.match(/\.val\('(\d+\.[0-9a-f]+)'\)/)[1]
-    assert_not_nil token, "No upload token found in response:\n#{response.body}"
+    token = ajax_upload('myupload.txt', 'File content')
 
     assert_difference 'Issue.count' do
       post '/projects/ecookbook/issues', {
@@ -56,14 +49,7 @@ class AttachmentsTest < ActionController::IntegrationTest
   def test_upload_as_js_and_preview_as_inline_attachment
     log_user('jsmith', 'jsmith')
 
-    assert_difference 'Attachment.count' do
-      post '/uploads.js?attachment_id=1&filename=myupload.jpg', 'JPEG content', {"CONTENT_TYPE" => 'application/octet-stream'}
-      assert_response :success
-      assert_equal 'text/javascript', response.content_type
-    end
-
-    token = response.body.match(/\.val\('(\d+\.[0-9a-f]+)'\)/)[1]
-    assert_not_nil token, "No upload token found in response:\n#{response.body}"
+    token = ajax_upload('myupload.jpg', 'JPEG content')
 
     post '/issues/preview/new/ecookbook', {
         :issue => {:tracker_id => 1, :description => 'Inline upload: !myupload.jpg!'},
@@ -82,14 +68,7 @@ class AttachmentsTest < ActionController::IntegrationTest
   def test_upload_and_resubmit_after_validation_failure
     log_user('jsmith', 'jsmith')
 
-    assert_difference 'Attachment.count' do
-      post '/uploads.js?attachment_id=1&filename=myupload.txt', 'File content', {"CONTENT_TYPE" => 'application/octet-stream'}
-      assert_response :success
-      assert_equal 'text/javascript', response.content_type
-    end
-
-    token = response.body.match(/\.val\('(\d+\.[0-9a-f]+)'\)/)[1]
-    assert_not_nil token, "No upload token found in response:\n#{response.body}"
+    token = ajax_upload('myupload.txt', 'File content')
 
     assert_no_difference 'Issue.count' do
       post '/projects/ecookbook/issues', {
@@ -122,11 +101,7 @@ class AttachmentsTest < ActionController::IntegrationTest
   def test_upload_as_js_and_destroy
     log_user('jsmith', 'jsmith')
 
-    assert_difference 'Attachment.count' do
-      post '/uploads.js?attachment_id=1&filename=myupload.txt', 'File content', {"CONTENT_TYPE" => 'application/octet-stream'}
-      assert_response :success
-      assert_equal 'text/javascript', response.content_type
-    end
+    token = ajax_upload('myupload.txt', 'File content')
 
     attachment = Attachment.order('id DESC').first
     attachment_path = "/attachments/#{attachment.id}.js?attachment_id=1"
@@ -138,5 +113,19 @@ class AttachmentsTest < ActionController::IntegrationTest
     end
 
     assert_include "$('#attachments_1').remove();", response.body
+  end
+
+  private
+
+  def ajax_upload(filename, content, attachment_id=1)
+    assert_difference 'Attachment.count' do
+      post "/uploads.js?attachment_id=#{attachment_id}&filename=#{filename}", content, {"CONTENT_TYPE" => 'application/octet-stream'}
+      assert_response :success
+      assert_equal 'text/javascript', response.content_type
+    end
+
+    token = response.body.match(/\.val\('(\d+\.[0-9a-f]+)'\)/)[1]
+    assert_not_nil token, "No upload token found in response:\n#{response.body}"
+    token
   end
 end
