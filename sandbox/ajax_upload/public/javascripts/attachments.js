@@ -50,7 +50,7 @@ function ajaxUpload(file, attachmentId, fileSpan, inputEl) {
       })
       .done(function(result) {
         progressSpan.progressbar( 'value', 100 ).remove();
-        fileSpan.find('input.description, a').show();
+        fileSpan.find('input.description, a').css('display', 'inline-block');
       })
       .fail(function(result) {
         progressSpan.text(result.statusText);
