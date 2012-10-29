@@ -78,11 +78,13 @@ class AttachmentsTest < ActionController::IntegrationTest
       assert_response :success
     end
     assert_select 'input[type=hidden][name=?][value=?]', 'attachments[p0][token]', token
+    assert_select 'input[name=?][value=?]', 'attachments[p0][filename]', 'myupload.txt'
+    assert_select 'input[name=?][value=?]', 'attachments[p0][description]', 'My uploaded file'
 
     assert_difference 'Issue.count' do
       post '/projects/ecookbook/issues', {
           :issue => {:tracker_id => 1, :subject => 'Issue with upload'},
-          :attachments => {'p0' => {:token => token}}
+          :attachments => {'p0' => {:filename => 'myupload.txt', :description => 'My uploaded file', :token => token}}
         }
       assert_response 302
     end
@@ -93,8 +95,7 @@ class AttachmentsTest < ActionController::IntegrationTest
 
     attachment = issue.attachments.first
     assert_equal 'myupload.txt', attachment.filename
-    # TODO: description is lost
-    #assert_equal 'My uploaded file', attachment.description
+    assert_equal 'My uploaded file', attachment.description
     assert_equal 'File content'.length, attachment.filesize
   end
 
