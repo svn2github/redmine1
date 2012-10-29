@@ -79,6 +79,46 @@ class AttachmentsTest < ActionController::IntegrationTest
     assert_equal 'JPEG content', response.body
   end
 
+  def test_upload_and_resubmit_after_validation_failure
+    log_user('jsmith', 'jsmith')
+
+    assert_difference 'Attachment.count' do
+      post '/uploads.js?attachment_id=1&filename=myupload.txt', 'File content', {"CONTENT_TYPE" => 'application/octet-stream'}
+      assert_response :success
+      assert_equal 'text/javascript', response.content_type
+    end
+
+    token = response.body.match(/\.val\('(\d+\.[0-9a-f]+)'\)/)[1]
+    assert_not_nil token, "No upload token found in response:\n#{response.body}"
+
+    assert_no_difference 'Issue.count' do
+      post '/projects/ecookbook/issues', {
+          :issue => {:tracker_id => 1, :subject => ''},
+          :attachments => {'1' => {:filename => 'myupload.txt', :description => 'My uploaded file', :token => token}}
+        }
+      assert_response :success
+    end
+    assert_select 'input[type=hidden][name=?][value=?]', 'attachments[p0][token]', token
+
+    assert_difference 'Issue.count' do
+      post '/projects/ecookbook/issues', {
+          :issue => {:tracker_id => 1, :subject => 'Issue with upload'},
+          :attachments => {'p0' => {:token => token}}
+        }
+      assert_response 302
+    end
+
+    issue = Issue.order('id DESC').first
+    assert_equal 'Issue with upload', issue.subject
+    assert_equal 1, issue.attachments.count
+
+    attachment = issue.attachments.first
+    assert_equal 'myupload.txt', attachment.filename
+    # TODO: description is lost
+    #assert_equal 'My uploaded file', attachment.description
+    assert_equal 'File content'.length, attachment.filesize
+  end
+
   def test_upload_as_js_and_destroy
     log_user('jsmith', 'jsmith')
 
