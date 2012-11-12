@@ -50,7 +50,7 @@ attachment_max_size:
 # Ajax concurrent uploads allowed, -1 to deactivate queueing
 attachment_max_concurrent_ajax_uploads:
   format: int
-  default: 3
+  default: 2
 issues_export_limit:
   format: int
   default: 500
