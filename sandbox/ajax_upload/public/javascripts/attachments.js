@@ -10,9 +10,9 @@ function addFile(inputEl, file, eagerUpload) {
     var fileSpan = $('<span>', { id: 'attachments_' + attachmentId });
     
     fileSpan.append(
-        $('<input>', { type: 'text', class: 'filename readonly', name: 'attachments[' + attachmentId + '][filename]', readonly: 'readonly'} ).val(file.name),
-        $('<input>', { type: 'text', class: 'description', name: 'attachments[' + attachmentId + '][description]', maxlength: 255, placeholder: $(inputEl).data('description-placeholder') } ).toggle(!eagerUpload),
-        $('<a>&nbsp</a>').attr({ href: "#", class: 'remove-upload' }).click( removeFile.bind(fileSpan) ).toggle(!eagerUpload)
+        $('<input>', { type: 'text', 'class': 'filename readonly', name: 'attachments[' + attachmentId + '][filename]', readonly: 'readonly'} ).val(file.name),
+        $('<input>', { type: 'text', 'class': 'description', name: 'attachments[' + attachmentId + '][description]', maxlength: 255, placeholder: $(inputEl).data('description-placeholder') } ).toggle(!eagerUpload),
+        $('<a>&nbsp</a>').attr({ href: "#", 'class': 'remove-upload' }).click(removeFile).toggle(!eagerUpload)
     ).appendTo('#attachments_fields');
 
     if(eagerUpload) {
@@ -79,8 +79,8 @@ function ajaxUpload(file, attachmentId, fileSpan, inputEl) {
 
 ajaxUpload.uploading = 0;
 
-function removeFile(el) {
-  this.remove();
+function removeFile() {
+  $(this).parent('span').remove();
   return false;
 }
 
