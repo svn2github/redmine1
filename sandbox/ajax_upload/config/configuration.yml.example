@@ -166,6 +166,9 @@ default:
   # the ImageMagick's `convert` binary. Used to generate attachment thumbnails.
   #imagemagick_convert_command:
 
+  # Maximum number of simultaneous AJAX uploads
+  #max_concurrent_ajax_uploads: 2
+
 # specific configuration options for production environment
 # that overrides the default ones
 production:
