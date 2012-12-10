@@ -954,7 +954,7 @@ class IssuesControllerTest < ActionController::TestCase
       :attributes => {:id => 'issue-form', :method => 'post', :enctype => 'multipart/form-data'},
       :descendant => {
         :tag => 'input',
-        :attributes => {:type => 'file', :name => 'attachments[1][file]'}
+        :attributes => {:type => 'file', :name => 'attachments_files'}
       }
   end
 
@@ -1488,8 +1488,7 @@ class IssuesControllerTest < ActionController::TestCase
     get :new, :project_id => 1, :tracker_id => 1
 
     assert_select 'form[id=issue-form][method=post][enctype=multipart/form-data]' do
-      assert_select 'input[name=?][type=file]', 'attachments[1][file]'
-      assert_select 'input[name=?][maxlength=255]', 'attachments[1][description]'
+      assert_select 'input[name=?][type=file]', 'attachments_files'
     end
   end
 
@@ -2056,7 +2055,7 @@ class IssuesControllerTest < ActionController::TestCase
     assert_nil attachment.container
 
     assert_tag 'input', :attributes => {:name => 'attachments[p0][token]', :value => attachment.token}
-    assert_tag 'span', :content => /testfile.txt/
+    assert_tag 'input', :attributes => {:name => 'attachments[p0][filename]', :value => 'testfile.txt'}
   end
 
   def test_post_create_with_failure_should_keep_saved_attachments
@@ -2075,7 +2074,7 @@ class IssuesControllerTest < ActionController::TestCase
     end
 
     assert_tag 'input', :attributes => {:name => 'attachments[p0][token]', :value => attachment.token}
-    assert_tag 'span', :content => /testfile.txt/
+    assert_tag 'input', :attributes => {:name => 'attachments[p0][filename]', :value => 'testfile.txt'}
   end
 
   def test_post_create_should_attach_saved_attachments
@@ -2800,7 +2799,7 @@ class IssuesControllerTest < ActionController::TestCase
     assert_nil attachment.container
 
     assert_tag 'input', :attributes => {:name => 'attachments[p0][token]', :value => attachment.token}
-    assert_tag 'span', :content => /testfile.txt/
+    assert_tag 'input', :attributes => {:name => 'attachments[p0][filename]', :value => 'testfile.txt'}
   end
 
   def test_put_update_with_failure_should_keep_saved_attachments
@@ -2819,7 +2818,7 @@ class IssuesControllerTest < ActionController::TestCase
     end
 
     assert_tag 'input', :attributes => {:name => 'attachments[p0][token]', :value => attachment.token}
-    assert_tag 'span', :content => /testfile.txt/
+    assert_tag 'input', :attributes => {:name => 'attachments[p0][filename]', :value => 'testfile.txt'}
   end
 
   def test_put_update_should_attach_saved_attachments
