@@ -97,44 +97,23 @@ class CustomField < ActiveRecord::Base
     end
   end
 
-  def possible_values_options(obj=nil)
-    case field_format
-    when 'user', 'version'
-      if obj.respond_to?(:project) && obj.project
-        case field_format
-        when 'user'
-          obj.project.users.sort.collect {|u| [u.to_s, u.id.to_s]}
-        when 'version'
-          obj.project.shared_versions.sort.collect {|u| [u.to_s, u.id.to_s]}
-        end
-      elsif obj.is_a?(Array)
-        obj.collect {|o| possible_values_options(o)}.reduce(:&)
-      else
-        []
-      end
-    when 'bool'
-      [[l(:general_text_Yes), '1'], [l(:general_text_No), '0']]
+  def possible_values_options(object=nil)
+    if object.is_a?(Array)
+      object.map {|o| format.possible_values_options(self, o)}.reduce(:&) || []
     else
-      possible_values || []
+      format.possible_values_options(self, object) || []
     end
   end
 
-  def possible_values(obj=nil)
-    case field_format
-    when 'user', 'version'
-      possible_values_options(obj).collect(&:last)
-    when 'bool'
-      ['1', '0']
-    else
-      values = super()
-      if values.is_a?(Array)
-        values.each do |value|
-          value.force_encoding('UTF-8') if value.respond_to?(:force_encoding)
-        end
-        values
-      else
-        []
+  def possible_values
+    values = super()
+    if values.is_a?(Array)
+      values.each do |value|
+        value.force_encoding('UTF-8') if value.respond_to?(:force_encoding)
       end
+      values
+    else
+      []
     end
   end
 

@@ -52,6 +52,10 @@ module Redmine
         value.to_s
       end
 
+      def possible_values_options(custom_field, object=nil)
+        custom_field.possible_values
+      end
+
       # Returns the validation errors for custom_field
       # Should return an empty array if custom_field is valid
       def validate_custom_field(custom_field)
@@ -153,6 +157,10 @@ module Redmine
       def cast_single_value(custom_field, value, customized=nil)
         value == '1' ? true : false
       end
+
+      def possible_values_options(custom_field, object=nil)
+        [[::I18n.t(:general_text_Yes), '1'], [::I18n.t(:general_text_No), '0']]
+      end
     end
 
     class List < Base
@@ -192,10 +200,22 @@ module Redmine
 
     class UserFormat < ObjectList
       add 'user'
+
+      def possible_values_options(custom_field, object=nil)
+        if object.respond_to?(:project) && object.project
+          object.project.users.sort.collect {|u| [u.to_s, u.id.to_s]}
+        end
+      end
     end
 
     class VersionFormat < ObjectList
       add 'version'
+
+      def possible_values_options(custom_field, object=nil)
+        if object.respond_to?(:project) && object.project
+          object.project.shared_versions.sort.collect {|u| [u.to_s, u.id.to_s]}
+        end
+      end
     end
   end
 end

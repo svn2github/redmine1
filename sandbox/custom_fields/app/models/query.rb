@@ -768,7 +768,7 @@ class Query < ActiveRecord::Base
     when "text"
       options = { :type => :text }
     when "list"
-      options = { :type => :list_optional, :values => field.possible_values }
+      options = { :type => :list_optional, :values => field.possible_values_options }
     when "date"
       options = { :type => :date }
     when "bool"
