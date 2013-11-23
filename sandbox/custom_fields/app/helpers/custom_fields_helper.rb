@@ -151,7 +151,7 @@ module CustomFieldsHelper
 
   # Return an array of custom field formats which can be used in select_tag
   def custom_field_formats_for_select(custom_field)
-    Redmine::CustomFieldFormat.as_select(custom_field.class.customized_class.name)
+    Redmine::FieldFormat.as_select(custom_field.class.customized_class.name)
   end
 
   # Renders the custom_values in api views

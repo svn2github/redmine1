@@ -21,6 +21,10 @@ module Redmine
       all[name.to_s] = klass.instance
     end
 
+    def self.delete(name)
+      all.delete(name.to_s)
+    end
+
     def self.all
       @formats ||= Hash.new(Base.instance)
     end
@@ -33,8 +37,20 @@ module Redmine
       all[name.to_s]
     end
 
+    # Return an array of custom field formats which can be used in select_tag
+    def self.as_select(class_name=nil)
+      formats = all.values
+      formats.select! do |format|
+        format.class.customized_class_names.nil? || format.class.customized_class_names.include?(class_name)
+      end
+      formats.map {|format| [::I18n.t(format.label), format.name] }.sort_by(&:first)
+    end
+
     class Base
       include Singleton
+
+      class_attribute :format_name
+      self.format_name = nil
 
       # Set this to true if the format supports multiple values
       class_attribute :multiple_supported
@@ -44,8 +60,23 @@ module Redmine
       class_attribute :searchable_supported
       self.searchable_supported = false
 
+      # Restricts the classes that the custom field can be added to
+      # Set to nil for no restrictions
+      class_attribute :customized_class_names
+      self.customized_class_names = nil
+
       def self.add(name)
+        self.format_name = name
         Redmine::FieldFormat.add(name, self)
+      end
+      private_class_method :add
+
+      def name
+        self.class.format_name
+      end
+
+      def label
+        "label_#{name}"
       end
 
       def cast_custom_value(custom_value)
@@ -132,6 +163,10 @@ module Redmine
     class IntFormat < Numeric
       add 'int'
 
+      def label
+        "label_integer"
+      end
+
       def cast_single_value(custom_field, value, customized=nil)
         value.to_i
       end
@@ -176,6 +211,10 @@ module Redmine
     class BoolFormat < Base
       add 'bool'
 
+      def label
+        "label_boolean"
+      end
+
       def cast_single_value(custom_field, value, customized=nil)
         value == '1' ? true : false
       end
@@ -210,6 +249,7 @@ module Redmine
     end
 
     class ObjectList < List
+      self.customized_class_names = %w(Issue TimeEntry Version Project)
 
       def cast_single_value(custom_field, value, customized=nil)
         target_class.find_by_id(value.to_i) if value.present?

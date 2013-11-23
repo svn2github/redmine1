@@ -63,12 +63,12 @@ class CustomFieldTest < ActiveSupport::TestCase
   end
 
   def test_field_format_validation_should_accept_formats_added_at_runtime
-    Redmine::CustomFieldFormat.register 'foobar'
+    Redmine::FieldFormat.add 'foobar', Class.new(Redmine::FieldFormat::Base)
 
     field = CustomField.new(:name => 'Some Custom Field', :field_format => 'foobar')
     assert field.valid?, 'field should be valid'
   ensure
-    Redmine::CustomFieldFormat.delete 'foobar'
+    Redmine::FieldFormat.delete 'foobar'
   end
 
   def test_should_not_change_field_format_of_existing_custom_field
