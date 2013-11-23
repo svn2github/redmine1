@@ -97,6 +97,10 @@ module Redmine
         value.to_s
       end
 
+      def target_class
+        nil
+      end
+
       def possible_values_options(custom_field, object=nil)
         custom_field.possible_values
       end
@@ -127,6 +131,10 @@ module Redmine
       def formatted_value(view, custom_field, value, customized=nil, html=false)
         cast_value(custom_field, value, customized)
       end
+
+      def query_filter_options(custom_field, query)
+        {:type => :string}
+      end
     end
 
     class Unbounded < Base
@@ -155,6 +163,10 @@ module Redmine
     class TextFormat < Unbounded
       add 'text'
       self.searchable_supported = true
+
+      def query_filter_options(custom_field, query)
+        {:type => :text}
+      end
     end
 
     class Numeric < Unbounded
@@ -176,6 +188,10 @@ module Redmine
         errs << ::I18n.t('activerecord.errors.messages.not_a_number') unless value =~ /^[+-]?\d+$/
         errs
       end
+
+      def query_filter_options(custom_field, query)
+        {:type => :integer}
+      end
     end
 
     class FloatFormat < Numeric
@@ -189,6 +205,10 @@ module Redmine
         errs = super
         errs << ::I18n.t('activerecord.errors.messages.invalid') unless (Kernel.Float(value) rescue nil)
         errs
+      end
+
+      def query_filter_options(custom_field, query)
+        {:type => :float}
       end
     end
 
@@ -206,6 +226,10 @@ module Redmine
           [::I18n.t('activerecord.errors.messages.not_a_date')]
         end
       end
+
+      def query_filter_options(custom_field, query)
+        {:type => :date}
+      end
     end
 
     class BoolFormat < Base
@@ -222,10 +246,18 @@ module Redmine
       def possible_values_options(custom_field, object=nil)
         [[::I18n.t(:general_text_Yes), '1'], [::I18n.t(:general_text_No), '0']]
       end
+
+      def query_filter_options(custom_field, query)
+        {:type => :list, :values => possible_values_options(custom_field)}
+      end
     end
 
     class List < Base
       self.multiple_supported = true
+
+      def query_filter_options(custom_field, query)
+        {:type => :list_optional, :values => possible_values_options(custom_field, query.project)}
+      end
     end
 
     class ListFormat < List
