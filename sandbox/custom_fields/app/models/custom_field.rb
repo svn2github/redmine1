@@ -148,24 +148,7 @@ class CustomField < ActiveRecord::Base
   end
 
   def cast_value(value)
-    casted = nil
-    unless value.blank?
-      case field_format
-      when 'string', 'text', 'list'
-        casted = value
-      when 'date'
-        casted = begin; value.to_date; rescue; nil end
-      when 'bool'
-        casted = (value == '1' ? true : false)
-      when 'int'
-        casted = value.to_i
-      when 'float'
-        casted = value.to_f
-      when 'user', 'version'
-        casted = (value.blank? ? nil : field_format.classify.constantize.find_by_id(value.to_i))
-      end
-    end
-    casted
+    format.cast_single_value(self, value) if value.present?
   end
 
   def value_from_keyword(keyword, customized)
@@ -301,12 +284,7 @@ class CustomField < ActiveRecord::Base
 
   # Returns the class that values represent
   def value_class
-    case field_format
-      when 'user', 'version'
-        field_format.classify.constantize
-      else
-        nil
-    end
+    format.target_class if format.respond_to?(:target_class)
   end
 
   def self.customized_class

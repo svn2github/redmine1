@@ -40,6 +40,10 @@ module Redmine
         Redmine::FieldFormat.add(name, self)
       end
 
+      def cast_single_value(custom_field, value, customized=nil)
+        custom_value.value.to_s
+      end
+
       # Returns the validation errors for custom_field
       # Should return an empty array if custom_field is valid
       def validate_custom_field(custom_field)
@@ -92,6 +96,10 @@ module Redmine
     class IntFormat < Numeric
       add 'int'
 
+      def cast_single_value(custom_field, value, customized=nil)
+        value.to_i
+      end
+
       def validate_single_value(custom_field, value, customized=nil)
         errs = super
         errs << ::I18n.t('activerecord.errors.messages.not_a_number') unless value =~ /^[+-]?\d+$/
@@ -102,6 +110,10 @@ module Redmine
     class FloatFormat < Numeric
       add 'float'
 
+      def cast_single_value(custom_field, value, customized=nil)
+        value.to_f
+      end
+
       def validate_single_value(custom_field, value, customized=nil)
         errs = super
         errs << ::I18n.t('activerecord.errors.messages.invalid') unless (Kernel.Float(value) rescue nil)
@@ -111,6 +123,10 @@ module Redmine
 
     class DateFormat < Unbounded
       add 'date'
+
+      def cast_single_value(custom_field, value, customized=nil)
+        value.to_date rescue nil
+      end
 
       def validate_single_value(custom_field, value, customized=nil)
         if value =~ /^\d{4}-\d{2}-\d{2}$/ && (value.to_date rescue false)
@@ -123,6 +139,10 @@ module Redmine
 
     class BoolFormat < Base
       add 'bool'
+
+      def cast_single_value(custom_field, value, customized=nil)
+        value == '1' ? true : false
+      end
     end
 
     class List < Base
@@ -148,6 +168,14 @@ module Redmine
     end
 
     class ObjectList < List
+
+      def cast_single_value(custom_field, value, customized=nil)
+        target_class.find_by_id(value.to_i) if value.present?
+      end
+
+      def target_class
+        @target_class ||= self.class.name[/^(.*::)?(.+)Format$/, 2].constantize rescue nil
+      end
     end
 
     class UserFormat < ObjectList
