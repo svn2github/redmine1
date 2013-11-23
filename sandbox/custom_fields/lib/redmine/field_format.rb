@@ -48,6 +48,20 @@ module Redmine
         Redmine::FieldFormat.add(name, self)
       end
 
+      def cast_custom_value(custom_value)
+        cast_value(custom_value.custom_field, custom_value.value, custom_value.customized)
+      end
+
+      def cast_value(custom_field, value, customized=nil)
+        if value.is_a?(Array)
+          value.map do |v|
+            cast_single_value(custom_field, v, customized)
+          end.sort
+        else
+          cast_single_value(custom_field, value, customized)
+        end
+      end
+
       def cast_single_value(custom_field, value, customized=nil)
         value.to_s
       end
@@ -73,6 +87,14 @@ module Redmine
 
       def validate_single_value(custom_field, value, customized=nil)
         []
+      end
+
+      def formatted_custom_value(view, custom_value, html=false)
+        formatted_value(view, custom_value.custom_field, custom_value.value, custom_value.customized, html)
+      end
+
+      def formatted_value(view, custom_field, value, customized=nil, html=false)
+        cast_value(custom_field, value, customized)
       end
     end
 

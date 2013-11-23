@@ -141,6 +141,7 @@ module Redmine
           @available_criteria["cf_#{cf.id}"] = {:sql => "#{cf.join_alias}.value",
                                                  :joins => cf.join_for_order_statement,
                                                  :format => cf.field_format,
+                                                 :custom_field => cf,
                                                  :label => cf.name}
         end
 
