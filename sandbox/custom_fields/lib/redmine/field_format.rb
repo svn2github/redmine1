@@ -49,7 +49,7 @@ module Redmine
       end
 
       def cast_single_value(custom_field, value, customized=nil)
-        custom_value.value.to_s
+        value.to_s
       end
 
       # Returns the validation errors for custom_field
