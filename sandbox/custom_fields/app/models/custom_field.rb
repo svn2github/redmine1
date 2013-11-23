@@ -57,9 +57,16 @@ class CustomField < ActiveRecord::Base
     visible? || user.admin?
   end
 
+  def format
+    @format ||= Redmine::FieldFormat.find(field_format)
+  end
+
   def field_format=(arg)
     # cannot change format of a saved custom field
-    super if new_record?
+    if new_record?
+      @format = nil
+      super
+    end
   end
 
   def set_searchable
@@ -71,9 +78,8 @@ class CustomField < ActiveRecord::Base
   end
 
   def validate_custom_field
-    if self.field_format == "list"
-      errors.add(:possible_values, :blank) if self.possible_values.nil? || self.possible_values.empty?
-      errors.add(:possible_values, :invalid) unless self.possible_values.is_a? Array
+    format.validate_custom_field(self).each do |attribute, message|
+      errors.add attribute, message
     end
 
     if regexp.present?
@@ -84,8 +90,10 @@ class CustomField < ActiveRecord::Base
       end
     end
 
-    if default_value.present? && !valid_field_value?(default_value)
-      errors.add(:default_value, :invalid)
+    if default_value.present?
+      validate_field_value(default_value).each do |message|
+        errors.add :default_value, message
+      end
     end
   end
 
@@ -317,7 +325,8 @@ class CustomField < ActiveRecord::Base
 
   # Returns the error messages for the given value
   # or an empty array if value is a valid value for the custom field
-  def validate_field_value(value)
+  def validate_custom_value(custom_value)
+    value = custom_value.value
     errs = []
     if value.is_a?(Array)
       if !multiple?
@@ -326,14 +335,20 @@ class CustomField < ActiveRecord::Base
       if is_required? && value.detect(&:present?).nil?
         errs << ::I18n.t('activerecord.errors.messages.blank')
       end
-      value.each {|v| errs += validate_field_value_format(v)}
     else
       if is_required? && value.blank?
         errs << ::I18n.t('activerecord.errors.messages.blank')
       end
-      errs += validate_field_value_format(value)
+    end
+    if custom_value.value.present?
+      errs += format.validate_custom_value(custom_value)
     end
     errs
+  end
+
+  # Returns the error messages for the default custom field value
+  def validate_field_value(value)
+    validate_custom_value(CustomValue.new(:custom_field => self, :value => value))
   end
 
   # Returns true if value is a valid value for the custom field
@@ -346,29 +361,6 @@ class CustomField < ActiveRecord::Base
   end
 
   protected
-
-  # Returns the error message for the given value regarding its format
-  def validate_field_value_format(value)
-    errs = []
-    if value.present?
-      errs << ::I18n.t('activerecord.errors.messages.invalid') unless regexp.blank? or value =~ Regexp.new(regexp)
-      errs << ::I18n.t('activerecord.errors.messages.too_short', :count => min_length) if min_length > 0 and value.length < min_length
-      errs << ::I18n.t('activerecord.errors.messages.too_long', :count => max_length) if max_length > 0 and value.length > max_length
-
-      # Format specific validations
-      case field_format
-      when 'int'
-        errs << ::I18n.t('activerecord.errors.messages.not_a_number') unless value =~ /^[+-]?\d+$/
-      when 'float'
-        begin; Kernel.Float(value); rescue; errs << ::I18n.t('activerecord.errors.messages.invalid') end
-      when 'date'
-        errs << ::I18n.t('activerecord.errors.messages.not_a_date') unless value =~ /^\d{4}-\d{2}-\d{2}$/ && begin; value.to_date; rescue; false end
-      when 'list'
-        errs << ::I18n.t('activerecord.errors.messages.inclusion') unless possible_values.include?(value)
-      end
-    end
-    errs
-  end
 
   # Removes multiple values for the custom field after setting the multiple attribute to false
   # We kepp the value with the highest id for each customized object
