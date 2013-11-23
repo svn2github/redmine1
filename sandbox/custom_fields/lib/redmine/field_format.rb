@@ -36,6 +36,14 @@ module Redmine
     class Base
       include Singleton
 
+      # Set this to true if the format supports multiple values
+      class_attribute :multiple_supported
+      self.multiple_supported = false
+
+      # Set this to true if the format supports textual search on custom values
+      class_attribute :searchable_supported
+      self.searchable_supported = false
+
       def self.add(name)
         Redmine::FieldFormat.add(name, self)
       end
@@ -84,10 +92,12 @@ module Redmine
 
     class StringFormat < Unbounded
       add 'string'
+      self.searchable_supported = true
     end
 
     class TextFormat < Unbounded
       add 'text'
+      self.searchable_supported = true
     end
 
     class Numeric < Unbounded
@@ -146,10 +156,12 @@ module Redmine
     end
 
     class List < Base
+      self.multiple_supported = true
     end
 
     class ListFormat < List
       add 'list'
+      self.searchable_supported = true
 
       def validate_custom_field(custom_field)
         errors = []

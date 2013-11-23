@@ -71,9 +71,9 @@ class CustomField < ActiveRecord::Base
 
   def set_searchable
     # make sure these fields are not searchable
-    self.searchable = false if %w(int float date bool).include?(field_format)
+    self.searchable = false unless format.class.searchable_supported
     # make sure only these fields can have multiple values
-    self.multiple = false unless %w(list user version).include?(field_format)
+    self.multiple = false unless format.class.multiple_supported
     true
   end
 
