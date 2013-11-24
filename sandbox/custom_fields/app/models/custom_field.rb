@@ -127,7 +127,7 @@ class CustomField < ActiveRecord::Base
   end
 
   def cast_value(value)
-    format.cast_single_value(self, value) if value.present?
+    format.cast_value(self, value)
   end
 
   def value_from_keyword(keyword, customized)

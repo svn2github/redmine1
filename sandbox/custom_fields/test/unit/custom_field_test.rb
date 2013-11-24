@@ -293,4 +293,18 @@ class CustomFieldTest < ActiveSupport::TestCase
 
     assert_equal [fields[0]], CustomField.visible(User.anonymous).order("id").to_a
   end
+
+  def test_float_cast_blank_value_should_return_nil
+    field = CustomField.new(:field_format => 'float')
+    assert_equal nil, field.cast_value(nil)
+    assert_equal nil, field.cast_value('')
+  end
+
+  def test_float_cast_valid_value_should_return_float
+    field = CustomField.new(:field_format => 'float')
+    assert_equal 12.0, field.cast_value('12')
+    assert_equal 12.5, field.cast_value('12.5')
+    assert_equal 12.5, field.cast_value('+12.5')
+    assert_equal -12.5, field.cast_value('-12.5')
+  end
 end
