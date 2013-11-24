@@ -44,6 +44,13 @@ module CustomFieldsHelper
     CUSTOM_FIELDS_TABS
   end
 
+  def render_custom_field_format_partial(form, custom_field)
+    partial = custom_field.format.form_partial
+    if partial
+      render :partial => custom_field.format.form_partial, :locals => {:f => form, :custom_field => custom_field}
+    end
+  end
+
   def custom_field_tag_name(prefix, custom_field)
     name = "#{prefix}[custom_field_values][#{custom_field.id}]"
     name << "[]" if custom_field.multiple?

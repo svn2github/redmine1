@@ -66,6 +66,10 @@ module Redmine
       class_attribute :customized_class_names
       self.customized_class_names = nil
 
+      # Name of the partial for editing the custom field
+      class_attribute :form_partial
+      self.form_partial = nil
+
       def self.add(name)
         self.format_name = name
         Redmine::FieldFormat.add(name, self)
@@ -182,11 +186,13 @@ module Redmine
     class StringFormat < Unbounded
       add 'string'
       self.searchable_supported = true
+      self.form_partial = 'custom_fields/formats/string'
     end
 
     class TextFormat < Unbounded
       add 'text'
       self.searchable_supported = true
+      self.form_partial = 'custom_fields/formats/text'
 
       def edit_tag(view, tag_id, tag_name, custom_value, options={})
         view.text_area_tag(tag_name, custom_value.value, options.merge(:id => tag_id, :rows => 3))
@@ -204,6 +210,7 @@ module Redmine
     end
 
     class Numeric < Unbounded
+      self.form_partial = 'custom_fields/formats/numeric'
     end
 
     class IntFormat < Numeric
@@ -248,6 +255,7 @@ module Redmine
 
     class DateFormat < Unbounded
       add 'date'
+      self.form_partial = 'custom_fields/formats/date'
 
       def cast_single_value(custom_field, value, customized=nil)
         value.to_date rescue nil
@@ -279,6 +287,7 @@ module Redmine
 
     class BoolFormat < Base
       add 'bool'
+      self.form_partial = 'custom_fields/formats/bool'
 
       def label
         "label_boolean"
@@ -349,6 +358,7 @@ module Redmine
     class ListFormat < List
       add 'list'
       self.searchable_supported = true
+      self.form_partial = 'custom_fields/formats/list'
 
       def validate_custom_field(custom_field)
         errors = []

@@ -36,6 +36,7 @@ class CustomFieldsController < ApplicationController
   end
 
   def new
+    @custom_field.field_format = 'string' if @custom_field.field_format.blank?
     @custom_field.default_value = nil
   end
 
