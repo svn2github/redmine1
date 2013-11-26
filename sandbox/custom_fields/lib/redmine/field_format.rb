@@ -76,6 +76,10 @@ module Redmine
       end
       private_class_method :add
 
+      def self.field_attributes(*args)
+        CustomField.store_accessor :format_store, *args
+      end
+
       def name
         self.class.format_name
       end
