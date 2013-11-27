@@ -315,7 +315,7 @@ module Redmine
       end
 
       def edit_tag(view, tag_id, tag_name, custom_value, options={})
-        view.hidden_field_tag(tag_name, '0') +
+        view.hidden_field_tag(tag_name, '0', :id => nil) +
           view.check_box_tag(tag_name, '1', custom_value.true?, options.merge(:id => tag_id))
       end
 
