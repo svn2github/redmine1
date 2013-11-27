@@ -49,6 +49,7 @@ module Redmine
     class Base
       include Singleton
       include Redmine::I18n
+      include ERB::Util
 
       class_attribute :format_name
       self.format_name = nil
@@ -197,6 +198,14 @@ module Redmine
       add 'text'
       self.searchable_supported = true
       self.form_partial = 'custom_fields/formats/text'
+
+      def formatted_value(view, custom_field, value, customized=nil, html=false)
+        if html
+          view.simple_format(html_escape(value))
+        else
+          value.to_s
+        end
+      end
 
       def edit_tag(view, tag_id, tag_name, custom_value, options={})
         view.text_area_tag(tag_name, custom_value.value, options.merge(:id => tag_id, :rows => 3))
