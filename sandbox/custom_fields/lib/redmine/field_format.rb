@@ -344,7 +344,7 @@ module Redmine
               blank_option = view.content_tag('option', "--- #{l(:actionview_instancetag_blank_option)} ---", :value => '')
             end
           else
-            blank_option = view.content_tag('option')
+            blank_option = view.content_tag('option', '&nbsp;'.html_safe)
           end
         end
         options_tags = blank_option + view.options_for_select(possible_values_options(custom_value.custom_field, custom_value.customized), custom_value.value)
