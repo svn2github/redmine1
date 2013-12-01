@@ -52,4 +52,28 @@ class Redmine::FieldFormatTest < ActionView::TestCase
     assert_equal "*foo*\nbar", field.format.formatted_custom_value(self, custom_value, false)
     assert_include "<strong>foo</strong>", field.format.formatted_custom_value(self, custom_value, true)
   end
+
+  def test_link_field_with_url_pattern_should_substitute_value
+    field = IssueCustomField.new(:field_format => 'link', :url_pattern => 'http://foo/%value%')
+    custom_value = CustomValue.new(:custom_field => field, :customized => Issue.new, :value => "bar")
+
+    assert_equal "bar", field.format.formatted_custom_value(self, custom_value, false)
+    assert_equal '<a href="http://foo/bar">bar</a>', field.format.formatted_custom_value(self, custom_value, true)
+  end
+
+  def test_link_field_without_url_pattern_should_link_to_value
+    field = IssueCustomField.new(:field_format => 'link')
+    custom_value = CustomValue.new(:custom_field => field, :customized => Issue.new, :value => "http://foo/bar")
+
+    assert_equal "http://foo/bar", field.format.formatted_custom_value(self, custom_value, false)
+    assert_equal '<a href="http://foo/bar">http://foo/bar</a>', field.format.formatted_custom_value(self, custom_value, true)
+  end
+
+  def test_link_field_without_url_pattern_should_link_to_value_with_http_by_default
+    field = IssueCustomField.new(:field_format => 'link')
+    custom_value = CustomValue.new(:custom_field => field, :customized => Issue.new, :value => "foo.bar")
+
+    assert_equal "foo.bar", field.format.formatted_custom_value(self, custom_value, false)
+    assert_equal '<a href="http://foo.bar">foo.bar</a>', field.format.formatted_custom_value(self, custom_value, true)
+  end
 end

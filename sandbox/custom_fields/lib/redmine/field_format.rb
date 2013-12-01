@@ -235,6 +235,30 @@ module Redmine
       end
     end
 
+    class LinkFormat < StringFormat
+      add 'link'
+      self.searchable_supported = false
+      self.form_partial = 'custom_fields/formats/link'
+      field_attributes :url_pattern
+
+      def formatted_value(view, custom_field, value, customized=nil, html=false)
+        if html
+          if custom_field.url_pattern.present?
+            url = custom_field.url_pattern.gsub('%value%', value.to_s)
+          else
+            url = value.to_s
+            unless url =~ %r{\A[a-z]+://}i
+              # no protocol found, use http by default
+              url = "http://" + url
+            end
+          end
+          view.link_to value.to_s, url
+        else
+          value.to_s
+        end
+      end
+    end
+
     class Numeric < Unbounded
       self.form_partial = 'custom_fields/formats/numeric'
     end
