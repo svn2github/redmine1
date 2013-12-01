@@ -192,6 +192,15 @@ module Redmine
       add 'string'
       self.searchable_supported = true
       self.form_partial = 'custom_fields/formats/string'
+      field_attributes :text_formatting
+
+      def formatted_value(view, custom_field, value, customized=nil, html=false)
+        if html && custom_field.text_formatting == 'full'
+          view.textilizable(value, :object => customized)
+        else
+          value.to_s
+        end
+      end
     end
 
     class TextFormat < Unbounded
@@ -201,7 +210,11 @@ module Redmine
 
       def formatted_value(view, custom_field, value, customized=nil, html=false)
         if html
-          view.simple_format(html_escape(value))
+          if custom_field.text_formatting == 'full'
+            view.textilizable(value, :object => customized)
+          else
+            view.simple_format(html_escape(value))
+          end
         else
           value.to_s
         end
