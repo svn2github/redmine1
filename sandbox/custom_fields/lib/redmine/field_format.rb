@@ -244,7 +244,17 @@ module Redmine
       def formatted_value(view, custom_field, value, customized=nil, html=false)
         if html
           if custom_field.url_pattern.present?
-            url = custom_field.url_pattern.gsub('%value%', value.to_s)
+            url = custom_field.url_pattern.to_s.dup
+            url.gsub!('%value%') {value.to_s}
+            url.gsub!('%id%') {customized.id.to_s}
+            url.gsub!('%project_id%') {(customized.respond_to?(:project) ? customized.project.try(:id) : nil).to_s}
+            if custom_field.regexp.present?
+              url.gsub!(%r{%m(\d+)%}) do
+                m = $1.to_i
+                matches ||= value.to_s.match(Regexp.new(custom_field.regexp))
+                matches[m].to_s
+              end
+            end
           else
             url = value.to_s
             unless url =~ %r{\A[a-z]+://}i
