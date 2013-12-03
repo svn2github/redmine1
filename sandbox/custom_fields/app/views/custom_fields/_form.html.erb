@@ -26,7 +26,7 @@
 <% case @custom_field.class.name
 when "IssueCustomField" %>
     <p><%= f.check_box :is_required %></p>
-    <p><%= f.check_box :is_for_all %></p>
+    <p><%= f.check_box :is_for_all, :data => {:disables => '#custom_field_project_ids input'} %></p>
     <p><%= f.check_box :is_filter %></p>
     <% if @custom_field.format.searchable_supported %>
     <p><%= f.check_box :searchable %></p>
@@ -34,11 +34,13 @@ when "IssueCustomField" %>
     <p>
       <label><%= l(:field_visible) %></label>
       <label class="block">
-        <%= radio_button_tag 'custom_field[visible]', 1, @custom_field.visible?, :id => 'custom_field_visible_on' %>
+        <%= radio_button_tag 'custom_field[visible]', 1, @custom_field.visible?, :id => 'custom_field_visible_on',
+              :data => {:disables => '.custom_field_role input'} %>
         <%= l(:label_visibility_public) %>
       </label>
       <label class="block">
-        <%= radio_button_tag 'custom_field[visible]', 0, !@custom_field.visible?, :id => 'custom_field_visible_off' %>
+        <%= radio_button_tag 'custom_field[visible]', 0, !@custom_field.visible?, :id => 'custom_field_visible_off',
+              :data => {:enables => '.custom_field_role input'} %>
         <%= l(:label_visibility_roles) %>:
       </label>
       <% Role.givable.sorted.each do |role| %>
@@ -111,16 +113,3 @@ when "IssueCustomField" %>
 <% end %>
 
 <% include_calendar_headers_tags %>
-
-<%= javascript_tag do %>
-function toggleCustomFieldRoles(){
-  var checked = $("#custom_field_visible_on").is(':checked');
-  $('.custom_field_role input').attr('disabled', checked);
-}
-$("#custom_field_visible_on, #custom_field_visible_off").change(toggleCustomFieldRoles);
-$(document).ready(toggleCustomFieldRoles);
-
-$("#custom_field_is_for_all").change(function(){
-  $("#custom_field_project_ids input").attr("disabled", $(this).is(":checked"));
-}).trigger('change');
-<% end %>
