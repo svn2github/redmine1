@@ -29,6 +29,21 @@ class Redmine::UserFieldFormatTest < ActionView::TestCase
     assert_equal ["1"], field.user_role
   end
 
+  def test_existing_values_should_be_valid
+    field = IssueCustomField.create!(:name => 'Foo', :field_format => 'user', :is_for_all => true, :trackers => Tracker.all)
+    project = Project.generate!
+    user = User.generate!
+    User.add_to_project(user, project, Role.find_by_name('Manager'))
+    issue = Issue.generate!(:project_id => project.id, :tracker_id => 1, :custom_field_values => {field.id => user.id})
+
+    field.user_role = [Role.find_by_name('Developer').id]
+    field.save!
+
+    issue = Issue.order('id DESC').first
+    assert_include [user.name, user.id.to_s], field.possible_custom_value_options(issue.custom_value_for(field))
+    assert issue.valid?
+  end
+
   def test_possible_values_options_should_return_project_members
     field = IssueCustomField.new(:field_format => 'user')
     project = Project.find(1)

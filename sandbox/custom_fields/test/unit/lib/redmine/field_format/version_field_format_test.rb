@@ -21,12 +21,26 @@ require 'redmine/field_format'
 class Redmine::VersionFieldFormatTest < ActionView::TestCase
   include ApplicationHelper
 
-  fixtures :projects, :versions
+  fixtures :projects, :versions, :trackers
 
   def test_version_status_should_reject_blank_values
     field = IssueCustomField.new(:name => 'Foo', :field_format => 'version', :version_status => ["open", ""])
     field.save!
     assert_equal ["open"], field.version_status
+  end
+
+  def test_existing_values_should_be_valid
+    field = IssueCustomField.create!(:name => 'Foo', :field_format => 'version', :is_for_all => true, :trackers => Tracker.all)
+    project = Project.generate!
+    version = Version.generate!(:project => project, :status => 'open')
+    issue = Issue.generate!(:project_id => project.id, :tracker_id => 1, :custom_field_values => {field.id => version.id})
+
+    field.version_status = ["open"]
+    field.save!
+
+    issue = Issue.order('id DESC').first
+    assert_include [version.name, version.id.to_s], field.possible_custom_value_options(issue.custom_value_for(field))
+    assert issue.valid?
   end
 
   def test_possible_values_options_should_return_project_versions

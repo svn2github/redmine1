@@ -444,7 +444,7 @@ module Redmine
       end
 
       def validate_custom_value(custom_value)
-        invalid_values = Array.wrap(custom_value.value) - Array.wrap(custom_value.value_was) - custom_value.custom_field.possible_values
+        invalid_values = Array.wrap(custom_value.value_was) - Array.wrap(custom_value.value_was) - custom_value.custom_field.possible_values
         if invalid_values.select(&:present?).any?
           [::I18n.t('activerecord.errors.messages.inclusion')]
         else
@@ -462,6 +462,16 @@ module Redmine
 
       def target_class
         @target_class ||= self.class.name[/^(.*::)?(.+)Format$/, 2].constantize rescue nil
+      end
+ 
+      def possible_custom_value_options(custom_value)
+        options = possible_values_options(custom_value.custom_field, custom_value.customized)
+        missing = [custom_value.value_was].flatten.reject(&:blank?) - options.map(&:last)
+        if missing.any?
+          options += target_class.find_all_by_id(missing.map(&:to_i)).map {|o| [o.to_s, o.id.to_s]}
+          options.sort_by!(&:first)
+        end
+        options
       end
     end
 
