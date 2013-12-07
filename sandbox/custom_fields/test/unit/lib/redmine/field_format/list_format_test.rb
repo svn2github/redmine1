@@ -15,36 +15,20 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-class CustomFieldValue
-  attr_accessor :custom_field, :customized, :value, :value_was
+require File.expand_path('../../../../../test_helper', __FILE__)
+require 'redmine/field_format'
 
-  def custom_field_id
-    custom_field.id
-  end
+class Redmine::ListFieldFormatTest < ActionView::TestCase
+  include ApplicationHelper
 
-  def true?
-    self.value == '1'
-  end
+  def test_possible_existing_value_should_be_valid
+    field = GroupCustomField.create!(:name => 'List', :field_format => 'list', :possible_values => ['Foo', 'Bar'])
+    group = Group.new(:name => 'Group')
+    group.custom_field_values = {field.id => 'Baz'}
+    assert group.save(:validate => false)
 
-  def editable?
-    custom_field.editable?
-  end
-
-  def visible?
-    custom_field.visible?
-  end
-
-  def required?
-    custom_field.is_required?
-  end
-
-  def to_s
-    value.to_s
-  end
-
-  def validate_value
-    custom_field.validate_custom_value(self).each do |message|
-      customized.errors.add(:base, custom_field.name + ' ' + message)
-    end
+    group = Group.order('id DESC').first
+    assert_equal ['Foo', 'Bar', 'Baz'], field.possible_custom_value_options(group.custom_value_for(field))
+    assert group.valid?
   end
 end

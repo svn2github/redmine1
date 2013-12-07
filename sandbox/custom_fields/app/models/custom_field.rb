@@ -101,6 +101,10 @@ class CustomField < ActiveRecord::Base
     end
   end
 
+  def possible_custom_value_options(custom_value)
+    format.possible_custom_value_options(custom_value)
+  end
+
   def possible_values_options(object=nil)
     if object.is_a?(Array)
       object.map {|o| format.possible_values_options(self, o)}.reduce(:&) || []

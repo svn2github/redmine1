@@ -112,6 +112,10 @@ module Redmine
       def target_class
         nil
       end
+ 
+      def possible_custom_value_options(custom_value)
+        possible_values_options(custom_value.custom_field, custom_value.customized)
+      end
 
       def possible_values_options(custom_field, object=nil)
         custom_field.possible_values
@@ -255,7 +259,7 @@ module Redmine
               url.gsub!(%r{%m(\d+)%}) do
                 m = $1.to_i
                 matches ||= value.to_s.match(Regexp.new(custom_field.regexp))
-                matches[m].to_s
+                matches[m].to_s if matches
               end
             end
           else
@@ -397,7 +401,7 @@ module Redmine
             blank_option = view.content_tag('option', '&nbsp;'.html_safe)
           end
         end
-        options_tags = blank_option + view.options_for_select(possible_values_options(custom_value.custom_field, custom_value.customized), custom_value.value)
+        options_tags = blank_option + view.options_for_select(possible_custom_value_options(custom_value), custom_value.value)
         s = view.select_tag(tag_name, options_tags, options.merge(:id => tag_id, :multiple => custom_value.custom_field.multiple?))
         if custom_value.custom_field.multiple?
           s << view.hidden_field_tag(tag_name, '')
@@ -422,6 +426,15 @@ module Redmine
       add 'list'
       self.searchable_supported = true
       self.form_partial = 'custom_fields/formats/list'
+ 
+      def possible_custom_value_options(custom_value)
+        options = super
+        missing = [custom_value.value].flatten.reject(&:blank?) - options
+        if missing.any?
+          options += missing
+        end
+        options
+      end
 
       def validate_custom_field(custom_field)
         errors = []
@@ -430,11 +443,12 @@ module Redmine
         errors
       end
 
-      def validate_single_value(custom_field, value, customized=nil)
-        if custom_field.possible_values.include?(value)
-          []
-        else
+      def validate_custom_value(custom_value)
+        invalid_values = Array.wrap(custom_value.value) - Array.wrap(custom_value.value_was) - custom_value.custom_field.possible_values
+        if invalid_values.select(&:present?).any?
           [::I18n.t('activerecord.errors.messages.inclusion')]
+        else
+          []
         end
       end
     end
