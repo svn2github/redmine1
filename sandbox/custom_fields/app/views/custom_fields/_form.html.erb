@@ -89,7 +89,7 @@ when "IssueCustomField" %>
 <% if @custom_field.is_a?(IssueCustomField) %>
 </div>
 <div class="splitcontentright">
-  <fieldset class="box"><legend><%=l(:label_tracker_plural)%></legend>
+  <fieldset class="box" id="custom_field_tracker_ids"><legend><%=l(:label_tracker_plural)%></legend>
   <% Tracker.sorted.all.each do |tracker| %>
     <%= check_box_tag "custom_field[tracker_ids][]",
                       tracker.id,
@@ -100,6 +100,7 @@ when "IssueCustomField" %>
     </label>
   <% end %>
   <%= hidden_field_tag "custom_field[tracker_ids][]", '' %>
+  <p><%= check_all_links 'custom_field_tracker_ids' %></p>
   </fieldset>
 
   <fieldset class="box" id="custom_field_project_ids"><legend><%= l(:label_project_plural) %></legend>
