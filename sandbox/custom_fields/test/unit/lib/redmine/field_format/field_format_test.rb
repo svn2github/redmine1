@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.expand_path('../../../../test_helper', __FILE__)
+require File.expand_path('../../../../../test_helper', __FILE__)
 require 'redmine/field_format'
 
 class Redmine::FieldFormatTest < ActionView::TestCase
@@ -81,7 +81,7 @@ class Redmine::FieldFormatTest < ActionView::TestCase
     field = IssueCustomField.new(:field_format => 'link', :url_pattern => 'http://foo/%project_id%')
     custom_value = CustomValue.new(:custom_field => field, :customized => object, :value => "bar")
 
-    assert_equal "bar", field.format.formatted_custom_value(self, custom_value, false)
+    assert_equal "bar", field.format.formatted_custofield_format_test.rbfield_format_test.rbm_value(self, custom_value, false)
     assert_equal '<a href="http://foo/52">bar</a>', field.format.formatted_custom_value(self, custom_value, true)
   end
 
