@@ -444,7 +444,7 @@ module Redmine
       end
 
       def validate_custom_value(custom_value)
-        invalid_values = Array.wrap(custom_value.value_was) - Array.wrap(custom_value.value_was) - custom_value.custom_field.possible_values
+        invalid_values = Array.wrap(custom_value.value) - Array.wrap(custom_value.value_was) - custom_value.custom_field.possible_values
         if invalid_values.select(&:present?).any?
           [::I18n.t('activerecord.errors.messages.inclusion')]
         else
