@@ -175,6 +175,41 @@ module Redmine
 
       def before_custom_field_save(custom_field)
       end
+
+      # Returns a ORDER BY clause that can used to sort customized
+      # objects by their value of the custom field.
+      # Returns nil if the custom field can not be used for sorting.
+      def order_statement(custom_field)
+        # COALESCE is here to make sure that blank and NULL values are sorted equally
+        "COALESCE(#{join_alias custom_field}.value, '')"
+      end
+
+      # Returns a GROUP BY clause that can used to group by custom value
+      # Returns nil if the custom field can not be used for grouping.
+      def group_statement(custom_field)
+        nil
+      end
+
+      # Returns a JOIN clause that is added to the query when sorting by custom values
+      def join_for_order_statement(custom_field)
+        alias_name = join_alias(custom_field)
+
+        "LEFT OUTER JOIN #{CustomValue.table_name} #{alias_name}" +
+          " ON #{alias_name}.customized_type = '#{custom_field.class.customized_class.base_class.name}'" +
+          " AND #{alias_name}.customized_id = #{custom_field.class.customized_class.table_name}.id" +
+          " AND #{alias_name}.custom_field_id = #{custom_field.id}" +
+          " AND (#{custom_field.visibility_by_project_condition})" +
+          " AND #{alias_name}.value <> ''" +
+          " AND #{alias_name}.id = (SELECT max(#{alias_name}_2.id) FROM #{CustomValue.table_name} #{alias_name}_2" +
+            " WHERE #{alias_name}_2.customized_type = #{alias_name}.customized_type" +
+            " AND #{alias_name}_2.customized_id = #{alias_name}.customized_id" +
+            " AND #{alias_name}_2.custom_field_id = #{alias_name}.custom_field_id)"
+      end
+
+      def join_alias(custom_field)
+        "cf_#{custom_field.id}"
+      end
+      protected :join_alias
     end
 
     class Unbounded < Base
@@ -278,6 +313,13 @@ module Redmine
 
     class Numeric < Unbounded
       self.form_partial = 'custom_fields/formats/numeric'
+
+      def order_statement(custom_field)
+        # Make the database cast values into numeric
+        # Postgresql will raise an error if a value can not be casted!
+        # CustomValue validations should ensure that it doesn't occur
+        "CAST(CASE #{join_alias custom_field}.value WHEN '' THEN '0' ELSE #{join_alias custom_field}.value END AS decimal(30,3))"
+      end
     end
 
     class IntFormat < Numeric
@@ -299,6 +341,10 @@ module Redmine
 
       def query_filter_options(custom_field, query)
         {:type => :integer}
+      end
+
+      def group_statement(custom_field)
+        order_statement(custom_field)
       end
     end
 
@@ -350,6 +396,10 @@ module Redmine
       def query_filter_options(custom_field, query)
         {:type => :date}
       end
+
+      def group_statement(custom_field)
+        order_statement(custom_field)
+      end
     end
 
     class BoolFormat < Base
@@ -384,6 +434,10 @@ module Redmine
 
       def query_filter_options(custom_field, query)
         {:type => :list, :values => possible_values_options(custom_field)}
+      end
+
+      def group_statement(custom_field)
+        order_statement(custom_field)
       end
     end
 
@@ -451,6 +505,10 @@ module Redmine
           []
         end
       end
+
+      def group_statement(custom_field)
+        order_statement(custom_field)
+      end
     end
 
     class RecordList < List
@@ -473,6 +531,38 @@ module Redmine
         end
         options
       end
+
+      def order_statement(custom_field)
+        if target_class.respond_to?(:fields_for_order_statement)
+          target_class.fields_for_order_statement(value_join_alias(custom_field))
+        end
+      end
+
+      def group_statement(custom_field)
+        "COALESCE(#{join_alias custom_field}.value, '')"
+      end
+
+      def join_for_order_statement(custom_field)
+        alias_name = join_alias(custom_field)
+
+        "LEFT OUTER JOIN #{CustomValue.table_name} #{alias_name}" +
+          " ON #{alias_name}.customized_type = '#{custom_field.class.customized_class.base_class.name}'" +
+          " AND #{alias_name}.customized_id = #{custom_field.class.customized_class.table_name}.id" +
+          " AND #{alias_name}.custom_field_id = #{custom_field.id}" +
+          " AND (#{custom_field.visibility_by_project_condition})" +
+          " AND #{alias_name}.value <> ''" +
+          " AND #{alias_name}.id = (SELECT max(#{alias_name}_2.id) FROM #{CustomValue.table_name} #{alias_name}_2" +
+            " WHERE #{alias_name}_2.customized_type = #{alias_name}.customized_type" +
+            " AND #{alias_name}_2.customized_id = #{alias_name}.customized_id" +
+            " AND #{alias_name}_2.custom_field_id = #{alias_name}.custom_field_id)" +
+          " LEFT OUTER JOIN #{target_class.table_name} #{value_join_alias custom_field}" +
+          " ON CAST(CASE #{alias_name}.value WHEN '' THEN '0' ELSE #{alias_name}.value END AS decimal(30,0)) = #{value_join_alias custom_field}.id"
+      end
+
+      def value_join_alias(custom_field)
+        join_alias(custom_field) + "_" + custom_field.field_format
+      end
+      protected :value_join_alias
     end
 
     class UserFormat < RecordList

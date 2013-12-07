@@ -159,83 +159,18 @@ class CustomField < ActiveRecord::Base
   # Returns nil if the custom field can not be used for sorting.
   def order_statement
     return nil if multiple?
-    case field_format
-      when 'string', 'text', 'list', 'date', 'bool'
-        # COALESCE is here to make sure that blank and NULL values are sorted equally
-        "COALESCE(#{join_alias}.value, '')"
-      when 'int', 'float'
-        # Make the database cast values into numeric
-        # Postgresql will raise an error if a value can not be casted!
-        # CustomValue validations should ensure that it doesn't occur
-        "CAST(CASE #{join_alias}.value WHEN '' THEN '0' ELSE #{join_alias}.value END AS decimal(30,3))"
-      when 'user', 'version'
-        value_class.fields_for_order_statement(value_join_alias)
-      else
-        nil
-    end
+    format.order_statement(self)
   end
 
   # Returns a GROUP BY clause that can used to group by custom value
   # Returns nil if the custom field can not be used for grouping.
   def group_statement
     return nil if multiple?
-    case field_format
-      when 'list', 'date', 'bool', 'int'
-        order_statement
-      when 'user', 'version'
-        "COALESCE(#{join_alias}.value, '')"
-      else
-        nil
-    end
+    format.group_statement(self)
   end
 
   def join_for_order_statement
-    case field_format
-      when 'user', 'version'
-        "LEFT OUTER JOIN #{CustomValue.table_name} #{join_alias}" +
-          " ON #{join_alias}.customized_type = '#{self.class.customized_class.base_class.name}'" +
-          " AND #{join_alias}.customized_id = #{self.class.customized_class.table_name}.id" +
-          " AND #{join_alias}.custom_field_id = #{id}" +
-          " AND (#{visibility_by_project_condition})" +
-          " AND #{join_alias}.value <> ''" +
-          " AND #{join_alias}.id = (SELECT max(#{join_alias}_2.id) FROM #{CustomValue.table_name} #{join_alias}_2" +
-            " WHERE #{join_alias}_2.customized_type = #{join_alias}.customized_type" +
-            " AND #{join_alias}_2.customized_id = #{join_alias}.customized_id" +
-            " AND #{join_alias}_2.custom_field_id = #{join_alias}.custom_field_id)" +
-          " LEFT OUTER JOIN #{value_class.table_name} #{value_join_alias}" +
-          " ON CAST(CASE #{join_alias}.value WHEN '' THEN '0' ELSE #{join_alias}.value END AS decimal(30,0)) = #{value_join_alias}.id"
-      when 'int', 'float'
-        "LEFT OUTER JOIN #{CustomValue.table_name} #{join_alias}" +
-          " ON #{join_alias}.customized_type = '#{self.class.customized_class.base_class.name}'" +
-          " AND #{join_alias}.customized_id = #{self.class.customized_class.table_name}.id" +
-          " AND #{join_alias}.custom_field_id = #{id}" +
-          " AND (#{visibility_by_project_condition})" +
-          " AND #{join_alias}.value <> ''" +
-          " AND #{join_alias}.id = (SELECT max(#{join_alias}_2.id) FROM #{CustomValue.table_name} #{join_alias}_2" +
-            " WHERE #{join_alias}_2.customized_type = #{join_alias}.customized_type" +
-            " AND #{join_alias}_2.customized_id = #{join_alias}.customized_id" +
-            " AND #{join_alias}_2.custom_field_id = #{join_alias}.custom_field_id)"
-      when 'string', 'text', 'list', 'date', 'bool'
-        "LEFT OUTER JOIN #{CustomValue.table_name} #{join_alias}" +
-          " ON #{join_alias}.customized_type = '#{self.class.customized_class.base_class.name}'" +
-          " AND #{join_alias}.customized_id = #{self.class.customized_class.table_name}.id" +
-          " AND #{join_alias}.custom_field_id = #{id}" +
-          " AND (#{visibility_by_project_condition})" +
-          " AND #{join_alias}.id = (SELECT max(#{join_alias}_2.id) FROM #{CustomValue.table_name} #{join_alias}_2" +
-            " WHERE #{join_alias}_2.customized_type = #{join_alias}.customized_type" +
-            " AND #{join_alias}_2.customized_id = #{join_alias}.customized_id" +
-            " AND #{join_alias}_2.custom_field_id = #{join_alias}.custom_field_id)"
-      else
-        nil
-    end
-  end
-
-  def join_alias
-    "cf_#{id}"
-  end
-
-  def value_join_alias
-    join_alias + "_" + field_format
+    format.join_for_order_statement(self)
   end
 
   def visibility_by_project_condition(project_key=nil, user=User.current)

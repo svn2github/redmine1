@@ -138,7 +138,7 @@ module Redmine
 
         # Add list and boolean custom fields as available criteria
         custom_fields.select {|cf| %w(list bool).include? cf.field_format }.each do |cf|
-          @available_criteria["cf_#{cf.id}"] = {:sql => "#{cf.join_alias}.value",
+          @available_criteria["cf_#{cf.id}"] = {:sql => cf.group_statement,
                                                  :joins => cf.join_for_order_statement,
                                                  :format => cf.field_format,
                                                  :custom_field => cf,
