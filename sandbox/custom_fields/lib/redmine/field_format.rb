@@ -453,7 +453,7 @@ module Redmine
       end
     end
 
-    class ObjectList < List
+    class RecordList < List
       self.customized_class_names = %w(Issue TimeEntry Version Project)
 
       def cast_single_value(custom_field, value, customized=nil)
@@ -475,7 +475,7 @@ module Redmine
       end
     end
 
-    class UserFormat < ObjectList
+    class UserFormat < RecordList
       add 'user'
       self.form_partial = 'custom_fields/formats/user'
       field_attributes :user_role
@@ -506,7 +506,7 @@ module Redmine
       end
     end
 
-    class VersionFormat < ObjectList
+    class VersionFormat < RecordList
       add 'version'
       self.form_partial = 'custom_fields/formats/version'
       field_attributes :version_status
