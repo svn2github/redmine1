@@ -23,6 +23,12 @@ class Redmine::VersionFieldFormatTest < ActionView::TestCase
 
   fixtures :projects, :versions
 
+  def test_version_status_should_reject_blank_values
+    field = IssueCustomField.new(:name => 'Foo', :field_format => 'version', :version_status => ["open", ""])
+    field.save!
+    assert_equal ["open"], field.version_status
+  end
+
   def test_possible_values_options_should_return_project_versions
     field = IssueCustomField.new(:field_format => 'version')
     project = Project.find(1)

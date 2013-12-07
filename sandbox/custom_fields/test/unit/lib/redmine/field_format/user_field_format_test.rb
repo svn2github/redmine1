@@ -23,6 +23,12 @@ class Redmine::UserFieldFormatTest < ActionView::TestCase
 
   fixtures :projects, :roles, :users, :members, :member_roles
 
+  def test_user_role_should_reject_blank_values
+    field = IssueCustomField.new(:name => 'Foo', :field_format => 'user', :user_role => ["1", ""])
+    field.save!
+    assert_equal ["1"], field.user_role
+  end
+
   def test_possible_values_options_should_return_project_members
     field = IssueCustomField.new(:field_format => 'user')
     project = Project.find(1)

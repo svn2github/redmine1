@@ -168,6 +168,9 @@ module Redmine
       def query_filter_options(custom_field, query)
         {:type => :string}
       end
+
+      def before_custom_field_save(custom_field)
+      end
     end
 
     class Unbounded < Base
@@ -470,6 +473,13 @@ module Redmine
           []
         end
       end
+
+      def before_custom_field_save(custom_field)
+        super
+        if custom_field.user_role.is_a?(Array)
+          custom_field.user_role.map!(&:to_s).reject!(&:blank?)
+        end
+      end
     end
 
     class VersionFormat < ObjectList
@@ -492,6 +502,13 @@ module Redmine
           scope.sort.collect {|u| [u.to_s, u.id.to_s]}
         else
           []
+        end
+      end
+
+      def before_custom_field_save(custom_field)
+        super
+        if custom_field.version_status.is_a?(Array)
+          custom_field.version_status.map!(&:to_s).reject!(&:blank?)
         end
       end
     end

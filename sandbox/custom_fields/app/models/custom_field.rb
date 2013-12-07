@@ -31,6 +31,9 @@ class CustomField < ActiveRecord::Base
   validate :validate_custom_field
 
   before_validation :set_searchable
+  before_save do |field|
+    field.format.before_custom_field_save(field)
+  end
   after_save :handle_multiplicity_change
   after_save do |field|
     if field.visible_changed? && field.visible
