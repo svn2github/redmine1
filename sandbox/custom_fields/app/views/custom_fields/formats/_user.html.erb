@@ -12,7 +12,10 @@
   </label>
   <% Role.givable.sorted.each do |role| %>
     <label class="block custom_field_user_role" style="padding-left:2em;">
-      <%= check_box_tag 'custom_field[user_role][]', role.id, custom_field.user_role.is_a?(Array) && custom_field.user_role.include?(role.id.to_s) %>
+      <%= check_box_tag 'custom_field[user_role][]',
+            role.id, 
+            custom_field.user_role.is_a?(Array) && custom_field.user_role.include?(role.id.to_s),
+            :id => nil %>
       <%= role.name %>
     </label>
   <% end %>
