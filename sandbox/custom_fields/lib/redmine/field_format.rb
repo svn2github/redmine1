@@ -474,13 +474,22 @@ module Redmine
 
     class VersionFormat < ObjectList
       add 'version'
+      self.form_partial = 'custom_fields/formats/version'
+      field_attributes :version_status
 
       def possible_values_options(custom_field, object=nil)
         if object.is_a?(Array)
           projects = object.map {|o| o.respond_to?(:project) ? o.project : nil}.compact.uniq
           projects.map {|project| possible_values_options(custom_field, project)}.reduce(:&) || []
         elsif object.respond_to?(:project) && object.project
-          object.project.shared_versions.sort.collect {|u| [u.to_s, u.id.to_s]}
+          scope = object.project.shared_versions
+          if custom_field.version_status.is_a?(Array)
+            statuses = custom_field.version_status.map(&:to_s).reject(&:blank?)
+            if statuses.any?
+              scope = scope.where(:status => statuses.map(&:to_s))
+            end
+          end
+          scope.sort.collect {|u| [u.to_s, u.id.to_s]}
         else
           []
         end
