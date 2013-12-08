@@ -433,7 +433,7 @@ module Redmine
       end
 
       def query_filter_options(custom_field, query)
-        {:type => :list, :values => possible_values_options(custom_field)}
+        {:type => :list_optional, :values => possible_values_options(custom_field)}
       end
 
       def group_statement(custom_field)
