@@ -572,7 +572,8 @@ a.atom { background: url(../images/feed.png) no-repeat 1px 50%; padding: 2px 0px
 em.info {font-style:normal;font-size:90%;color:#888;display:block;}
 em.info.error {padding-left:20px; background:url(../images/exclamation.png) no-repeat 0 50%;}
 
-textarea.text_cf {width:90%;}
+textarea.text_cf {width:95%; resize:vertical;}
+input.string_cf, input.link_cf {width:95%;}
 
 #tab-content-modules fieldset p {margin:3px 0 4px 0;}
 
