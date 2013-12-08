@@ -502,9 +502,10 @@ module Redmine
           tag = view.send(tag_method, tag_name, value, checked, :id => tag_id)
           # set the id on the first tag only
           tag_id = nil
-          s << view.content_tag('label', tag + ' ' + label, :class => 'block') 
+          s << view.content_tag('label', tag + ' ' + label) 
         end
-        view.content_tag('span', s, :class => 'check_box_group')
+        css = "#{options[:class]} check_box_group"
+        view.content_tag('span', s, options.merge(:class => css))
       end
     end
 
