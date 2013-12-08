@@ -18,6 +18,12 @@
 class CustomFieldValue
   attr_accessor :custom_field, :customized, :value, :value_was
 
+  def initialize(attributes={})
+    attributes.each do |name, v|
+      send "#{name}=", v
+    end
+  end
+
   def custom_field_id
     custom_field.id
   end

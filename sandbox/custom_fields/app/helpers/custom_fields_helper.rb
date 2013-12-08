@@ -130,4 +130,8 @@ module CustomFieldsHelper
       end
     end unless custom_values.empty?
   end
+
+  def edit_tag_style_tag(form)
+    form.select :edit_tag_style, [[l(:label_drop_down_list), ''], [l(:label_checkboxes), 'check_box']], :label => :label_display
+  end
 end

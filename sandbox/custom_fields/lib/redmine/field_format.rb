@@ -443,24 +443,14 @@ module Redmine
 
     class List < Base
       self.multiple_supported = true
+      field_attributes :edit_tag_style
 
       def edit_tag(view, tag_id, tag_name, custom_value, options={})
-        blank_option = ''.html_safe
-        unless custom_value.custom_field.multiple?
-          if custom_value.custom_field.is_required?
-            unless custom_value.custom_field.default_value.present?
-              blank_option = view.content_tag('option', "--- #{l(:actionview_instancetag_blank_option)} ---", :value => '')
-            end
-          else
-            blank_option = view.content_tag('option', '&nbsp;'.html_safe)
-          end
+        if custom_value.custom_field.edit_tag_style == 'check_box'
+          check_box_edit_tag(view, tag_id, tag_name, custom_value, options)
+        else
+          select_edit_tag(view, tag_id, tag_name, custom_value, options)
         end
-        options_tags = blank_option + view.options_for_select(possible_custom_value_options(custom_value), custom_value.value)
-        s = view.select_tag(tag_name, options_tags, options.merge(:id => tag_id, :multiple => custom_value.custom_field.multiple?))
-        if custom_value.custom_field.multiple?
-          s << view.hidden_field_tag(tag_name, '')
-        end
-        s
       end
 
       def bulk_edit_tag(view, tag_id, tag_name, custom_field, objects, value, options={})
@@ -473,6 +463,48 @@ module Redmine
 
       def query_filter_options(custom_field, query)
         {:type => :list_optional, :values => possible_values_options(custom_field, query.project)}
+      end
+
+      protected
+
+      # Renders the edit tag as a select tag
+      def select_edit_tag(view, tag_id, tag_name, custom_value, options={})
+        blank_option = ''.html_safe
+        unless custom_value.custom_field.multiple?
+          if custom_value.custom_field.is_required?
+            unless custom_value.custom_field.default_value.present?
+              blank_option = view.content_tag('option', "--- #{l(:actionview_instancetag_blank_option)} ---", :value => '')
+            end
+          else
+            blank_option = view.content_tag('option', '&nbsp;'.html_safe, :value => '')
+          end
+        end
+        options_tags = blank_option + view.options_for_select(possible_custom_value_options(custom_value), custom_value.value)
+        s = view.select_tag(tag_name, options_tags, options.merge(:id => tag_id, :multiple => custom_value.custom_field.multiple?))
+        if custom_value.custom_field.multiple?
+          s << view.hidden_field_tag(tag_name, '')
+        end
+        s
+      end
+
+      # Renders the edit tag as check box or radio tags
+      def check_box_edit_tag(view, tag_id, tag_name, custom_value, options={})
+        opts = []
+        unless custom_value.custom_field.multiple? || custom_value.custom_field.is_required?
+          opts << ["(#{l(:label_none)})", '']
+        end
+        opts += possible_custom_value_options(custom_value)
+        s = ''.html_safe
+        tag_method = custom_value.custom_field.multiple? ? :check_box_tag : :radio_button_tag
+        opts.each do |label, value|
+          value ||= label
+          checked = (custom_value.value.is_a?(Array) && custom_value.value.include?(value)) || custom_value.value.to_s == value
+          tag = view.send(tag_method, tag_name, value, checked, :id => tag_id)
+          # set the id on the first tag only
+          tag_id = nil
+          s << view.content_tag('label', tag + ' ' + label, :class => 'block') 
+        end
+        view.content_tag('span', s, :class => 'check_box_group')
       end
     end
 
