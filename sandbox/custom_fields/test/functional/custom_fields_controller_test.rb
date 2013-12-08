@@ -92,7 +92,9 @@ class CustomFieldsControllerTest < ActionController::TestCase
   def test_default_value_should_be_a_checkbox_for_bool_custom_field
     get :new, :type => 'IssueCustomField', :custom_field => {:field_format => 'bool'}
     assert_response :success
-    assert_select 'input[name=?][type=checkbox]', 'custom_field[default_value]'
+    assert_select 'select[name=?]', 'custom_field[default_value]' do
+      assert_select 'option', 3
+    end
   end
 
   def test_default_value_should_not_be_present_for_user_custom_field

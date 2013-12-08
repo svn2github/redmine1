@@ -402,45 +402,6 @@ module Redmine
       end
     end
 
-    class BoolFormat < Base
-      add 'bool'
-      self.form_partial = 'custom_fields/formats/bool'
-
-      def label
-        "label_boolean"
-      end
-
-      def cast_single_value(custom_field, value, customized=nil)
-        value == '1' ? true : false
-      end
-
-      def possible_values_options(custom_field, object=nil)
-        [[::I18n.t(:general_text_Yes), '1'], [::I18n.t(:general_text_No), '0']]
-      end
-
-      def edit_tag(view, tag_id, tag_name, custom_value, options={})
-        view.hidden_field_tag(tag_name, '0', :id => nil) +
-          view.check_box_tag(tag_name, '1', custom_value.true?, options.merge(:id => tag_id))
-      end
-
-      def bulk_edit_tag(view, tag_id, tag_name, custom_field, objects, value, options={})
-        view.select_tag(tag_name,
-          view.options_for_select([
-            [l(:label_no_change_option), ''],
-            [l(:general_text_Yes), '1'],
-            [l(:general_text_No), '0']], value),
-          options.merge(:id => tag_id))
-      end
-
-      def query_filter_options(custom_field, query)
-        {:type => :list_optional, :values => possible_values_options(custom_field)}
-      end
-
-      def group_statement(custom_field)
-        order_statement(custom_field)
-      end
-    end
-
     class List < Base
       self.multiple_supported = true
       field_attributes :edit_tag_style
@@ -537,6 +498,28 @@ module Redmine
         else
           []
         end
+      end
+
+      def group_statement(custom_field)
+        order_statement(custom_field)
+      end
+    end
+
+    class BoolFormat < List
+      add 'bool'
+      self.multiple_supported = false
+      self.form_partial = 'custom_fields/formats/bool'
+
+      def label
+        "label_boolean"
+      end
+
+      def cast_single_value(custom_field, value, customized=nil)
+        value == '1' ? true : false
+      end
+
+      def possible_values_options(custom_field, object=nil)
+        [[::I18n.t(:general_text_Yes), '1'], [::I18n.t(:general_text_No), '0']]
       end
 
       def group_statement(custom_field)
