@@ -73,8 +73,10 @@ module CustomFieldsHelper
   # Return custom field label tag
   def custom_field_label_tag(name, custom_value, options={})
     required = options[:required] || custom_value.custom_field.is_required?
+    title = custom_value.custom_field.description.presence
+    content = content_tag 'span', custom_value.custom_field.name, :title => title
 
-    content_tag "label", h(custom_value.custom_field.name) +
+    content_tag "label", content +
       (required ? " <span class=\"required\">*</span>".html_safe : ""),
       :for => "#{name}_custom_field_values_#{custom_value.custom_field.id}"
   end

@@ -475,7 +475,9 @@ p.pagination {margin-top:8px; font-size: 90%}
 
 html>body .tabular p {overflow:hidden;}
 
-.tabular input, .tabular select, .tabular textarea {max-width:95%}
+.tabular input, .tabular select {max-width:95%}
+.tabular textarea {width:95%; resize:vertical;}
+.tabular span[title] {border-bottom:1px dotted #aaa;}
 
 .tabular label{
   font-weight: bold;
