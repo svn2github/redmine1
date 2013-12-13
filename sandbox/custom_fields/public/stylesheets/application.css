@@ -536,7 +536,16 @@ fieldset#notified_events .parent { padding-left: 20px; }
 span.required {color: #bb0000;}
 .summary {font-style: italic;}
 
-.check_box_group {display:block; max-height:300px; overflow-y:auto; margin-bottom:0.4em;}
+.check_box_group {
+  display:block;
+  width:95%;
+  max-height:300px;
+  overflow-y:auto;
+  padding:2px 4px 4px 2px;
+  background:#fff;
+  border:1px solid #9EB1C2;
+  border-radius:2px
+}
 .check_box_group label {
   font-weight: normal;
   margin-left: 0px !important;
@@ -545,6 +554,8 @@ span.required {color: #bb0000;}
   display: block;
   width: auto;
 }
+.check_box_group.bool_cf {border:0; background:inherit;}
+.check_box_group.bool_cf label {display: inline;}
 
 #attachments_fields input.description {margin-left:4px; width:340px;}
 #attachments_fields span {display:block; white-space:nowrap;}
