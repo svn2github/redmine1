@@ -459,12 +459,14 @@ class Project < ActiveRecord::Base
     if new_record?
       Version.
         joins(:project).
+        preload(:project).
         where("#{Project.table_name}.status <> ? AND #{Version.table_name}.sharing = 'system'", STATUS_ARCHIVED)
     else
       @shared_versions ||= begin
         r = root? ? self : root
         Version.
           joins(:project).
+          preload(:project).
           where("#{Project.table_name}.id = #{id}" +
                   " OR (#{Project.table_name}.status <> #{Project::STATUS_ARCHIVED} AND (" +
                     " #{Version.table_name}.sharing = 'system'" +
