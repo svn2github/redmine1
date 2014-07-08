@@ -45,7 +45,8 @@ class IssueQuery < Query
   scope :visible, lambda {|*args|
     user = args.shift || User.current
     base = Project.allowed_to_condition(user, :view_issues, *args)
-    scope = includes(:project).where("#{table_name}.project_id IS NULL OR (#{base})")
+    scope = joins("LEFT OUTER JOIN #{Project.table_name} ON #{table_name}.project_id = #{Project.table_name}.id").
+      where("#{table_name}.project_id IS NULL OR (#{base})")
 
     if user.admin?
       scope.where("#{table_name}.visibility <> ? OR #{table_name}.user_id = ?", VISIBILITY_PRIVATE, user.id)
@@ -338,7 +339,7 @@ class IssueQuery < Query
       scope = scope.preload(:author)
     end
 
-    issues = scope.all
+    issues = scope.to_a
 
     if has_column?(:spent_hours)
       Issue.load_visible_spent_hours(issues)
@@ -364,7 +365,7 @@ class IssueQuery < Query
       joins(joins_for_order_statement(order_option.join(','))).
       limit(options[:limit]).
       offset(options[:offset]).
-      find_ids
+      pluck(:id)
   rescue ::ActiveRecord::StatementInvalid => e
     raise StatementInvalid.new(e.message)
   end
@@ -379,7 +380,7 @@ class IssueQuery < Query
       limit(options[:limit]).
       offset(options[:offset]).
       preload(:details, :user, {:issue => [:project, :author, :tracker, :status]}).
-      all
+      to_a
   rescue ::ActiveRecord::StatementInvalid => e
     raise StatementInvalid.new(e.message)
   end
@@ -442,7 +443,7 @@ class IssueQuery < Query
 
   def sql_for_is_private_field(field, operator, value)
     op = (operator == "=" ? 'IN' : 'NOT IN')
-    va = value.map {|v| v == '0' ? connection.quoted_false : connection.quoted_true}.uniq.join(',')
+    va = value.map {|v| v == '0' ? self.class.connection.quoted_false : self.class.connection.quoted_true}.uniq.join(',')
 
     "#{Issue.table_name}.is_private #{op} (#{va})"
   end
@@ -461,14 +462,14 @@ class IssueQuery < Query
     sql = case operator
       when "*", "!*"
         op = (operator == "*" ? 'IN' : 'NOT IN')
-        "#{Issue.table_name}.id #{op} (SELECT DISTINCT #{IssueRelation.table_name}.#{join_column} FROM #{IssueRelation.table_name} WHERE #{IssueRelation.table_name}.relation_type = '#{connection.quote_string(relation_type)}')"
+        "#{Issue.table_name}.id #{op} (SELECT DISTINCT #{IssueRelation.table_name}.#{join_column} FROM #{IssueRelation.table_name} WHERE #{IssueRelation.table_name}.relation_type = '#{self.class.connection.quote_string(relation_type)}')"
       when "=", "!"
         op = (operator == "=" ? 'IN' : 'NOT IN')
-        "#{Issue.table_name}.id #{op} (SELECT DISTINCT #{IssueRelation.table_name}.#{join_column} FROM #{IssueRelation.table_name} WHERE #{IssueRelation.table_name}.relation_type = '#{connection.quote_string(relation_type)}' AND #{IssueRelation.table_name}.#{target_join_column} = #{value.first.to_i})"
+        "#{Issue.table_name}.id #{op} (SELECT DISTINCT #{IssueRelation.table_name}.#{join_column} FROM #{IssueRelation.table_name} WHERE #{IssueRelation.table_name}.relation_type = '#{self.class.connection.quote_string(relation_type)}' AND #{IssueRelation.table_name}.#{target_join_column} = #{value.first.to_i})"
       when "=p", "=!p", "!p"
         op = (operator == "!p" ? 'NOT IN' : 'IN')
         comp = (operator == "=!p" ? '<>' : '=')
-        "#{Issue.table_name}.id #{op} (SELECT DISTINCT #{IssueRelation.table_name}.#{join_column} FROM #{IssueRelation.table_name}, #{Issue.table_name} relissues WHERE #{IssueRelation.table_name}.relation_type = '#{connection.quote_string(relation_type)}' AND #{IssueRelation.table_name}.#{target_join_column} = relissues.id AND relissues.project_id #{comp} #{value.first.to_i})"
+        "#{Issue.table_name}.id #{op} (SELECT DISTINCT #{IssueRelation.table_name}.#{join_column} FROM #{IssueRelation.table_name}, #{Issue.table_name} relissues WHERE #{IssueRelation.table_name}.relation_type = '#{self.class.connection.quote_string(relation_type)}' AND #{IssueRelation.table_name}.#{target_join_column} = relissues.id AND relissues.project_id #{comp} #{value.first.to_i})"
       end
 
     if relation_options[:sym] == field && !options[:reverse]

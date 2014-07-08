@@ -28,23 +28,23 @@ module CollectiveIdea #:nodoc:
         end
 
         def quoted_left_column_name
-          connection.quote_column_name(left_column_name)
+          (respond_to?(:connection) ? self : self.class).connection.quote_column_name(left_column_name)
         end
 
         def quoted_right_column_name
-          connection.quote_column_name(right_column_name)
+          (respond_to?(:connection) ? self : self.class).connection.quote_column_name(right_column_name)
         end
 
         def quoted_depth_column_name
-          connection.quote_column_name(depth_column_name)
+          (respond_to?(:connection) ? self : self.class).connection.quote_column_name(depth_column_name)
         end
 
         def quoted_parent_column_name
-          connection.quote_column_name(parent_column_name)
+          (respond_to?(:connection) ? self : self.class).connection.quote_column_name(parent_column_name)
         end
 
         def quoted_scope_column_names
-          scope_column_names.collect {|column_name| connection.quote_column_name(column_name) }
+          scope_column_names.collect {|column_name|(respond_to?(:connection) ? self : self.class).connection.quote_column_name(column_name) }
         end
 
         def quoted_order_column_name

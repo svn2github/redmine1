@@ -1433,7 +1433,7 @@ RAW
 
   def test_raw_json_should_escape_closing_tags
     s = raw_json(["<foo>bar</foo>"])
-    assert_equal '["<foo>bar<\/foo>"]', s
+    assert_include '\/foo', s
   end
 
   def test_raw_json_should_be_html_safe

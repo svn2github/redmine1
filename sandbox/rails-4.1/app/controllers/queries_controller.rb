@@ -39,6 +39,7 @@ class QueriesController < ApplicationController
                     offset(@offset).
                     all
     respond_to do |format|
+      format.html {render_error :status => 406}
       format.api
     end
   end

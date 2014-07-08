@@ -492,7 +492,7 @@ module ApplicationHelper
       h(Setting.app_title)
     else
       b = []
-      ancestors = (@project.root? ? [] : @project.ancestors.visible.all)
+      ancestors = (@project.root? ? [] : @project.ancestors.visible.to_a)
       if ancestors.any?
         root = ancestors.shift
         b << link_to_project(root, {:jump => current_menu_item}, :class => 'root')
@@ -1207,7 +1207,7 @@ module ApplicationHelper
         source
       end
     end
-    super sources, options
+    super *sources, options
   end
 
   # Overrides Rails' image_tag with themes and plugins support.
@@ -1240,7 +1240,7 @@ module ApplicationHelper
         end
       end
     end
-    super sources, options
+    super *sources, options
   end
 
   # TODO: remove this in 2.5.0

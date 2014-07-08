@@ -3107,20 +3107,15 @@ class IssuesControllerTest < ActionController::TestCase
   def test_put_update_with_attachment_that_fails_to_save
     set_tmp_attachments_directory
 
-    # Delete all fixtured journals, a race condition can occur causing the wrong
-    # journal to get fetched in the next find.
-    Journal.delete_all
-
-    # Mock out the unsaved attachment
-    Attachment.any_instance.stubs(:create).returns(Attachment.new)
-
     # anonymous user
-    put :update,
-         :id => 1,
-         :issue => {:notes => ''},
-         :attachments => {'1' => {'file' => uploaded_test_file('testfile.txt', 'text/plain')}}
-    assert_redirected_to :action => 'show', :id => '1'
-    assert_equal '1 file(s) could not be saved.', flash[:warning]
+    with_settings :attachment_max_size => 0 do
+      put :update,
+           :id => 1,
+           :issue => {:notes => ''},
+           :attachments => {'1' => {'file' => uploaded_test_file('testfile.txt', 'text/plain')}}
+      assert_redirected_to :action => 'show', :id => '1'
+      assert_equal '1 file(s) could not be saved.', flash[:warning]
+    end
   end
 
   def test_put_update_with_no_change

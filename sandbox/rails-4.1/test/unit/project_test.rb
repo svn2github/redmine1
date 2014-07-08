@@ -729,7 +729,7 @@ class ProjectTest < ActiveSupport::TestCase
 
   def test_activities_should_use_the_system_activities
     project = Project.find(1)
-    assert_equal project.activities, TimeEntryActivity.where(:active => true).all
+    assert_equal project.activities.to_a, TimeEntryActivity.where(:active => true).to_a
     assert_kind_of ActiveRecord::Relation, project.activities
   end
 

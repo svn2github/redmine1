@@ -104,7 +104,7 @@ class IssuesController < ApplicationController
   end
 
   def show
-    @journals = @issue.journals.includes(:user, :details).reorder("#{Journal.table_name}.id ASC").all
+    @journals = @issue.journals.includes(:user, :details).reorder("#{Journal.table_name}.id ASC").to_a
     @journals.each_with_index {|j,i| j.indice = i+1}
     @journals.reject!(&:private_notes?) unless User.current.allowed_to?(:view_private_notes, @issue.project)
     Journal.preload_journals_details_custom_fields(@journals)
@@ -189,7 +189,7 @@ class IssuesController < ApplicationController
     rescue ActiveRecord::StaleObjectError
       @conflict = true
       if params[:last_journal_id]
-        @conflict_journals = @issue.journals_after(params[:last_journal_id]).all
+        @conflict_journals = @issue.journals_after(params[:last_journal_id]).to_a
         @conflict_journals.reject!(&:private_notes?) unless User.current.allowed_to?(:view_private_notes, @issue.project)
       end
     end
@@ -301,7 +301,7 @@ class IssuesController < ApplicationController
     else
       @saved_issues = @issues
       @unsaved_issues = unsaved_issues
-      @issues = Issue.visible.where(:id => @unsaved_issues.map(&:id)).all
+      @issues = Issue.visible.where(:id => @unsaved_issues.map(&:id)).to_a
       bulk_edit
       render :action => 'bulk_edit'
     end
@@ -375,7 +375,9 @@ class IssuesController < ApplicationController
   def update_issue_from_params
     @edit_allowed = User.current.allowed_to?(:edit_issues, @project)
     @time_entry = TimeEntry.new(:issue => @issue, :project => @issue.project)
-    @time_entry.attributes = params[:time_entry]
+    if params[:time_entry]
+      @time_entry.attributes = params[:time_entry]
+    end
 
     @issue.init_journal(User.current)
 
@@ -422,7 +424,9 @@ class IssuesController < ApplicationController
     @issue.project = @project
     @issue.author ||= User.current
     # Tracker must be set before custom field values
-    @issue.tracker ||= @project.trackers.find((params[:issue] && params[:issue][:tracker_id]) || params[:tracker_id] || :first)
+    tracker_id = (params[:issue] && params[:issue][:tracker_id]) || params[:tracker_id]
+    tracker = tracker_id.present? ? @project.trackers.find(tracker_id) : @project.trackers.first
+    @issue.tracker ||= tracker
     if @issue.tracker.nil?
       render_error l(:error_no_tracker_in_project)
       return false

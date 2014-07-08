@@ -17,7 +17,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class IssuesTest < ActionController::IntegrationTest
+class IssuesTest < ActionDispatch::IntegrationTest
   fixtures :projects,
            :users,
            :roles,

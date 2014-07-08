@@ -23,11 +23,11 @@ module MyHelper
       where(:project_id => User.current.projects.map(&:id)).
       where("(start_date>=? and start_date<=?) or (due_date>=? and due_date<=?)", startdt, enddt, startdt, enddt).
       includes(:project, :tracker, :priority, :assigned_to).
-      all
+      to_a
   end
 
   def documents_items
-    Document.visible.order("#{Document.table_name}.created_on DESC").limit(10).all
+    Document.visible.order("#{Document.table_name}.created_on DESC").limit(10).to_a
   end
 
   def issuesassignedtome_items
@@ -36,7 +36,7 @@ module MyHelper
       limit(10).
       includes(:status, :project, :tracker, :priority).
       order("#{IssuePriority.table_name}.position DESC, #{Issue.table_name}.updated_on DESC").
-      all
+      to_a
   end
 
   def issuesreportedbyme_items
@@ -45,11 +45,11 @@ module MyHelper
       limit(10).
       includes(:status, :project, :tracker).
       order("#{Issue.table_name}.updated_on DESC").
-      all
+      to_a
   end
 
   def issueswatched_items
-    Issue.visible.on_active_project.watched_by(User.current.id).recently_updated.limit(10).all
+    Issue.visible.on_active_project.watched_by(User.current.id).recently_updated.limit(10).to_a
   end
 
   def news_items
@@ -58,14 +58,14 @@ module MyHelper
       limit(10).
       includes(:project, :author).
       order("#{News.table_name}.created_on DESC").
-      all
+      to_a
   end
 
   def timelog_items
     TimeEntry.
       where("#{TimeEntry.table_name}.user_id = ? AND #{TimeEntry.table_name}.spent_on BETWEEN ? AND ?", User.current.id, Date.today - 6, Date.today).
-      includes(:activity, :project, {:issue => [:tracker, :status]}).
+      joins(:activity, :project, {:issue => [:tracker, :status]}).
       order("#{TimeEntry.table_name}.spent_on DESC, #{Project.table_name}.name ASC, #{Tracker.table_name}.position ASC, #{Issue.table_name}.id ASC").
-      all
+      to_a
   end
 end

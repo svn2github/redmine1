@@ -75,7 +75,6 @@ module CollectiveIdea #:nodoc:
         has_many_children_options = {
           :class_name => self.base_class.to_s,
           :foreign_key => parent_column_name,
-          :order => quoted_order_column_name,
           :inverse_of => (:parent unless acts_as_nested_set_options[:polymorphic]),
         }
 
@@ -84,7 +83,7 @@ module CollectiveIdea #:nodoc:
           has_many_children_options.update(ar_callback => acts_as_nested_set_options[ar_callback]) if acts_as_nested_set_options[ar_callback]
         end
 
-        has_many :children, has_many_children_options
+        has_many :children, lambda {order(quoted_order_column_name)}, has_many_children_options
       end
 
       def acts_as_nested_set_relate_parent!

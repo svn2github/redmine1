@@ -417,7 +417,7 @@ class MailHandler < ActionMailer::Base
             end
 
     parts.reject! do |part|
-      part.header[:content_disposition].try(:disposition_type) == 'attachment'
+      part.attachment?
     end
 
     @plain_text_body = parts.map do |p|

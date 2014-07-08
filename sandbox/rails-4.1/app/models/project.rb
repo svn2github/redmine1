@@ -28,31 +28,29 @@ class Project < ActiveRecord::Base
 
   # Specific overridden Activities
   has_many :time_entry_activities
-  has_many :members, :include => [:principal, :roles], :conditions => "#{Principal.table_name}.type='User' AND #{Principal.table_name}.status=#{Principal::STATUS_ACTIVE}"
+  has_many :members, lambda {joins(:principal, :roles).where("#{Principal.table_name}.type='User' AND #{Principal.table_name}.status=#{Principal::STATUS_ACTIVE}")}
   has_many :memberships, :class_name => 'Member'
-  has_many :member_principals, :class_name => 'Member',
-                               :include => :principal,
-                               :conditions => "#{Principal.table_name}.type='Group' OR (#{Principal.table_name}.type='User' AND #{Principal.table_name}.status=#{Principal::STATUS_ACTIVE})"
-
+  has_many :member_principals, lambda {joins(:principal).where("#{Principal.table_name}.type='Group' OR (#{Principal.table_name}.type='User' AND #{Principal.table_name}.status=#{Principal::STATUS_ACTIVE})")},
+    :class_name => 'Member'
   has_many :enabled_modules, :dependent => :delete_all
-  has_and_belongs_to_many :trackers, :order => "#{Tracker.table_name}.position"
-  has_many :issues, :dependent => :destroy, :include => [:status, :tracker]
+  has_and_belongs_to_many :trackers, lambda {order("#{Tracker.table_name}.position")}
+  has_many :issues, :dependent => :destroy
   has_many :issue_changes, :through => :issues, :source => :journals
-  has_many :versions, :dependent => :destroy, :order => "#{Version.table_name}.effective_date DESC, #{Version.table_name}.name DESC"
+  has_many :versions, lambda {order("#{Version.table_name}.effective_date DESC, #{Version.table_name}.name DESC")}, :dependent => :destroy
   has_many :time_entries, :dependent => :destroy
   has_many :queries, :class_name => 'IssueQuery', :dependent => :delete_all
   has_many :documents, :dependent => :destroy
-  has_many :news, :dependent => :destroy, :include => :author
-  has_many :issue_categories, :dependent => :delete_all, :order => "#{IssueCategory.table_name}.name"
-  has_many :boards, :dependent => :destroy, :order => "position ASC"
-  has_one :repository, :conditions => ["is_default = ?", true]
+  has_many :news, lambda {includes(:author)}, :dependent => :destroy
+  has_many :issue_categories, lambda {order("#{IssueCategory.table_name}.name")}, :dependent => :delete_all
+  has_many :boards, lambda {order("position ASC")}, :dependent => :destroy
+  has_one :repository, lambda {where(["is_default = ?", true])}
   has_many :repositories, :dependent => :destroy
   has_many :changesets, :through => :repository
   has_one :wiki, :dependent => :destroy
   # Custom field for the project issues
   has_and_belongs_to_many :issue_custom_fields,
+                          lambda {order("#{CustomField.table_name}.position")},
                           :class_name => 'IssueCustomField',
-                          :order => "#{CustomField.table_name}.position",
                           :join_table => "#{table_name_prefix}custom_fields_projects#{table_name_suffix}",
                           :association_foreign_key => 'custom_field_id'
 
@@ -452,7 +450,7 @@ class Project < ActiveRecord::Base
   def rolled_up_versions
     @rolled_up_versions ||=
       Version.
-        includes(:project).
+        joins(:project).
         where("#{Project.table_name}.lft >= ? AND #{Project.table_name}.rgt <= ? AND #{Project.table_name}.status <> ?", lft, rgt, STATUS_ARCHIVED)
   end
 
@@ -460,13 +458,13 @@ class Project < ActiveRecord::Base
   def shared_versions
     if new_record?
       Version.
-        includes(:project).
+        joins(:project).
         where("#{Project.table_name}.status <> ? AND #{Version.table_name}.sharing = 'system'", STATUS_ARCHIVED)
     else
       @shared_versions ||= begin
         r = root? ? self : root
         Version.
-          includes(:project).
+          joins(:project).
           where("#{Project.table_name}.id = #{id}" +
                   " OR (#{Project.table_name}.status <> #{Project::STATUS_ARCHIVED} AND (" +
                     " #{Version.table_name}.sharing = 'system'" +
@@ -492,7 +490,7 @@ class Project < ActiveRecord::Base
   # Deletes all project's members
   def delete_all_members
     me, mr = Member.table_name, MemberRole.table_name
-    connection.delete("DELETE FROM #{mr} WHERE #{mr}.member_id IN (SELECT #{me}.id FROM #{me} WHERE #{me}.project_id = #{id})")
+    self.class.connection.delete("DELETE FROM #{mr} WHERE #{mr}.member_id IN (SELECT #{me}.id FROM #{me} WHERE #{me}.project_id = #{id})")
     Member.delete_all(['project_id = ?', id])
   end
 
@@ -718,7 +716,7 @@ class Project < ActiveRecord::Base
     project = project.is_a?(Project) ? project : Project.find(project)
 
     to_be_copied = %w(wiki versions issue_categories issues members queries boards)
-    to_be_copied = to_be_copied & options[:only].to_a unless options[:only].nil?
+    to_be_copied = to_be_copied & Array.wrap(options[:only]) unless options[:only].nil?
 
     Project.transaction do
       if save
@@ -730,6 +728,7 @@ class Project < ActiveRecord::Base
         save
       end
     end
+    true
   end
 
   # Returns a new unsaved Project instance with attributes copied from +project+

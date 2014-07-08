@@ -79,8 +79,8 @@ class User < Principal
                           :after_remove => Proc.new {|user, group| group.user_removed(user)}
   has_many :changesets, :dependent => :nullify
   has_one :preference, :dependent => :destroy, :class_name => 'UserPreference'
-  has_one :rss_token, :class_name => 'Token', :conditions => "action='feeds'"
-  has_one :api_token, :class_name => 'Token', :conditions => "action='api'"
+  has_one :rss_token, lambda {where "action='feeds'"}, :class_name => 'Token'
+  has_one :api_token, lambda {where "action='api'"}, :class_name => 'Token'
   belongs_to :auth_source
 
   scope :logged, lambda { where("#{User.table_name}.status <> #{STATUS_ANONYMOUS}") }
@@ -105,9 +105,13 @@ class User < Principal
   validates_length_of :firstname, :lastname, :maximum => 30
   validates_format_of :mail, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, :allow_blank => true
   validates_length_of :mail, :maximum => MAIL_LENGTH_LIMIT, :allow_nil => true
-  validates_confirmation_of :password, :allow_nil => true
   validates_inclusion_of :mail_notification, :in => MAIL_NOTIFICATION_OPTIONS.collect(&:first), :allow_blank => true
   validate :validate_password_length
+  validate do
+    if password_confirmation && password != password_confirmation
+      errors.add(:password, :confirmation)
+    end
+  end
 
   before_create :set_mail_notification
   before_save   :generate_password_if_needed, :update_hashed_password
@@ -149,6 +153,15 @@ class User < Principal
 
   def mail=(arg)
     write_attribute(:mail, arg.to_s.strip)
+  end
+
+  def self.find_or_initialize_by_identity_url(url)
+    user = where(:identity_url => url).first
+    unless user
+      user = User.new
+      user.identity_url = url
+    end
+    user
   end
 
   def identity_url=(url)

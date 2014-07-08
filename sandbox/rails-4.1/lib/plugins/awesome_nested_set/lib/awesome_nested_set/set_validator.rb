@@ -5,7 +5,7 @@ module CollectiveIdea #:nodoc:
 
         def initialize(model)
           @model = model
-          @scope = model.scoped
+          @scope = model
           @parent = arel_table.alias('parent')
         end
 

@@ -121,7 +121,7 @@ class MemberTest < ActiveSupport::TestCase
     end
     assert m.destroyed?
   ensure
-    Member._destroy_callbacks.reject! {|c| c.filter==:destroy_test_callback}
+    Member._destroy_callbacks.delete(:destroy_test_callback)
   end
 
   def test_sort_without_roles

@@ -30,4 +30,6 @@ RedmineApp::Application.configure do
   config.action_mailer.logger = nil
 
   config.active_support.deprecation = :log
+
+  config.eager_load = true
 end

@@ -101,9 +101,9 @@ class QueryTest < ActiveSupport::TestCase
   end
 
   def find_issues_with_query(query)
-    Issue.includes([:assigned_to, :status, :tracker, :project, :priority]).where(
+    Issue.joins(:status, :tracker, :project, :priority).where(
          query.statement
-       ).all
+       ).to_a
   end
 
   def assert_find_issues_with_query_is_successful(query)

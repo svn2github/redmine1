@@ -29,6 +29,7 @@ class CustomField < ActiveRecord::Base
   validates_length_of :name, :maximum => 30
   validates_inclusion_of :field_format, :in => Proc.new { Redmine::FieldFormat.available_formats }
   validate :validate_custom_field
+  attr_protected :id
 
   before_validation :set_searchable
   before_save do |field|

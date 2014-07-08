@@ -26,17 +26,25 @@ include ObjectHelpers
 
 require 'awesome_nested_set/version'
 
+class ActionView::TestCase
+  helper :application
+  include ApplicationHelper
+end
+
 class ActiveSupport::TestCase
   include ActionDispatch::TestProcess
+  include Shoulda::Context::Assertions
+  include Shoulda::Context::InstanceMethods
+  extend Shoulda::Context::ClassMethods
 
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
 
-  ESCAPED_CANT  = 'can&#x27;t'
-  ESCAPED_UCANT = 'Can&#x27;t'
+  #ESCAPED_CANT  = 'can&#x27;t'
+  #ESCAPED_UCANT = 'Can&#x27;t'
   # Rails 4.0.2
-  #ESCAPED_CANT  = 'can&#39;t'
-  #ESCAPED_UCANT = 'Can&#39;t'
+  ESCAPED_CANT  = 'can&#39;t'
+  ESCAPED_UCANT = 'Can&#39;t'
 
   def log_user(login, password)
     User.anonymous

@@ -33,11 +33,12 @@ class Version < ActiveRecord::Base
   validates :effective_date, :date => true
   validates_inclusion_of :status, :in => VERSION_STATUSES
   validates_inclusion_of :sharing, :in => VERSION_SHARINGS
+  attr_protected :id
 
   scope :named, lambda {|arg| where("LOWER(#{table_name}.name) = LOWER(?)", arg.to_s.strip)}
   scope :open, lambda { where(:status => 'open') }
   scope :visible, lambda {|*args|
-    includes(:project).where(Project.allowed_to_condition(args.first || User.current, :view_issues))
+    joins(:project).where(Project.allowed_to_condition(args.first || User.current, :view_issues))
   }
 
   safe_attributes 'name',

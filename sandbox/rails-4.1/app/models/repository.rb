@@ -25,7 +25,7 @@ class Repository < ActiveRecord::Base
   IDENTIFIER_MAX_LENGTH = 255
 
   belongs_to :project
-  has_many :changesets, :order => "#{Changeset.table_name}.committed_on DESC, #{Changeset.table_name}.id DESC"
+  has_many :changesets, lambda{order("#{Changeset.table_name}.committed_on DESC, #{Changeset.table_name}.id DESC")}
   has_many :filechanges, :class_name => 'Change', :through => :changesets
 
   serialize :extra_info
@@ -45,6 +45,7 @@ class Repository < ActiveRecord::Base
   validates_format_of :identifier, :with => /\A(?!\d+$)[a-z0-9\-_]*\z/, :allow_blank => true
   # Checks if the SCM is enabled when creating a repository
   validate :repo_create_validation, :on => :create
+  attr_protected :id
 
   safe_attributes 'identifier',
     'login',
@@ -435,10 +436,10 @@ class Repository < ActiveRecord::Base
     ci = "#{table_name_prefix}changesets_issues#{table_name_suffix}"
     cp = "#{table_name_prefix}changeset_parents#{table_name_suffix}"
 
-    connection.delete("DELETE FROM #{ch} WHERE #{ch}.changeset_id IN (SELECT #{cs}.id FROM #{cs} WHERE #{cs}.repository_id = #{id})")
-    connection.delete("DELETE FROM #{ci} WHERE #{ci}.changeset_id IN (SELECT #{cs}.id FROM #{cs} WHERE #{cs}.repository_id = #{id})")
-    connection.delete("DELETE FROM #{cp} WHERE #{cp}.changeset_id IN (SELECT #{cs}.id FROM #{cs} WHERE #{cs}.repository_id = #{id})")
-    connection.delete("DELETE FROM #{cs} WHERE #{cs}.repository_id = #{id}")
+    self.class.connection.delete("DELETE FROM #{ch} WHERE #{ch}.changeset_id IN (SELECT #{cs}.id FROM #{cs} WHERE #{cs}.repository_id = #{id})")
+    self.class.connection.delete("DELETE FROM #{ci} WHERE #{ci}.changeset_id IN (SELECT #{cs}.id FROM #{cs} WHERE #{cs}.repository_id = #{id})")
+    self.class.connection.delete("DELETE FROM #{cp} WHERE #{cp}.changeset_id IN (SELECT #{cs}.id FROM #{cs} WHERE #{cs}.repository_id = #{id})")
+    self.class.connection.delete("DELETE FROM #{cs} WHERE #{cs}.repository_id = #{id}")
     clear_extra_info_of_changesets
   end
 
