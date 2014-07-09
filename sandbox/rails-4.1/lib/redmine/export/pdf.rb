@@ -22,10 +22,6 @@ require 'fpdf/chinese'
 require 'fpdf/japanese'
 require 'fpdf/korean'
 
-if RUBY_VERSION < '1.9'
-  require 'iconv'
-end
-
 module Redmine
   module Export
     module PDF

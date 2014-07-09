@@ -27,7 +27,6 @@ end
 platforms :mri, :mingw do
   # Optional gem for exporting the gantt to a PNG file, not supported with jruby
   group :rmagick do
-    # RMagick 2 supports ruby 1.9
     gem "rmagick", ">= 2.0.0"
   end
 

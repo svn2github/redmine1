@@ -39,8 +39,7 @@ class RepositoriesGitControllerTest < ActionController::TestCase
   JRUBY_SKIP_STR = "TODO: This test fails in JRuby"
 
   def setup
-    @ruby19_non_utf8_pass =
-      (RUBY_VERSION >= '1.9' && Encoding.default_external.to_s != 'UTF-8')
+    @ruby19_non_utf8_pass = Encoding.default_external.to_s != 'UTF-8'
 
     User.current = nil
     @project    = Project.find(PRJ_ID)
@@ -639,8 +638,8 @@ class RepositoriesGitControllerTest < ActionController::TestCase
     private
 
     def puts_ruby19_non_utf8_pass
-      puts "TODO: This test fails in Ruby 1.9 " +
-           "and Encoding.default_external is not UTF-8. " +
+      puts "TODO: This test fails " +
+           "when Encoding.default_external is not UTF-8. " +
            "Current value is '#{Encoding.default_external.to_s}'"
     end
   else

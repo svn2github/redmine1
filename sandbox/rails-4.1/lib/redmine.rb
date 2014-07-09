@@ -63,12 +63,8 @@ require 'redmine/themes'
 require 'redmine/hook'
 require 'redmine/plugin'
 
-if RUBY_VERSION < '1.9'
-  require 'fastercsv'
-else
-  require 'csv'
-  FCSV = CSV
-end
+require 'csv'
+FCSV = CSV
 
 Redmine::Scm::Base.add "Subversion"
 Redmine::Scm::Base.add "Darcs"
