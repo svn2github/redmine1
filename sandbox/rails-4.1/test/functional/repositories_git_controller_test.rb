@@ -498,11 +498,13 @@ class RepositoriesGitControllerTest < ActionController::TestCase
     end
 
     def test_annotate_binary_file
-      get :annotate, :id => PRJ_ID,
-          :path => repository_path_hash(['images', 'edit.png'])[:param]
-      assert_response 500
-      assert_tag :tag => 'p', :attributes => { :id => /errorExplanation/ },
-                              :content => /cannot be annotated/
+      with_settings :default_language => 'en' do
+        get :annotate, :id => PRJ_ID,
+            :path => repository_path_hash(['images', 'edit.png'])[:param]
+        assert_response 500
+        assert_tag :tag => 'p', :attributes => { :id => /errorExplanation/ },
+                                :content => /cannot be annotated/
+      end
     end
 
     def test_annotate_error_when_too_big
