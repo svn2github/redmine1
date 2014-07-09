@@ -219,7 +219,7 @@ class WikiController < ApplicationController
       reorder('version DESC').
       limit(@version_pages.per_page + 1).
       offset(@version_pages.offset).
-      all
+      to_a
 
     render :layout => false if request.xhr?
   end
@@ -280,7 +280,7 @@ class WikiController < ApplicationController
     @pages = @wiki.pages.
                       order('title').
                       includes([:content, {:attachments => :author}]).
-                      all
+                      to_a
     respond_to do |format|
       format.html {
         export = render_to_string :action => 'export_multiple', :layout => false
@@ -360,6 +360,6 @@ private
                 reorder("#{WikiPage.table_name}.title").
                 includes(:wiki => :project).
                 includes(:parent).
-                all
+                to_a
   end
 end

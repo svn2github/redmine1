@@ -32,7 +32,7 @@ class EnumerationsController < ApplicationController
       format.api {
         @klass = Enumeration.get_subclass(params[:type])
         if @klass
-          @enumerations = @klass.shared.sorted.all
+          @enumerations = @klass.shared.sorted.to_a
         else
           render_404
         end
@@ -75,7 +75,7 @@ class EnumerationsController < ApplicationController
       redirect_to enumerations_path
       return
     end
-    @enumerations = @enumeration.class.system.all - [@enumeration]
+    @enumerations = @enumeration.class.system.to_a - [@enumeration]
   end
 
   private

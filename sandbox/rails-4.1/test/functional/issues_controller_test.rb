@@ -3361,7 +3361,7 @@ class IssuesControllerTest < ActionController::TestCase
     post :bulk_edit, :ids => [1, 2, 6], :issue => {:project_id => 1}
     assert_response :success
     assert_template 'bulk_edit'
-    assert_equal Project.find(1).shared_versions.open.all.sort, assigns(:versions).sort
+    assert_equal Project.find(1).shared_versions.open.to_a.sort, assigns(:versions).sort
 
     assert_select 'select[name=?]', 'issue[fixed_version_id]' do
       assert_select 'option', :text => '2.0'

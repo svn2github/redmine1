@@ -23,7 +23,7 @@ class PrincipalTest < ActiveSupport::TestCase
   fixtures :users, :projects, :members, :member_roles
 
   def test_active_scope_should_return_groups_and_active_users
-    result = Principal.active.all
+    result = Principal.active.to_a
     assert_include Group.first, result
     assert_not_nil result.detect {|p| p.is_a?(User)}
     assert_nil result.detect {|p| p.is_a?(User) && !p.active?}
@@ -56,7 +56,7 @@ class PrincipalTest < ActiveSupport::TestCase
 
   def test_sorted_scope_should_sort_users_before_groups
     scope = Principal.where("type <> ?", 'AnonymousUser')
-    expected_order = scope.all.sort do |a, b|
+    expected_order = scope.to_a.sort do |a, b|
       if a.is_a?(User) && b.is_a?(Group)
         -1
       elsif a.is_a?(Group) && b.is_a?(User)

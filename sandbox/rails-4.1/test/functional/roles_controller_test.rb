@@ -31,7 +31,7 @@ class RolesControllerTest < ActionController::TestCase
     assert_template 'index'
 
     assert_not_nil assigns(:roles)
-    assert_equal Role.order('builtin, position').all, assigns(:roles)
+    assert_equal Role.order('builtin, position').to_a, assigns(:roles)
 
     assert_tag :tag => 'a', :attributes => { :href => '/roles/1/edit' },
                             :content => 'Manager'

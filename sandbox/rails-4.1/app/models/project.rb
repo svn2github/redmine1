@@ -124,9 +124,9 @@ class Project < ActiveRecord::Base
     if !initialized.key?('trackers') && !initialized.key?('tracker_ids')
       default = Setting.default_projects_tracker_ids
       if default.is_a?(Array)
-        self.trackers = Tracker.where(:id => default.map(&:to_i)).sorted.all
+        self.trackers = Tracker.where(:id => default.map(&:to_i)).sorted.to_a
       else
-        self.trackers = Tracker.sorted.all
+        self.trackers = Tracker.sorted.to_a
       end
     end
   end
@@ -142,7 +142,7 @@ class Project < ActiveRecord::Base
   # returns latest created projects
   # non public projects will be returned only if user is a member of those
   def self.latest(user=nil, count=5)
-    visible(user).limit(count).order("created_on DESC").all
+    visible(user).limit(count).order("created_on DESC").to_a
   end
 
   # Returns true if the project is visible to +user+ or to the current user.
@@ -357,7 +357,7 @@ class Project < ActiveRecord::Base
   # by the current user
   def allowed_parents
     return @allowed_parents if @allowed_parents
-    @allowed_parents = Project.where(Project.allowed_to_condition(User.current, :add_subprojects)).all
+    @allowed_parents = Project.where(Project.allowed_to_condition(User.current, :add_subprojects)).to_a
     @allowed_parents = @allowed_parents - self_and_descendants
     if User.current.allowed_to?(:add_project, nil, :global => true) || (!new_record? && parent.nil?)
       @allowed_parents << nil
@@ -432,7 +432,7 @@ class Project < ActiveRecord::Base
         select("DISTINCT #{Tracker.table_name}.*").
         where("#{Project.table_name}.lft >= ? AND #{Project.table_name}.rgt <= ? AND #{Project.table_name}.status <> #{STATUS_ARCHIVED}", lft, rgt).
         sorted.
-        all
+        to_a
   end
 
   # Closes open and locked project versions that are completed

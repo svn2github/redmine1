@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     @user_count = scope.count
     @user_pages = Paginator.new @user_count, @limit, params['page']
     @offset ||= @user_pages.offset
-    @users =  scope.order(sort_clause).limit(@limit).offset(@offset).all
+    @users =  scope.order(sort_clause).limit(@limit).offset(@offset).to_a
 
     respond_to do |format|
       format.html {

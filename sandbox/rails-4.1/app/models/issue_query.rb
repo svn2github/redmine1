@@ -133,17 +133,17 @@ class IssueQuery < Query
     if project
       principals += project.principals.sort
       unless project.leaf?
-        subprojects = project.descendants.visible.all
+        subprojects = project.descendants.visible.to_a
         principals += Principal.member_of(subprojects)
       end
-      versions = project.shared_versions.all
-      categories = project.issue_categories.all
+      versions = project.shared_versions.to_a
+      categories = project.issue_categories.to_a
       issue_custom_fields = project.all_issue_custom_fields
     else
       if all_projects.any?
         principals += Principal.member_of(all_projects)
       end
-      versions = Version.visible.where(:sharing => 'system').all
+      versions = Version.visible.where(:sharing => 'system').to_a
       issue_custom_fields = IssueCustomField.where(:is_for_all => true)
     end
     principals.uniq!
@@ -411,7 +411,7 @@ class IssueQuery < Query
       groups = Group.all
       operator = '!' # Override the operator since we want to find by assigned_to
     else
-      groups = Group.where(:id => value).all
+      groups = Group.where(:id => value).to_a
     end
     groups ||= []
 

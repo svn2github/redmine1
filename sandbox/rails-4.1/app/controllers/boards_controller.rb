@@ -50,7 +50,7 @@ class BoardsController < ApplicationController
           offset(@topic_pages.offset).
           order(sort_clause).
           preload(:author, {:last_reply => :author}).
-          all
+          to_a
         @message = Message.new(:board => @board)
         render :action => 'show', :layout => !request.xhr?
       }
@@ -59,7 +59,7 @@ class BoardsController < ApplicationController
           reorder('created_on DESC').
           includes(:author, :board).
           limit(Setting.feeds_limit.to_i).
-          all
+          to_a
         render_feed(@messages, :title => "#{@project}: #{@board}")
       }
     end

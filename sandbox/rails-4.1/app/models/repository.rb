@@ -265,7 +265,7 @@ class Repository < ActiveRecord::Base
         reorder("#{Changeset.table_name}.committed_on DESC, #{Changeset.table_name}.id DESC").
         limit(limit).
         preload(:user).
-        all
+        to_a
     else
       filechanges.
         where("path = ?", path.with_leading_slash).

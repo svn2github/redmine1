@@ -204,7 +204,7 @@ class IssueTest < ActiveSupport::TestCase
 
   def test_visible_scope_for_anonymous
     # Anonymous user should see issues of public projects only
-    issues = Issue.visible(User.anonymous).all
+    issues = Issue.visible(User.anonymous).to_a
     assert issues.any?
     assert_nil issues.detect {|issue| !issue.project.is_public?}
     assert_nil issues.detect {|issue| issue.is_private?}
@@ -214,7 +214,7 @@ class IssueTest < ActiveSupport::TestCase
   def test_visible_scope_for_anonymous_without_view_issues_permissions
     # Anonymous user should not see issues without permission
     Role.anonymous.remove_permission!(:view_issues)
-    issues = Issue.visible(User.anonymous).all
+    issues = Issue.visible(User.anonymous).to_a
     assert issues.empty?
     assert_visibility_match User.anonymous, issues
   end
@@ -237,7 +237,7 @@ class IssueTest < ActiveSupport::TestCase
     user = User.find(9)
     assert user.projects.empty?
     # Non member user should see issues of public projects only
-    issues = Issue.visible(user).all
+    issues = Issue.visible(user).to_a
     assert issues.any?
     assert_nil issues.detect {|issue| !issue.project.is_public?}
     assert_nil issues.detect {|issue| issue.is_private?}
@@ -249,7 +249,7 @@ class IssueTest < ActiveSupport::TestCase
     Issue.create!(:project_id => 1, :tracker_id => 1, :author_id => 9, :subject => 'Issue by non member')
     user = User.find(9)
 
-    issues = Issue.visible(user).all
+    issues = Issue.visible(user).to_a
     assert issues.any?
     assert_nil issues.detect {|issue| issue.author != user}
     assert_visibility_match user, issues
@@ -260,7 +260,7 @@ class IssueTest < ActiveSupport::TestCase
     Role.non_member.remove_permission!(:view_issues)
     user = User.find(9)
     assert user.projects.empty?
-    issues = Issue.visible(user).all
+    issues = Issue.visible(user).to_a
     assert issues.empty?
     assert_visibility_match user, issues
   end
@@ -270,7 +270,7 @@ class IssueTest < ActiveSupport::TestCase
     # User should see issues of projects for which user has view_issues permissions only
     Role.non_member.remove_permission!(:view_issues)
     Member.create!(:principal => user, :project_id => 3, :role_ids => [2])
-    issues = Issue.visible(user).all
+    issues = Issue.visible(user).to_a
     assert issues.any?
     assert_nil issues.detect {|issue| issue.project_id != 3}
     assert_nil issues.detect {|issue| issue.is_private?}
@@ -290,12 +290,12 @@ class IssueTest < ActiveSupport::TestCase
       :is_private => true)
 
     Role.find(2).update_attribute :issues_visibility, 'default'
-    issues = Issue.visible(User.find(8)).all
+    issues = Issue.visible(User.find(8)).to_a
     assert issues.any?
     assert issues.include?(issue)
 
     Role.find(2).update_attribute :issues_visibility, 'own'
-    issues = Issue.visible(User.find(8)).all
+    issues = Issue.visible(User.find(8)).to_a
     assert issues.any?
     assert issues.include?(issue)
   end
@@ -304,7 +304,7 @@ class IssueTest < ActiveSupport::TestCase
     user = User.find(1)
     user.members.each(&:destroy)
     assert user.projects.empty?
-    issues = Issue.visible(user).all
+    issues = Issue.visible(user).to_a
     assert issues.any?
     # Admin should see issues on private projects that admin does not belong to
     assert issues.detect {|issue| !issue.project.is_public?}
@@ -315,7 +315,7 @@ class IssueTest < ActiveSupport::TestCase
 
   def test_visible_scope_with_project
     project = Project.find(1)
-    issues = Issue.visible(User.find(2), :project => project).all
+    issues = Issue.visible(User.find(2), :project => project).to_a
     projects = issues.collect(&:project).uniq
     assert_equal 1, projects.size
     assert_equal project, projects.first
@@ -323,7 +323,7 @@ class IssueTest < ActiveSupport::TestCase
 
   def test_visible_scope_with_project_and_subprojects
     project = Project.find(1)
-    issues = Issue.visible(User.find(2), :project => project, :with_subprojects => true).all
+    issues = Issue.visible(User.find(2), :project => project, :with_subprojects => true).to_a
     projects = issues.collect(&:project).uniq
     assert projects.size > 1
     assert_equal [], projects.select {|p| !p.is_or_is_descendant_of?(project)}
@@ -350,12 +350,12 @@ class IssueTest < ActiveSupport::TestCase
   end
 
   def test_open_scope
-    issues = Issue.open.all
+    issues = Issue.open.to_a
     assert_nil issues.detect(&:closed?)
   end
 
   def test_open_scope_with_arg
-    issues = Issue.open(false).all
+    issues = Issue.open(false).to_a
     assert_equal issues, issues.select(&:closed?)
   end
 

@@ -45,7 +45,7 @@ module Redmine
         end
 
         def available_custom_fields
-          CustomField.where("type = '#{self.class.name}CustomField'").sorted.all
+          CustomField.where("type = '#{self.class.name}CustomField'").sorted.to_a
         end
 
         # Sets the values of the object's custom fields

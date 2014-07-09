@@ -27,7 +27,7 @@ class DocumentsController < ApplicationController
 
   def index
     @sort_by = %w(category date title author).include?(params[:sort_by]) ? params[:sort_by] : 'category'
-    documents = @project.documents.includes(:attachments, :category).all
+    documents = @project.documents.includes(:attachments, :category).to_a
     case @sort_by
     when 'date'
       @grouped = documents.group_by {|d| d.updated_on.to_date }
@@ -43,7 +43,7 @@ class DocumentsController < ApplicationController
   end
 
   def show
-    @attachments = @document.attachments.all
+    @attachments = @document.attachments.to_a
   end
 
   def new

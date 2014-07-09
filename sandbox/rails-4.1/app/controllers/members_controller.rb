@@ -32,7 +32,7 @@ class MembersController < ApplicationController
                     order("#{Member.table_name}.id").
                     limit(@limit).
                     offset(@offset).
-                    all
+                    to_a
     respond_to do |format|
       format.html { head 406 }
       format.api

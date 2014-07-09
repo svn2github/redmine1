@@ -25,7 +25,7 @@ class GroupsController < ApplicationController
   helper :custom_fields
 
   def index
-    @groups = Group.sorted.all
+    @groups = Group.sorted.to_a
     respond_to do |format|
       format.html {
         @user_count_by_group_id = user_count_by_group_id
@@ -91,7 +91,7 @@ class GroupsController < ApplicationController
   end
 
   def add_users
-    @users = User.where(:id => (params[:user_id] || params[:user_ids])).all
+    @users = User.where(:id => (params[:user_id] || params[:user_ids])).to_a
     @group.users << @users if request.post?
     respond_to do |format|
       format.html { redirect_to edit_group_path(@group, :tab => 'users') }

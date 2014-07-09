@@ -80,7 +80,7 @@ class IssueStatus < ActiveRecord::Base
         includes(:new_status).
         where(["role_id IN (:role_ids) AND tracker_id = :tracker_id AND (#{conditions})",
           {:role_ids => roles.collect(&:id), :tracker_id => tracker.id, :true => true, :false => false}
-          ]).all.
+          ]).to_a.
         map(&:new_status).compact.sort
     else
       []
