@@ -54,8 +54,7 @@ class RepositoryTest < ActiveSupport::TestCase
 
   def test_blank_log_encoding_error_message_fr
     set_language_if_valid 'fr'
-    str = "Encodage des messages de commit doit \xc3\xaatre renseign\xc3\xa9(e)"
-    str.force_encoding('UTF-8') if str.respond_to?(:force_encoding)
+    str = "Encodage des messages de commit doit \xc3\xaatre renseign\xc3\xa9(e)".force_encoding('UTF-8')
     repo = Repository::Bazaar.new(
                         :project      => Project.find(3),
                         :url          => "/test"

@@ -52,8 +52,7 @@ class GroupTest < ActiveSupport::TestCase
 
   def test_blank_name_error_message_fr
     set_language_if_valid 'fr'
-    str = "Nom doit \xc3\xaatre renseign\xc3\xa9(e)"
-    str.force_encoding('UTF-8') if str.respond_to?(:force_encoding)
+    str = "Nom doit \xc3\xaatre renseign\xc3\xa9(e)".force_encoding('UTF-8')
     g = Group.new
     assert !g.save
     assert_include str, g.errors.full_messages

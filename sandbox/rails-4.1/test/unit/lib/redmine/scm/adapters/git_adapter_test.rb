@@ -60,12 +60,8 @@ begin
                       'ISO-8859-1'
                    )
         assert @adapter
-        @char_1 = CHAR_1_HEX.dup
-        @str_felix_hex  = FELIX_HEX.dup
-        if @char_1.respond_to?(:force_encoding)
-          @char_1.force_encoding('UTF-8')
-          @str_felix_hex.force_encoding('ASCII-8BIT')
-        end
+        @char_1 = CHAR_1_HEX.dup.force_encoding('UTF-8')
+        @str_felix_hex  = FELIX_HEX.dup.force_encoding('ASCII-8BIT')
       end
 
       def test_scm_version

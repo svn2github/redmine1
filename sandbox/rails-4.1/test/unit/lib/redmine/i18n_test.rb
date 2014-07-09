@@ -48,8 +48,7 @@ class Redmine::I18nTest < ActiveSupport::TestCase
     today = now = Time.parse('2011-02-20 14:00:00')
     Setting.date_format = '%d %B %Y'
     User.current.language = 'fr'
-    s1 = "20 f\xc3\xa9vrier 2011"
-    s1.force_encoding("UTF-8") if s1.respond_to?(:force_encoding)
+    s1 = "20 f\xc3\xa9vrier 2011".force_encoding("UTF-8")
     assert_equal s1, format_date(today)
     User.current.language = nil
     assert_equal '20 Febrero 2011', format_date(today)
@@ -175,8 +174,7 @@ class Redmine::I18nTest < ActiveSupport::TestCase
     set_language_if_valid 'bs'
     assert_equal "KM -1000,20", number_to_currency(-1000.2)
     set_language_if_valid 'de'
-    euro_sign = "\xe2\x82\xac"
-    euro_sign.force_encoding('UTF-8') if euro_sign.respond_to?(:force_encoding)
+    euro_sign = "\xe2\x82\xac".force_encoding('UTF-8')
     assert_equal "-1000,20 #{euro_sign}", number_to_currency(-1000.2)
   end
 
@@ -193,8 +191,7 @@ class Redmine::I18nTest < ActiveSupport::TestCase
     assert_nil options.detect {|option| option.size != 2}
     assert_nil options.detect {|option| !option.first.is_a?(String) || !option.last.is_a?(String)}
     assert_include ["English", "en"], options
-    ja = "Japanese (\xe6\x97\xa5\xe6\x9c\xac\xe8\xaa\x9e)"
-    ja.force_encoding('UTF-8') if ja.respond_to?(:force_encoding)
+    ja = "Japanese (\xe6\x97\xa5\xe6\x9c\xac\xe8\xaa\x9e)".force_encoding('UTF-8')
     assert_include [ja, "ja"], options
   end
 
@@ -233,30 +230,21 @@ class Redmine::I18nTest < ActiveSupport::TestCase
 
   def test_utf8
     set_language_if_valid 'ja'
-    str_ja_yes  = "\xe3\x81\xaf\xe3\x81\x84"
+    str_ja_yes  = "\xe3\x81\xaf\xe3\x81\x84".force_encoding('UTF-8')
     i18n_ja_yes = l(:general_text_Yes)
-    if str_ja_yes.respond_to?(:force_encoding)
-      str_ja_yes.force_encoding('UTF-8')
-      assert_equal "UTF-8", i18n_ja_yes.encoding.to_s
-    end
     assert_equal str_ja_yes, i18n_ja_yes
+    assert_equal "UTF-8", i18n_ja_yes.encoding.to_s
   end
 
   def test_traditional_chinese_locale
     set_language_if_valid 'zh-TW'
-    str_tw = "Traditional Chinese (\xe7\xb9\x81\xe9\xab\x94\xe4\xb8\xad\xe6\x96\x87)"
-    if str_tw.respond_to?(:force_encoding)
-      str_tw.force_encoding('UTF-8')
-    end
+    str_tw = "Traditional Chinese (\xe7\xb9\x81\xe9\xab\x94\xe4\xb8\xad\xe6\x96\x87)".force_encoding('UTF-8')
     assert_equal str_tw, l(:general_lang_name)
   end
 
   def test_french_locale
     set_language_if_valid 'fr'
-    str_fr = "Fran\xc3\xa7ais"
-    if str_fr.respond_to?(:force_encoding)
-      str_fr.force_encoding('UTF-8')
-    end
+    str_fr = "Fran\xc3\xa7ais".force_encoding('UTF-8')
     assert_equal str_fr, l(:general_lang_name)
   end
 end
