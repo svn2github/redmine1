@@ -109,7 +109,8 @@ class TimeEntryQuery < Query
       where(statement).
       order(order_option).
       joins(joins_for_order_statement(order_option.join(','))).
-      includes(:activity)
+      includes(:activity).
+      references(:activity)
   end
 
   def sql_for_activity_id_field(field, operator, value)
