@@ -473,12 +473,8 @@ class IssuesControllerTest < ActionController::TestCase
 
   def test_index_csv_big_5
     with_settings :default_language => "zh-TW" do
-      str_utf8  = "\xe4\xb8\x80\xe6\x9c\x88"
-      str_big5  = "\xa4@\xa4\xeb"
-      if str_utf8.respond_to?(:force_encoding)
-        str_utf8.force_encoding('UTF-8')
-        str_big5.force_encoding('Big5')
-      end
+      str_utf8  = "\xe4\xb8\x80\xe6\x9c\x88".force_encoding('UTF-8')
+      str_big5  = "\xa4@\xa4\xeb".force_encoding('Big5')
       issue = Issue.generate!(:subject => str_utf8)
 
       get :index, :project_id => 1, 
@@ -487,10 +483,7 @@ class IssuesControllerTest < ActionController::TestCase
                   :format => 'csv'
       assert_equal 'text/csv; header=present', @response.content_type
       lines = @response.body.chomp.split("\n")
-      s1 = "\xaa\xac\xbaA"
-      if str_utf8.respond_to?(:force_encoding)
-        s1.force_encoding('Big5')
-      end
+      s1 = "\xaa\xac\xbaA".force_encoding('Big5')
       assert_include s1, lines[0]
       assert_include str_big5, lines[1]
     end
@@ -498,10 +491,7 @@ class IssuesControllerTest < ActionController::TestCase
 
   def test_index_csv_cannot_convert_should_be_replaced_big_5
     with_settings :default_language => "zh-TW" do
-      str_utf8  = "\xe4\xbb\xa5\xe5\x86\x85"
-      if str_utf8.respond_to?(:force_encoding)
-        str_utf8.force_encoding('UTF-8')
-      end
+      str_utf8  = "\xe4\xbb\xa5\xe5\x86\x85".force_encoding('UTF-8')
       issue = Issue.generate!(:subject => str_utf8)
 
       get :index, :project_id => 1, 
@@ -512,20 +502,14 @@ class IssuesControllerTest < ActionController::TestCase
                   :set_filter => 1
       assert_equal 'text/csv; header=present', @response.content_type
       lines = @response.body.chomp.split("\n")
-      s1 = "\xaa\xac\xbaA" # status
-      if str_utf8.respond_to?(:force_encoding)
-        s1.force_encoding('Big5')
-      end
+      s1 = "\xaa\xac\xbaA".force_encoding('Big5') # status
       assert lines[0].include?(s1)
       s2 = lines[1].split(",")[2]
-      if s1.respond_to?(:force_encoding)
-        s3 = "\xa5H?" # subject
-        s3.force_encoding('Big5')
-        assert_equal s3, s2
-      elsif RUBY_PLATFORM == 'java'
+      if RUBY_PLATFORM == 'java'
         assert_equal "??", s2
       else
-        assert_equal "\xa5H???", s2
+        s3 = "\xa5H?".force_encoding('Big5') # subject
+        assert_equal s3, s2
       end
     end
   end

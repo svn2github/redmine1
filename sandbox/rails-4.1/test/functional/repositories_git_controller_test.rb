@@ -26,8 +26,8 @@ class RepositoriesGitControllerTest < ActionController::TestCase
   REPOSITORY_PATH = Rails.root.join('tmp/test/git_repository').to_s
   REPOSITORY_PATH.gsub!(/\//, "\\") if Redmine::Platform.mswin?
   PRJ_ID     = 3
-  CHAR_1_HEX = "\xc3\x9c"
-  FELIX_HEX  = "Felix Sch\xC3\xA4fer"
+  CHAR_1_HEX = "\xc3\x9c".force_encoding('UTF-8')
+  FELIX_HEX  = "Felix Sch\xC3\xA4fer".force_encoding('UTF-8')
   NUM_REV = 28
 
   ## Git, Mercurial and CVS path encodings are binary.
@@ -50,12 +50,6 @@ class RepositoriesGitControllerTest < ActionController::TestCase
                       :path_encoding => 'ISO-8859-1'
                       )
     assert @repository
-    @char_1        = CHAR_1_HEX.dup
-    @felix_utf8  = FELIX_HEX.dup
-    if @char_1.respond_to?(:force_encoding)
-      @char_1.force_encoding('UTF-8')
-      @felix_utf8.force_encoding('UTF-8')
-    end
   end
 
   def test_create_and_update
@@ -231,7 +225,7 @@ class RepositoriesGitControllerTest < ActionController::TestCase
         with_settings :repositories_encodings => 'UTF-8,ISO-8859-1' do
           ['57ca437c', '57ca437c0acbbcb749821fdf3726a1367056d364'].each do |r1|
             get :entry, :id => PRJ_ID,
-                :path => repository_path_hash(['latin-1-dir', "test-#{@char_1}.txt"])[:param],
+                :path => repository_path_hash(['latin-1-dir', "test-#{CHAR_1_HEX}.txt"])[:param],
                 :rev => r1
             assert_response :success
             assert_template 'entry'
@@ -239,7 +233,7 @@ class RepositoriesGitControllerTest < ActionController::TestCase
                    :content => '1',
                    :attributes => { :class => 'line-num' },
                    :sibling => { :tag => 'td',
-                                 :content => /test-#{@char_1}.txt/ }
+                                 :content => /test-#{CHAR_1_HEX}.txt/ }
           end
         end
       end
@@ -419,14 +413,14 @@ class RepositoriesGitControllerTest < ActionController::TestCase
                          :descendant => {
                            :tag => 'th',
                            :attributes => { :class => 'filename' } ,
-                           :content => /latin-1-dir\/test-#{@char_1}.txt/ ,
+                           :content => /latin-1-dir\/test-#{CHAR_1_HEX}.txt/ ,
                           },
                          :sibling => {
                            :tag => 'tbody',
                            :descendant => {
                               :tag => 'td',
                               :attributes => { :class => /diff_in/ },
-                              :content => /test-#{@char_1}.txt/
+                              :content => /test-#{CHAR_1_HEX}.txt/
                            }
                          }
             end
@@ -535,14 +529,14 @@ class RepositoriesGitControllerTest < ActionController::TestCase
         with_settings :repositories_encodings => 'UTF-8,ISO-8859-1' do
           ['57ca437c', '57ca437c0acbbcb749821fdf3726a1367056d364'].each do |r1|
             get :annotate, :id => PRJ_ID,
-                :path => repository_path_hash(['latin-1-dir', "test-#{@char_1}.txt"])[:param],
+                :path => repository_path_hash(['latin-1-dir', "test-#{CHAR_1_HEX}.txt"])[:param],
                 :rev => r1
             assert_select "th.line-num", :text => '1' do
               assert_select "+ td.revision" do
                 assert_select "a", :text => '57ca437c'
                 assert_select "+ td.author", :text => "jsmith" do
                   assert_select "+ td",
-                                :text => "test-#{@char_1}.txt"
+                                :text => "test-#{CHAR_1_HEX}.txt"
                 end
               end
             end
@@ -559,7 +553,7 @@ class RepositoriesGitControllerTest < ActionController::TestCase
         assert_select "th.line-num", :text => '1' do
           assert_select "+ td.revision" do
             assert_select "a", :text => '83ca5fd5'
-            assert_select "+ td.author", :text => @felix_utf8 do
+            assert_select "+ td.author", :text => FELIX_HEX do
               assert_select "+ td",
                             :text => "And this is a file with a leading and trailing space..."
             end
