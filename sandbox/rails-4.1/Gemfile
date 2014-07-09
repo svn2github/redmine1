@@ -92,7 +92,7 @@ group :test do
   gem "minitest"
   gem "shoulda"
   gem "shoulda-context"
-  gem "mocha", "~> 1.0.0", :require => 'mocha/api'
+  gem "mocha", :require => 'mocha/api'
   if RUBY_VERSION >= '1.9.3'
     gem "capybara", "~> 2.1.0"
     gem "selenium-webdriver"
