@@ -27,16 +27,23 @@ module CollectiveIdea #:nodoc:
           def associate_parents(objects)
             return objects unless objects.all? {|o| o.respond_to?(:association)}
 
-            id_indexed = objects.index_by(&:id)
+            id_indexed = objects.index_by(&primary_column_name.to_sym)
             objects.each do |object|
               association = object.association(:parent)
               parent = id_indexed[object.parent_id]
 
               if !association.loaded? && parent
                 association.target = parent
-                association.set_inverse_instance(parent)
+                add_to_inverse_association(association, parent)
               end
             end
+          end
+
+          def add_to_inverse_association(association, record)
+            inverse_reflection = association.send(:inverse_reflection_for, record)
+            inverse = record.association(inverse_reflection.name)
+            inverse.target << association.owner
+            inverse.loaded!
           end
 
           def children_of(parent_id)
@@ -71,12 +78,14 @@ module CollectiveIdea #:nodoc:
             where arel_table[left_column_name].gteq(node)
           end
 
-          def nested_set_scope
-            order(quoted_order_column_full_name)
+          def nested_set_scope(options = {})
+            options = {:order => quoted_order_column_full_name}.merge(options)
+
+            where(options[:conditions]).order(options.delete(:order))
           end
 
           def primary_key_scope(id)
-            where arel_table[primary_key].eq(id)
+            where arel_table[primary_column_name].eq(id)
           end
 
           def root
@@ -95,6 +104,10 @@ module CollectiveIdea #:nodoc:
         # Value of the parent column
         def parent_id(target = self)
           target[parent_column_name]
+        end
+
+        def primary_id(target = self)
+          target[primary_column_name]
         end
 
         # Value of the left column
@@ -132,12 +145,12 @@ module CollectiveIdea #:nodoc:
             end
           end
 
-          self.class.nested_set_scope.where(options[:conditions])
+          self.class.base_class.nested_set_scope options
         end
 
         def to_text
           self_and_descendants.map do |node|
-            "#{'*'*(node.level+1)} #{node.id} #{node.to_s} (#{node.parent_id}, #{node.left}, #{node.right})"
+            "#{'*'*(node.level+1)} #{node.primary_id} #{node.to_s} (#{node.parent_id}, #{node.left}, #{node.right})"
           end.join("\n")
         end
 
@@ -145,7 +158,7 @@ module CollectiveIdea #:nodoc:
 
         def without_self(scope)
           return scope if new_record?
-          scope.where(["#{self.class.quoted_table_name}.#{self.class.primary_key} != ?", self])
+          scope.where(["#{self.class.quoted_table_name}.#{self.class.quoted_primary_column_name} != ?", self.primary_id])
         end
 
         def store_new_parent
@@ -157,11 +170,19 @@ module CollectiveIdea #:nodoc:
           nested_set_scope.column_names.map(&:to_s).include?(depth_column_name.to_s)
         end
 
+        def right_most_node
+          @right_most_node ||= self.class.base_class.unscoped.nested_set_scope(
+            :order => "#{quoted_right_column_full_name} desc"
+          ).first
+        end
+
         def right_most_bound
-          right_most_node =
-            self.class.base_class.unscoped.
-              order("#{quoted_right_column_full_name} desc").limit(1).lock(true).first
-          right_most_node ? (right_most_node[right_column_name] || 0) : 0
+          @right_most_bound ||= begin
+            return 0 if right_most_node.nil?
+
+            right_most_node.lock!
+            right_most_node[right_column_name] || 0
+          end
         end
 
         def set_depth!
@@ -169,10 +190,35 @@ module CollectiveIdea #:nodoc:
 
           in_tenacious_transaction do
             reload
-            nested_set_scope.primary_key_scope(id).
-              update_all(["#{quoted_depth_column_name} = ?", level])
+            update_depth(level)
           end
-          self[depth_column_name] = self.level
+        end
+
+        def set_depth_for_self_and_descendants!
+          return unless has_depth_column?
+
+          in_tenacious_transaction do
+            reload
+            self_and_descendants.select(primary_column_name).lock(true)
+            old_depth = self[depth_column_name] || 0
+            new_depth = level
+            update_depth(new_depth)
+            change_descendants_depth!(new_depth - old_depth)
+            new_depth
+          end
+        end
+
+        def update_depth(depth)
+          nested_set_scope.primary_key_scope(primary_id).
+              update_all(["#{quoted_depth_column_name} = ?", depth])
+          self[depth_column_name] = depth
+        end
+
+        def change_descendants_depth!(diff)
+          if !leaf? && diff != 0
+            sign = "++-"[diff <=> 0]
+            descendants.update_all("#{quoted_depth_column_name} = #{quoted_depth_column_name} #{sign} #{diff.abs}")
+          end
         end
 
         def set_default_left_and_right
@@ -189,11 +235,11 @@ module CollectiveIdea #:nodoc:
           )
         end
 
-        def reload_target(target)
+        def reload_target(target, position)
           if target.is_a? self.class.base_class
             target.reload
-          else
-            nested_set_scope.find(target)
+          elsif position != :root
+            nested_set_scope.where(primary_column_name => target).first!
           end
         end
       end

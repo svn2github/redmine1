@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "AwesomeNestedSet" do
   before(:all) do
-    self.class.fixtures :categories, :departments, :notes, :things, :brokens
+    self.class.fixtures :categories, :departments, :notes, :things, :brokens, :users
   end
 
   describe "defaults" do
@@ -16,6 +16,10 @@ describe "AwesomeNestedSet" do
 
     it "should have parent_column_default" do
       Default.acts_as_nested_set_options[:parent_column].should == 'parent_id'
+    end
+
+    it " should have a primary_column_default" do
+      Default.acts_as_nested_set_options[:primary_column].should == 'id'
     end
 
     it "should have scope_default" do
@@ -49,6 +53,13 @@ describe "AwesomeNestedSet" do
       RenamedColumns.parent_column_name.should == 'mother_id'
       RenamedColumns.new.parent_column_name.should == 'mother_id'
     end
+
+    it "should have primary_column_name" do
+      Default.primary_column_name.should == 'id'
+      Default.new.primary_column_name.should == 'id'
+      User.primary_column_name.should == 'uuid'
+      User.new.primary_column_name.should == 'uuid'
+    end
   end
 
   it "creation_with_altered_column_names" do
@@ -58,144 +69,152 @@ describe "AwesomeNestedSet" do
   end
 
   it "creation when existing record has nil left column" do
-    assert_nothing_raised do
+    lambda {
       Broken.create!
+    }.should_not raise_exception
+  end
+
+  describe "quoted column names" do
+    it "quoted_left_column_name" do
+      quoted = Default.connection.quote_column_name('lft')
+      Default.quoted_left_column_name.should == quoted
+      Default.new.quoted_left_column_name.should == quoted
+    end
+
+    it "quoted_right_column_name" do
+      quoted = Default.connection.quote_column_name('rgt')
+      Default.quoted_right_column_name.should == quoted
+      Default.new.quoted_right_column_name.should == quoted
+    end
+
+    it "quoted_depth_column_name" do
+      quoted = Default.connection.quote_column_name('depth')
+      Default.quoted_depth_column_name.should == quoted
+      Default.new.quoted_depth_column_name.should == quoted
+    end
+
+    it "quoted_order_column_name" do
+      quoted = Default.connection.quote_column_name('lft')
+      Default.quoted_order_column_name.should == quoted
+      Default.new.quoted_order_column_name.should == quoted
     end
   end
 
-  it "quoted_left_column_name" do
-    quoted = Default.connection.quote_column_name('lft')
-    Default.quoted_left_column_name.should == quoted
-    Default.new.quoted_left_column_name.should == quoted
-  end
+  describe "protected columns" do
+    it "left_column_protected_from_assignment" do
+      lambda {
+        Category.new.lft = 1
+      }.should raise_exception(ActiveRecord::ActiveRecordError)
+    end
 
-  it "quoted_right_column_name" do
-    quoted = Default.connection.quote_column_name('rgt')
-    Default.quoted_right_column_name.should == quoted
-    Default.new.quoted_right_column_name.should == quoted
-  end
+    it "right_column_protected_from_assignment" do
+      lambda {
+        Category.new.rgt = 1
+      }.should raise_exception(ActiveRecord::ActiveRecordError)
+    end
 
-  it "quoted_depth_column_name" do
-    quoted = Default.connection.quote_column_name('depth')
-    Default.quoted_depth_column_name.should == quoted
-    Default.new.quoted_depth_column_name.should == quoted
-  end
-
-  it "quoted_order_column_name" do
-    quoted = Default.connection.quote_column_name('lft')
-    Default.quoted_order_column_name.should == quoted
-    Default.new.quoted_order_column_name.should == quoted
-  end
-
-  it "left_column_protected_from_assignment" do
-    lambda {
-      Category.new.lft = 1
-    }.should raise_exception(ActiveRecord::ActiveRecordError)
-  end
-
-  it "right_column_protected_from_assignment" do
-    lambda {
-      Category.new.rgt = 1
-    }.should raise_exception(ActiveRecord::ActiveRecordError)
-  end
-
-  it "depth_column_protected_from_assignment" do
-    lambda {
-      Category.new.depth = 1
-    }.should raise_exception(ActiveRecord::ActiveRecordError)
-  end
-
-  it "scoped_appends_id" do
-    ScopedCategory.acts_as_nested_set_options[:scope].should == :organization_id
-  end
-
-  it "roots_class_method" do
-    found_by_us = Category.where(:parent_id => nil).to_a
-    found_by_roots = Category.roots.to_a
-    found_by_us.length.should == found_by_roots.length
-    found_by_us.each do |root|
-      found_by_roots.should include(root)
+    it "depth_column_protected_from_assignment" do
+      lambda {
+        Category.new.depth = 1
+      }.should raise_exception(ActiveRecord::ActiveRecordError)
     end
   end
 
-  it "root_class_method" do
-    Category.root.should == categories(:top_level)
+  describe "scope" do
+    it "scoped_appends_id" do
+      ScopedCategory.acts_as_nested_set_options[:scope].should == :organization_id
+    end
   end
 
-  it "root" do
-    categories(:child_3).root.should == categories(:top_level)
-  end
+  describe "hierarchical structure" do
+    it "roots_class_method" do
+      found_by_us = Category.where(:parent_id => nil).to_a
+      found_by_roots = Category.roots.to_a
+      found_by_us.length.should == found_by_roots.length
+      found_by_us.each do |root|
+        found_by_roots.should include(root)
+      end
+    end
 
-  it "root when not persisted and parent_column_name value is self" do
-    new_category = Category.new
-    new_category.root.should == new_category
-  end
+    it "root_class_method" do
+      Category.root.should == categories(:top_level)
+    end
 
-  it "root when not persisted and parent_column_name value is set" do
-    last_category = Category.last
-    Category.new(Default.parent_column_name => last_category.id).root.should == last_category.root
-  end
+    it "root" do
+      categories(:child_3).root.should == categories(:top_level)
+    end
 
-  it "root?" do
-    categories(:top_level).root?.should be_true
-    categories(:top_level_2).root?.should be_true
-  end
+    it "root when not persisted and parent_column_name value is self" do
+      new_category = Category.new
+      new_category.root.should == new_category
+    end
 
-  it "leaves_class_method" do
-    Category.leaves.count.should == 4
-    Category.leaves.should include(categories(:child_1))
-    Category.leaves.should include(categories(:child_2_1))
-    Category.leaves.should include(categories(:child_3))
-    Category.leaves.should include(categories(:top_level_2))
-  end
+    it "root when not persisted and parent_column_name value is set" do
+      last_category = Category.last
+      Category.new(Default.parent_column_name => last_category.id).root.should == last_category.root
+    end
 
-  it "leaf" do
-    categories(:child_1).leaf?.should be_true
-    categories(:child_2_1).leaf?.should be_true
-    categories(:child_3).leaf?.should be_true
-    categories(:top_level_2).leaf?.should be_true
+    it "root?" do
+      categories(:top_level).root?.should be_true
+      categories(:top_level_2).root?.should be_true
+    end
 
-    categories(:top_level).leaf?.should be_false
-    categories(:child_2).leaf?.should be_false
-    Category.new.leaf?.should be_false
-  end
+    it "leaves_class_method" do
+      Category.where("#{Category.right_column_name} - #{Category.left_column_name} = 1").to_a.should == Category.leaves.to_a
+      Category.leaves.count.should == 4
+      Category.leaves.should include(categories(:child_1))
+      Category.leaves.should include(categories(:child_2_1))
+      Category.leaves.should include(categories(:child_3))
+      Category.leaves.should include(categories(:top_level_2))
+    end
 
+    it "leaf" do
+      categories(:child_1).leaf?.should be_true
+      categories(:child_2_1).leaf?.should be_true
+      categories(:child_3).leaf?.should be_true
+      categories(:top_level_2).leaf?.should be_true
 
-  it "parent" do
-    categories(:child_2_1).parent.should == categories(:child_2)
-  end
+      categories(:top_level).leaf?.should be_false
+      categories(:child_2).leaf?.should be_false
+      Category.new.leaf?.should be_false
+    end
 
-  it "self_and_ancestors" do
-    child = categories(:child_2_1)
-    self_and_ancestors = [categories(:top_level), categories(:child_2), child]
-    child.self_and_ancestors.should == self_and_ancestors
-  end
+    it "parent" do
+      categories(:child_2_1).parent.should == categories(:child_2)
+    end
 
-  it "ancestors" do
-    child = categories(:child_2_1)
-    ancestors = [categories(:top_level), categories(:child_2)]
-    ancestors.should == child.ancestors
-  end
+    it "self_and_ancestors" do
+      child = categories(:child_2_1)
+      self_and_ancestors = [categories(:top_level), categories(:child_2), child]
+      child.self_and_ancestors.should == self_and_ancestors
+    end
 
-  it "self_and_siblings" do
-    child = categories(:child_2)
-    self_and_siblings = [categories(:child_1), child, categories(:child_3)]
-    self_and_siblings.should == child.self_and_siblings
-    lambda do
-      tops = [categories(:top_level), categories(:top_level_2)]
-      assert_equal tops, categories(:top_level).self_and_siblings
-    end.should_not raise_exception
-  end
+    it "ancestors" do
+      child = categories(:child_2_1)
+      ancestors = [categories(:top_level), categories(:child_2)]
+      ancestors.should == child.ancestors
+    end
 
-  it "siblings" do
-    child = categories(:child_2)
-    siblings = [categories(:child_1), categories(:child_3)]
-    siblings.should == child.siblings
-  end
+    it "self_and_siblings" do
+      child = categories(:child_2)
+      self_and_siblings = [categories(:child_1), child, categories(:child_3)]
+      self_and_siblings.should == child.self_and_siblings
+      lambda do
+        tops = [categories(:top_level), categories(:top_level_2)]
+        assert_equal tops, categories(:top_level).self_and_siblings
+      end.should_not raise_exception
+    end
 
-  it "leaves" do
-    leaves = [categories(:child_1), categories(:child_2_1), categories(:child_3)]
-    categories(:top_level).leaves.should == leaves
+    it "siblings" do
+      child = categories(:child_2)
+      siblings = [categories(:child_1), categories(:child_3)]
+      siblings.should == child.siblings
+    end
+
+    it "leaves" do
+      leaves = [categories(:child_1), categories(:child_2_1), categories(:child_3)]
+      categories(:top_level).leaves.should == leaves
+    end
   end
 
   describe "level" do
@@ -220,44 +239,75 @@ describe "AwesomeNestedSet" do
   end
 
   describe "depth" do
-    let(:lawyers) { Category.create!(:name => "lawyers") }
-    let(:us) { Category.create!(:name => "United States") }
-    let(:new_york) { Category.create!(:name => "New York") }
-    let(:patent) { Category.create!(:name => "Patent Law") }
+    context "in general" do
+      let(:lawyers) { Category.create!(:name => "lawyers") }
+      let(:us) { Category.create!(:name => "United States") }
+      let(:new_york) { Category.create!(:name => "New York") }
+      let(:patent) { Category.create!(:name => "Patent Law") }
+      let(:ch) { Category.create!(:name => "Switzerland") }
+      let(:bern) { Category.create!(:name => "Bern") }
 
-    before(:each) do
-      # lawyers > us > new_york > patent
-      us.move_to_child_of(lawyers)
-      new_york.move_to_child_of(us)
-      patent.move_to_child_of(new_york)
-      [lawyers, us, new_york, patent].each(&:reload)
+      before(:each) do
+        # lawyers > us > new_york > patent
+        #         > ch > bern
+        us.move_to_child_of(lawyers)
+        new_york.move_to_child_of(us)
+        patent.move_to_child_of(new_york)
+        ch.move_to_child_of(lawyers)
+        bern.move_to_child_of(ch)
+        [lawyers, us, new_york, patent, ch, bern].each(&:reload)
+      end
+
+      it "updates depth when moved into child position" do
+        lawyers.depth.should == 0
+        us.depth.should == 1
+        new_york.depth.should == 2
+        patent.depth.should == 3
+        ch.depth.should == 1
+        bern.depth.should == 2
+      end
+
+      it "decreases depth of all descendants when parent is moved up" do
+        # lawyers
+        # us > new_york > patent
+        us.move_to_right_of(lawyers)
+        [lawyers, us, new_york, patent, ch, bern].each(&:reload)
+        us.depth.should == 0
+        new_york.depth.should == 1
+        patent.depth.should == 2
+        ch.depth.should == 1
+        bern.depth.should == 2
+      end
+
+      it "keeps depth of all descendants when parent is moved right" do
+        us.move_to_right_of(ch)
+        [lawyers, us, new_york, patent, ch, bern].each(&:reload)
+        us.depth.should == 1
+        new_york.depth.should == 2
+        patent.depth.should == 3
+        ch.depth.should == 1
+        bern.depth.should == 2
+      end
+
+      it "increases depth of all descendants when parent is moved down" do
+        us.move_to_child_of(bern)
+        [lawyers, us, new_york, patent, ch, bern].each(&:reload)
+        us.depth.should == 3
+        new_york.depth.should == 4
+        patent.depth.should == 5
+        ch.depth.should == 1
+        bern.depth.should == 2
+      end
     end
 
-    it "updates depth when moved into child position" do
-      lawyers.depth.should == 0
-      us.depth.should == 1
-      new_york.depth.should == 2
-      patent.depth.should == 3
+    it "is magic and does not apply when column is missing" do
+      lambda { NoDepth.create!(:name => "shallow") }.should_not raise_error
+      lambda { NoDepth.first.save }.should_not raise_error
+      lambda { NoDepth.rebuild! }.should_not raise_error
+
+      NoDepth.method_defined?(:depth).should be_false
+      NoDepth.first.respond_to?(:depth).should be_false
     end
-
-    it "updates depth of all descendants when parent is moved" do
-      # lawyers
-      # us > new_york > patent
-      us.move_to_right_of(lawyers)
-      [lawyers, us, new_york, patent].each(&:reload)
-      us.depth.should == 0
-      new_york.depth.should == 1
-      patent.depth.should == 2
-    end
-  end
-
-  it "depth is magic and does not apply when column is missing" do
-    lambda { NoDepth.create!(:name => "shallow") }.should_not raise_error
-    lambda { NoDepth.first.save }.should_not raise_error
-    lambda { NoDepth.rebuild! }.should_not raise_error
-
-    NoDepth.method_defined?(:depth).should be_false
-    NoDepth.first.respond_to?(:depth).should be_false
   end
 
   it "has_children?" do
@@ -443,8 +493,8 @@ describe "AwesomeNestedSet" do
     categories(:child_2).parent.should be_nil
     categories(:child_2).level.should == 0
     categories(:child_2_1).level.should == 1
-    categories(:child_2).left.should == 7
-    categories(:child_2).right.should == 10
+    categories(:child_2).left.should == 9
+    categories(:child_2).right.should == 12
     Category.valid?.should be_true
   end
 
@@ -489,6 +539,23 @@ describe "AwesomeNestedSet" do
       categories(:child_2).right.should == 7
     end
 
+    it "move downward within current parent" do
+      categories(:child_1).move_to_child_with_index(categories(:top_level), 1)
+      categories(:child_1).parent_id.should == categories(:top_level).id
+      categories(:child_1).left.should == 6
+      categories(:child_1).right.should == 7
+      categories(:child_2).reload
+      categories(:child_2).parent_id.should == categories(:top_level).id
+      categories(:child_2).left.should == 2
+      categories(:child_2).right.should == 5
+    end
+
+    it "move to the same position within current parent" do
+      categories(:child_1).move_to_child_with_index(categories(:top_level), 0)
+      categories(:child_1).parent_id.should == categories(:top_level).id
+      categories(:child_1).left.should == 2
+      categories(:child_1).right.should == 3
+    end
   end
 
   it "move_to_child_of_appends_to_end" do
@@ -938,16 +1005,6 @@ describe "AwesomeNestedSet" do
     check_structure(Category.root.self_and_descendants, levels)
   end
 
-  it "should not error on a model with attr_accessible" do
-    model = Class.new(ActiveRecord::Base)
-    model.table_name = 'categories'
-    model.attr_accessible :name
-    lambda {
-      model.acts_as_nested_set
-      model.new(:name => 'foo')
-    }.should_not raise_exception
-  end
-
   describe "before_move_callback" do
     it "should fire the callback" do
       categories(:child_2).should_receive(:custom_before_move)
@@ -1093,6 +1150,68 @@ describe "AwesomeNestedSet" do
     it "should sort by custom sort column" do
       OrderedCategory.acts_as_nested_set_options[:order_column].should == 'name'
       OrderedCategory.order_column.should == 'name'
+    end
+  end
+
+  describe 'associate_parents' do
+    it 'assigns parent' do
+      root = Category.root
+      categories = root.self_and_descendants
+      categories = Category.associate_parents categories
+      expect(categories[1].parent).to be categories.first
+    end
+
+    it 'adds children on inverse of association' do
+      root = Category.root
+      categories = root.self_and_descendants
+      categories = Category.associate_parents categories
+      expect(categories[0].children.first).to be categories[1]
+    end
+  end
+
+  describe 'table inheritance' do
+    it 'allows creation of a subclass pointing to a superclass' do
+      subclass1 = Subclass1.create(name: "Subclass1")
+      Subclass2.create(name: "Subclass2", parent_id: subclass1.id)
+    end
+  end
+
+  describe 'option dependent' do
+    it 'destroy should destroy children and node' do
+      Category.acts_as_nested_set_options[:dependent] = :destroy
+      root = Category.root
+      root.destroy!
+      expect(Category.where(id: root.id)).to be_empty
+      expect(Category.where(parent_id: root.id)).to be_empty
+    end
+
+    it 'delete should delete children and node' do
+      Category.acts_as_nested_set_options[:dependent] = :delete
+      root = Category.root
+      root.destroy!
+      expect(Category.where(id: root.id)).to be_empty
+      expect(Category.where(parent_id: root.id)).to be_empty
+    end
+
+    it 'restrict_with_exception should raise exception' do
+      Category.acts_as_nested_set_options[:dependent] = :restrict_with_exception
+      root = Category.root
+      expect { root.destroy! }.to raise_error  ActiveRecord::DeleteRestrictionError, 'Cannot delete record because of dependent children'
+    end
+
+    describe 'restrict_with_error' do
+      it 'adds the error to the parent' do
+        Category.acts_as_nested_set_options[:dependent] = :restrict_with_error
+        root = Category.root
+        root.destroy
+        assert_equal ["Cannot delete record because dependent children exist"], root.errors[:base]
+      end
+
+      it 'deletes the leaf' do
+        Category.acts_as_nested_set_options[:dependent] = :restrict_with_error
+        leaf = Category.last
+        assert_equal leaf, leaf.destroy
+      end
     end
   end
 end

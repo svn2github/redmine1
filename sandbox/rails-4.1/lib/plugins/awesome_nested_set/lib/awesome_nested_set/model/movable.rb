@@ -29,7 +29,7 @@ module CollectiveIdea #:nodoc:
             move_to node, :left
           end
 
-          # Move the node to the left of another node
+          # Move the node to the right of another node
           def move_to_right_of(node)
             move_to node, :right
           end
@@ -46,13 +46,23 @@ module CollectiveIdea #:nodoc:
             elsif node.children.count == index
               move_to_right_of(node.children.last)
             else
-              move_to_left_of(node.children[index])
+              my_position = node.children.index(self)
+              if my_position && my_position < index
+                # e.g. if self is at position 0 and we want to move self to position 1 then self
+                # needs to move to the *right* of the node at position 1. That's because the node
+                # that is currently at position 1 will be at position 0 after the move completes.
+                move_to_right_of(node.children[index])
+              elsif my_position && my_position == index
+                # do nothing. already there.
+              else
+                move_to_left_of(node.children[index])
+              end
             end
           end
 
           # Move the node to root nodes
           def move_to_root
-            move_to_right_of(root)
+            move_to self, :root
           end
 
           # Order children in a nested set by an attribute
@@ -91,7 +101,7 @@ module CollectiveIdea #:nodoc:
 
             run_callbacks :move do
               in_tenacious_transaction do
-                target = reload_target(target)
+                target = reload_target(target, position)
                 self.reload_nested_set
 
                 Move.new(target, position, self).move
@@ -104,8 +114,7 @@ module CollectiveIdea #:nodoc:
 
           def after_move_to(target, position)
             target.reload_nested_set if target
-            self.set_depth!
-            self.descendants.each(&:save)
+            self.set_depth_for_self_and_descendants!
             self.reload_nested_set
           end
 

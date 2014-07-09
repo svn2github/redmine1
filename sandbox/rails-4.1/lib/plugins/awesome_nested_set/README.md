@@ -1,9 +1,13 @@
 # AwesomeNestedSet
 
+[![Build Status][Build Status Image]][Build Status]
+[Build Status Image]: https://travis-ci.org/collectiveidea/awesome_nested_set.png?branch=master
+[Build Status]: https://travis-ci.org/collectiveidea/awesome_nested_set
+
 Awesome Nested Set is an implementation of the nested set pattern for ActiveRecord models.
 It is a replacement for acts_as_nested_set and BetterNestedSet, but more awesome.
 
-Version 2 supports Rails 3. Gem versions prior to 2.0 support Rails 2.
+Version 2 supports Rails 3 and Rails 4. Gem versions prior to 2.0 support Rails 2.
 
 ## What makes this so awesome?
 
@@ -52,6 +56,25 @@ end
 ```
 
 Run `rake rdoc` to generate the API docs and see [CollectiveIdea::Acts::NestedSet](lib/awesome_nested_set/awesome_nested_set.rb) for more information.
+
+## Options
+
+You can pass various options to `acts_as_nested_set` macro. Configuration options are:
+
+* `parent_column`: specifies the column name to use for keeping the position integer (default: parent_id)
+* `left_column`: column name for left boundry data (default: lft)
+* `right_column`: column name for right boundry data (default: rgt)
+* `depth_column`: column name for the depth data default (default: depth)
+* `scope`: restricts what is to be considered a list. Given a symbol, it'll attach “_id” (if it hasn't been already) and use that as the foreign key restriction. You can also pass an array to scope by multiple attributes. Example: `acts_as_nested_set :scope => [:notable_id, :notable_type]`
+* `dependent`: behavior for cascading destroy. If set to :destroy, all the child objects are destroyed alongside this object by calling their destroy method. If set to :delete_all (default), all the child objects are deleted without calling their destroy method.
+* `counter_cache`: adds a counter cache for the number of children. defaults to false. Example: `acts_as_nested_set :counter_cache => :children_count`
+* `order_column`: on which column to do sorting, by default it is the left_column_name. Example: `acts_as_nested_set :order_column => :position`
+
+See [CollectiveIdea::Acts::NestedSet::Model::ClassMethods](/lib/awesome_nested_set/model.rb#L26) for a list of class methods and [CollectiveIdea::Acts::NestedSet::Model](lib/awesome_nested_set/model.rb#L13) for a list of instance methods added to acts_as_nested_set models
+
+## Indexes
+
+It is highly recommended that you add an index to the `rgt` column on your models. Every insertion requires finding the next `rgt` value to use and this can be slow for large tables without an index. It is probably best to index the other fields as well (`parent_id`, `lft`, `depth`).
 
 ## Callbacks
 
@@ -127,6 +150,50 @@ class Category < ActiveRecord::Base
   attr_protected :lft, :rgt
 end
 ```
+
+
+## Add to your existing project
+
+To make use of `awesome_nested_set`, your model needs to have 3 fields:
+`lft`, `rgt`, and `parent_id`. The names of these fields are configurable.
+You can also have an optional field, `depth`.
+
+Create a migration to add fields:
+
+```ruby
+class AddNestedToCategories < ActiveRecord::Migration
+
+  def self.up
+    add_column :categories, :parent_id, :integer # Comment this line if your project already has this column
+    # Category.where(parent_id: 0).update_all(parent_id: nil) # Uncomment this line if your project already has :parent_id
+    add_column :categories, :lft      , :integer
+    add_column :categories, :rgt      , :integer
+    add_column :categories, :depth    , :integer  # this is optional.
+
+    # This is necessary to update :lft and :rgt columns
+    Category.rebuild!
+  end
+
+  def self.down
+    remove_column :categories, :parent_id
+    remove_column :categories, :lft
+    remove_column :categories, :rgt
+    remove_column :categories, :depth  # this is optional.
+  end
+
+end
+```
+
+Enable the nested set functionality by declaring `acts_as_nested_set` on your model
+
+```ruby
+class Category < ActiveRecord::Base
+  acts_as_nested_set
+end
+```
+
+Your project is now ready to run with the `awesome_nested_set` gem!
+
 
 ## Conversion from other trees
 

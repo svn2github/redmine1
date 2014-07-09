@@ -11,7 +11,7 @@ ActiveRecord::Base.logger = Logger.new(plugin_test_dir + "/debug.log")
 require 'yaml'
 require 'erb'
 ActiveRecord::Base.configurations = YAML::load(ERB.new(IO.read(plugin_test_dir + "/db/database.yml")).result)
-ActiveRecord::Base.establish_connection(ENV["DB"] ||= "sqlite3mem")
+ActiveRecord::Base.establish_connection((ENV["DB"] ||= "sqlite3mem").to_sym)
 ActiveRecord::Migration.verbose = false
 
 require 'combustion/database'
@@ -20,6 +20,10 @@ load(File.join(plugin_test_dir, "db", "schema.rb"))
 
 require 'awesome_nested_set'
 require 'support/models'
+
+begin
+  require 'action_view'
+rescue LoadError; end # action_view doesn't exist in Rails 4.0, but we need this for the tests to run with Rails 4.1
 
 require 'action_controller'
 require 'rspec/rails'
