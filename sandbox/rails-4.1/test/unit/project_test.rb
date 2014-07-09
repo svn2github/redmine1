@@ -316,7 +316,7 @@ class ProjectTest < ActiveSupport::TestCase
 
     parent.reload
     assert_equal 4, parent.children.size
-    assert_equal parent.children.all.sort_by(&:name), parent.children.all
+    assert_equal parent.children.sort_by(&:name), parent.children.all
   end
 
   def test_set_parent_should_update_issue_fixed_version_associations_when_a_fixed_version_is_moved_out_of_the_hierarchy
