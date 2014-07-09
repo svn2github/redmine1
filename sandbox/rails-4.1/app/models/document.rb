@@ -35,7 +35,9 @@ class Document < ActiveRecord::Base
   after_create :send_notification
 
   scope :visible, lambda {|*args|
-    joins(:project).where(Project.allowed_to_condition(args.shift || User.current, :view_documents, *args))
+    joins(:project).
+    references(:project).
+    where(Project.allowed_to_condition(args.shift || User.current, :view_documents, *args))
   }
 
   safe_attributes 'category_id', 'title', 'description'

@@ -23,6 +23,7 @@ module MyHelper
       where(:project_id => User.current.projects.map(&:id)).
       where("(start_date>=? and start_date<=?) or (due_date>=? and due_date<=?)", startdt, enddt, startdt, enddt).
       includes(:project, :tracker, :priority, :assigned_to).
+      references(:project, :tracker, :priority, :assigned_to).
       to_a
   end
 
@@ -35,6 +36,7 @@ module MyHelper
       where(:assigned_to_id => ([User.current.id] + User.current.group_ids)).
       limit(10).
       includes(:status, :project, :tracker, :priority).
+      references(:status, :project, :tracker, :priority).
       order("#{IssuePriority.table_name}.position DESC, #{Issue.table_name}.updated_on DESC").
       to_a
   end
@@ -44,6 +46,7 @@ module MyHelper
       where(:author_id => User.current.id).
       limit(10).
       includes(:status, :project, :tracker).
+      references(:status, :project, :tracker).
       order("#{Issue.table_name}.updated_on DESC").
       to_a
   end
@@ -57,6 +60,7 @@ module MyHelper
       where(:project_id => User.current.projects.map(&:id)).
       limit(10).
       includes(:project, :author).
+      references(:project, :author).
       order("#{News.table_name}.created_on DESC").
       to_a
   end
@@ -65,6 +69,7 @@ module MyHelper
     TimeEntry.
       where("#{TimeEntry.table_name}.user_id = ? AND #{TimeEntry.table_name}.spent_on BETWEEN ? AND ?", User.current.id, Date.today - 6, Date.today).
       joins(:activity, :project, {:issue => [:tracker, :status]}).
+      references(:activity, :project, {:issue => [:tracker, :status]}).
       order("#{TimeEntry.table_name}.spent_on DESC, #{Project.table_name}.name ASC, #{Tracker.table_name}.position ASC, #{Issue.table_name}.id ASC").
       to_a
   end

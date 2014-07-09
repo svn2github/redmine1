@@ -46,6 +46,7 @@ class IssueQuery < Query
     user = args.shift || User.current
     base = Project.allowed_to_condition(user, :view_issues, *args)
     scope = joins("LEFT OUTER JOIN #{Project.table_name} ON #{table_name}.project_id = #{Project.table_name}.id").
+      references(:project).
       where("#{table_name}.project_id IS NULL OR (#{base})")
 
     if user.admin?
@@ -360,6 +361,7 @@ class IssueQuery < Query
       joins(:status, :project).
       where(statement).
       includes(([:status, :project] + (options[:include] || [])).uniq).
+      references(([:status, :project] + (options[:include] || [])).uniq).
       where(options[:conditions]).
       order(order_option).
       joins(joins_for_order_statement(order_option.join(','))).
@@ -392,6 +394,7 @@ class IssueQuery < Query
       where(project_statement).
       where(options[:conditions]).
       includes(:project).
+      references(:project).
       to_a
   rescue ::ActiveRecord::StatementInvalid => e
     raise StatementInvalid.new(e.message)

@@ -32,7 +32,9 @@ class Board < ActiveRecord::Base
   attr_protected :id
 
   scope :visible, lambda {|*args|
-    joins(:project).where(Project.allowed_to_condition(args.shift || User.current, :view_messages, *args))
+    joins(:project).
+    references(:project).
+    where(Project.allowed_to_condition(args.shift || User.current, :view_messages, *args))
   }
 
   safe_attributes 'name', 'description', 'parent_id', 'move_to'

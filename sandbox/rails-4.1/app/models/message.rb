@@ -49,7 +49,9 @@ class Message < ActiveRecord::Base
   after_create :send_notification
 
   scope :visible, lambda {|*args|
-    joins(:board => :project).where(Project.allowed_to_condition(args.shift || User.current, :view_messages, *args))
+    joins(:board => :project).
+    references(:board => :project).
+    where(Project.allowed_to_condition(args.shift || User.current, :view_messages, *args))
   }
 
   safe_attributes 'subject', 'content'
