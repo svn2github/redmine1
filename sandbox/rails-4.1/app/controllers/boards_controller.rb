@@ -25,7 +25,7 @@ class BoardsController < ApplicationController
   helper :watchers
 
   def index
-    @boards = @project.boards.preload(:project, :last_message => :author).all
+    @boards = @project.boards.preload(:project, :last_message => :author).to_a
     # show the board if there is only one
     if @boards.size == 1
       @board = @boards.first

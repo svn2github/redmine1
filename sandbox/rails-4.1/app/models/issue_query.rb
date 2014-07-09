@@ -392,7 +392,7 @@ class IssueQuery < Query
       where(project_statement).
       where(options[:conditions]).
       includes(:project).
-      all
+      to_a
   rescue ::ActiveRecord::StatementInvalid => e
     raise StatementInvalid.new(e.message)
   end
