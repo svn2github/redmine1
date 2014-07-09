@@ -562,6 +562,8 @@ class User < Principal
         # Authorize if user is authorized on every element of the array
         context.map {|project| allowed_to?(action, project, options, &block)}.reduce(:&)
       end
+    elsif context
+      raise ArgumentError.new("#allowed_to? context argument must be a Project, an Array of projects or nil")
     elsif options[:global]
       # Admin users are always authorized
       return true if admin?

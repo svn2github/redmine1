@@ -996,10 +996,10 @@ class UserTest < ActiveSupport::TestCase
       end
 
       should "return true only if user has permission on all these projects" do
-        assert_equal true, @admin.allowed_to?(:view_project, Project.all)
-        assert_equal false, @dlopper.allowed_to?(:view_project, Project.all) #cannot see Project(2)
-        assert_equal true, @jsmith.allowed_to?(:edit_issues, @jsmith.projects) #Manager or Developer everywhere
-        assert_equal false, @jsmith.allowed_to?(:delete_issue_watchers, @jsmith.projects) #Dev cannot delete_issue_watchers
+        assert_equal true, @admin.allowed_to?(:view_project, Project.all.to_a)
+        assert_equal false, @dlopper.allowed_to?(:view_project, Project.all.to_a) #cannot see Project(2)
+        assert_equal true, @jsmith.allowed_to?(:edit_issues, @jsmith.projects.to_a) #Manager or Developer everywhere
+        assert_equal false, @jsmith.allowed_to?(:delete_issue_watchers, @jsmith.projects.to_a) #Dev cannot delete_issue_watchers
       end
 
       should "behave correctly with arrays of 1 project" do
