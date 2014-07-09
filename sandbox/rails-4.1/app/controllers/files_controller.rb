@@ -34,7 +34,7 @@ class FilesController < ApplicationController
     @containers = [Project.includes(:attachments).
                      references(:attachments).reorder(sort_clause).find(@project.id)]
     @containers += @project.versions.includes(:attachments).
-                    references(:attachments).reorder(sort_clause).all.sort.reverse
+                    references(:attachments).reorder(sort_clause).to_a.sort.reverse
     render :layout => !request.xhr?
   end
 

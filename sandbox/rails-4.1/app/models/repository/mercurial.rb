@@ -120,7 +120,7 @@ class Repository::Mercurial < Repository
       references(:user).
       limit(limit).
       order("#{Changeset.table_name}.id DESC").
-      all
+      to_a
   end
 
   def is_short_id_in_db?
