@@ -408,7 +408,7 @@ module IssuesHelper
     if association
       record = association.class_name.constantize.find_by_id(id)
       if record
-        record.name.force_encoding('UTF-8') if record.name.respond_to?(:force_encoding)
+        record.name.force_encoding('UTF-8')
         return record.name
       end
     end

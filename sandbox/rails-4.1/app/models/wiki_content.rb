@@ -105,7 +105,7 @@ class WikiContent < ActiveRecord::Base
                 # uncompressed data
                 data
               end
-        str.force_encoding("UTF-8") if str.respond_to?(:force_encoding)
+        str.force_encoding("UTF-8")
         str
       end
     end

@@ -118,7 +118,7 @@ class CustomField < ActiveRecord::Base
     values = read_attribute(:possible_values)
     if values.is_a?(Array)
       values.each do |value|
-        value.force_encoding('UTF-8') if value.respond_to?(:force_encoding)
+        value.force_encoding('UTF-8')
       end
       values
     else

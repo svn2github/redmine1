@@ -279,7 +279,7 @@ module Redmine
 
     def line_to_html(line, offsets)
       html = line_to_html_raw(line, offsets)
-      html.force_encoding('UTF-8') if html.respond_to?(:force_encoding)
+      html.force_encoding('UTF-8')
       html
     end
 

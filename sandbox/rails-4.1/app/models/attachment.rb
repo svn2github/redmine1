@@ -75,7 +75,7 @@ class Attachment < ActiveRecord::Base
       if @temp_file.size > 0
         if @temp_file.respond_to?(:original_filename)
           self.filename = @temp_file.original_filename
-          self.filename.force_encoding("UTF-8") if filename.respond_to?(:force_encoding)
+          self.filename.force_encoding("UTF-8")
         end
         if @temp_file.respond_to?(:content_type)
           self.content_type = @temp_file.content_type.to_s.chomp
