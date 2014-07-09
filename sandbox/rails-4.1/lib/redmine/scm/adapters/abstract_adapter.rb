@@ -288,21 +288,12 @@ module Redmine
         def scm_iconv(to, from, str)
           return nil if str.nil?
           return str if to == from
-          if str.respond_to?(:force_encoding)
-            str.force_encoding(from)
-            begin
-              str.encode(to)
-            rescue Exception => err
-              logger.error("failed to convert from #{from} to #{to}. #{err}")
-              nil
-            end
-          else
-            begin
-              Iconv.conv(to, from, str)
-            rescue Iconv::Failure => err
-              logger.error("failed to convert from #{from} to #{to}. #{err}")
-              nil
-            end
+          str.force_encoding(from)
+          begin
+            str.encode(to)
+          rescue Exception => err
+            logger.error("failed to convert from #{from} to #{to}. #{err}")
+            nil
           end
         end
 
