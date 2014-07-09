@@ -121,11 +121,7 @@ module Redmine
 
         # Encodes an UTF-8 string to UTF-16BE
         def to_utf16(str)
-          if str.respond_to?(:encode)
-            str.encode('UTF-16BE')
-          else
-            Iconv.conv('UTF-16BE', 'UTF-8', str)
-          end
+          str.encode('UTF-16BE')
         end
 
         def RDMCell(w ,h=0, txt='', border=0, ln=0, align='', fill=0, link='')

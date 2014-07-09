@@ -99,16 +99,12 @@ class ApplicationHelperTest < ActionView::TestCase
     to_test.each { |text, result| assert_equal "<p>#{result}</p>", textilizable(text) }
   end
 
-  if 'ruby'.respond_to?(:encoding)
-    def test_auto_links_with_non_ascii_characters
-      to_test = {
-        "http://foo.bar/#{@russian_test}" =>
-          %|<a class="external" href="http://foo.bar/#{@russian_test}">http://foo.bar/#{@russian_test}</a>|
-      }
-      to_test.each { |text, result| assert_equal "<p>#{result}</p>", textilizable(text) }
-    end
-  else
-    puts 'Skipping test_auto_links_with_non_ascii_characters, unsupported ruby version'
+  def test_auto_links_with_non_ascii_characters
+    to_test = {
+      "http://foo.bar/#{@russian_test}" =>
+        %|<a class="external" href="http://foo.bar/#{@russian_test}">http://foo.bar/#{@russian_test}</a>|
+    }
+    to_test.each { |text, result| assert_equal "<p>#{result}</p>", textilizable(text) }
   end
 
   def test_auto_mailto
@@ -254,16 +250,12 @@ RAW
     to_test.each { |text, result| assert_equal "<p>#{result}</p>", textilizable(text) }
   end
 
-  if 'ruby'.respond_to?(:encoding)
-    def test_textile_external_links_with_non_ascii_characters
-      to_test = {
-        %|This is a "link":http://foo.bar/#{@russian_test}| =>
-          %|This is a <a href="http://foo.bar/#{@russian_test}" class="external">link</a>|
-      }
-      to_test.each { |text, result| assert_equal "<p>#{result}</p>", textilizable(text) }
-    end
-  else
-    puts 'Skipping test_textile_external_links_with_non_ascii_characters, unsupported ruby version'
+  def test_textile_external_links_with_non_ascii_characters
+    to_test = {
+      %|This is a "link":http://foo.bar/#{@russian_test}| =>
+        %|This is a <a href="http://foo.bar/#{@russian_test}" class="external">link</a>|
+    }
+    to_test.each { |text, result| assert_equal "<p>#{result}</p>", textilizable(text) }
   end
 
   def test_redmine_links
