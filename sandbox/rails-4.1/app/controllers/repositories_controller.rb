@@ -69,7 +69,7 @@ class RepositoriesController < ApplicationController
       @repository.merge_extra_info(attrs[:attrs_extra])
     end
     @repository.project = @project
-    if request.put? && @repository.save
+    if @repository.save
       redirect_to settings_project_path(@project, :tab => 'repositories')
     else
       render :action => 'edit'

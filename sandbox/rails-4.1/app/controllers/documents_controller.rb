@@ -69,7 +69,7 @@ class DocumentsController < ApplicationController
 
   def update
     @document.safe_attributes = params[:document]
-    if request.put? and @document.save
+    if @document.save
       flash[:notice] = l(:notice_successful_update)
       redirect_to document_path(@document)
     else

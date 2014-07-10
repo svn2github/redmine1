@@ -56,7 +56,7 @@ class EnumerationsController < ApplicationController
   end
 
   def update
-    if request.put? && @enumeration.update_attributes(params[:enumeration])
+    if @enumeration.update_attributes(params[:enumeration])
       flash[:notice] = l(:notice_successful_update)
       redirect_to enumerations_path
     else
