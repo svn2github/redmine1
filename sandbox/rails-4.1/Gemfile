@@ -11,7 +11,7 @@ gem "protected_attributes"
 gem "actionpack-action_caching"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin]
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :jruby]
 
 # Optional gem for LDAP authentication
 group :ldap do
