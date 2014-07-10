@@ -4,19 +4,10 @@ module Redmine
 
     def self.replace_invalid_utf8(str)
       return str if str.nil?
-      if RUBY_PLATFORM == 'java'
-        begin
-          ic = Iconv.new('UTF-8', 'UTF-8')
-          str = ic.iconv(str)
-        rescue
-          str = str.gsub(%r{[^\r\n\t\x20-\x7e]}, '?')
-        end
-      else
-        str.force_encoding('UTF-8')
-        if ! str.valid_encoding?
-          str = str.encode("US-ASCII", :invalid => :replace,
-                :undef => :replace, :replace => '?').encode("UTF-8")
-        end
+      str.force_encoding('UTF-8')
+      if ! str.valid_encoding?
+        str = str.encode("US-ASCII", :invalid => :replace,
+              :undef => :replace, :replace => '?').encode("UTF-8")
       end
       str
     end
@@ -29,24 +20,15 @@ module Redmine
         return str
       end
       enc = encoding.blank? ? "UTF-8" : encoding
-      if RUBY_PLATFORM == 'java'
-        begin
-          ic = Iconv.new('UTF-8', enc)
-          str = ic.iconv(str)
-        rescue
-          str = str.gsub(%r{[^\r\n\t\x20-\x7e]}, '?')
-        end
+      if enc.upcase != "UTF-8"
+        str.force_encoding(enc)
+        str = str.encode("UTF-8", :invalid => :replace,
+              :undef => :replace, :replace => '?')
       else
-        if enc.upcase != "UTF-8"
-          str.force_encoding(enc)
-          str = str.encode("UTF-8", :invalid => :replace,
-                :undef => :replace, :replace => '?')
-        else
-          str.force_encoding("UTF-8")
-          if ! str.valid_encoding?
-            str = str.encode("US-ASCII", :invalid => :replace,
-                  :undef => :replace, :replace => '?').encode("UTF-8")
-          end
+        str.force_encoding("UTF-8")
+        if ! str.valid_encoding?
+          str = str.encode("US-ASCII", :invalid => :replace,
+                :undef => :replace, :replace => '?').encode("UTF-8")
         end
       end
       str
@@ -78,21 +60,12 @@ module Redmine
 
     def self.from_utf8(str, encoding)
       str ||= ''
-      if RUBY_PLATFORM == 'java'
-        begin
-          ic = Iconv.new(encoding, 'UTF-8')
-          str = ic.iconv(str)
-        rescue
-          str = str.gsub(%r{[^\r\n\t\x20-\x7e]}, '?')
-        end
+      str.force_encoding('UTF-8')
+      if encoding.upcase != 'UTF-8'
+        str = str.encode(encoding, :invalid => :replace,
+                         :undef => :replace, :replace => '?')
       else
-        str.force_encoding('UTF-8')
-        if encoding.upcase != 'UTF-8'
-          str = str.encode(encoding, :invalid => :replace,
-                           :undef => :replace, :replace => '?')
-        else
-          str = self.replace_invalid_utf8(str)
-        end
+        str = self.replace_invalid_utf8(str)
       end
     end
   end
