@@ -64,7 +64,6 @@ require 'redmine/hook'
 require 'redmine/plugin'
 
 require 'csv'
-FCSV = CSV
 
 Redmine::Scm::Base.add "Subversion"
 Redmine::Scm::Base.add "Darcs"
