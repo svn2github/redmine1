@@ -67,39 +67,38 @@ class PdfTest < ActiveSupport::TestCase
   end
 
   def test_attach
-   ["CP932", "SJIS"].each do |encoding|
-    set_fixtures_attachments_directory
+    ["CP932", "SJIS"].each do |encoding|
+      set_fixtures_attachments_directory
 
-    str2 = "\x83e\x83X\x83g".force_encoding("ASCII-8BIT")
+      str2 = "\x83e\x83X\x83g".force_encoding("ASCII-8BIT")
 
-    a1 = Attachment.find(17)
-    a2 = Attachment.find(19)
+      a1 = Attachment.find(17)
+      a2 = Attachment.find(19)
+      User.current = User.find(1)
+      assert a1.readable?
+      assert a1.visible?
+      assert a2.readable?
+      assert a2.visible?
 
-    User.current = User.find(1)
-    assert a1.readable?
-    assert a1.visible?
-    assert a2.readable?
-    assert a2.visible?
+      aa1 = Redmine::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "Testfile.PNG", "UTF-8")
+      assert_not_nil aa1
+      assert_equal 17, aa1.id
 
-    aa1 = Redmine::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "Testfile.PNG", "UTF-8")
-    assert_not_nil aa1
-    assert_equal 17, aa1.id
-    aa2 = Redmine::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "test#{str2}.png", encoding)
-    assert_not_nil aa2
-    assert_equal 19, aa2.id
+      aa2 = Redmine::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "test#{str2}.png", encoding)
+      assert_not_nil aa2
+      assert_equal 19, aa2.id
 
-    User.current = nil
-    assert a1.readable?
-    assert (! a1.visible?)
-    assert a2.readable?
-    assert (! a2.visible?)
+      User.current = nil
+      assert a1.readable?
+      assert (! a1.visible?)
+      assert a2.readable?
+      assert (! a2.visible?)
+      aa1 = Redmine::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "Testfile.PNG", "UTF-8")
+      assert_equal nil, aa1
+      aa2 = Redmine::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "test#{str2}.png", encoding)
+      assert_equal nil, aa2
 
-    aa1 = Redmine::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "Testfile.PNG", "UTF-8")
-    assert_equal nil, aa1
-    aa2 = Redmine::Export::PDF::RDMPdfEncoding::attach(Attachment.all, "test#{str2}.png", encoding)
-    assert_equal nil, aa2
-
-    set_tmp_attachments_directory
-   end
+      set_tmp_attachments_directory
+    end
   end
 end
