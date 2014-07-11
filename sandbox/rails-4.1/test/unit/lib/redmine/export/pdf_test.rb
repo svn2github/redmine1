@@ -67,10 +67,10 @@ class PdfTest < ActiveSupport::TestCase
   end
 
   def test_attach
+   ["CP932", "SJIS"].each do |encoding|
     set_fixtures_attachments_directory
 
     str2 = "\x83e\x83X\x83g".force_encoding("ASCII-8BIT")
-    encoding = ( RUBY_PLATFORM == 'java' ? "SJIS" : "CP932" )
 
     a1 = Attachment.find(17)
     a2 = Attachment.find(19)
@@ -100,5 +100,6 @@ class PdfTest < ActiveSupport::TestCase
     assert_equal nil, aa2
 
     set_tmp_attachments_directory
+   end
   end
 end
