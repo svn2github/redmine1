@@ -27,11 +27,10 @@ class PdfTest < ActiveSupport::TestCase
   end
 
   def test_rdm_pdf_iconv_cannot_convert_ja_cp932
-    encoding = ( RUBY_PLATFORM == 'java' ? "SJIS" : "CP932" )
     utf8_txt_1  = "\xe7\x8b\x80\xe6\x85\x8b"
     utf8_txt_2  = "\xe7\x8b\x80\xe6\x85\x8b\xe7\x8b\x80"
     utf8_txt_3  = "\xe7\x8b\x80\xe7\x8b\x80\xe6\x85\x8b\xe7\x8b\x80"
-    if true
+    ["CP932", "SJIS"].each do |encoding|
       txt_1 = Redmine::Export::PDF::RDMPdfEncoding::rdm_from_utf8(utf8_txt_1, encoding)
       txt_2 = Redmine::Export::PDF::RDMPdfEncoding::rdm_from_utf8(utf8_txt_2, encoding)
       txt_3 = Redmine::Export::PDF::RDMPdfEncoding::rdm_from_utf8(utf8_txt_3, encoding)
