@@ -202,10 +202,7 @@ class RepositorySubversionTest < ActiveSupport::TestCase
 
     def test_log_encoding_ignore_setting
       with_settings :commit_logs_encoding => 'windows-1252' do
-        # TODO: what is s1 used for ? we're not testing #encode here
-        s1 = "\xC2\x80".force_encoding('ISO-8859-1')
         s2 = "\xc3\x82\xc2\x80".force_encoding('UTF-8')
-        assert_equal s1.encode('UTF-8'), s2
         c = Changeset.new(:repository => @repository,
                           :comments   => s2,
                           :revision   => '123',
