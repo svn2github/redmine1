@@ -1339,7 +1339,7 @@ class Issue < ActiveRecord::Base
         self.root_id = (@parent_issue.nil? ? id : @parent_issue.root_id)
         cond = ["root_id = ? AND lft >= ? AND rgt <= ? ", old_root_id, lft, rgt]
         self.class.base_class.select('id').lock(true).where(cond)
-        offset = right_most_bound + 1 - lft
+        offset = rdm_right_most_bound + 1 - lft
         Issue.where(cond).
           update_all(["root_id = ?, lft = lft + ?, rgt = rgt + ?", root_id, offset, offset])
         self[left_column_name]  = lft + offset
@@ -1358,6 +1358,14 @@ class Issue < ActiveRecord::Base
     # update former parent
     recalculate_attributes_for(former_parent_id) if former_parent_id
   end
+
+  def rdm_right_most_bound
+    right_most_node =
+      self.class.base_class.unscoped.
+        order("#{quoted_right_column_full_name} desc").limit(1).lock(true).first
+      right_most_node ? (right_most_node[right_column_name] || 0 ) : 0
+  end
+  private :rdm_right_most_bound
 
   def update_parent_attributes
     recalculate_attributes_for(parent_id) if parent_id
