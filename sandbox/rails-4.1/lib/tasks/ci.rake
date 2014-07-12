@@ -29,45 +29,15 @@ namespace :ci do
   desc "Build Redmine"
   task :build do
     if test_suite = ENV['TEST_SUITE']
-      Rake::Task["ci:test:#{test_suite}"].invoke
+      Rake::Task["test:#{test_suite}"].invoke
     else
-      Rake::Task["ci:test:all"].invoke
+      Rake::Task["test"].invoke
     end
     # Rake::Task["test:ui"].invoke
   end
 
   desc "Finish the build"
   task :teardown do
-  end
-
-  namespace :test do
-    Rake::TestTask.new(:all => "db:test:prepare") do |t|
-      t.libs << "test"
-      t.verbose = true
-      t.test_files = FileList[
-                         'test/unit/**/*_test.rb',
-                         'test/functional/**/*_test.rb',
-                         'test/integration/**/*_test.rb'
-                       ]
-    end
-
-    Rake::TestTask.new(:units => "db:test:prepare") do |t|
-      t.libs << "test"
-      t.verbose = true
-      t.test_files = FileList['test/unit/**/*_test.rb']
-    end
-
-    Rake::TestTask.new(:functionals => "db:test:prepare") do |t|
-      t.libs << "test"
-      t.verbose = true
-      t.test_files = FileList['test/functional/**/*_test.rb']
-    end
-
-    Rake::TestTask.new(:integration => "db:test:prepare") do |t|
-      t.libs << "test"
-      t.verbose = true
-      t.test_files = FileList['test/integration/**/*_test.rb']
-    end
   end
 end
 
