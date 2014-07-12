@@ -25,6 +25,7 @@ require File.expand_path(File.dirname(__FILE__) + '/object_helpers')
 include ObjectHelpers
 
 require 'awesome_nested_set/version'
+require 'shoulda'
 
 class ActionView::TestCase
   helper :application
