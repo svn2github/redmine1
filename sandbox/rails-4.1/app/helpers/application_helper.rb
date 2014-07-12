@@ -138,9 +138,7 @@ module ApplicationHelper
     if project.archived?
       h(project.name)
     elsif options.key?(:action)
-      ActiveSupport::Deprecation.warn "#link_to_project with :action option is deprecated and will be removed in Redmine 3.0."
-      url = {:controller => 'projects', :action => 'show', :id => project}.merge(options)
-      link_to project.name, url, html_options
+      raise "#link_to_project no longer accepts :action option in Redmine 3.0"
     else
       link_to project.name, project_path(project, options), html_options
     end
