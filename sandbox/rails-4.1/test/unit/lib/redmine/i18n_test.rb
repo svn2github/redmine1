@@ -32,46 +32,50 @@ class Redmine::I18nTest < ActiveSupport::TestCase
   def test_date_format_default
     set_language_if_valid 'en'
     today = Date.today
-    Setting.date_format = ''
-    assert_equal I18n.l(today), format_date(today)
+    with_settings :date_format => '' do
+      assert_equal I18n.l(today), format_date(today)
+    end
   end
 
   def test_date_format
     set_language_if_valid 'en'
     today = Date.today
-    Setting.date_format = '%d %m %Y'
-    assert_equal today.strftime('%d %m %Y'), format_date(today)
+    with_settings :date_format => '%d %m %Y' do
+      assert_equal today.strftime('%d %m %Y'), format_date(today)
+    end
   end
 
   def test_date_format_default_with_user_locale
     set_language_if_valid 'es'
     today = now = Time.parse('2011-02-20 14:00:00')
-    Setting.date_format = '%d %B %Y'
-    User.current.language = 'fr'
-    s1 = "20 f\xc3\xa9vrier 2011".force_encoding("UTF-8")
-    assert_equal s1, format_date(today)
-    User.current.language = nil
-    assert_equal '20 Febrero 2011', format_date(today)
+    with_settings :date_format => '%d %B %Y' do
+      User.current.language = 'fr'
+      s1 = "20 f\xc3\xa9vrier 2011".force_encoding("UTF-8")
+      assert_equal s1, format_date(today)
+      User.current.language = nil
+      assert_equal '20 Febrero 2011', format_date(today)
+    end
   end
 
   def test_date_and_time_for_each_language
-    Setting.date_format = ''
-    valid_languages.each do |lang|
-      set_language_if_valid lang
-      assert_nothing_raised "#{lang} failure" do
-        format_date(Date.today)
-        format_time(Time.now)
-        format_time(Time.now, false)
-        assert_not_equal 'default', ::I18n.l(Date.today, :format => :default),
-                         "date.formats.default missing in #{lang}"
-        assert_not_equal 'time',    ::I18n.l(Time.now, :format => :time),
-                         "time.formats.time missing in #{lang}"
+    with_settings :date_format => '' do
+      valid_languages.each do |lang|
+        set_language_if_valid lang
+        assert_nothing_raised "#{lang} failure" do
+          format_date(Date.today)
+          format_time(Time.now)
+          format_time(Time.now, false)
+          assert_not_equal 'default', ::I18n.l(Date.today, :format => :default),
+                           "date.formats.default missing in #{lang}"
+          assert_not_equal 'time',    ::I18n.l(Time.now, :format => :time),
+                           "time.formats.time missing in #{lang}"
+        end
+        assert l('date.day_names').is_a?(Array)
+        assert_equal 7, l('date.day_names').size
+  
+        assert l('date.month_names').is_a?(Array)
+        assert_equal 13, l('date.month_names').size
       end
-      assert l('date.day_names').is_a?(Array)
-      assert_equal 7, l('date.day_names').size
-
-      assert l('date.month_names').is_a?(Array)
-      assert_equal 13, l('date.month_names').size
     end
   end
 
@@ -133,10 +137,10 @@ class Redmine::I18nTest < ActiveSupport::TestCase
   def test_utc_time_format
     set_language_if_valid 'en'
     now = Time.now
-    Setting.date_format = '%d %m %Y'
-    Setting.time_format = '%H %M'
-    assert_equal now.strftime('%d %m %Y %H %M'), format_time(now.utc)
-    assert_equal now.strftime('%H %M'), format_time(now.utc, false)
+    with_settings :date_format => '%d %m %Y', :time_format => '%H %M' do
+      assert_equal now.strftime('%d %m %Y %H %M'), format_time(now.utc)
+      assert_equal now.strftime('%H %M'), format_time(now.utc, false)
+    end
   end
 
   def test_number_to_human_size_for_each_language
