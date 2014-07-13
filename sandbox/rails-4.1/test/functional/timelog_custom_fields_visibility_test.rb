@@ -108,9 +108,9 @@ class TimelogCustomFieldsVisibilityTest < ActionController::TestCase
                                 :custom_field_values => {@field2.id => 'ValueC'}))
     @request.session[:user_id] = user.id
     get :index, :c => ["hours", "issue.cf_#{@field2.id}"]
-    assert_select 'td', :text => 'ValueA'
+    assert_select 'td', {:text => 'ValueA'}, "ValueA not found in:\n#{response.body}"
     assert_select 'td', :text => 'ValueB', :count => 0
-    assert_select 'td', :text => 'ValueC'
+    assert_select 'td', {:text => 'ValueC'}, "ValueC not found in:\n#{response.body}"
 
     get :index, :set_filter => '1', "issue.cf_#{@field2.id}" => '*'
     assert_equal %w(ValueA ValueC), assigns(:entries).map{|i| i.issue.custom_field_value(@field2)}.sort
