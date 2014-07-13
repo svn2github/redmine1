@@ -43,7 +43,7 @@ class MessagesController < ApplicationController
     @reply_pages = Paginator.new @reply_count, REPLIES_PER_PAGE, page
     @replies =  @topic.children.
       includes(:author, :attachments, {:board => :project}).
-      reorder("#{Message.table_name}.created_on ASC").
+      reorder("#{Message.table_name}.created_on ASC, #{Message.table_name}.id ASC").
       limit(@reply_pages.per_page).
       offset(@reply_pages.offset).
       to_a
