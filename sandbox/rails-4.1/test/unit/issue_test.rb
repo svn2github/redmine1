@@ -1268,7 +1268,7 @@ class IssueTest < ActiveSupport::TestCase
   end
 
   test "#copy should not create a journal" do
-    copy = Issue.find(1).copy(:project_id => 3, :tracker_id => 2, :assigned_to_id => 3)
+    copy = Issue.find(1).copy({:project_id => 3, :tracker_id => 2, :assigned_to_id => 3}, :link => false)
     copy.save!
     assert_equal 0, copy.reload.journals.size
   end
@@ -1304,7 +1304,7 @@ class IssueTest < ActiveSupport::TestCase
   test "#copy should create a journal with notes" do
     date = Date.today
     notes = "Notes added when copying"
-    copy = Issue.find(1).copy(:project_id => 3, :tracker_id => 2, :start_date => date)
+    copy = Issue.find(1).copy({:project_id => 3, :tracker_id => 2, :start_date => date}, :link => false)
     copy.init_journal(User.current, notes)
     copy.save!
 
