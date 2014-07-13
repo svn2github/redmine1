@@ -25,10 +25,10 @@ Rails.application.routes.draw do
   match 'account/activate', :to => 'account#activate', :via => :get
   get 'account/activation_email', :to => 'account#activation_email', :as => 'activation_email'
 
-  match '/news/preview', :controller => 'previews', :action => 'news', :as => 'preview_news', :via => [:get, :post, :put]
-  match '/issues/preview/new/:project_id', :to => 'previews#issue', :as => 'preview_new_issue', :via => [:get, :post, :put]
-  match '/issues/preview/edit/:id', :to => 'previews#issue', :as => 'preview_edit_issue', :via => [:get, :post, :put]
-  match '/issues/preview', :to => 'previews#issue', :as => 'preview_issue', :via => [:get, :post, :put]
+  match '/news/preview', :controller => 'previews', :action => 'news', :as => 'preview_news', :via => [:get, :post, :put, :patch]
+  match '/issues/preview/new/:project_id', :to => 'previews#issue', :as => 'preview_new_issue', :via => [:get, :post, :put, :patch]
+  match '/issues/preview/edit/:id', :to => 'previews#issue', :as => 'preview_edit_issue', :via => [:get, :post, :put, :patch]
+  match '/issues/preview', :to => 'previews#issue', :as => 'preview_issue', :via => [:get, :post, :put, :patch]
 
   match 'projects/:id/wiki', :to => 'wikis#edit', :via => :post
   match 'projects/:id/wiki/destroy', :to => 'wikis#destroy', :via => [:get, :post]
@@ -74,7 +74,7 @@ Rails.application.routes.draw do
   match 'my/order_blocks', :controller => 'my', :action => 'order_blocks', :via => :post
 
   resources :users
-  match 'users/:id/memberships/:membership_id', :to => 'users#edit_membership', :via => :put, :as => 'user_membership'
+  match 'users/:id/memberships/:membership_id', :to => 'users#edit_membership', :via => [:put, :patch], :as => 'user_membership'
   match 'users/:id/memberships/:membership_id', :to => 'users#destroy_membership', :via => :delete
   match 'users/:id/memberships', :to => 'users#edit_membership', :via => :post, :as => 'user_memberships'
 
@@ -119,7 +119,7 @@ Rails.application.routes.draw do
       end
     end
     # issue form update
-    match 'issues/update_form', :controller => 'issues', :action => 'update_form', :via => [:put, :post], :as => 'issue_form'
+    match 'issues/update_form', :controller => 'issues', :action => 'update_form', :via => [:put, :patch, :post], :as => 'issue_form'
 
     resources :files, :only => [:index, :new, :create]
 
@@ -157,7 +157,7 @@ Rails.application.routes.draw do
         post 'rename'
         get 'history'
         get 'diff'
-        match 'preview', :via => [:post, :put]
+        match 'preview', :via => [:post, :put, :patch]
         post 'protect'
         post 'add_attachment'
       end
