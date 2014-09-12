@@ -310,12 +310,7 @@ class TimeEntryReportsControllerTest < ActionController::TestCase
     s1 = "\xa5\xce\xa4\xe1,2011-11-11,\xa4u\xae\xc9\xc1`\xadp".force_encoding('Big5')
     assert_equal s1, lines.first
     # Total row
-    s2 = ""
-    if RUBY_PLATFORM == 'java'
-      s2 = "??"
-    else
-      s2 = "\xa5H?".force_encoding('Big5')
-    end
+    s2 = "\xa5H?".force_encoding('Big5')
     assert_equal "#{s2} #{user.lastname},7.30,7.30", lines[1]
   end
 

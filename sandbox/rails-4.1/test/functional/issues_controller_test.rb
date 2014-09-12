@@ -505,12 +505,8 @@ class IssuesControllerTest < ActionController::TestCase
       s1 = "\xaa\xac\xbaA".force_encoding('Big5') # status
       assert lines[0].include?(s1)
       s2 = lines[1].split(",")[2]
-      if RUBY_PLATFORM == 'java'
-        assert_equal "??", s2
-      else
-        s3 = "\xa5H?".force_encoding('Big5') # subject
-        assert_equal s3, s2
-      end
+      s3 = "\xa5H?".force_encoding('Big5') # subject
+      assert_equal s3, s2
     end
   end
 
