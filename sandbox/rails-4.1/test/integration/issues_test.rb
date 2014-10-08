@@ -184,8 +184,8 @@ class IssuesTest < ActionDispatch::IntegrationTest
         :issue => {
           :custom_field_values => {@field.id.to_s => new_tester.id.to_s}
         }
+      assert_response 302
     end
-    assert_response 302
 
     # Issue view
     follow_redirect!
