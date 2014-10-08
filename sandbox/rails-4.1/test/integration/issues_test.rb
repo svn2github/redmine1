@@ -111,21 +111,21 @@ class IssuesTest < ActionDispatch::IntegrationTest
   end
 
   def test_pagination_links_on_index
-    Setting.per_page_options = '2'
-    get '/projects/ecookbook/issues'
+    with_settings :per_page_options => '2' do
+      get '/projects/ecookbook/issues'
 
-    assert_tag :a, :content => '2',
-                   :attributes => { :href => '/projects/ecookbook/issues?page=2' }
-
+      assert_tag :a, :content => '2',
+                     :attributes => { :href => '/projects/ecookbook/issues?page=2' }
+    end
   end
 
   def test_pagination_links_on_index_without_project_id_in_url
-    Setting.per_page_options = '2'
-    get '/issues', :project_id => 'ecookbook'
-
-    assert_tag :a, :content => '2',
-                   :attributes => { :href => '/projects/ecookbook/issues?page=2' }
-
+    with_settings :per_page_options => '2' do
+      get '/issues', :project_id => 'ecookbook'
+  
+      assert_tag :a, :content => '2',
+                     :attributes => { :href => '/projects/ecookbook/issues?page=2' }
+    end
   end
 
   def test_issue_with_user_custom_field
