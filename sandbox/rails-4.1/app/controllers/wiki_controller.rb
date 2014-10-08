@@ -327,7 +327,7 @@ private
   def find_existing_or_new_page
     @page = @wiki.find_or_new_page(params[:id])
     if @wiki.page_found_with_redirect?
-      redirect_to params.update(:id => @page.title)
+      redirect_to_page @page
     end
   end
 
@@ -339,8 +339,12 @@ private
       return
     end
     if @wiki.page_found_with_redirect?
-      redirect_to params.update(:id => @page.title)
+      redirect_to_page @page
     end
+  end
+
+  def redirect_to_page(page)
+    redirect_to :action => action_name, :project_id => page.wiki.project, :id => page.title
   end
 
   # Returns true if the current user is allowed to edit the page, otherwise false
