@@ -155,7 +155,6 @@ tr:
   general_lang_name: 'Türkçe'
   general_csv_separator: ','
   general_csv_encoding: ISO-8859-9
-  general_pdf_encoding: UTF-8
   general_first_day_of_week: '7'
 
   notice_account_updated: Hesap başarıyla güncelleştirildi.
@@ -1126,3 +1125,5 @@ tr:
   label_latest_compatible_version: Latest compatible version
   label_unknown_plugin: Unknown plugin
   label_radio_buttons: radio buttons
+  label_group_anonymous: Anonymous users
+  label_group_non_member: Non member users

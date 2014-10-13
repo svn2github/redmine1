@@ -407,6 +407,55 @@ class Repository < ActiveRecord::Base
     new_record? && project && Repository.where(:project_id => project.id).empty?
   end
 
+  # Returns a hash with statistics by author in the following form:
+  # {
+  #   "John Smith" => { :commits => 45, :changes => 324 },
+  #   "Bob" => { ... }
+  # }
+  #
+  # Notes:
+  # - this hash honnors the users mapping defined for the repository
+  def stats_by_author
+    commits = Changeset.where("repository_id = ?", id).select("committer, user_id, count(*) as count").group("committer, user_id")
+
+    #TODO: restore ordering ; this line probably never worked
+    #commits.to_a.sort! {|x, y| x.last <=> y.last}
+
+    changes = Change.joins(:changeset).where("#{Changeset.table_name}.repository_id = ?", id).select("committer, user_id, count(*) as count").group("committer, user_id")
+
+    user_ids = changesets.map(&:user_id).compact.uniq
+    authors_names = User.where(:id => user_ids).inject({}) do |memo, user|
+      memo[user.id] = user.to_s
+      memo
+    end
+
+    (commits + changes).inject({}) do |hash, element|
+      mapped_name = element.committer
+      if username = authors_names[element.user_id.to_i]
+        mapped_name = username
+      end
+      hash[mapped_name] ||= { :commits_count => 0, :changes_count => 0 }
+      if element.is_a?(Changeset)
+        hash[mapped_name][:commits_count] += element.count.to_i
+      else
+        hash[mapped_name][:changes_count] += element.count.to_i
+      end
+      hash
+    end
+  end
+
+  # Returns a scope of changesets that come from the same commit as the given changeset
+  # in different repositories that point to the same backend
+  def same_commits_in_scope(scope, changeset)
+    scope = scope.joins(:repository).where(:repositories => {:url => url, :root_url => root_url, :type => type})
+    if changeset.scmid.present?
+      scope = scope.where(:scmid => changeset.scmid)
+    else
+      scope = scope.where(:revision => changeset.revision)
+    end
+    scope
+  end
+
   protected
 
   def check_default

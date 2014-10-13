@@ -342,7 +342,6 @@ es:
   general_csv_separator: ';'
   general_first_day_of_week: '1'
   general_lang_name: 'Español'
-  general_pdf_encoding: UTF-8
   general_text_No: 'No'
   general_text_Yes: 'Sí'
   general_text_no: 'no'
@@ -1150,3 +1149,5 @@ es:
   label_latest_compatible_version: Latest compatible version
   label_unknown_plugin: Unknown plugin
   label_radio_buttons: radio buttons
+  label_group_anonymous: Anonymous users
+  label_group_non_member: Non member users

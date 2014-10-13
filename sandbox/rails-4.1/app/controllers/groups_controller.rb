@@ -25,12 +25,16 @@ class GroupsController < ApplicationController
   helper :custom_fields
 
   def index
-    @groups = Group.sorted.to_a
     respond_to do |format|
       format.html {
+        @groups = Group.sorted.to_a
         @user_count_by_group_id = user_count_by_group_id
       }
-      format.api
+      format.api {
+        scope = Group.sorted
+        scope = scope.givable unless params[:builtin] == '1'
+        @groups = scope.to_a
+      }
     end
   end
 

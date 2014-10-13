@@ -116,7 +116,7 @@ class User < Principal
   before_create :set_mail_notification
   before_save   :generate_password_if_needed, :update_hashed_password
   before_destroy :remove_references_before_destroy
-  after_save :update_notified_project_ids
+  after_save :update_notified_project_ids, :destroy_tokens
 
   scope :in_group, lambda {|group|
     group_id = group.is_a?(Group) ? group.id : group.to_i
@@ -292,6 +292,7 @@ class User < Principal
   def salt_password(clear_password)
     self.salt = User.generate_salt
     self.hashed_password = User.hash_password("#{salt}#{User.hash_password clear_password}")
+    self.passwd_changed_on = Time.now
   end
 
   # Does the backend storage allow this user to change their password?
@@ -486,15 +487,15 @@ class User < Principal
 
   # Return user's roles for project
   def roles_for_project(project)
-    roles = []
     # No role on archived projects
-    return roles if project.nil? || project.archived?
+    return [] if project.nil? || project.archived?
     if membership = membership(project)
-      roles = membership.roles
+      membership.roles.dup
+    elsif project.is_public?
+      project.override_roles(builtin_role)
     else
-      roles << builtin_role
+      []
     end
-    roles
   end
 
   # Return true if the user is a member of project
@@ -506,20 +507,29 @@ class User < Principal
   def projects_by_role
     return @projects_by_role if @projects_by_role
 
-    @projects_by_role = Hash.new([])
-    memberships.each do |membership|
-      if membership.project
-        membership.roles.each do |role|
-          @projects_by_role[role] = [] unless @projects_by_role.key?(role)
-          @projects_by_role[role] << membership.project
+    hash = Hash.new([])
+
+    members = Member.joins(:project).
+      where("#{Project.table_name}.status <> 9").
+      where("#{Member.table_name}.user_id = ? OR (#{Project.table_name}.is_public = ? AND #{Member.table_name}.user_id = ?)", self.id, true, Group.builtin_id(self)).
+      preload(:project, :roles).
+      to_a
+
+    members.reject! {|member| member.user_id != id && project_ids.include?(member.project_id)}
+    members.each do |member|
+      if member.project
+        member.roles.each do |role|
+          hash[role] = [] unless hash.key?(role)
+          hash[role] << member.project
         end
       end
     end
-    @projects_by_role.each do |role, projects|
+    
+    hash.each do |role, projects|
       projects.uniq!
     end
 
-    @projects_by_role
+    @projects_by_role = hash
   end
 
   # Returns true if user is arg or belongs to arg
@@ -582,7 +592,11 @@ class User < Principal
 
   # Is the user allowed to do the specified action on any project?
   # See allowed_to? for the actions and valid options.
-  def allowed_to_globally?(action, options, &block)
+  #
+  # NB: this method is not used anywhere in the core codebase as of
+  # 2.5.2, but it's used by many plugins so if we ever want to remove
+  # it it has to be carefully deprecated for a version or two.
+  def allowed_to_globally?(action, options={}, &block)
     allowed_to?(action, nil, options.reverse_merge(:global => true), &block)
   end
 
@@ -689,6 +703,20 @@ class User < Principal
     if generate_password? && auth_source.nil?
       length = [Setting.password_min_length.to_i + 2, 10].max
       random_password(length)
+    end
+  end
+
+  # Delete all outstanding password reset tokens on password or email change.
+  # Delete the autologin tokens on password change to prohibit session leakage.
+  # This helps to keep the account secure in case the associated email account
+  # was compromised.
+  def destroy_tokens
+    tokens  = []
+    tokens |= ['recovery', 'autologin'] if hashed_password_changed?
+    tokens |= ['recovery'] if mail_changed?
+
+    if tokens.any?
+      Token.where(:user_id => id, :action => tokens).delete_all
     end
   end
 

@@ -340,7 +340,10 @@ module ApplicationHelper
   end
 
   def project_tree_options_for_select(projects, options = {})
-    s = ''
+    s = ''.html_safe
+    if options[:include_blank]
+      s << content_tag('option', '&nbsp;'.html_safe, :value => '')
+    end
     project_tree(projects) do |project, level|
       name_prefix = (level > 0 ? '&nbsp;' * 2 * level + '&#187; ' : '').html_safe
       tag_options = {:value => project.id}
@@ -1181,7 +1184,7 @@ module ApplicationHelper
                      "beforeShow: beforeShowDatePicker};")
         jquery_locale = l('jquery.locale', :default => current_language.to_s)
         unless jquery_locale == 'en'
-          tags << javascript_include_tag("i18n/jquery.ui.datepicker-#{jquery_locale}.js")
+          tags << javascript_include_tag("i18n/datepicker-#{jquery_locale}.js")
         end
         tags
       end

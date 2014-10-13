@@ -162,7 +162,7 @@ ja:
   general_csv_separator: ','
   general_csv_decimal_separator: '.'
   general_csv_encoding: CP932
-  general_pdf_encoding: CP932
+  general_pdf_encoding: UTF-8
   general_first_day_of_week: '7'
 
   notice_account_updated: アカウントが更新されました。
@@ -1133,3 +1133,5 @@ ja:
   label_latest_compatible_version: 互換性のある最新バージョン
   label_unknown_plugin: 不明なプラグイン
   label_radio_buttons: ラジオボタン
+  label_group_anonymous: 匿名ユーザー
+  label_group_non_member: 非メンバー

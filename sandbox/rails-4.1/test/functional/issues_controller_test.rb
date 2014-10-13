@@ -25,6 +25,7 @@ class IssuesControllerTest < ActionController::TestCase
            :member_roles,
            :issues,
            :issue_statuses,
+           :issue_relations,
            :versions,
            :trackers,
            :projects_trackers,
@@ -552,15 +553,6 @@ class IssuesControllerTest < ActionController::TestCase
         assert_response :success
         assert_template 'index'
 
-        if lang == "ja"
-          if RUBY_PLATFORM != 'java'
-            assert_equal "CP932", l(:general_pdf_encoding)
-          end
-          if RUBY_PLATFORM == 'java' && l(:general_pdf_encoding) == "CP932"
-            next
-          end
-        end
-
         get :index, :format => 'pdf'
         assert_response :success
         assert_not_nil assigns(:issues)
@@ -612,6 +604,7 @@ class IssuesControllerTest < ActionController::TestCase
     assert_not_nil issues
     assert !issues.empty?
     assert_equal issues.sort {|a,b| a.tracker == b.tracker ? b.id <=> a.id : a.tracker <=> b.tracker }.collect(&:id), issues.collect(&:id)
+    assert_select 'table.issues.sort-by-tracker.sort-asc'
   end
 
   def test_index_sort_by_field_not_included_in_columns
@@ -624,6 +617,7 @@ class IssuesControllerTest < ActionController::TestCase
     assert_response :success
     assignees = assigns(:issues).collect(&:assigned_to).compact
     assert_equal assignees.sort, assignees
+    assert_select 'table.issues.sort-by-assigned-to.sort-asc'
   end
   
   def test_index_sort_by_assigned_to_desc
@@ -631,6 +625,7 @@ class IssuesControllerTest < ActionController::TestCase
     assert_response :success
     assignees = assigns(:issues).collect(&:assigned_to).compact
     assert_equal assignees.sort.reverse, assignees
+    assert_select 'table.issues.sort-by-assigned-to.sort-desc'
   end
   
   def test_index_group_by_assigned_to
@@ -1384,11 +1379,29 @@ class IssuesControllerTest < ActionController::TestCase
   end
 
   def test_show_export_to_pdf
+    issue = Issue.find(3) 
+    assert issue.relations.select{|r| r.other_issue(issue).visible?}.present?
     get :show, :id => 3, :format => 'pdf'
     assert_response :success
     assert_equal 'application/pdf', @response.content_type
     assert @response.body.starts_with?('%PDF')
     assert_not_nil assigns(:issue)
+  end
+
+  def test_export_to_pdf_with_utf8_u_fffd
+    # U+FFFD
+    s = "\xef\xbf\xbd"
+    s.force_encoding('UTF-8') if s.respond_to?(:force_encoding)
+    issue = Issue.generate!(:subject => s)
+    ["en", "zh", "zh-TW", "ja", "ko"].each do |lang|
+      with_settings :default_language => lang do
+        get :show, :id => issue.id, :format => 'pdf'
+        assert_response :success
+        assert_equal 'application/pdf', @response.content_type
+        assert @response.body.starts_with?('%PDF')
+        assert_not_nil assigns(:issue)
+      end
+    end
   end
 
   def test_show_export_to_pdf_with_ancestors

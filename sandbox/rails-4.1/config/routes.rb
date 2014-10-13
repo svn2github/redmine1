@@ -111,13 +111,7 @@ Rails.application.routes.draw do
     resource :enumerations, :controller => 'project_enumerations', :only => [:update, :destroy]
 
     get 'issues/:copy_from/copy', :to => 'issues#new', :as => 'copy_issue'
-    resources :issues, :only => [:index, :new, :create] do
-      resources :time_entries, :controller => 'timelog' do
-        collection do
-          get 'report'
-        end
-      end
-    end
+    resources :issues, :only => [:index, :new, :create]
     # issue form update
     match 'issues/update_form', :controller => 'issues', :action => 'update_form', :via => [:put, :patch, :post], :as => 'issue_form'
 
@@ -336,7 +330,7 @@ Rails.application.routes.draw do
 
   match 'sys/projects', :to => 'sys#projects', :via => :get
   match 'sys/projects/:id/repository', :to => 'sys#create_project_repository', :via => :post
-  match 'sys/fetch_changesets', :to => 'sys#fetch_changesets', :via => :get
+  match 'sys/fetch_changesets', :to => 'sys#fetch_changesets', :via => [:get, :post]
 
   match 'uploads', :to => 'attachments#upload', :via => :post
 
