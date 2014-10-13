@@ -22,7 +22,7 @@ class RepositoryCvsTest < ActiveSupport::TestCase
 
   include Redmine::I18n
 
-  REPOSITORY_PATH = Rails.root.join('tmp/test/cvs_repository').to_s
+  REPOSITORY_PATH = repository_path('cvs')
   REPOSITORY_PATH.gsub!(/\//, "\\") if Redmine::Platform.mswin?
   # CVS module
   MODULE_NAME    = 'test'

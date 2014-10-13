@@ -168,6 +168,7 @@ module Redmine
             file_state = nil
             branch_map = nil
             io.each_line() do |line|
+              line = line.strip
               if state != "revision" && /^#{ENDLOG}/ =~ line
                 commit_log = String.new
                 revision   = nil

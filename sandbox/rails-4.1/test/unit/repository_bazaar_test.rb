@@ -22,7 +22,7 @@ class RepositoryBazaarTest < ActiveSupport::TestCase
 
   include Redmine::I18n
 
-  REPOSITORY_PATH = Rails.root.join('tmp/test/bazaar_repository').to_s
+  REPOSITORY_PATH = repository_path('bazaar')
   REPOSITORY_PATH_TRUNK = File.join(REPOSITORY_PATH, "trunk")
   NUM_REV = 4
 

@@ -156,7 +156,9 @@ class ActiveSupport::TestCase
 
   # Returns the path to the test +vendor+ repository
   def self.repository_path(vendor)
-    Rails.root.join("tmp/test/#{vendor.downcase}_repository").to_s
+    path = Rails.root.join("tmp/test/#{vendor.downcase}_repository").to_s
+    # Unlike ruby, JRuby returns Rails.root with backslashes under Windows
+    path.tr("\\", "/")
   end
 
   # Returns the url of the subversion test repository
