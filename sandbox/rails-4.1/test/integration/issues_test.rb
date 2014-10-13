@@ -131,7 +131,7 @@ class IssuesTest < ActionDispatch::IntegrationTest
   def test_issue_with_user_custom_field
     @field = IssueCustomField.create!(:name => 'Tester', :field_format => 'user', :is_for_all => true, :trackers => Tracker.all)
     Role.anonymous.add_permission! :add_issues, :edit_issues
-    users = Project.find(1).users
+    users = Project.find(1).users.uniq.sort
     tester = users.first
 
     # Issue form
@@ -184,7 +184,7 @@ class IssuesTest < ActionDispatch::IntegrationTest
         :issue => {
           :custom_field_values => {@field.id.to_s => new_tester.id.to_s}
         }
-      assert_response 302
+      assert_redirected_to "/issues/#{issue.id}"
     end
 
     # Issue view
