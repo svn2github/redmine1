@@ -861,11 +861,26 @@ class UserTest < ActiveSupport::TestCase
     assert_equal ["Non member"], roles.map(&:name)
   end
 
-  def test_roles_for_project_with_non_member_with_public_project_should_return_no_roles
+  def test_roles_for_project_with_non_member_with_public_project_and_override_should_return_override_roles
+    project = Project.find(1)
+    Member.create!(:project => project, :principal => Group.non_member, :role_ids => [1, 2])
+    roles = User.find(8).roles_for_project(project)
+    assert_equal ["Developer", "Manager"], roles.map(&:name).sort
+  end
+
+  def test_roles_for_project_with_non_member_with_private_project_should_return_no_roles
     Project.find(1).update_attribute :is_public, false
   
     roles = User.find(8).roles_for_project(Project.find(1))
     assert_equal [], roles.map(&:name)
+  end
+
+  def test_roles_for_project_with_non_member_with_private_project_and_override_should_return_no_roles
+    project = Project.find(1)
+    project.update_attribute :is_public, false
+    Member.create!(:project => project, :principal => Group.non_member, :role_ids => [1, 2])
+    roles = User.find(8).roles_for_project(project)
+    assert_equal [], roles.map(&:name).sort
   end
 
   def test_roles_for_project_with_anonymous_with_public_project_should_return_anonymous
@@ -874,11 +889,26 @@ class UserTest < ActiveSupport::TestCase
     assert_equal ["Anonymous"], roles.map(&:name)
   end
 
-  def test_roles_for_project_with_anonymous_with_public_project_should_return_no_roles
+  def test_roles_for_project_with_anonymous_with_public_project_and_override_should_return_override_roles
+    project = Project.find(1)
+    Member.create!(:project => project, :principal => Group.anonymous, :role_ids => [1, 2])
+    roles = User.anonymous.roles_for_project(project)
+    assert_equal ["Developer", "Manager"], roles.map(&:name).sort
+  end
+
+  def test_roles_for_project_with_anonymous_with_private_project_should_return_no_roles
     Project.find(1).update_attribute :is_public, false
   
     roles = User.anonymous.roles_for_project(Project.find(1))
     assert_equal [], roles.map(&:name)
+  end
+
+  def test_roles_for_project_with_anonymous_with_private_project_and_override_should_return_no_roles
+    project = Project.find(1)
+    project.update_attribute :is_public, false
+    Member.create!(:project => project, :principal => Group.anonymous, :role_ids => [1, 2])
+    roles = User.anonymous.roles_for_project(project)
+    assert_equal [], roles.map(&:name).sort
   end
 
   def test_projects_by_role_for_user_with_role

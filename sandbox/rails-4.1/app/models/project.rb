@@ -216,9 +216,9 @@ class Project < ActiveRecord::Base
   end
 
   def override_roles(role)
-    @override_members ||= memberships.where(:user_id => [GroupAnonymous.instance_id, GroupNonMember.instance_id]).all
-    member = @override_members.detect {|m| role.anonymous? ^ (m.user_id == GroupNonMember.instance_id)}
-    member ? member.roles : [role]
+    group_class = role.anonymous? ? GroupAnonymous : GroupNonMember
+    member = member_principals.where("#{Principal.table_name}.type = ?", group_class.name).first
+    member ? member.roles.to_a : [role]
   end
 
   def principals

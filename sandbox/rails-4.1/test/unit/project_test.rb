@@ -944,4 +944,10 @@ class ProjectTest < ActiveSupport::TestCase
     assert !project.notified_users.include?(only_assigned_user), "should not include users with the 'only_assigned' notification option"
     assert !project.notified_users.include?(only_owned_user), "should not include users with the 'only_owner' notification option"
   end
+
+  def test_override_roles_without_builtin_group_memberships
+    project = Project.generate!
+    assert_equal [Role.anonymous], project.override_roles(Role.anonymous)
+    assert_equal [Role.non_member], project.override_roles(Role.non_member)
+  end
 end

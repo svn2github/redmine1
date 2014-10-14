@@ -97,10 +97,6 @@ class Group < Principal
     super(attr_name, *args)
   end
 
-  def self.builtin_id(arg)
-    (arg.anonymous? ? GroupAnonymous : GroupNonMember).instance_id
-  end
-
   def self.anonymous
     GroupAnonymous.load_instance
   end

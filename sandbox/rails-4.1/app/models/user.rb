@@ -509,9 +509,10 @@ class User < Principal
 
     hash = Hash.new([])
 
-    members = Member.joins(:project).
+    group_class = anonymous? ? GroupAnonymous : GroupNonMember
+    members = Member.joins(:project, :principal).
       where("#{Project.table_name}.status <> 9").
-      where("#{Member.table_name}.user_id = ? OR (#{Project.table_name}.is_public = ? AND #{Member.table_name}.user_id = ?)", self.id, true, Group.builtin_id(self)).
+      where("#{Member.table_name}.user_id = ? OR (#{Project.table_name}.is_public = ? AND #{Principal.table_name}.type = ?)", self.id, true, group_class.name).
       preload(:project, :roles).
       to_a
 
