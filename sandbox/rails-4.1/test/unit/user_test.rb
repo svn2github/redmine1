@@ -27,6 +27,8 @@ class UserTest < ActiveSupport::TestCase
             :groups_users,
             :enabled_modules
 
+  include Redmine::I18n
+
   def setup
     @admin = User.find(1)
     @jsmith = User.find(2)
@@ -854,6 +856,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_roles_for_project_with_non_member_with_public_project_should_return_non_member
+    set_language_if_valid 'en'
     roles = User.find(8).roles_for_project(Project.find(1))
     assert_equal ["Non member"], roles.map(&:name)
   end
@@ -866,6 +869,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_roles_for_project_with_anonymous_with_public_project_should_return_anonymous
+    set_language_if_valid 'en'
     roles = User.anonymous.roles_for_project(Project.find(1))
     assert_equal ["Anonymous"], roles.map(&:name)
   end
