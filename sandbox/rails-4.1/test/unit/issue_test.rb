@@ -370,6 +370,13 @@ class IssueTest < ActiveSupport::TestCase
     assert_equal 2, parent.descendants.visible(user).collect{|i| i}.size
   end
 
+  def test_visible_scope_with_unsaved_user_should_not_raise_an_error
+    user = User.new
+    assert_nothing_raised do
+      Issue.visible(user).to_a
+    end
+  end
+
   def test_open_scope
     issues = Issue.open.to_a
     assert_nil issues.detect(&:closed?)

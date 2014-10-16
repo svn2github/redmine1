@@ -116,7 +116,7 @@ class Issue < ActiveRecord::Base
   # Returns a SQL conditions string used to find all issues visible by the specified user
   def self.visible_condition(user, options={})
     Project.allowed_to_condition(user, :view_issues, options) do |role, user|
-      if user.logged?
+      if user.id && user.logged?
         case role.issues_visibility
         when 'all'
           nil
