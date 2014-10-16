@@ -27,6 +27,7 @@ class JournalTest < ActiveSupport::TestCase
 
   def setup
     @journal = Journal.find 1
+    User.current = nil
   end
 
   def test_journalized_is_an_issue
